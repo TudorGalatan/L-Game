@@ -1,9 +1,15 @@
-#include <iostream>
+/*
+    This is the starting point of the application.
+*/
+
+#include "Controller.h"
 
 
 
 int main ()
 {
-    std::cout << "Hello!";
+    // Start the application.
+    runApplication();
+
     return 0;
 }

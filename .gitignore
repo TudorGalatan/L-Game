@@ -1,3 +1,4 @@
 *.cbp
 *.o
 *.exe
+*.depend
