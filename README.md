@@ -1,2 +1,5 @@
 # L-Game
-L-Game
+
+## Authors
+### Adrian Onofrei
+### Tudor Galatan
