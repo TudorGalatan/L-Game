@@ -1,6 +1,8 @@
 # L Game
 
+## Description
+This is the final project for the "Introduction to Programming" course (year I, semester I) from university.
+
 ## Authors
-### Adrian Onofrei
-### Tudor Galatan
-#### L-game made in C++ with graphics.h
+- Adrian Onofrei
+- Tudor Gălățan
