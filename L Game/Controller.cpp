@@ -1,18 +1,33 @@
+/**
+    This file includes the implementation of the Controller layer.
+    The Controller layer is responsible with controlling the application.
+**/
+
 #include "Controller.h"
 
 
 
+/**
+    Here are the main instructions of the application.
+    Input:
+        - none
+    Output:
+        - none
+**/
 void runApplication ()
 {
-    // Read Data
+    // Read the data from the input file.
     unsigned short int board[4][4];
     unsigned short int player = 1;    // 1 = the red player | 2 = the blue player
     readData(board);
+
+    /* Temporary (Just Testing Right Now) */
 
     // Get Coordinates
     std::vector < std::pair <unsigned short int, unsigned short int> > coordinates;
     getNewCoordinates(coordinates);
 
+    // Check Move
     std::cout << checkMove(board, player, coordinates);
 }
 
@@ -21,10 +36,10 @@ void runApplication ()
 /**
     Reads the data from the file.
     Input:
-        - board: the game board
+        - "board": the game board
     Output:
         - none
-    Comments:
+    Observations:
         - 0: empty square
         - 1: the red player
         - 2: the blue player
@@ -42,7 +57,7 @@ void readData (unsigned short int board[][4])
 
 
 /**
-    Prints the board on the screen.
+    Prints the game board on the screen.
     Input:
         - board: the game board
     Output:
@@ -61,11 +76,11 @@ void printBoard (unsigned short int board[][4])
 
 
 /**
-    Get the coordinates of the new L from the user.
+    Get the coordinates of the new "L" from the user.
     Input:
         - none
     Output:
-        - coordinates: the coordinates of the new L
+        - "coordinates": the x and y coordinates of the new "L"
 **/
 void getNewCoordinates (std::vector < std::pair <unsigned short int, unsigned short int> >& coordinates)
 {

@@ -1,6 +1,6 @@
-/*
-    This is the starting point of the application.
-*/
+/**
+    The Application Manager layer is responsible with launching the application.
+**/
 
 #include "Controller.h"
 

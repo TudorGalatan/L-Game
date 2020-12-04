@@ -1,3 +1,10 @@
+/**
+    This file includes the interface of the Controller layer.
+    The Controller layer is responsible with controlling the application.
+**/
+
+#pragma once
+
 #include <fstream>
 #include <iostream>
 #include <vector>
