@@ -100,8 +100,9 @@ void getNewCoordinates (std::vector < std::pair <unsigned short int, unsigned sh
     Checks whether the coordinates can represent a valid move on the board.
     It checks if it is an "L".
     Input:
-        - board: the game board
-        - coordinates: the coordinates
+        - "board": the game board
+        - "currentPlayer": the current player
+        - "coordinates": the coordinates
     Output:
         - true: if the coordinates represent a valid move on the board
         - false: otherwise
@@ -218,4 +219,32 @@ bool checkMove (unsigned short int board[][4], unsigned short int currentPlayer,
     }
 
     return true;
+}
+
+
+
+/**
+    It performs the move of the current player, considering that all validations were already done.
+    Input:
+        - "board": the game board
+        - "currentPlayer": the current player
+        - "coordinates": the coordinates
+    Output:
+        - "board": the updated board
+**/
+void makeMove (unsigned short int board[][4], unsigned short int currentPlayer, std::vector < std::pair <unsigned short int, unsigned short int> > coordinates)
+{
+    // Delete the current squares of the current player.
+    for (unsigned short int line = 0; line < 4; line++)
+        for (unsigned short int column = 0; column < 4; column++)
+            if (board[line][column] == currentPlayer)
+                board[line][column] = 0;
+
+    // Add the player on the new position.
+    for (unsigned short int square = 0; square < 4; square++)
+    {
+        unsigned short int line = coordinates[square].first;
+        unsigned short int column = coordinates[square].second;
+        board[line][column] = currentPlayer;
+    }
 }
