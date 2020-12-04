@@ -17,9 +17,9 @@
 void runApplication ()
 {
     // Read the data from the input file.
-    unsigned short int board[4][4];
+    unsigned short int gameBoard[4][4];
     unsigned short int player = 1;    // 1 = the red player | 2 = the blue player
-    readData(board);
+    readData(gameBoard);
 
     /* Temporary (Just Testing Right Now) */
 
@@ -28,15 +28,15 @@ void runApplication ()
     getNewCoordinates(coordinates);
 
     // Check Move
-    std::cout << checkMove(board, player, coordinates);
+    std::cout << checkMove(gameBoard, player, coordinates);
 }
 
 
 
 /**
-    Reads the data from the file.
+    Reads the data from the input file.
     Input:
-        - "board": the game board
+        - "gameBoard": the game board
     Output:
         - none
     Observations:
@@ -45,12 +45,12 @@ void runApplication ()
         - 2: the blue player
         - 3: coin
 **/
-void readData (unsigned short int board[][4])
+void readData (unsigned short int gameBoard[][4])
 {
     std::ifstream inputFile("Input.in");
     for (unsigned short int line = 0; line < 4; line++)
         for (unsigned short int column = 0; column < 4; column++)
-            inputFile >> board[line][column];
+            inputFile >> gameBoard[line][column];
     inputFile.close();
 }
 
@@ -59,16 +59,16 @@ void readData (unsigned short int board[][4])
 /**
     Prints the game board on the screen.
     Input:
-        - board: the game board
+        - "gameBoard": the game board
     Output:
         - none
 **/
-void printBoard (unsigned short int board[][4])
+void printBoard (unsigned short int gameBoard[][4])
 {
     for (unsigned short int line = 0; line < 4; line++)
     {
         for (unsigned short int column = 0; column < 4; column++)
-            std::cout << board[line][column] << ' ';
+            std::cout << gameBoard[line][column] << ' ';
         std::cout << '\n';
     }
 }
@@ -80,34 +80,33 @@ void printBoard (unsigned short int board[][4])
     Input:
         - none
     Output:
-        - "coordinates": the x and y coordinates of the new "L"
+        - "coordinates": the line and column coordinates of the new "L"
 **/
 void getNewCoordinates (std::vector < std::pair <unsigned short int, unsigned short int> >& coordinates)
 {
     std::cout << "\nGive the coordinates of your new L:\n";
 
-    for (unsigned short int index = 0; index < 4; index++)
+    for (unsigned short int square = 0; square < 4; square++)
     {
-        unsigned short int x, y;
-        std::cin >> x >> y;
-        coordinates.push_back(std::make_pair(x, y));
+        unsigned short int line, column;
+        std::cin >> line >> column;
+        coordinates.push_back(std::make_pair(line, column));
     }
 }
 
 
 
 /**
-    Checks whether the coordinates can represent a valid move on the board.
-    It checks if it is an "L".
+    Checks whether the coordinates can represent a valid move on the game board. So it checks if it is an "L".
     Input:
-        - "board": the game board
+        - "gameBoard": the game board
         - "currentPlayer": the current player
         - "coordinates": the coordinates
     Output:
-        - true: if the coordinates represent a valid move on the board
+        - true: if the coordinates represent a valid move on the game board
         - false: otherwise
 **/
-bool checkMove (unsigned short int board[][4], unsigned short int currentPlayer, std::vector < std::pair <unsigned short int, unsigned short int> > coordinates)
+bool checkMove (unsigned short int gameBoard[][4], unsigned short int currentPlayer, std::vector < std::pair <unsigned short int, unsigned short int> > coordinates)
 {
     bool horizontalOrientation = false, verticalOrientation = false;
 
@@ -154,27 +153,27 @@ bool checkMove (unsigned short int board[][4], unsigned short int currentPlayer,
         // If the first element on the line and the last element on the line are
         // reresented by the same player, then we have a gap in the middle and
         // it cannot be an "L".
-        if (board[line][0] == currentPlayer && board[line][3] == currentPlayer)
+        if (gameBoard[line][0] == currentPlayer && gameBoard[line][3] == currentPlayer)
             return false;
 
         // Find the starting position of the horizontal line.
         unsigned short int startPosition = 0;
-        if (board[line][0] != currentPlayer)
+        if (gameBoard[line][0] != currentPlayer)
             startPosition = 1;
         unsigned short int endPosition = startPosition + 2;
 
         bool squaresWithSameValue = 0;
 
-        if (line - 1 >= 0 && board[line - 1][startPosition] == currentPlayer)
+        if (line - 1 >= 0 && gameBoard[line - 1][startPosition] == currentPlayer)
             squaresWithSameValue++;
 
-        if (line + 1 <= 3 && board[line + 1][startPosition] == currentPlayer)
+        if (line + 1 <= 3 && gameBoard[line + 1][startPosition] == currentPlayer)
             squaresWithSameValue++;
 
-        if (line - 1 >= 0 && board[line - 1][endPosition] == currentPlayer)
+        if (line - 1 >= 0 && gameBoard[line - 1][endPosition] == currentPlayer)
             squaresWithSameValue++;
 
-        if (line - 1 >= 0 && board[line - 1][endPosition] == currentPlayer)
+        if (line - 1 >= 0 && gameBoard[line - 1][endPosition] == currentPlayer)
             squaresWithSameValue++;
 
         // If the other square is not in one of the valid positions, then
@@ -189,27 +188,27 @@ bool checkMove (unsigned short int board[][4], unsigned short int currentPlayer,
         // If the first element on the column and the last element on the column are
         // reresented by the same player, then we have a gap in the middle and
         // it cannot be an "L".
-        if (board[0][column] == currentPlayer && board[3][column] == currentPlayer)
+        if (gameBoard[0][column] == currentPlayer && gameBoard[3][column] == currentPlayer)
             return false;
 
         // Find the starting position of the vertical line.
         unsigned short int startPosition = 0;
-        if (board[0][column] != currentPlayer)
+        if (gameBoard[0][column] != currentPlayer)
             startPosition = 1;
         unsigned short int endPosition = startPosition + 2;
 
         bool squaresWithSameValue = 0;
 
-        if (column - 1 >= 0 && board[startPosition][column - 1] == currentPlayer)
+        if (column - 1 >= 0 && gameBoard[startPosition][column - 1] == currentPlayer)
             squaresWithSameValue++;
 
-        if (column + 1 <= 3 && board[startPosition][column + 1] == currentPlayer)
+        if (column + 1 <= 3 && gameBoard[startPosition][column + 1] == currentPlayer)
             squaresWithSameValue++;
 
-        if (column - 1 >= 0 && board[endPosition][column - 1] == currentPlayer)
+        if (column - 1 >= 0 && gameBoard[endPosition][column - 1] == currentPlayer)
             squaresWithSameValue++;
 
-        if (column - 1 >= 0 && board[endPosition][column + 1] == currentPlayer)
+        if (column - 1 >= 0 && gameBoard[endPosition][column + 1] == currentPlayer)
             squaresWithSameValue++;
 
         // If the other square is not in one of the valid positions, then
@@ -224,27 +223,27 @@ bool checkMove (unsigned short int board[][4], unsigned short int currentPlayer,
 
 
 /**
-    It performs the move of the current player, considering that all validations were already done.
+    It performs the current move of the current player, considering that all validations were already done.
     Input:
-        - "board": the game board
+        - "gameBoard": the game board
         - "currentPlayer": the current player
-        - "coordinates": the coordinates
+        - "newCoordinates": the new coordinates of the current player
     Output:
-        - "board": the updated board
+        - "gameBoard": the updated game board
 **/
-void makeMove (unsigned short int board[][4], unsigned short int currentPlayer, std::vector < std::pair <unsigned short int, unsigned short int> > coordinates)
+void makeMove (unsigned short int gameBoard[][4], unsigned short int currentPlayer, std::vector < std::pair <unsigned short int, unsigned short int> > newCoordinates)
 {
     // Delete the current squares of the current player.
     for (unsigned short int line = 0; line < 4; line++)
         for (unsigned short int column = 0; column < 4; column++)
-            if (board[line][column] == currentPlayer)
-                board[line][column] = 0;
+            if (gameBoard[line][column] == currentPlayer)
+                gameBoard[line][column] = 0;
 
     // Add the player on the new position.
     for (unsigned short int square = 0; square < 4; square++)
     {
-        unsigned short int line = coordinates[square].first;
-        unsigned short int column = coordinates[square].second;
-        board[line][column] = currentPlayer;
+        unsigned short int line = newCoordinates[square].first;
+        unsigned short int column = newCoordinates[square].second;
+        gameBoard[line][column] = currentPlayer;
     }
 }
