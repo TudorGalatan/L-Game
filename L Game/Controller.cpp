@@ -3,6 +3,10 @@
     The Controller layer is responsible with controlling the application.
 **/
 
+#include <fstream>
+#include <iostream>
+#include <vector>
+
 #include "Controller.h"
 
 
