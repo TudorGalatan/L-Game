@@ -131,8 +131,6 @@ unsigned short int checkMouseLocation (double xCoordinate, double yCoordinate)
     return 0;
 }
 
-
-
 /**
     Redraws the "START" button with the hover effect on it.
     Input:
@@ -185,8 +183,105 @@ void hoverStart ()
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
 
+void hoverRules ()
+{
+    // Clear the screen.
+    cleardevice();
+
+    // Get the new parameters for the "START" button.
+    unsigned short int distanceFromCenter = 100;
+    unsigned short int left = WINDOW_SIZE / 2 - distanceFromCenter;
+    unsigned short int right = WINDOW_SIZE / 2 + distanceFromCenter;
+    unsigned short int up = 200;
+    unsigned short int down = 300;
+    unsigned short int depth = 25;
+    bool drawDetails = 1;
+    unsigned short int textXCoordinate = WINDOW_SIZE / 2 - 50;
+    unsigned short int textYCoordinate = 250;
+    char text[] = "START";
 
 
+    // Draw the "START" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+
+    // Update the parameters for the "RULES" button.
+    distanceFromCenter = 80;
+    left = WINDOW_SIZE / 2 - distanceFromCenter;
+    right = WINDOW_SIZE / 2 + distanceFromCenter + 40;
+    up = 380;
+    down = 480;
+    depth = 10;
+    textXCoordinate = WINDOW_SIZE / 2 - 30;
+    textYCoordinate = 430;
+    strcpy(text, "RULES");
+
+    // Draw the "RULES" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+
+    // Update the parameters for the "EXIT" button.
+    distanceFromCenter = 100;
+    left = WINDOW_SIZE / 2 - distanceFromCenter;
+    right = WINDOW_SIZE / 2 + distanceFromCenter;
+    up = 600;
+    down = 700;
+    depth = 25;
+    textXCoordinate -= 10;
+    textYCoordinate = 650;
+    strcpy(text, "EXIT");
+
+    // Draw the "EXIT" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+
+}
+
+void hoverExit()
+{
+     cleardevice();
+
+    // Get the new parameters for the "START" button.
+    unsigned short int distanceFromCenter = 100;
+    unsigned short int left = WINDOW_SIZE / 2 - distanceFromCenter;
+    unsigned short int right = WINDOW_SIZE / 2 + distanceFromCenter;
+    unsigned short int up = 200;
+    unsigned short int down = 300;
+    unsigned short int depth = 25;
+    bool drawDetails = 1;
+    unsigned short int textXCoordinate = WINDOW_SIZE / 2 - 50;
+    unsigned short int textYCoordinate = 250;
+    char text[] = "START";
+
+    // Draw the "START" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+
+   // Update the parameters for the "RULES" button.
+    distanceFromCenter = 100;
+    left = WINDOW_SIZE / 2 - distanceFromCenter;
+    right = WINDOW_SIZE / 2 + distanceFromCenter;
+    up = 400;
+    down = 500;
+    depth = 25;
+    textXCoordinate = WINDOW_SIZE / 2 - 50;
+    textYCoordinate = 450;
+    strcpy(text, "RULES");
+
+    // Draw the "RULES" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+
+    // Update the parameters for the "EXIT" button.
+    distanceFromCenter = 80;
+    left = WINDOW_SIZE / 2 - distanceFromCenter;
+    right = WINDOW_SIZE / 2 + distanceFromCenter + 40;
+    up = 580;
+    down = 680;
+    depth = 10;
+    textXCoordinate = WINDOW_SIZE / 2 - 20;
+    textYCoordinate = 630;
+    strcpy(text, "EXIT");
+
+
+    //Draw the "EXIT" button
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+}
 /**
     Permanently scans the mouse position.
     Input:
@@ -222,20 +317,14 @@ void scanMousePosition ()
             // The "RULES" button
             case 2:
                 if (changer == false)
-                {
-                    // To Add
-                    // * hoverRules *
-                }
+                    hoverRules();
                 changer = true;
                 break;
 
             // The "EXIT" button
             case 3:
                 if (changer == false)
-                {
-                    // To Add
-                    // * hoverExit *
-                }
+                    hoverExit();
                 changer = true;
                 break;
 
@@ -267,7 +356,6 @@ void scanMousePosition ()
                     system("pause");
                     break;
 
-                // The "EXIT" button
                 case 3:
                     system("pause");
                     break;
@@ -293,3 +381,4 @@ void closeApplication ()
     getch();
     closegraph();
 }
+
