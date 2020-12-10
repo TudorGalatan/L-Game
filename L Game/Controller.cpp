@@ -1,6 +1,6 @@
 /**
-    This file includes the implementation of the Controller layer.
-    The Controller layer is responsible with controlling the application.
+    This is the implementation for the Controller layer.
+    The Controller layer is responsible with coordinating the application.
 **/
 
 #include <fstream>

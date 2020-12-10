@@ -1,3 +1,8 @@
+/**
+    This is the implementation for the User Interface layer.
+    The User Interface layer is responsible with the visual side of the application.
+**/
+
 #include "User_Interface.h"
 
 

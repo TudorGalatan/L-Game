@@ -1,3 +1,8 @@
+/**
+    This is the interface for the User Interface layer.
+    The User Interface layer is responsible with the visual side of the application.
+**/
+
 #pragma once
 
 #include <graphics.h>

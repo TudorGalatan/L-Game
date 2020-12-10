@@ -1,6 +1,6 @@
 /**
-    This file includes the interface of the Controller layer.
-    The Controller layer is responsible with controlling the application.
+    This is the interface for the Controller layer.
+    The Controller layer is responsible with coordinating the application.
 **/
 
 #pragma once
