@@ -5,6 +5,7 @@
 
 #include "Test.h"
 #include "User_Interface.h"
+// #include "Controller.h"         // Temporary (Working Area)
 
 
 
@@ -15,6 +16,9 @@ int main ()
 
     // Start the application.
     runGUI();
+
+    // Temporary (Working Area)
+    // runApplication();
 
     return 0;
 }

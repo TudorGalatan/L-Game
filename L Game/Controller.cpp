@@ -3,10 +3,6 @@
     The Controller layer is responsible with coordinating the application.
 **/
 
-#include <fstream>
-#include <iostream>
-#include <vector>
-
 #include "Controller.h"
 
 
@@ -49,7 +45,7 @@ void runApplication ()
         - 2: the blue player
         - 3: coin
 **/
-void readData (unsigned short int gameBoard[][4])
+void readData (USI gameBoard[][4])
 {
     std::ifstream inputFile("Input.in");
     for (unsigned short int line = 0; line < 4; line++)
@@ -67,7 +63,7 @@ void readData (unsigned short int gameBoard[][4])
     Output:
         - none
 **/
-void printBoard (unsigned short int gameBoard[][4])
+void printBoard (USI gameBoard[][4])
 {
     for (unsigned short int line = 0; line < 4; line++)
     {
@@ -86,7 +82,7 @@ void printBoard (unsigned short int gameBoard[][4])
     Output:
         - "coordinates": the line and column coordinates of the new "L"
 **/
-void getNewCoordinates (std::vector < std::pair <unsigned short int, unsigned short int> >& coordinates)
+void getNewCoordinates (std::vector < std::pair <USI, USI> >& coordinates)
 {
     std::cout << "\nGive the coordinates of your new L:\n";
 
@@ -110,118 +106,212 @@ void getNewCoordinates (std::vector < std::pair <unsigned short int, unsigned sh
         - true: if the coordinates represent a valid move on the game board
         - false: otherwise
 **/
-bool checkMove (unsigned short int gameBoard[][4], unsigned short int currentPlayer, std::vector < std::pair <unsigned short int, unsigned short int> > coordinates)
+bool checkMove (USI gameBoard[][4], USI currentPlayer, std::vector < std::pair <USI, USI> > coordinates)
 {
-    bool horizontalOrientation = false, verticalOrientation = false;
+    std::pair <USI, USI> orientation = getOrientation(gameBoard, coordinates);
 
-    // The frequency of X and Y indexes.
-    unsigned short int frequencyOfX[4] = {0};
-    unsigned short int frequencyOfY[4] = {0};
+    // If we have neither a horizontal, nor a vertical orientation, then it is not an "L".
+    if (orientation.first == 0)
+        return false;
 
-    // Calculate how many times X and Y repeats.
-    for (unsigned short int index = 0; index < 4; index++)
+    // If there is a gap between the three squares that should form an "L", then it cannot be an "L".
+    if (hasGap(gameBoard, orientation, currentPlayer))
+        return false;
+
+    // Get the start and end positions for the body of the "L" form.
+    std::pair <USI, USI> startEndPositions = getStartEndPositions(gameBoard, orientation, currentPlayer);
+
+    // If the fourth square of the possible "L" is not on a valid position, then it cannot be an "L".
+    if (onValidPosition(gameBoard, orientation, startEndPositions, currentPlayer) == 0)
+        return false;
+
+    // We have an "L" form, so it is a valid move.
+    return true;
+}
+
+
+
+/**
+    Gets the orientation for the possible "L".
+    Input:
+        - "gameBoard": the game board
+        - "coordinates": the coordinates of the squares
+    Output:
+        - "orientation": a pair containing:
+            - "orientation.first": the orientation for the possible "L"
+                - 0: if the orientation for the possible "L" is neither horizontal, nor vertical
+                - 1: if the orientation for the possible "L" is horizontal
+                - 2: if the orientation for the possible "L" is vertical
+            - "orientation.second": the number of the line or the column that constitutes the body of "L"
+**/
+std::pair <USI, USI> getOrientation (USI gameBoard[][4], std::vector < std::pair <USI, USI> > coordinates)
+{
+    // The frequency of the lines and columns of the coordinates for the possible "L"
+    unsigned short int frequencyOfLine[4] = { 0 };
+    unsigned short int frequencyOfColumn[4] = { 0 };
+
+    // Calculate how many times a line or a column appears in the coordinates.
+    for (unsigned short int square = 0; square < 4; square++)
     {
-        frequencyOfX[coordinates[index].first]++;
-        frequencyOfY[coordinates[index].second]++;
+        frequencyOfLine[coordinates[square].first]++;
+        frequencyOfColumn[coordinates[square].second]++;
     }
 
     unsigned short int line = 4, column = 4;
 
-    // Check if any orientation (horizontal or vertical) applies.
-    for (unsigned short int index = 0; index < 4; index++)
+    std::pair <USI, USI> orientation;
+
+    // Firstly, we assume that we have neither a horizontal, nor a vertical orientation.
+    orientation.first = 0;
+    orientation.second = 0;
+
+    // Check if there is a horizontal or a vertical orientation.
+    for (unsigned short int square = 0; square < 4; square++)
     {
-        // We have a horizontal orientation for "L" if there
-        // are 3 equal coordinates for x.
-        if (frequencyOfX[index] == 3)
+        // We have a horizontal orientation if there are 3 equal line coordinates.
+        if (frequencyOfLine[square] == 3)
         {
-            horizontalOrientation = true;
-            line = index;
+            orientation.first = 1;
+            orientation.second = square;
         }
 
-        // We have a vertical orientation for "L" if there
-        // are 3 equal coordinates for y.
-        if (frequencyOfY[index] == 3)
+        // We have a vertical orientation if there are 3 equal column coordinates.
+        if (frequencyOfColumn[square] == 3)
         {
-            verticalOrientation = true;
-            column = index;
+            orientation.first = 2;
+            orientation.second = square;
         }
     }
 
-    // If we have no orientation, then it is not an "L".
-    if (horizontalOrientation == false && verticalOrientation == false)
+    return orientation;
+}
+
+
+
+/**
+    It checks if there is a gap between the three elements of the possible "L".
+    Input:
+        - "gameBoard": the game board
+        - "orientation": the orientation for the possible "L"
+        - "currentPlayer": the current player
+    Output:
+        - true: if there is a gap
+        - false: otherwise
+**/
+bool hasGap (USI gameBoard[][4], std::pair <USI, USI> orientation, USI currentPlayer)
+{
+        // We have a horizontal orientation.
+        if (orientation.first == 1)
+        {
+            unsigned short int line = orientation.second;
+            if (gameBoard[line][0] == currentPlayer && gameBoard[line][3] == currentPlayer)
+                return true;
+        }
+
+        // We have a vertical orientation.
+        unsigned short int column = orientation.second;
+        if (gameBoard[0][column] == currentPlayer && gameBoard[3][column] == currentPlayer)
+            return true;
+
+        // We don't have a gap.
         return false;
+}
 
-    // If we have a horizontal orientation for "L".
-    if (horizontalOrientation)
+
+
+/**
+    Gets the start and end positions for the body of the "L" form.
+    Input:
+        - "gameBoard": the game board
+        - "orientation": the orientation of "L"
+        - "currentPlayer": the current player
+    Output:
+        - "startEndPositions": a pair consisting of:
+            - "startEndPositions.first": the start position
+            - "startEndPositions.second": the end position
+**/
+std::pair <USI, USI> getStartEndPositions (USI gameBoard[][4], std::pair <USI, USI> orientation, USI currentPlayer)
+{
+    // We assume the start position is 0.
+    unsigned short int startPosition = 0;
+
+    // We have a horizontal orientation.
+    if (orientation.first == 1)
     {
-        // If the first element on the line and the last element on the line are
-        // reresented by the same player, then we have a gap in the middle and
-        // it cannot be an "L".
-        if (gameBoard[line][0] == currentPlayer && gameBoard[line][3] == currentPlayer)
-            return false;
-
-        // Find the starting position of the horizontal line.
-        unsigned short int startPosition = 0;
+        unsigned short int line = orientation.second;
         if (gameBoard[line][0] != currentPlayer)
             startPosition = 1;
-        unsigned short int endPosition = startPosition + 2;
-
-        bool squaresWithSameValue = 0;
-
-        if (line - 1 >= 0 && gameBoard[line - 1][startPosition] == currentPlayer)
-            squaresWithSameValue++;
-
-        if (line + 1 <= 3 && gameBoard[line + 1][startPosition] == currentPlayer)
-            squaresWithSameValue++;
-
-        if (line - 1 >= 0 && gameBoard[line - 1][endPosition] == currentPlayer)
-            squaresWithSameValue++;
-
-        if (line - 1 >= 0 && gameBoard[line - 1][endPosition] == currentPlayer)
-            squaresWithSameValue++;
-
-        // If the other square is not in one of the valid positions, then
-        // it cannot be an "L".
-        if (squaresWithSameValue == 0)
-            return false;
     }
 
-    // If we have a vertical orientation for "L".
-    if (verticalOrientation)
+    // We have a vertical orientation.
+    else
     {
-        // If the first element on the column and the last element on the column are
-        // reresented by the same player, then we have a gap in the middle and
-        // it cannot be an "L".
-        if (gameBoard[0][column] == currentPlayer && gameBoard[3][column] == currentPlayer)
-            return false;
-
-        // Find the starting position of the vertical line.
-        unsigned short int startPosition = 0;
+        unsigned short int column = orientation.second;
         if (gameBoard[0][column] != currentPlayer)
             startPosition = 1;
-        unsigned short int endPosition = startPosition + 2;
-
-        bool squaresWithSameValue = 0;
-
-        if (column - 1 >= 0 && gameBoard[startPosition][column - 1] == currentPlayer)
-            squaresWithSameValue++;
-
-        if (column + 1 <= 3 && gameBoard[startPosition][column + 1] == currentPlayer)
-            squaresWithSameValue++;
-
-        if (column - 1 >= 0 && gameBoard[endPosition][column - 1] == currentPlayer)
-            squaresWithSameValue++;
-
-        if (column - 1 >= 0 && gameBoard[endPosition][column + 1] == currentPlayer)
-            squaresWithSameValue++;
-
-        // If the other square is not in one of the valid positions, then
-        // it cannot be an "L".
-        if (squaresWithSameValue == 0)
-            return false;
     }
 
-    return true;
+    unsigned short int endPosition = startPosition + 2;
+
+    std::pair <USI, USI> startEndPositions;
+    startEndPositions.first = startPosition;
+    startEndPositions.second = endPosition;
+
+    return startEndPositions;
+}
+
+
+
+/**
+    Checks whether the other square from the possible "L" is on a valid position.
+    Input:
+        - "gameBoard": the game board
+        - "orientation": the orientation of the possible "L"
+        - "startEndPositions": the start and end positions for the body of the possible "L"
+        - "currentPlayer": the current player
+    Output:
+        - true: if the other square is on a proper position
+        - false: otherwise
+**/
+bool onValidPosition (USI gameBoard[][4], std::pair <USI, USI> orientation, std::pair <USI, USI> startEndPositions, USI currentPlayer)
+{
+    unsigned short int startPosition = startEndPositions.first;
+    unsigned short int endPosition = startEndPositions.second;
+
+    std::vector < std::pair <USI, USI> > possibleCoordinates;
+
+    // We have a horizontal orientation.
+    if (orientation.first == 1)
+    {
+        unsigned short int line = orientation.second;
+        possibleCoordinates.push_back(std::make_pair(line - 1, startPosition));
+        possibleCoordinates.push_back(std::make_pair(line + 1, startPosition));
+        possibleCoordinates.push_back(std::make_pair(line - 1, endPosition));
+        possibleCoordinates.push_back(std::make_pair(line + 1, endPosition));
+    }
+
+    // We have a vertical orientation.
+    else
+    {
+        unsigned short int column = orientation.second;
+        possibleCoordinates.push_back(std::make_pair(startPosition, column - 1));
+        possibleCoordinates.push_back(std::make_pair(startPosition, column + 1));
+        possibleCoordinates.push_back(std::make_pair(endPosition, column - 1));
+        possibleCoordinates.push_back(std::make_pair(endPosition, column + 1));
+    }
+
+
+    for (unsigned short int possibleSquare = 0; possibleSquare < possibleCoordinates.size(); possibleSquare++)
+    {
+        unsigned short int line = possibleCoordinates.at(possibleSquare).first;
+        unsigned short int column = possibleCoordinates.at(possibleSquare).second;
+
+        if (gameBoard[line][column] == currentPlayer)
+            return true;
+    }
+
+    // The other square is not on a valid position.
+    return false;
 }
 
 
@@ -235,7 +325,7 @@ bool checkMove (unsigned short int gameBoard[][4], unsigned short int currentPla
     Output:
         - "gameBoard": the updated game board
 **/
-void makeMove (unsigned short int gameBoard[][4], unsigned short int currentPlayer, std::vector < std::pair <unsigned short int, unsigned short int> > newCoordinates)
+void makeMove (USI gameBoard[][4], USI currentPlayer, std::vector < std::pair <USI, USI> > newCoordinates)
 {
     // Delete the current squares of the current player.
     for (unsigned short int line = 0; line < 4; line++)

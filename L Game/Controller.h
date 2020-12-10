@@ -5,13 +5,21 @@
 
 #pragma once
 
+#include <fstream>
+#include <iostream>
 #include <vector>
+
+#define USI unsigned short int
 
 
 
 void runApplication ();
-void readData (unsigned short int gameBoard[][4]);
-void printBoard (unsigned short int gameBoard[][4]);
-void getNewCoordinates (std::vector < std::pair <unsigned short int, unsigned short int> >& coordinates);
-bool checkMove (unsigned short int gameBoard[][4], unsigned short int currentPlayer, std::vector < std::pair <unsigned short int, unsigned short int> > coordinates);
-void makeMove (unsigned short int gameBoard[][4], unsigned short int currentPlayer, std::vector < std::pair <unsigned short int, unsigned short int> > newCoordinates);
+void readData (USI gameBoard[][4]);
+void printBoard (USI gameBoard[][4]);
+void getNewCoordinates (std::vector < std::pair <USI, USI> >& coordinates);
+bool checkMove (USI gameBoard[][4], USI currentPlayer, std::vector < std::pair <USI, USI> > coordinates);
+std::pair <USI, USI> getOrientation (USI gameBoard[][4], std::vector < std::pair <USI, USI> > coordinates);
+bool hasGap (USI gameBoard[][4], std::pair <USI, USI> orientation, USI currentPlayer);
+std::pair <USI, USI> getStartEndPositions (USI gameBoard[][4], std::pair <USI, USI> orientation, USI currentPlayer);
+bool onValidPosition (USI gameBoard[][4], std::pair <USI, USI> orientation, std::pair <USI, USI> startEndPositions, USI currentPlayer);
+void makeMove (USI gameBoard[][4], USI currentPlayer, std::vector < std::pair <USI, USI> > newCoordinates);
