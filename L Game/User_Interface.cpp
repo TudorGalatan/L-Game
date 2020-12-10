@@ -3,20 +3,27 @@
     The User Interface layer is responsible with the visual side of the application.
 **/
 
-
 #include "User_Interface.h"
+
+
 
 bool onRulesPage = false;
 
+
+
 /**
-    Start the graphical user interface.
+   Runs the graphical user interface.
+    Input:
+        - none
+    Output:
+        - none
 **/
 void runGUI ()
 {
     // Exclude the C functions for higher speed.
     std::ios::sync_with_stdio(false);
 
-    // Draw the window.
+    // Draw the application window.
     initwindow(WINDOW_SIZE, WINDOW_SIZE);
 
     // Draw the main menu's buttons.
@@ -51,7 +58,7 @@ void drawButton (USI left, USI up, USI right, USI down, USI depth, bool drawDeta
     // Draw the button.
     bar3d(left, up, right, down, depth, drawDetails);
 
-    // Set font characteristics.
+    // Set the font characteristics.
     settextstyle(BOLD_FONT, HORIZ_DIR, FONT_SIZE);
 
     // Write the text.
@@ -61,16 +68,17 @@ void drawButton (USI left, USI up, USI right, USI down, USI depth, bool drawDeta
 
 
 /**
-    Draws the buttons of the main menu on the screen.
+    Draws all the buttons of the main menu.
     Input:
         - none
     Output:
-        - draws the buttons of the main menu on the screen
+        - draws all the buttons of the main menu on the screen
 **/
 void drawMainMenuButtons ()
 {
     cleardevice();
-    // Get the parameters for the "START" button.
+
+    // Get the parameters for drawing the "START" button.
     unsigned short int distanceFromCenter = 100;
     unsigned short int left = WINDOW_SIZE / 2 - distanceFromCenter;
     unsigned short int right = WINDOW_SIZE / 2 + distanceFromCenter;
@@ -85,7 +93,7 @@ void drawMainMenuButtons ()
     // Draw the "START" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
-    // Update the parameters for the "RULES" button.
+    // Update the parameters for drawing the "RULES" button.
     up = 400;
     down = 500;
     textYCoordinate = 450;
@@ -94,7 +102,7 @@ void drawMainMenuButtons ()
     // Draw the "RULES" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
-    // Update the parameters for the "EXIT" button.
+    // Update the parameters for drawing the "EXIT" button.
     up = 600;
     down = 700;
     textXCoordinate += 10;
@@ -114,9 +122,9 @@ void drawMainMenuButtons ()
         - "yCoordinate": the y coordinate for the click
     Output:
         - 0: the user clicked outside the buttons
-        - 1: the user clicked on "START"
-        - 2: the user clicked on "RULES"
-        - 3: the user clicked on "EXIT"
+        - 1: the user clicked on the "START" button
+        - 2: the user clicked on the "RULES" button
+        - 3: the user clicked on the "EXIT" button
 */
 unsigned short int checkMouseLocation (double xCoordinate, double yCoordinate)
 {
@@ -138,19 +146,21 @@ unsigned short int checkMouseLocation (double xCoordinate, double yCoordinate)
     return 0;
 }
 
+
+
 /**
     Redraws the "START" button with the hover effect on it.
     Input:
         - none
     Output:
-        - redraws all the buttons with the hover effect on them
+        - redraws all the buttons with the hover effect on the "START" button
 **/
 void hoverStart ()
 {
     // Clear the screen.
     cleardevice();
 
-    // Get the new parameters for the "START" button.
+    // Get the new parameters for redrawing the "START" button.
     unsigned short int distanceFromCenter = 80;
     unsigned short int left = WINDOW_SIZE / 2 - distanceFromCenter;
     unsigned short int right = WINDOW_SIZE / 2 + distanceFromCenter + 40;
@@ -162,10 +172,10 @@ void hoverStart ()
     unsigned short int textYCoordinate = 230;
     char text[] = "START";
 
-    // Draw the "START" button.
+    // Redraw the "START" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
-    // Update the parameters for the "RULES" button.
+    // Update the parameters for redrawing the "RULES" button.
     distanceFromCenter = 100;
     left = WINDOW_SIZE / 2 - distanceFromCenter;
     right = WINDOW_SIZE / 2 + distanceFromCenter;
@@ -176,26 +186,35 @@ void hoverStart ()
     textYCoordinate = 450;
     strcpy(text, "RULES");
 
-    // Draw the "RULES" button.
+    // Redraw the "RULES" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
-    // Update the parameters for the "EXIT" button.
+    // Update the parameters for redrawing the "EXIT" button.
     up = 600;
     down = 700;
     textXCoordinate += 10;
     textYCoordinate = 650;
     strcpy(text, "EXIT");
 
-    // Draw the "EXIT" button.
+    // Redraw the "EXIT" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
 
+
+
+/**
+    Redraws the "RULES" button with the hover effect on it.
+    Input:
+        - none
+    Output:
+        - redraws all the buttons with the hover effect on the "RULES" button
+**/
 void hoverRules ()
 {
     // Clear the screen.
     cleardevice();
 
-    // Get the new parameters for the "START" button.
+    // Get the new parameters for redrawing the "START" button.
     unsigned short int distanceFromCenter = 100;
     unsigned short int left = WINDOW_SIZE / 2 - distanceFromCenter;
     unsigned short int right = WINDOW_SIZE / 2 + distanceFromCenter;
@@ -207,11 +226,10 @@ void hoverRules ()
     unsigned short int textYCoordinate = 250;
     char text[] = "START";
 
-
-    // Draw the "START" button.
+    // Redraw the "START" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
-    // Update the parameters for the "RULES" button.
+    // Update the parameters for redrawing the "RULES" button.
     distanceFromCenter = 80;
     left = WINDOW_SIZE / 2 - distanceFromCenter;
     right = WINDOW_SIZE / 2 + distanceFromCenter + 40;
@@ -222,10 +240,10 @@ void hoverRules ()
     textYCoordinate = 430;
     strcpy(text, "RULES");
 
-    // Draw the "RULES" button.
+    // Redraw the "RULES" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
-    // Update the parameters for the "EXIT" button.
+    // Update the parameters for redrawing the "EXIT" button.
     distanceFromCenter = 100;
     left = WINDOW_SIZE / 2 - distanceFromCenter;
     right = WINDOW_SIZE / 2 + distanceFromCenter;
@@ -236,16 +254,25 @@ void hoverRules ()
     textYCoordinate = 650;
     strcpy(text, "EXIT");
 
-    // Draw the "EXIT" button.
+    // Redraw the "EXIT" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
-
 }
 
-void hoverExit()
+
+
+/**
+    Redraws the "EXIT" button with the hover effect on it.
+    Input:
+        - none
+    Output:
+        - redraws all the buttons with the hover effect on the "EXIT" button
+**/
+void hoverExit ()
 {
+    // Clear the screen.
     cleardevice();
 
-    // Get the new parameters for the "START" button.
+    // Get the new parameters for redrawing the "START" button.
     unsigned short int distanceFromCenter = 100;
     unsigned short int left = WINDOW_SIZE / 2 - distanceFromCenter;
     unsigned short int right = WINDOW_SIZE / 2 + distanceFromCenter;
@@ -257,10 +284,10 @@ void hoverExit()
     unsigned short int textYCoordinate = 250;
     char text[] = "START";
 
-    // Draw the "START" button.
+    // Redraw the "START" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
-    // Update the parameters for the "RULES" button.
+    // Update the parameters for redrawing the "RULES" button.
     distanceFromCenter = 100;
     left = WINDOW_SIZE / 2 - distanceFromCenter;
     right = WINDOW_SIZE / 2 + distanceFromCenter;
@@ -271,10 +298,10 @@ void hoverExit()
     textYCoordinate = 450;
     strcpy(text, "RULES");
 
-    // Draw the "RULES" button.
+    // Redraw the "RULES" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
-    // Update the parameters for the "EXIT" button.
+    // Update the parameters for redrawing the "EXIT" button.
     distanceFromCenter = 80;
     left = WINDOW_SIZE / 2 - distanceFromCenter;
     right = WINDOW_SIZE / 2 + distanceFromCenter + 40;
@@ -285,12 +312,16 @@ void hoverExit()
     textYCoordinate = 630;
     strcpy(text, "EXIT");
 
-
-    //Draw the "EXIT" button
+    // Redraw the "EXIT" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
 
-void hoverBack()
+
+
+/**
+    ???
+**/
+void hoverBack ()
 {
     cleardevice();
     unsigned short startPosition = 200;///position from where the text starts on OX
@@ -305,9 +336,14 @@ void hoverBack()
     outtextxy(startPosition,450,"in such a way that you block the other player.");
     outtextxy(startPosition,500,"The player who runs out of moves loses!!!");
     drawButton(startPosition + 220, 780,startPosition + 370, 880,10,1,startPosition + 250, 830, "BACK");
-
 }
-void drawRulesPage()
+
+
+
+/**
+    ???
+**/
+void drawRulesPage ()
 {
     unsigned short startPosition = 200;///position from where the text starts on OX
     cleardevice();
@@ -323,14 +359,12 @@ void drawRulesPage()
     drawButton(startPosition + 200, 800,startPosition + 350, 900,25,1,startPosition + 230, 850, "BACK");
 }
 
+
+
 /**
-    Clears the screen and draws the "RULES" page.
-    Input:
-        - none
-    Output:
-        - draws the rules and the "BACK" button
-*/
-void clickOnRules()
+    ???
+**/
+void clickOnRules ()
 {
     onRulesPage = true;
     bool changer = false; ///used for the same performance reasons as in the main menu (redrawing only once the rules page to avoid flickering)
@@ -351,16 +385,13 @@ void clickOnRules()
         if (GetAsyncKeyState(VK_LBUTTON))///If you click on the button
             if(xCoordinate >= startPosition + 200 && xCoordinate <= startPosition + 350)///check if mouse is on OX between the edges of the button (between left and right)
                 if(yCoordinate >= 800 && yCoordinate <= 900)///check if mouse is on OY between the edges of the button (between top and bottom)
-                    {
-                        xCoordinate = cursorPosition.x;///update the OX position of the cursor
-                        yCoordinate = cursorPosition.y;///update the OY position of the cursor
-                        if(xCoordinate >= startPosition+200 && xCoordinate <= startPosition + 350)///check if mouse is on OX between the edges of the button (between left and right)
-                            if(yCoordinate >= 800 && yCoordinate <= 900)///check if mouse is on OY between the edges of the button (between top and bottom)
-                            {
-                                onRulesPage = false;///changing it to exit the while loop
-                            }
-
-                    }
+                {
+                    xCoordinate = cursorPosition.x;///update the OX position of the cursor
+                    yCoordinate = cursorPosition.y;///update the OY position of the cursor
+                    if(xCoordinate >= startPosition+200 && xCoordinate <= startPosition + 350)///check if mouse is on OX between the edges of the button (between left and right)
+                        if(yCoordinate >= 800 && yCoordinate <= 900)///check if mouse is on OY between the edges of the button (between top and bottom)
+                            onRulesPage = false;///changing it to exit the while loop
+                }
         if(xCoordinate >= startPosition + 200 && xCoordinate <= startPosition + 350)///check if mouse is on OX between the edges of the button (between left and right)
             if(yCoordinate >= 800 && yCoordinate <= 900)///check if mouse is on OY between the edges of the button (between top and bottom)
             {
@@ -380,17 +411,19 @@ void clickOnRules()
                 }
             }
         else///if the cursor leaves the OX zone of the button
-        {
             if(changer == true)///update the screen without the hover effect if we didn't do it before
             {
                 changer = false;
                 drawRulesPage();///draw Rules page without hover effect
             }
-        }
     }
+
     drawMainMenuButtons();///redraw the main menu
     scanMousePosition();///search where you click
 }
+
+
+
 /**
     Permanently scans the mouse position.
     Input:
@@ -416,35 +449,35 @@ void scanMousePosition ()
 
         switch (button)
         {
-        // The "START" button
-        case 1:
-            if (changer == false)
-                hoverStart();
-            changer = true;
-            break;
+            // The "START" button
+            case 1:
+                if (changer == false)
+                    hoverStart();
+                changer = true;
+                break;
 
-        // The "RULES" button
-        case 2:
-            if (changer == false)
-                hoverRules();
-            changer = true;
-            break;
+            // The "RULES" button
+            case 2:
+                if (changer == false)
+                    hoverRules();
+                changer = true;
+                break;
 
-        // The "EXIT" button
-        case 3:
-            if (changer == false)
-                hoverExit();
-            changer = true;
-            break;
+            // The "EXIT" button
+            case 3:
+                if (changer == false)
+                    hoverExit();
+                changer = true;
+                break;
 
-        // The click is outside the buttons.
-        default:
-            if (changer == true)
-            {
-                cleardevice();
-                drawMainMenuButtons();
-            }
-            changer = false;
+            // The click is outside the buttons.
+            default:
+                if (changer == true)
+                {
+                    cleardevice();
+                    drawMainMenuButtons();
+                }
+                changer = false;
         }
 
         // If you pressed left click
@@ -455,26 +488,27 @@ void scanMousePosition ()
 
             switch (button)
             {
-            // The "START" button
-            case 1:
-                buttonPressed = true;
-                system("pause");
-                break;
+                // The "START" button
+                case 1:
+                    buttonPressed = true;
+                    system("pause");
+                    break;
 
-            // The "RULES" button
-            case 2:
-                buttonPressed = true;
-                clickOnRules();
-                break;
+                // The "RULES" button
+                case 2:
+                    buttonPressed = true;
+                    clickOnRules();
+                    break;
 
-            case 3:
-                buttonPressed = true;
-                closeApplication();
-                system("pause");
-                break;
+                case 3:
+                    buttonPressed = true;
+                    closeApplication();
+                    system("pause");
+                    break;
             }
         }
-        // Waits 5 milliseconds.
+
+        // Wait 5 milliseconds for some reason.
         delay(5);
     }
 }
