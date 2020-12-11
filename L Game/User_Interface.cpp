@@ -429,6 +429,7 @@ void clickOnRules ()
 
         // Get the mouse position.
         GetCursorPos(&cursorPosition);
+        // Get the mouse position on the window.
         ScreenToClient(hwnd,&cursorPosition);
 
         double xCoordinate = cursorPosition.x;
@@ -499,6 +500,7 @@ void scanMousePosition ()
     {
         // Get the mouse position.
         GetCursorPos(&cursorPosition);
+        // Get the mouse position on the screen.
         ScreenToClient(hwnd,&cursorPosition);
         double xCoordinate = cursorPosition.x;
         double yCoordinate = cursorPosition.y;
@@ -560,10 +562,7 @@ void scanMousePosition ()
                     break;
 
                 case 3:
-                    buttonPressed = true;
-                    closeApplication();
-                    system("pause");
-                    break;
+                    exit(0);
             }
         }
 
