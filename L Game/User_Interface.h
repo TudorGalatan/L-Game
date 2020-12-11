@@ -6,7 +6,7 @@
 #pragma once
 
 #include <graphics.h>
-#include <windows.h>
+#include <Windows.h>
 #include <cstring>
 #include <iostream>
 

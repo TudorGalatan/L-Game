@@ -424,14 +424,17 @@ void clickOnRules ()
 
     while (onRulesPage == true)
     {
+        HWND hwnd = GetForegroundWindow();
         POINT cursorPosition;
 
         // Get the mouse position.
         GetCursorPos(&cursorPosition);
+        ScreenToClient(hwnd,&cursorPosition);
+
         double xCoordinate = cursorPosition.x;
         double yCoordinate = cursorPosition.y;
 
-        // First we check if the user clicked somewhere on the screen, then we check the position.
+        // First we check if the usScreenToClient(hwnd, &p)er clicked somewhere on the screen, then we check the position.
         // After this, we check if we can apply the hover animation on the button.
         if (GetAsyncKeyState(VK_LBUTTON))
 
@@ -487,6 +490,7 @@ void clickOnRules ()
 **/
 void scanMousePosition ()
 {
+    HWND hwnd = GetForegroundWindow();
     POINT cursorPosition;
     bool buttonPressed = false;
     bool changer = false;
@@ -495,6 +499,7 @@ void scanMousePosition ()
     {
         // Get the mouse position.
         GetCursorPos(&cursorPosition);
+        ScreenToClient(hwnd,&cursorPosition);
         double xCoordinate = cursorPosition.x;
         double yCoordinate = cursorPosition.y;
 
