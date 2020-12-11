@@ -7,10 +7,6 @@
 
 
 
-bool onRulesPage = false;   // ???
-
-
-
 /**
    Runs the graphical user interface.
     Input:
@@ -288,13 +284,8 @@ void hoverExit ()
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
     // Update the parameters for redrawing the "RULES" button.
-    distanceFromCenter = 100;
-    left = WINDOW_SIZE / 2 - distanceFromCenter;
-    right = WINDOW_SIZE / 2 + distanceFromCenter;
     up = 400;
     down = 500;
-    depth = 25;
-    textXCoordinate = WINDOW_SIZE / 2 - 50;
     textYCoordinate = 450;
     strcpy(text, "RULES");
 
@@ -319,107 +310,170 @@ void hoverExit ()
 
 
 /**
-    ???
+    Redraws the "BACK" button with the hover effect on it.
+    Input:
+        - none
+    Output:
+        - redraws the "RULES" page with the hover effect on the "BACK" button
 **/
 void hoverBack ()
 {
+    // Clears the screen.
     cleardevice();
-    unsigned short startPosition = 200;///position from where the text starts on OX
-    cleardevice();
-    settextstyle(BOLD_FONT,HORIZ_DIR,4);
-    outtextxy(startPosition + 50,100,"!!!RULES OF THE GAME!!!");
-    settextstyle(BOLD_FONT,HORIZ_DIR,2);
-    outtextxy(startPosition,250,"The board has 2 'L' shaped objects and 2 coins");
-    outtextxy(startPosition,300,"You can move your 'L' object and, if you wish,");
-    outtextxy(startPosition,350,"you can move at your choice one of the coins on");
-    outtextxy(startPosition,400,"a free position. You have to move your objects");
-    outtextxy(startPosition,450,"in such a way that you block the other player.");
-    outtextxy(startPosition,500,"The player who runs out of moves loses!!!");
-    drawButton(startPosition + 220, 780,startPosition + 370, 880,10,1,startPosition + 250, 830, "BACK");
+
+    unsigned short horizontalPosition = 200;
+    unsigned short int fontSize = 4;
+    unsigned short int verticalPosition = 100;
+
+    // Write the title.
+    settextstyle(BOLD_FONT, HORIZ_DIR, fontSize);
+    outtextxy(horizontalPosition + 50, verticalPosition, "!!!RULES OF THE GAME!!!");
+
+    // Write the rules.
+    settextstyle(BOLD_FONT, HORIZ_DIR, fontSize / 2);
+    outtextxy(horizontalPosition, verticalPosition += 150, "The board has 2 'L' shaped objects and 2 coins");
+    outtextxy(horizontalPosition, verticalPosition += 50, "You can move your 'L' object and, if you wish,");
+    outtextxy(horizontalPosition, verticalPosition += 50, "you can move at your choice one of the coins on");
+    outtextxy(horizontalPosition, verticalPosition += 50, "a free position. You have to move your objects");
+    outtextxy(horizontalPosition, verticalPosition += 50, "in such a way that you block the other player.");
+    outtextxy(horizontalPosition, verticalPosition += 50, "The player who runs out of moves loses!!!");
+
+    unsigned short int left = horizontalPosition + 220;
+    unsigned short int right = horizontalPosition + 370;
+    unsigned short int up = 780;
+    unsigned short int down = 880;
+    unsigned short int depth = 10;
+    bool drawDetails = 1;
+    unsigned short int textXCoordinate = horizontalPosition + 250;
+    unsigned short int textYCoordinate = 830;
+    char text[] = "BACK";
+
+    // Draw the "BACK" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
 
 
 
 /**
-    ???
+    Draws the "RULES" page.
+    Input:
+        - none
+    Output:
+        - draws the "RULES" page
 **/
 void drawRulesPage ()
 {
-    unsigned short startPosition = 200;///position from where the text starts on OX
+    // Clear the screen.
     cleardevice();
-    settextstyle(BOLD_FONT,HORIZ_DIR,4);
-    outtextxy(startPosition + 50,100,"!!!RULES OF THE GAME!!!");
-    settextstyle(BOLD_FONT,HORIZ_DIR,2);
-    outtextxy(startPosition,250,"The board has 2 'L' shaped objects and 2 coins");
-    outtextxy(startPosition,300,"You can move your 'L' object and, if you wish,");
-    outtextxy(startPosition,350,"you can move at your choice one of the coins on");
-    outtextxy(startPosition,400,"a free position. You have to move your objects");
-    outtextxy(startPosition,450,"in such a way that you block the other player.");
-    outtextxy(startPosition,500,"The player who runs out of moves loses!!!");
-    drawButton(startPosition + 200, 800,startPosition + 350, 900,25,1,startPosition + 230, 850, "BACK");
+
+    unsigned short horizontalPosition = 250;
+    unsigned short int fontSize = 4;
+    unsigned short int verticalPosition = 100;
+
+    // Write the title.
+    settextstyle(BOLD_FONT, HORIZ_DIR, fontSize);
+    outtextxy(horizontalPosition, verticalPosition, "!!!RULES OF THE GAME!!!");
+
+    horizontalPosition -= 50;
+
+    // Write the rules.
+    settextstyle(BOLD_FONT, HORIZ_DIR, fontSize / 2);
+    outtextxy(horizontalPosition, verticalPosition += 150, "The board has 2 'L' shaped objects and 2 coins");
+    outtextxy(horizontalPosition, verticalPosition += 50, "You can move your 'L' object and, if you wish,");
+    outtextxy(horizontalPosition, verticalPosition += 50, "you can move at your choice one of the coins on");
+    outtextxy(horizontalPosition, verticalPosition += 50, "a free position. You have to move your objects");
+    outtextxy(horizontalPosition, verticalPosition += 50, "in such a way that you block the other player.");
+    outtextxy(horizontalPosition, verticalPosition += 50, "The player who runs out of moves loses!!!");
+
+    unsigned short int left = horizontalPosition + 200;
+    unsigned short int right = horizontalPosition + 350;
+    unsigned short int up = 800;
+    unsigned short int down = 900;
+    unsigned short int depth = 25;
+    bool drawDetails = 1;
+    unsigned short int textXCoordinate = horizontalPosition + 230;
+    unsigned short int textYCoordinate = 850;
+    char text[] = "BACK";
+
+    // Draw the "BACK" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
 
 
 
 /**
-    ???
+    Redirects to the "RULES" page.
+    Input:
+        - none
+    Output:
+        - redirects to the "RULES" page
 **/
 void clickOnRules ()
 {
-    onRulesPage = true;
-    bool changer = false; ///used for the same performance reasons as in the main menu (redrawing only once the rules page to avoid flickering)
-    unsigned short startPosition = 200;///position from where the text starts on OX
+    // Clears the screen.
     cleardevice();
+
+    // Draws the "RULES" page.
     drawRulesPage();
-    while(onRulesPage == true)
+
+    bool onRulesPage = true;
+    bool changer = false;
+
+    // Horizontal left position for the "RULES" button.
+    unsigned short int startPosition = 400;
+
+    while (onRulesPage == true)
     {
         POINT cursorPosition;
+
         // Get the mouse position.
         GetCursorPos(&cursorPosition);
         double xCoordinate = cursorPosition.x;
         double yCoordinate = cursorPosition.y;
-        /**
-            First we check if the user clicked somewhere on the screen, then we check the position.
-            After this, we check if we can apply the hover animation on the button.
-        */
-        if (GetAsyncKeyState(VK_LBUTTON))///If you click on the button
-            if(xCoordinate >= startPosition + 200 && xCoordinate <= startPosition + 350)///check if mouse is on OX between the edges of the button (between left and right)
-                if(yCoordinate >= 800 && yCoordinate <= 900)///check if mouse is on OY between the edges of the button (between top and bottom)
+
+        // First we check if the user clicked somewhere on the screen, then we check the position.
+        // After this, we check if we can apply the hover animation on the button.
+        if (GetAsyncKeyState(VK_LBUTTON))
+
+            // Check if the click is inside the "BACK" button.
+            if (xCoordinate >= startPosition && xCoordinate <= startPosition + 150)
+                if (yCoordinate >= 800 && yCoordinate <= 900)
                 {
-                    xCoordinate = cursorPosition.x;///update the OX position of the cursor
-                    yCoordinate = cursorPosition.y;///update the OY position of the cursor
-                    if(xCoordinate >= startPosition+200 && xCoordinate <= startPosition + 350)///check if mouse is on OX between the edges of the button (between left and right)
-                        if(yCoordinate >= 800 && yCoordinate <= 900)///check if mouse is on OY between the edges of the button (between top and bottom)
-                            onRulesPage = false;///changing it to exit the while loop
+                    xCoordinate = cursorPosition.x;
+                    yCoordinate = cursorPosition.y;
+                    onRulesPage = false;
                 }
-        if(xCoordinate >= startPosition + 200 && xCoordinate <= startPosition + 350)///check if mouse is on OX between the edges of the button (between left and right)
-            if(yCoordinate >= 800 && yCoordinate <= 900)///check if mouse is on OY between the edges of the button (between top and bottom)
+
+        if (xCoordinate >= startPosition && xCoordinate <= startPosition + 150)
+            if (yCoordinate >= 800 && yCoordinate <= 900)
             {
-                if(changer == false)///if we didn't update the screen before with the hover effect on the button
-                {
+                 if (changer == false)
+                 {
                     changer = true;
                     cleardevice();
                     hoverBack();
-                }
+                 }
             }
-            else///if the cursor leaves the OY zone of the button
+            else
             {
-                if(changer == true)///update the screen without the hover effect if we didn't do it before
+                if (changer == true)
                 {
                     changer = false;
-                    drawRulesPage();///draw the Rules page without hover effect
+                    drawRulesPage();
                 }
             }
-        else///if the cursor leaves the OX zone of the button
-            if(changer == true)///update the screen without the hover effect if we didn't do it before
-            {
-                changer = false;
-                drawRulesPage();///draw Rules page without hover effect
-            }
+        else if (changer == true)
+        {
+            changer = false;
+            drawRulesPage();
+        }
     }
 
-    drawMainMenuButtons();///redraw the main menu
-    scanMousePosition();///search where you click
+    // Redraw the main window.
+    drawMainMenuButtons();
+
+    // Look for the mouse position.
+    scanMousePosition();
 }
 
 
