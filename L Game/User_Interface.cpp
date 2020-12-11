@@ -7,7 +7,7 @@
 
 
 
-bool onRulesPage = false;
+bool onRulesPage = false;   // ???
 
 
 
