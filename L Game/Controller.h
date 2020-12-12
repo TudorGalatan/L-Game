@@ -5,8 +5,6 @@
 
 #pragma once
 
-#include <fstream>
-#include <iostream>
 #include <vector>
 
 #define USI unsigned short int

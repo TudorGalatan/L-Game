@@ -5,13 +5,8 @@
 
 #pragma once
 
-#include <graphics.h>
-#include <Windows.h>
-#include <cstring>
-#include <iostream>
-
 #define USI unsigned short int
-#define WINDOW_SIZE 1000
+#define WINDOW_SIZE 1920
 #define FONT_SIZE 4
 
 
@@ -22,6 +17,9 @@ void drawMainMenuButtons ();
 void scanMousePosition ();
 void hoverStart ();
 void hoverBack ();
+void hoverSinglePlayer();
+void hoverMultiPlayer();
+void drawStartPage ();
 void drawRulesPage ();
 void clickOnRules ();
 unsigned short int checkMouseLocation (double xCoordinate, double yCoordinate);

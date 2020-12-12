@@ -5,7 +5,9 @@
 
 #include "User_Interface.h"
 
-
+#include <graphics.h>///for graphics
+#include <Windows.h>///for the mouse cursor position inside the window
+#include <cstring>///for the strcpy() function
 
 /**
    Runs the graphical user interface.
@@ -124,7 +126,7 @@ void drawMainMenuButtons ()
 */
 unsigned short int checkMouseLocation (double xCoordinate, double yCoordinate)
 {
-    if (xCoordinate >= 400 && xCoordinate <= 600)
+    if (xCoordinate >= WINDOW_SIZE / 2 - 100 && xCoordinate <= WINDOW_SIZE / 2 + 100)
 
         // The user clicked on the "START" button.
         if(yCoordinate >= 200 && yCoordinate <= 300)
@@ -233,7 +235,7 @@ void hoverRules ()
     down = 480;
     depth = 10;
     textXCoordinate = WINDOW_SIZE / 2 - 30;
-    textYCoordinate = 430;
+    textYCoordinate = 430;\
     strcpy(text, "RULES");
 
     // Redraw the "RULES" button.
@@ -321,38 +323,147 @@ void hoverBack ()
     // Clears the screen.
     cleardevice();
 
-    unsigned short horizontalPosition = 200;
+    cleardevice();
+
+    unsigned short horizontalPosition = WINDOW_SIZE / 2;
     unsigned short int fontSize = 4;
     unsigned short int verticalPosition = 100;
 
     // Write the title.
     settextstyle(BOLD_FONT, HORIZ_DIR, fontSize);
-    outtextxy(horizontalPosition + 50, verticalPosition, "!!!RULES OF THE GAME!!!");
+    outtextxy(horizontalPosition - 200, verticalPosition, "!!!RULES OF THE GAME!!!");
+
+    horizontalPosition -= 50;
 
     // Write the rules.
     settextstyle(BOLD_FONT, HORIZ_DIR, fontSize / 2);
-    outtextxy(horizontalPosition, verticalPosition += 150, "The board has 2 'L' shaped objects and 2 coins");
-    outtextxy(horizontalPosition, verticalPosition += 50, "You can move your 'L' object and, if you wish,");
-    outtextxy(horizontalPosition, verticalPosition += 50, "you can move at your choice one of the coins on");
-    outtextxy(horizontalPosition, verticalPosition += 50, "a free position. You have to move your objects");
-    outtextxy(horizontalPosition, verticalPosition += 50, "in such a way that you block the other player.");
-    outtextxy(horizontalPosition, verticalPosition += 50, "The player who runs out of moves loses!!!");
+    outtextxy(horizontalPosition - 200, verticalPosition += 150, "The board has 2 'L' shaped objects and 2 coins");
+    outtextxy(horizontalPosition - 200, verticalPosition += 50, "You can move your 'L' object and, if you wish,");
+    outtextxy(horizontalPosition - 200, verticalPosition += 50, "you can move at your choice one of the coins on");
+    outtextxy(horizontalPosition - 200, verticalPosition += 50, "a free position. You have to move your objects");
+    outtextxy(horizontalPosition - 200, verticalPosition += 50, "in such a way that you block the other player.");
+    outtextxy(horizontalPosition - 200, verticalPosition += 50, "The player who runs out of moves loses!!!");
 
-    unsigned short int left = horizontalPosition + 220;
-    unsigned short int right = horizontalPosition + 370;
+    unsigned short int left = horizontalPosition - 80;
+    unsigned short int right = horizontalPosition + 120;
     unsigned short int up = 780;
     unsigned short int down = 880;
     unsigned short int depth = 10;
     bool drawDetails = 1;
-    unsigned short int textXCoordinate = horizontalPosition + 250;
+    unsigned short int textXCoordinate = horizontalPosition - 20;
     unsigned short int textYCoordinate = 830;
     char text[] = "BACK";
 
     // Draw the "BACK" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
+/**
+    Redraws the "SINGLE PLAYER" button with the hover effect on it.
+    Input:
+        - none
+    Output:
+        - redraws the "SINGLE PLAYER" page with the hover effect on the "BACK" button
+**/
+void hoverSinglePlayer()
+{
+   cleardevice();
+    unsigned short int horizontalPosition = WINDOW_SIZE / 2;
+    unsigned short int left = horizontalPosition - 150;
+    unsigned short int right = horizontalPosition + 150;
+    unsigned short int up = horizontalPosition - 600;
+    unsigned short int down = horizontalPosition - 500;
+    unsigned short int depth = 25;
+    bool drawDetails = 1;
+    unsigned short int textXCoordinate = horizontalPosition - 120;
+    unsigned short int textYCoordinate = WINDOW_SIZE / 2 - 550;
+    char text[] = "SINGLE PLAYER";
 
+    // Draw the "SINGLE PLAYER" button.
+    drawButton(left + 20, up - 20, right + 20, down - 20, depth - 15, drawDetails, textXCoordinate + 20, textYCoordinate - 20, text);
 
+    //Update the values.
+    up += 300;
+    down += 300;
+    textXCoordinate += 20;
+    textYCoordinate += 300;
+    strcpy(text,"MULTIPLAYER");
+
+    //Draw the "MULTIPLAYER" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+}
+
+/**
+    Redraws the "MULTIPLAYER" button with the hover effect on it.
+    Input:
+        - none
+    Output:
+        - redraws the "MULTIPLAYER" page with the hover effect on the "BACK" button
+**/
+void hoverMultiPlayer()
+{
+    cleardevice();
+    unsigned short int horizontalPosition = WINDOW_SIZE / 2;
+    unsigned short int left = horizontalPosition - 150;
+    unsigned short int right = horizontalPosition + 150;
+    unsigned short int up = horizontalPosition - 600;
+    unsigned short int down = horizontalPosition - 500;
+    unsigned short int depth = 25;
+    bool drawDetails = 1;
+    unsigned short int textXCoordinate = horizontalPosition - 120;
+    unsigned short int textYCoordinate = WINDOW_SIZE / 2 - 550;
+    char text[] = "SINGLE PLAYER";
+
+    // Draw the "SINGLE PLAYER" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+
+    //Update the values.
+    up += 280;
+    down += 280;
+    left += 20;
+    right +=20;
+    depth = 10;
+    textXCoordinate += 40;
+    textYCoordinate += 280;
+    strcpy(text,"MULTIPLAYER");
+
+    //Draw the "MULTIPLAYER" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+}
+/**
+    Draws the "START" page.
+    Input:
+        - none
+    Output:
+        - draws the "START" page
+**/
+void drawStartPage()
+{
+    //Clear the screen.
+    cleardevice();
+    unsigned short int horizontalPosition = WINDOW_SIZE / 2;
+    unsigned short int left = horizontalPosition - 150;
+    unsigned short int right = horizontalPosition + 150;
+    unsigned short int up = horizontalPosition - 600;
+    unsigned short int down = horizontalPosition - 500;
+    unsigned short int depth = 25;
+    bool drawDetails = 1;
+    unsigned short int textXCoordinate = horizontalPosition - 120;
+    unsigned short int textYCoordinate = WINDOW_SIZE / 2 - 550;
+    char text[] = "SINGLE PLAYER";
+
+    // Draw the "SINGLE PLAYER" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+
+    //Update the values.
+    up += 300;
+    down += 300;
+    textXCoordinate += 20;
+    textYCoordinate += 300;
+    strcpy(text,"MULTIPLAYER");
+
+    //Draw the "MULTIPLAYER" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+}
 
 /**
     Draws the "RULES" page.
@@ -366,39 +477,122 @@ void drawRulesPage ()
     // Clear the screen.
     cleardevice();
 
-    unsigned short horizontalPosition = 250;
+    unsigned short horizontalPosition = WINDOW_SIZE / 2;
     unsigned short int fontSize = 4;
     unsigned short int verticalPosition = 100;
 
     // Write the title.
     settextstyle(BOLD_FONT, HORIZ_DIR, fontSize);
-    outtextxy(horizontalPosition, verticalPosition, "!!!RULES OF THE GAME!!!");
+    outtextxy(horizontalPosition - 200, verticalPosition, "!!!RULES OF THE GAME!!!");
 
     horizontalPosition -= 50;
 
     // Write the rules.
     settextstyle(BOLD_FONT, HORIZ_DIR, fontSize / 2);
-    outtextxy(horizontalPosition, verticalPosition += 150, "The board has 2 'L' shaped objects and 2 coins");
-    outtextxy(horizontalPosition, verticalPosition += 50, "You can move your 'L' object and, if you wish,");
-    outtextxy(horizontalPosition, verticalPosition += 50, "you can move at your choice one of the coins on");
-    outtextxy(horizontalPosition, verticalPosition += 50, "a free position. You have to move your objects");
-    outtextxy(horizontalPosition, verticalPosition += 50, "in such a way that you block the other player.");
-    outtextxy(horizontalPosition, verticalPosition += 50, "The player who runs out of moves loses!!!");
+    outtextxy(horizontalPosition - 200, verticalPosition += 150, "The board has 2 'L' shaped objects and 2 coins");
+    outtextxy(horizontalPosition - 200, verticalPosition += 50, "You can move your 'L' object and, if you wish,");
+    outtextxy(horizontalPosition - 200, verticalPosition += 50, "you can move at your choice one of the coins on");
+    outtextxy(horizontalPosition - 200, verticalPosition += 50, "a free position. You have to move your objects");
+    outtextxy(horizontalPosition - 200, verticalPosition += 50, "in such a way that you block the other player.");
+    outtextxy(horizontalPosition - 200, verticalPosition += 50, "The player who runs out of moves loses!!!");
 
-    unsigned short int left = horizontalPosition + 200;
-    unsigned short int right = horizontalPosition + 350;
+    unsigned short int left = horizontalPosition - 100;
+    unsigned short int right = horizontalPosition + 100;
     unsigned short int up = 800;
     unsigned short int down = 900;
     unsigned short int depth = 25;
     bool drawDetails = 1;
-    unsigned short int textXCoordinate = horizontalPosition + 230;
+    unsigned short int textXCoordinate = horizontalPosition - 40;
     unsigned short int textYCoordinate = 850;
     char text[] = "BACK";
 
     // Draw the "BACK" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
+void clickOnStart ()
+{
+    // Clears the screen.
+    cleardevice();
 
+    // Draws the "RULES" page.
+    drawStartPage();
+
+    bool onStartPage = true;
+    bool changer = false;
+
+    // Horizontal left position for the "RULES" button.
+    unsigned short int startPosition = WINDOW_SIZE / 2;
+
+    while (onStartPage == true)
+    {
+        HWND hwnd = GetForegroundWindow();
+        POINT cursorPosition;
+
+        // Get the mouse position.
+        GetCursorPos(&cursorPosition);
+        // Get the mouse position on the window.
+        ScreenToClient(hwnd,&cursorPosition);
+
+        double xCoordinate = cursorPosition.x;
+        double yCoordinate = cursorPosition.y;
+
+        // First we check if the usScreenToClient(hwnd, &p)er clicked somewhere on the screen, then we check the position.
+        // After this, we check if we can apply the hover animation on the button.
+        if (GetAsyncKeyState(VK_LBUTTON))
+
+            // Check if the click is inside the "SINGLE PLAYER" button.
+            if (xCoordinate >= startPosition -150 && xCoordinate <= startPosition + 150)
+                if (yCoordinate >= 300 && yCoordinate <= 400)
+                {
+                    ///Action if user clicks on Single player
+                    onStartPage = false;
+                }
+                else if(yCoordinate >=600 && yCoordinate <= 700)
+                {
+                    ///Action if user clicks on Multiplayer
+                    onStartPage = false;
+                }
+
+        if (xCoordinate >= startPosition - 150 && xCoordinate <= startPosition + 150)
+            if (yCoordinate >= 300 && yCoordinate <= 400)
+            {
+                 if (changer == false)
+                 {
+                    changer = true;
+                    cleardevice();
+                    hoverSinglePlayer();
+                 }
+            }
+            else if(yCoordinate >= 600 && yCoordinate <= 700)
+            {
+                if(changer == false)
+                {
+                    changer = true;
+                    cleardevice();
+                    hoverMultiPlayer();
+                }
+            }
+            else
+            {
+                if (changer == true)
+                {
+                    changer = false;
+                    drawStartPage();
+                }
+            }
+        else if (changer == true)
+        {
+            changer = false;
+            drawStartPage();
+        }
+    }
+
+    // Redraw the main window.
+    drawMainMenuButtons();
+
+    // Look for the mouse position.
+    scanMousePosition();
+}
 
 
 /**
@@ -420,7 +614,7 @@ void clickOnRules ()
     bool changer = false;
 
     // Horizontal left position for the "RULES" button.
-    unsigned short int startPosition = 400;
+    unsigned short int startPosition = WINDOW_SIZE / 2;
 
     while (onRulesPage == true)
     {
@@ -440,7 +634,7 @@ void clickOnRules ()
         if (GetAsyncKeyState(VK_LBUTTON))
 
             // Check if the click is inside the "BACK" button.
-            if (xCoordinate >= startPosition && xCoordinate <= startPosition + 150)
+            if (xCoordinate >= startPosition  - 100 && xCoordinate <= startPosition + 100)
                 if (yCoordinate >= 800 && yCoordinate <= 900)
                 {
                     xCoordinate = cursorPosition.x;
@@ -448,7 +642,7 @@ void clickOnRules ()
                     onRulesPage = false;
                 }
 
-        if (xCoordinate >= startPosition && xCoordinate <= startPosition + 150)
+        if (xCoordinate >= startPosition - 100 && xCoordinate <= startPosition + 100)
             if (yCoordinate >= 800 && yCoordinate <= 900)
             {
                  if (changer == false)
@@ -552,7 +746,7 @@ void scanMousePosition ()
                 // The "START" button
                 case 1:
                     buttonPressed = true;
-                    system("pause");
+                    clickOnStart();
                     break;
 
                 // The "RULES" button
@@ -565,9 +759,8 @@ void scanMousePosition ()
                     exit(0);
             }
         }
-
-        // Wait 5 milliseconds for some reason.
-        delay(5);
+        // Wait 50 milliseconds for performance reasons. (we don t want to scan the mouse position every millisecond)
+        delay(50);
     }
 }
 
