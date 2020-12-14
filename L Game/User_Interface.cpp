@@ -4,6 +4,8 @@
 **/
 
 #include "User_Interface.h"
+#include "Multiplayer.h"
+#include "Single_Player.h"
 
 #include <graphics.h>///for graphics
 #include <Windows.h>///for the mouse cursor position inside the window
@@ -23,6 +25,7 @@ void runGUI ()
 
     int len = GetSystemMetrics(SM_CXSCREEN);
     int wid = GetSystemMetrics(SM_CYSCREEN);
+
     // Draw the application window.
     initwindow(len, wid);
 
@@ -77,8 +80,8 @@ void drawButton (USI left, USI up, USI right, USI down, USI depth, bool drawDeta
 void drawMainMenuButtons ()
 {
     cleardevice();
-    int length = GetSystemMetrics(SM_CXSCREEN);
-    int width = GetSystemMetrics(SM_CYSCREEN);
+    int length = GetSystemMetrics(SM_CXSCREEN);///Get the length of the screen.
+    int width = GetSystemMetrics(SM_CYSCREEN);///Get the width of the screen.
     // Get the parameters for drawing the "START" button.
     unsigned short int distanceFromCenter = 100;
     unsigned short int left = length / 2 - distanceFromCenter;
@@ -567,6 +570,7 @@ void clickOnStart ()
                 {
                     ///Action if user clicks on Multiplayer
                     onStartPage = false;
+                    startMultiplayerGame();
                 }
 
         if (xCoordinate >= startPosition - 150 && xCoordinate <= startPosition + 150)
