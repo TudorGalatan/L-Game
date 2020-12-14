@@ -6,7 +6,6 @@
 #pragma once
 
 #define USI unsigned short int
-#define WINDOW_SIZE 1920
 #define FONT_SIZE 4
 
 
