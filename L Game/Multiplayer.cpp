@@ -12,10 +12,10 @@ void startMultiplayerGame()
         continue;
 }
 
-void Cell::setColor(int xCoord,int yCoord, int color)///set the color of the cell
+void Cell::setColor(int color)///set the color of the cell
 {
     setfillstyle(SOLID_FILL, color);///set the fill style
-    floodfill(xCoord,yCoord,WHITE);///color the cell
+    floodfill(posX,posY,WHITE);///color the cell
 }
 void Cell::drawCell(int left,int up,int right,int bottom)
 {
@@ -30,15 +30,21 @@ int Cell::changeCellSize(int newSize)
 
 void drawBoard()
 {
-    Cell cell;
-    int len = GetSystemMetrics(SM_CXSCREEN);
-    int wid = GetSystemMetrics(SM_CYSCREEN);
-    int cellSize = (wid - 200) / 4;///calculate the size of a cell
-    cellSize = cell.changeCellSize(cellSize);///change the value in the class
-    for(int i = wid / 4 + cellSize; i <= wid / 4 + 4 * cellSize; i += cellSize)
-        for(int j = wid / 4 - cellSize; j <= wid / 4 + 2 * cellSize; j += cellSize)
+    Cell cell[5][5];
+    int xCoord = 0, yCoord = 0;
+    int height = 1080;
+    int cellSize = (height - 200) / 4;///calculate the size of a cell
+    cellSize = cell[xCoord][yCoord].changeCellSize(cellSize);///change the value in the class
+    for(int i = height / 4 + cellSize; i <= height / 4 + 4 * cellSize; i += cellSize)
+    {
+        for(int j = height / 4 - cellSize; j <= height / 4 + 2 * cellSize; j += cellSize)
         {
-            cell.drawCell(i, j,i + cellSize, j + cellSize);///draw the cell
-            cell.setColor(i + cellSize / 2, j + cellSize / 2, rand() % 10 + 1);///E CV MIC GRESIT AICI LA COLORAT
+            cell[xCoord][yCoord].drawCell(i, j,i + cellSize, j + cellSize);///draw the cell
+            cell[xCoord][yCoord].setPosition(i + cellSize / 2, j + cellSize / 2);
+            cell[xCoord][yCoord].setColor(BLACK);///E CV MIC GRESIT AICI LA COLORAT
+            yCoord++;
         }
+        yCoord = 0;
+        xCoord++;
+    }
 }

@@ -11,10 +11,17 @@ class LObj///the L object on the board
 
 class Cell///a cell on the board
 {
-    private:
-        int dim = 200;///200 x 200 px each cell
     public:
-        void setColor(int xCoord,int yCoord, int color);///set the color of the cell
+         int dim;///200 x 200 px each cell
+         int posX, posY;
+    public:
+        void setPosition(int pX,int pY)
+        {
+            posX = pX;
+            posY = pY;
+        }
+
+        void setColor(int color);///set the color of the cell
         void drawCell(int left,int up,int right,int bottom);
         int changeCellSize(int newSize);
 
