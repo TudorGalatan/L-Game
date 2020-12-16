@@ -4,8 +4,8 @@
 **/
 
 #include "User_Interface.h"
-#include "Multiplayer.h"
-#include "Single_Player.h"
+#include "Player_Versus_Environment.h"
+#include "Player_Versus_Player.h"
 
 #include <graphics.h>///for graphics
 #include <Windows.h>///for the mouse cursor position inside the window
