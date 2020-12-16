@@ -39,6 +39,6 @@ void drawBoard()
         for(int j = wid / 4 - cellSize; j <= wid / 4 + 2 * cellSize; j += cellSize)
         {
             cell.drawCell(i, j,i + cellSize, j + cellSize);///draw the cell
-            cell.setColor((2* i / cellSize) / 2, (2 * j + cellSize) / 2, BLUE);///E CV MIC GRESIT AICI LA COLORAT
+            cell.setColor(i + cellSize / 2, j + cellSize / 2, rand() % 10 + 1);///E CV MIC GRESIT AICI LA COLORAT
         }
 }
