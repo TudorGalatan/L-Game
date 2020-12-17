@@ -5,6 +5,8 @@
 
 #pragma once
 
+#include "Player_Versus_Player.h"
+
 #include <vector>
 
 #define USI unsigned short int
@@ -12,7 +14,7 @@
 
 
 void runApplication ();
-void readData (USI gameBoard[][4]);
+void readData (USI gameBoard[][4],GameBoard board);
 void printBoard (USI gameBoard[][4]);
 void getNewCoordinates (std::vector < std::pair <USI, USI> >& coordinates);
 bool checkMove (USI gameBoard[][4], USI currentPlayer, std::vector < std::pair <USI, USI> > coordinates);

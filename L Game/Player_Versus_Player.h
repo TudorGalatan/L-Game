@@ -10,8 +10,6 @@
 
 #define SIZE 4
 
-
-
 /**
     Defines a player.
 **/
@@ -67,14 +65,20 @@ class Cell
         int changeCellSize (int newSize); ///change the size of the cell (not used yet)
 };
 
+/**
+    Defines the board.
+*/
+
 class GameBoard
 {
     public:
+        unsigned short int boardData[4][4];
         Cell cell[4][4];
         Coin coin;
         Player redL,blueL;
-        void loadNewGame(std::ifstream file);
+        void loadNewGame(GameBoard board);
         void redMove (GameBoard gameBoard);
         void drawBoard (GameBoard gameBoard);
 };
-void startMultiplayerGame ();
+
+void startMultiplayerGame ();///starts the player vs player mode

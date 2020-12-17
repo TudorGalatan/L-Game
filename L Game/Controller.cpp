@@ -4,35 +4,10 @@
 **/
 
 #include "Controller.h"
+#include "Player_Versus_Player.h"
+
 #include <fstream>
 #include <iostream>
-
-
-/**
-    Here are the main instructions of the application.
-    Input:
-        - none
-    Output:
-        - none
-**/
-void runApplication ()
-{
-    // Read the data from the input file.
-    unsigned short int gameBoard[4][4];
-    unsigned short int player = 1;    // 1 = the red player | 2 = the blue player
-    readData(gameBoard);
-
-    /* Temporary (Just Testing Right Now) */
-
-    // Get Coordinates
-    std::vector < std::pair <unsigned short int, unsigned short int> > coordinates;
-    getNewCoordinates(coordinates);
-
-    // Check Move
-    std::cout << checkMove(gameBoard, player, coordinates);
-}
-
-
 
 /**
     Reads the data from the input file.
@@ -46,12 +21,12 @@ void runApplication ()
         - 2: the blue player
         - 3: coin
 **/
-void readData (USI gameBoard[][4])
+void readData (USI gameBoard[][4], GameBoard board)
 {
     std::ifstream inputFile("Input.in");
     for (unsigned short int line = 0; line < 4; line++)
         for (unsigned short int column = 0; column < 4; column++)
-            inputFile >> gameBoard[line][column];
+            inputFile >> gameBoard[line][column],board.boardData[line][column] = gameBoard[line][column];
     inputFile.close();
 }
 
@@ -66,11 +41,12 @@ void readData (USI gameBoard[][4])
 **/
 void printBoard (USI gameBoard[][4])
 {
+    std::ofstream saveFile("Playground.txt");
     for (unsigned short int line = 0; line < 4; line++)
     {
         for (unsigned short int column = 0; column < 4; column++)
-            std::cout << gameBoard[line][column] << ' ';
-        std::cout << '\n';
+            saveFile << gameBoard[line][column] << ' ';
+        saveFile << '\n';
     }
 }
 

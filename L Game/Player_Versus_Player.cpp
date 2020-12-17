@@ -4,6 +4,7 @@
 **/
 
 #include "Player_Versus_Player.h"
+#include "Controller.h"
 
 #include <graphics.h>
 #include <iostream>
@@ -20,14 +21,19 @@
 **/
 void startMultiplayerGame ()
 {
-    GameBoard gameBoard;
+    GameBoard board;
     bool player = false;    // False -> The Red Player; True -> The Blue Player
 
     // Clear the window.
     cleardevice();
 
     // Draw the game board.
-    gameBoard.drawBoard(gameBoard);
+    board.drawBoard(board);
+    readData(board.boardData,board);
+
+    printBoard(board.boardData);
+    ///board.loadNewGame(board);
+
 
     // Temporary: just for testing
     delay(1000);
@@ -38,7 +44,7 @@ void startMultiplayerGame ()
         {
             // The Red Player's Turn
             case false:
-                gameBoard.redMove(gameBoard);
+                board.redMove(board);
                 break;
 
             // The blue player's turn
@@ -106,10 +112,10 @@ int Cell::changeCellSize (int newSize)
 /**
     ???
     Input:
-        - "pX":
-        - "pY":
+        - "pX": position on ox
+        - "pY": position on oy
     Output:
-        -
+        - changes the private variables posx and posy
 **/
 void Cell::setPosition (int pX, int pY)
 {
@@ -140,8 +146,10 @@ int Cell::getColor ()
     Output:
         - draws the coin
 **/
-void Coin::drawCoin (int xCoord, int yCoord)///we have to change this function to be more flexible-----> pls ask me wtf i meant by that
+void Coin::drawCoin (int xCoord, int yCoord)            /// We have to change this function to be more flexible-----> pls ask me wtf i meant by that
 {                                                       /// WTF DID YOU MEAN???????
+                                                        /// xDDD  I changed it so the coin will spawn at some coordonates saved in each cell object. Waiting for your answer!!!
+                                                        /// ...
     int height = GetSystemMetrics(SM_CYSCREEN);
     int cellSize = (height - 200) / 4;
     circle(xCoord, yCoord, getCoinSize());
@@ -161,24 +169,24 @@ int Cell::getPosition(char* axis)
 /**
     Draws the game board.
     Input:
-        - "cell": ???
+        - none
     Output:
         - draws the game board
 **/
-void GameBoard::drawBoard (GameBoard gameBoard)
+void GameBoard::drawBoard (GameBoard board)
 {
     int xCoord = 0, yCoord = 0;
     int height = GetSystemMetrics(SM_CYSCREEN);
     int cellSize = (height - 200) / 4;
-    cellSize = gameBoard.cell[xCoord][yCoord].changeCellSize(cellSize);///change the value in the class
+    cellSize = board.cell[xCoord][yCoord].changeCellSize(cellSize);///change the value in the class
 
     for (int i = height / 4 + cellSize; i <= height / 4 + 4 * cellSize; i += cellSize)
     {
         for (int j = height / 4 - cellSize; j <= height / 4 + 2 * cellSize; j += cellSize)
         {
-            gameBoard.cell[xCoord][yCoord].drawCell(i, j,i + cellSize, j + cellSize);///draw the cell
-            gameBoard.cell[xCoord][yCoord].setPosition(i + cellSize / 2, j + cellSize / 2);
-            gameBoard.cell[xCoord][yCoord].setColor(BLACK);///set the black color to the cells
+            board.cell[xCoord][yCoord].drawCell(i, j,i + cellSize, j + cellSize);///draw the cell
+            board.cell[xCoord][yCoord].setPosition(i + cellSize / 2, j + cellSize / 2);
+            board.cell[xCoord][yCoord].setColor(BLACK);///set the black color to the cells
             xCoord++;
         }
         xCoord = 0;
@@ -186,29 +194,41 @@ void GameBoard::drawBoard (GameBoard gameBoard)
     }
 
     // Draw the coins.
-    gameBoard.coin.drawCoin(gameBoard.cell[0][0].getPosition("ox"),gameBoard.cell[0][0].getPosition("oy"));
-    gameBoard.coin.drawCoin(gameBoard.cell[3][3].getPosition("ox"),gameBoard.cell[3][3].getPosition("oy"));
+    board.coin.drawCoin(board.cell[0][0].getPosition("ox"),board.cell[0][0].getPosition("oy"));
+    board.coin.drawCoin(board.cell[3][3].getPosition("ox"),board.cell[3][3].getPosition("oy"));
         // Second coin?
 
     // Draw the red player.
-    gameBoard.cell[1][0].setColor(RED);
+    board.cell[1][0].setColor(RED);
     for (int i=0; i<3; i++)
-        gameBoard.cell[2][i].setColor(RED);
+        board.cell[2][i].setColor(RED);
 
     // Draw the blue player.
-    gameBoard.cell[2][3].setColor(BLUE);
+    board.cell[2][3].setColor(BLUE);
     for (int i=1; i<=3; i++)
-        gameBoard.cell[1][i].setColor(BLUE);
+        board.cell[1][i].setColor(BLUE);
 }
 
-
+void GameBoard::loadNewGame(GameBoard board)
+{
+    for(int i=0;i<4;i++)
+        for(int j=0;j<4;j++)
+        {
+            if(board.boardData[i][j] == 1)
+                board.cell[i][j].setColor(RED);
+            else if(board.boardData[i][j] == 2)
+                board.cell[i][j].setColor(BLUE);
+            else if(board.boardData[i][j] == 3)
+                board.coin.drawCoin(board.cell[i][j].getPosition("ox"),board.cell[i][j].getPosition("oy"));
+        }
+}
 
 /**
     ???
     Input:
-        - "cell": ???
+        - the board of the game
     Output:
-        - ???
+        - nuj stai sa vedem
 **/
 void GameBoard::redMove (GameBoard gameBoard)
 {
