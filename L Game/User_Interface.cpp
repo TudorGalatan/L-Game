@@ -408,7 +408,7 @@ void hoverSinglePlayer ()
 
     unsigned short int horizontalPosition = screenWidth / 2;
     unsigned short int left = horizontalPosition - 150;
-    unsigned short int right = horizontalPosition + 150;
+    unsigned short int right = horizontalPosition + 250;
     unsigned short int up = horizontalPosition - 600 + screenHeight - 1080;
     unsigned short int down = horizontalPosition - 500 + screenHeight - 1080;
     unsigned short int depth = 25;
@@ -450,7 +450,7 @@ void hoverMultiPlayer ()
 
     unsigned short int horizontalPosition = screenWidth / 2;
     unsigned short int left = horizontalPosition - 150;
-    unsigned short int right = horizontalPosition + 150;
+    unsigned short int right = horizontalPosition + 250;
     unsigned short int up = horizontalPosition - 600 + screenHeight - 1080;
     unsigned short int down = horizontalPosition - 500 + screenHeight - 1080;
     unsigned short int depth = 25;
@@ -496,7 +496,7 @@ void drawStartPage ()
 
     unsigned short int horizontalPosition = screenWidth / 2;
     unsigned short int left = horizontalPosition - 150;
-    unsigned short int right = horizontalPosition + 150;
+    unsigned short int right = horizontalPosition + 250;
     unsigned short int up = horizontalPosition - 600;
     unsigned short int down = horizontalPosition - 500;
     unsigned short int depth = 25;
