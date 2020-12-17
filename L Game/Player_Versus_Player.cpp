@@ -20,14 +20,14 @@
 **/
 void startMultiplayerGame ()
 {
-    Cell cell[4][4];
+    GameBoard gameBoard;
     bool player = false;    // False -> The Red Player; True -> The Blue Player
 
     // Clear the window.
     cleardevice();
 
     // Draw the game board.
-    drawBoard(cell);
+    gameBoard.drawBoard(gameBoard);
 
     // Temporary: just for testing
     delay(1000);
@@ -38,7 +38,7 @@ void startMultiplayerGame ()
         {
             // The Red Player's Turn
             case false:
-                redMove(cell);
+                gameBoard.redMove(gameBoard);
                 break;
 
             // The blue player's turn
@@ -162,21 +162,20 @@ void Coin::drawCoin ()///we have to change this function to be more flexible----
     Output:
         - draws the game board
 **/
-void drawBoard (Cell cell[][4])
+void GameBoard::drawBoard (GameBoard gameBoard)
 {
-    Coin firstCoin, secondCoin;
     int xCoord = 0, yCoord = 0;
     int height = GetSystemMetrics(SM_CYSCREEN);
     int cellSize = (height - 200) / 4;
-    cellSize = cell[xCoord][yCoord].changeCellSize(cellSize);///change the value in the class
+    cellSize = gameBoard.cell[xCoord][yCoord].changeCellSize(cellSize);///change the value in the class
 
     for (int i = height / 4 + cellSize; i <= height / 4 + 4 * cellSize; i += cellSize)
     {
         for (int j = height / 4 - cellSize; j <= height / 4 + 2 * cellSize; j += cellSize)
         {
-            cell[xCoord][yCoord].drawCell(i, j,i + cellSize, j + cellSize);///draw the cell
-            cell[xCoord][yCoord].setPosition(i + cellSize / 2, j + cellSize / 2);
-            cell[xCoord][yCoord].setColor(BLACK);///set the black color to the cells
+            gameBoard.cell[xCoord][yCoord].drawCell(i, j,i + cellSize, j + cellSize);///draw the cell
+            gameBoard.cell[xCoord][yCoord].setPosition(i + cellSize / 2, j + cellSize / 2);
+            gameBoard.cell[xCoord][yCoord].setColor(BLACK);///set the black color to the cells
             xCoord++;
         }
         xCoord = 0;
@@ -184,18 +183,18 @@ void drawBoard (Cell cell[][4])
     }
 
     // Draw the coins.
-    firstCoin.drawCoin();
+    gameBoard.coin1.drawCoin();
         // Second coin?
 
     // Draw the red player.
-    cell[1][0].setColor(RED);
+    gameBoard.cell[1][0].setColor(RED);
     for (int i=0; i<3; i++)
-        cell[2][i].setColor(RED);
+        gameBoard.cell[2][i].setColor(RED);
 
     // Draw the blue player.
-    cell[2][3].setColor(BLUE);
+    gameBoard.cell[2][3].setColor(BLUE);
     for (int i=1; i<=3; i++)
-        cell[1][i].setColor(BLUE);
+        gameBoard.cell[1][i].setColor(BLUE);
 }
 
 
@@ -207,14 +206,14 @@ void drawBoard (Cell cell[][4])
     Output:
         - ???
 **/
-void redMove (Cell cell[][4])
+void GameBoard::redMove (GameBoard gameBoard)
 {
     if (GetAsyncKeyState(VK_LBUTTON))
     {
         int playerColor = RED;
         for (unsigned short int line = 0; line < 4; line++)
             for (unsigned short int column = 0; column < 4; column++)
-                if (cell[line][column].getColor() == RED)
-                    cell[line][column].setColor(BLACK);
+                if (gameBoard.cell[line][column].getColor() == RED)
+                    gameBoard.cell[line][column].setColor(BLACK);
     }
 }

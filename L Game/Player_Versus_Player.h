@@ -6,6 +6,7 @@
 #pragma once
 
 #include <graphics.h>
+#include <fstream>
 
 #define SIZE 4
 
@@ -14,7 +15,7 @@
 /**
     Defines a player.
 **/
-class LObj///the L object on the board (actually, a player)
+class Player///the L object on the board (actually, a player)
 {
     private:
         unsigned short color; ///4 is RED, 1 is BLUE // player, not colour
@@ -54,7 +55,7 @@ class Cell
 {
     private:
          int dim; ///200 x 200 px each cell
-         int posX, posY; ///we store the positions used in setPosition()
+         int posX, posY; ///we store the positions used in setPosition(), the 'spawn' position.
          int cellColor; ///stores the color of the cell
 
     public:
@@ -65,8 +66,14 @@ class Cell
         int changeCellSize (int newSize); ///change the size of the cell (not used yet)
 };
 
-
-
-void redMove (Cell cell[][4]);
-void drawBoard (Cell cell[][4]);
+class GameBoard
+{
+    public:
+        Cell cell[4][4];
+        Coin coin1,coin2;
+        Player redL,blueL;
+        void loadNewGame(std::ifstream file);
+        void redMove (GameBoard gameBoard);
+        void drawBoard (GameBoard gameBoard);
+};
 void startMultiplayerGame ();
