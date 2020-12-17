@@ -42,7 +42,7 @@ class Coin
         int coinSize = 100;
 
     public:
-        void drawCoin ();
+        void drawCoin (int xCoord, int yCoord);
         int getCoinSize () {return coinSize;};
 };
 
@@ -60,6 +60,7 @@ class Cell
 
     public:
         void setPosition (int pX, int pY); ///set the position to help the setColor function fill the right cell
+        int getPosition (char* axis);
         void setColor (int color); ///set the color of the cell
         int getColor (); ///returns the color of the cell
         void drawCell (int left, int up, int right, int bottom); ///draw the rectangle
@@ -70,7 +71,7 @@ class GameBoard
 {
     public:
         Cell cell[4][4];
-        Coin coin1,coin2;
+        Coin coin;
         Player redL,blueL;
         void loadNewGame(std::ifstream file);
         void redMove (GameBoard gameBoard);

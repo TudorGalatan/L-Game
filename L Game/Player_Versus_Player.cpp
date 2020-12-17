@@ -140,20 +140,23 @@ int Cell::getColor ()
     Output:
         - draws the coin
 **/
-void Coin::drawCoin ()///we have to change this function to be more flexible-----> pls ask me wtf i meant by that
+void Coin::drawCoin (int xCoord, int yCoord)///we have to change this function to be more flexible-----> pls ask me wtf i meant by that
 {                                                       /// WTF DID YOU MEAN???????
     int height = GetSystemMetrics(SM_CYSCREEN);
     int cellSize = (height - 200) / 4;
-    int posX = height / 4 + cellSize + cellSize / 2;
-    int posY = height / 4 - cellSize + cellSize / 2;
-    circle(posX, posY, getCoinSize());
+    circle(xCoord, yCoord, getCoinSize());
     setfillstyle(SOLID_FILL, YELLOW);
 
     // Colour the cell.
-    floodfill(posX, posY, WHITE);
+    floodfill(xCoord, yCoord, WHITE);
 }
 
-
+int Cell::getPosition(char* axis)
+{
+    if(strcmp(axis,"ox") == 0) return posX;
+    else if(strcmp(axis,"oy") == 0) return posY;
+    return -1;
+}
 
 /**
     Draws the game board.
@@ -183,7 +186,8 @@ void GameBoard::drawBoard (GameBoard gameBoard)
     }
 
     // Draw the coins.
-    gameBoard.coin1.drawCoin();
+    gameBoard.coin.drawCoin(gameBoard.cell[0][0].getPosition("ox"),gameBoard.cell[0][0].getPosition("oy"));
+    gameBoard.coin.drawCoin(gameBoard.cell[3][3].getPosition("ox"),gameBoard.cell[3][3].getPosition("oy"));
         // Second coin?
 
     // Draw the red player.
