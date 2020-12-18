@@ -6,8 +6,8 @@
 #pragma once
 
 #include "Domain_Cell.h"
-#include "Domain_Coin.h"
 #include "Domain_Player.h"
+#include "Domain_Coin.h"
 
 
 
@@ -52,5 +52,5 @@ class GameBoard
             Output:
                 - nuj stai sa vedem
         **/
-        void redMove (GameBoard& gameBoard);
+        void redPlayerMoves (GameBoard& gameBoard);
 };

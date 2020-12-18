@@ -7,10 +7,10 @@
 
 
 
-void GameBoard::drawBoard (GameBoard &board)
+void GameBoard::drawBoard (GameBoard &board)    /// EXplain please
 {
     int xCoord = 0, yCoord = 0;
-    int width = getmaxx();
+    int width = getmaxx();      /// What does this do?
     int height = getmaxy();
     int cellSize = (height - 200) / 4;
     int position = width / 2 - (3 * cellSize) / 2;
@@ -34,38 +34,48 @@ void GameBoard::drawBoard (GameBoard &board)
 
 void GameBoard::loadNewGame (GameBoard &board)
 {
-    for (int i=0;i<4;i++)
-        for (int j=0;j<4;j++)
-        {
-            if (board.boardData[i][j] == 1)
-                board.cell[i][j].setColor(RED);
-            else if (board.boardData[i][j] == 2)
-                board.cell[i][j].setColor(BLUE);
-            else if (board.boardData[i][j] == 3)
-                    board.coin.drawCoin(board.cell[i][j].getPosition("ox"),board.cell[i][j].getPosition("oy"));
-        }
+    for (unsigned short int line = 0; line < 4; line++)
+        for (unsigned short int column = 0; column < 4; column++)
+
+            // Colour the red player.
+            if (board.boardData[line][column] == 1)
+                board.cell[line][column].setColor(RED);
+
+            // Colour the blue player.
+            else if (board.boardData[line][column] == 2)
+                board.cell[line][column].setColor(BLUE);
+
+            // Colour the coins.
+            else if (board.boardData[line][column] == 3)
+            {
+                /// This CARNATZ must be eaten piece by piece.
+                board.coin.drawCoin(board.cell[line][column].getPosition("ox"), board.cell[line][column].getPosition("oy"));
+            }
 }
 
 
 
-void GameBoard::redMove (GameBoard& gameBoard)
+void GameBoard::redPlayerMoves (GameBoard& gameBoard)
 {
     if (GetAsyncKeyState(VK_LBUTTON))
     {
-        for (int i = 0; i < 4; i++)
-            for (int j = 0; j < 4; j++)
-                if (gameBoard.boardData[i][j] == 1)
+        for (unsigned short int line = 0; line < 4; line++)
+            for (unsigned short int column = 0; column < 4; column++)
+                if (gameBoard.boardData[line][column] == 1)
                 {
-                    gameBoard.boardData[i][j] = 0; // deletes the positions occupied by his previous move
-                    gameBoard.cell[i][j].setColor(BLACK); // sets the color of the occupied cell to BLACK to show that it's a free cell
+                    // Delete the last occupied position.
+                    gameBoard.boardData[line][column] = 0;
+
+                    // Set the colour of the previously occupied cell to black to show that it's a free cell now.
+                    gameBoard.cell[line][column].setColor(BLACK);
                 }
-        while (1)
+
+        while (true)
         {
             int playerColor = RED;
-            POINT mousePos; // we'll save the cursor position in mousePos
-            mousePos.x = mousex(); // get the OX coordonate
-            mousePos.y = mousey(); // get the OY coordonate
-
+            POINT mousePosition;
+            mousePosition.x = mousex();     /// ??? What is the function doing?
+            mousePosition.y = mousey();
         }
     }
 }

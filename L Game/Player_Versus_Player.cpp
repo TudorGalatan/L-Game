@@ -35,7 +35,7 @@ void startPlayerVsPlayerGame ()
         {
             // The red player's turn
             case false:
-                gameBoard.redMove(gameBoard);
+                gameBoard.redPlayerMoves(gameBoard);
                 break;
 
             // The blue player's turn
