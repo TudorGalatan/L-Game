@@ -684,6 +684,58 @@ void drawRulesPage ()
 
 
 /**
+    Draws the "OPTIONS" page.
+    Input:
+        - none
+    Output:
+        - draws the "OPTIONS" page
+**/
+void drawOptionsPage ()
+{
+    // Clear the window.
+    cleardevice();
+
+    // Get the size of the screen.
+    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
+    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
+
+    // Get the parameters for drawing the "CHANGE LANGUAGE" button.
+    unsigned short int distanceFromCenter = 200;
+    unsigned short int left = screenWidth / 2 - distanceFromCenter;
+    unsigned short int right = screenWidth / 2 + distanceFromCenter;
+    unsigned short int up = 200;
+    unsigned short int down = 300;
+    unsigned short int depth = 25;
+    bool drawDetails = 1;
+    unsigned short int textXCoordinate = screenWidth / 2 - 50;
+    unsigned short int textYCoordinate = 250;
+    char text[] = "CHANGE LANGUAGE";
+
+    // Draw the "CHANGE LANGUAGE" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+
+    // Update the parameters for drawing the "TURN MUSIC ON/OFF" button.
+    up = 400;
+    down = 500;
+    textYCoordinate = 450;
+    strcpy(text, "TURN MUSIC ON/OFF");
+
+    // Draw the "TURN MUSIC ON/OFF" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+
+    // Update the parameters for drawing the "CHANGE RESOLUTION" button.
+    up = 600;
+    down = 700;
+    textYCoordinate = 650;
+    strcpy(text, "CHANGE RESOLUTION");
+
+    // Draw the "CHANGE RESOLUTION" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+}
+
+
+
+/**
     ???
 **/
 void clickOnStart ()
@@ -695,7 +747,7 @@ void clickOnStart ()
     int screenWidth = GetSystemMetrics(SM_CXSCREEN);
     int screenHeight = GetSystemMetrics(SM_CYSCREEN);
 
-    // Draws the "RULES" page.
+    // Draws the "START" page.
     drawStartPage();
 
     bool onStartPage = true;
@@ -864,6 +916,108 @@ void clickOnRules ()
 
 
 /**
+    Redirects to the "OPTIONS" page.
+    Input:
+        - none
+    Output:
+        - redirects to the "OPTIONS" page
+**/
+void clickOnOptions ()
+{
+    // Clear the window.
+    cleardevice();
+
+    // Get the size of the screen.
+    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
+    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
+
+    // Draws the "OPTIONS" page.
+    drawOptionsPage();
+
+    //////
+
+    bool onOptionsPage = true;
+    bool changer = false;
+
+    // Horizontal left position for the "OPTIONS" button.
+    unsigned short int startPosition = screenWidth / 2;
+
+    while (onOptionsPage == true)
+    {
+        HWND hwnd = GetForegroundWindow();  /// ?????
+        POINT cursorPosition;
+
+        // Get the mouse position.
+        GetCursorPos(&cursorPosition);
+
+        // Get the mouse position on the window.
+        ScreenToClient(hwnd, &cursorPosition);
+
+        double xCoordinate = cursorPosition.x;
+        double yCoordinate = cursorPosition.y;
+
+        // First we check if the usScreenToClient(hwnd, &p)er clicked somewhere on the screen, then we check the position.
+        // After this, we check if we can apply the hover animation on the button.
+        if (GetAsyncKeyState(VK_LBUTTON))
+            if (xCoordinate >= startPosition - 150 && xCoordinate <= startPosition + 150)
+
+                // Do if the click is inside the "CHANGE LANGUAGE" button.
+                if (yCoordinate >= 300 + screenHeight - 1080 && yCoordinate <= 400 + screenHeight - 1080)
+                    onOptionsPage = false;
+
+                // Do if the click is inside the "TURN MUSIC ON/OFF" button.
+                else if(yCoordinate >=600 + screenHeight - 1080 && yCoordinate <= 700 + screenHeight - 1080)
+                    onOptionsPage = false;
+
+                // Do if the click is inside the "CHANGE RESOLUTION" button.
+                else if(yCoordinate >=600 + screenHeight - 1080 && yCoordinate <= 700 + screenHeight - 1080)
+                    onOptionsPage = false;
+
+        // HOVER
+        if (xCoordinate >= startPosition - 150 && xCoordinate <= startPosition + 150)
+            if (yCoordinate >= 300 + screenHeight - 1080 && yCoordinate <= 400 + screenHeight - 1080)
+            {
+                 if (changer == false)
+                 {
+                    changer = true;
+                    cleardevice();
+                    // hoverSinglePlayer();
+                 }
+            }
+            else if(yCoordinate >= 600 + screenHeight - 1080 && yCoordinate <= 700 + screenHeight - 1080)
+            {
+                if(changer == false)
+                {
+                    changer = true;
+                    cleardevice();
+                    // hoverMultiPlayer();
+                }
+            }
+            else
+            {
+                if (changer == true)
+                {
+                    changer = false;
+                    drawOptionsPage();
+                }
+            }
+        else if (changer == true)
+        {
+            changer = false;
+            drawOptionsPage();
+        }
+    }
+
+    // Redraw the main window.
+    drawMainMenuButtons();
+
+    // Look for the mouse position.
+    scanMousePosition();
+}
+
+
+
+/**
     Permanently scans the mouse position.
     Input:
         - none
@@ -949,8 +1103,15 @@ void scanMousePosition ()
                     clickOnRules();
                     break;
 
+                // The "EXIT" button
                 case 3:
                     exit(0);
+
+                // The "OPTIONS" button
+                case 4:
+                    buttonPressed = true;
+                    clickOnOptions();
+                    break;
             }
         }
 
