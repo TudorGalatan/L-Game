@@ -1,6 +1,6 @@
 /**
-    This is the implementation for the Application Manager layer.
-    The Application Manager layer is responsible with launching the application.
+    This is the implementation for the Application Manager module.
+    The module is responsible with launching the application.
 **/
 
 #include "Test.h"
