@@ -7,16 +7,16 @@
 #include "Player_Versus_Environment.h"
 #include "Player_Versus_Player.h"
 
-#include <graphics.h> // for graphics
-#include <Windows.h> // for the mouse cursor position inside the window
-#include <cstring> // for the "strcpy" function
+#include <graphics.h>
+#include <Windows.h>
+#include <cstring>
 
 const unsigned short int SCREEN_WIDTH = GetSystemMetrics(SM_CXSCREEN);
 const unsigned short int SCREEN_HEIGHT = GetSystemMetrics(SM_CYSCREEN);
 
 
 
-void runGUI ()
+void startGUI ()
 {
     // Exclude the C functions for higher speed.
     std::ios::sync_with_stdio(false);
@@ -24,11 +24,11 @@ void runGUI ()
     // Draw the application window.
     initwindow(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    // Draw the main menu's buttons.
-    drawMainMenuButtons();
+    // Draw the main menu.
+    drawMainMenu();
 
-    // Search for a click and see where the user clicked.
-    scanMousePosition();
+    // Permanently scan the mouse location on the screen.
+    scanMouseLocation();
 
     // Close the application.
     closeApplication();
@@ -36,7 +36,7 @@ void runGUI ()
 
 
 
-void drawMainMenuButtons ()
+void drawMainMenu ()
 {
     // Clear the window.
     cleardevice();
@@ -45,7 +45,7 @@ void drawMainMenuButtons ()
     unsigned short int distanceFromCenter = 100;
     unsigned short int left = SCREEN_WIDTH / 2 - distanceFromCenter;
     unsigned short int right = SCREEN_WIDTH / 2 + distanceFromCenter;
-    unsigned short int up = 200 + SCREEN_HEIGHT - 1080;
+    unsigned short int up = 200 + SCREEN_HEIGHT - 1080;                         /// WHY - 1080 ???
     unsigned short int down = 300 + SCREEN_HEIGHT - 1080;
     unsigned short int depth = 25;
     bool drawDetails = 1;
@@ -87,7 +87,7 @@ void drawMainMenuButtons ()
 
 
 
-void drawStartPage ()
+void drawStartGameMenu ()
 {
     // Clear the window.
     cleardevice();
@@ -119,7 +119,7 @@ void drawStartPage ()
 
 
 
-void drawRulesPage ()
+void drawRulesScreen ()
 {
     // Clear the screen.
     cleardevice();
@@ -159,7 +159,7 @@ void drawRulesPage ()
 
 
 
-void drawOptionsPage ()
+void drawOptionsMenu ()
 {
     // Clear the window.
     cleardevice();
@@ -214,7 +214,7 @@ void drawButton (USI left, USI up, USI right, USI down, USI depth, bool drawDeta
 
 
 
-void hoverStart ()
+void hoverStartGame ()
 {
     // Clear the window.
     cleardevice();
@@ -484,7 +484,7 @@ void hoverBack ()
 
 
 
-void hoverSinglePlayer ()
+void hoverPlayerVsComputer ()
 {
     cleardevice();
 
@@ -515,7 +515,7 @@ void hoverSinglePlayer ()
 
 
 
-void hoverMultiPlayer ()
+void hoverPlayerVsPlayer ()
 {
     cleardevice();
 
@@ -549,13 +549,13 @@ void hoverMultiPlayer ()
 
 
 
-void clickOnStart ()
+void clickOnStartGame ()
 {
     // Clear the window.
     cleardevice();
 
     // Draws the "START" page.
-    drawStartPage();
+    drawStartGameMenu();
 
     bool onStartPage = true;
     bool changer = false;
@@ -601,7 +601,7 @@ void clickOnStart ()
                  {
                     changer = true;
                     cleardevice();
-                    hoverSinglePlayer();
+                    hoverPlayerVsComputer();
                  }
             }
             else if(yCoordinate >= 600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
@@ -610,7 +610,7 @@ void clickOnStart ()
                 {
                     changer = true;
                     cleardevice();
-                    hoverMultiPlayer();
+                    hoverPlayerVsPlayer();
                 }
             }
             else
@@ -618,21 +618,21 @@ void clickOnStart ()
                 if (changer == true)
                 {
                     changer = false;
-                    drawStartPage();
+                    drawStartGameMenu();
                 }
             }
         else if (changer == true)
         {
             changer = false;
-            drawStartPage();
+            drawStartGameMenu();
         }
     }
 
     // Redraw the main window.
-    drawMainMenuButtons();
+    drawMainMenu();
 
     // Look for the mouse position.
-    scanMousePosition();
+    scanMouseLocation();
 }
 
 
@@ -643,7 +643,7 @@ void clickOnRules ()
     cleardevice();
 
     // Draws the "RULES" page.
-    drawRulesPage();
+    drawRulesScreen();
 
     bool onRulesPage = true;
     bool changer = false;
@@ -692,21 +692,21 @@ void clickOnRules ()
                 if (changer == true)
                 {
                     changer = false;
-                    drawRulesPage();
+                    drawRulesScreen();
                 }
             }
         else if (changer == true)
         {
             changer = false;
-            drawRulesPage();
+            drawRulesScreen();
         }
     }
 
     // Redraw the main window.
-    drawMainMenuButtons();
+    drawMainMenu();
 
     // Look for the mouse position.
-    scanMousePosition();
+    scanMouseLocation();
 }
 
 
@@ -717,7 +717,7 @@ void clickOnOptions ()
     cleardevice();
 
     // Draws the "OPTIONS" page.
-    drawOptionsPage();
+    drawOptionsMenu();
 
     bool onOptionsPage = true;
     bool changer = false;
@@ -764,7 +764,7 @@ void clickOnOptions ()
                  {
                     changer = true;
                     cleardevice();
-                    // hoverSinglePlayer();
+                    // hoverPlayerVsComputer();
                  }
             }
             else if(yCoordinate >= 600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
@@ -773,7 +773,7 @@ void clickOnOptions ()
                 {
                     changer = true;
                     cleardevice();
-                    // hoverMultiPlayer();
+                    // hoverPlayerVsPlayer();
                 }
             }
             else
@@ -781,26 +781,26 @@ void clickOnOptions ()
                 if (changer == true)
                 {
                     changer = false;
-                    drawOptionsPage();
+                    drawOptionsMenu();
                 }
             }
         else if (changer == true)
         {
             changer = false;
-            drawOptionsPage();
+            drawOptionsMenu();
         }
     }
 
     // Redraw the main window.
-    drawMainMenuButtons();
+    drawMainMenu();
 
     // Look for the mouse position.
-    scanMousePosition();
+    scanMouseLocation();
 }
 
 
 
-void scanMousePosition ()
+void scanMouseLocation ()
 {
     HWND hwnd = GetForegroundWindow();
     POINT cursorPosition;
@@ -817,14 +817,14 @@ void scanMousePosition ()
         double yCoordinate = cursorPosition.y;
 
         // Check if the click is on a button.
-        unsigned short int button = checkMouseLocation(xCoordinate, yCoordinate);
+        unsigned short int button = getMouseLocation(xCoordinate, yCoordinate);
 
         switch (button)
         {
             // The "START" button
             case 1:
                 if (changer == false)
-                    hoverStart();
+                    hoverStartGame();
                 changer = true;
                 break;
 
@@ -854,7 +854,7 @@ void scanMousePosition ()
                 if (changer == true)
                 {
                     cleardevice();
-                    drawMainMenuButtons();
+                    drawMainMenu();
                 }
                 changer = false;
         }
@@ -863,14 +863,14 @@ void scanMousePosition ()
         if (GetAsyncKeyState(VK_LBUTTON))
         {
             // Get the position of the cursor.
-            int button = checkMouseLocation(xCoordinate, yCoordinate);
+            int button = getMouseLocation(xCoordinate, yCoordinate);
 
             switch (button)
             {
                 // The "START" button
                 case 1:
                     buttonPressed = true;
-                    clickOnStart();
+                    clickOnStartGame();
                     break;
 
                 // The "RULES" button
@@ -898,7 +898,7 @@ void scanMousePosition ()
 
 
 
-unsigned short int checkMouseLocation (double xCoordinate, double yCoordinate)
+unsigned short int getMouseLocation (double xCoordinate, double yCoordinate)
 {
     if (xCoordinate >= SCREEN_WIDTH / 2 - 100 && xCoordinate <= SCREEN_WIDTH / 2 + 100)
 

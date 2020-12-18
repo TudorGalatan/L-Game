@@ -14,7 +14,7 @@ int main ()
     runTests();
 
     // Start the application.
-    runGUI();
+    startGUI();
 
     return 0;
 }

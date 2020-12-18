@@ -17,7 +17,7 @@
     Output:
         - starts the graphical user interface
 **/
-void runGUI ();
+void startGUI ();
 
 
 
@@ -28,7 +28,7 @@ void runGUI ();
     Output:
         - draws the main menu
 **/
-void drawMainMenuButtons ();
+void drawMainMenu ();
 
 
 
@@ -39,7 +39,7 @@ void drawMainMenuButtons ();
     Output:
         - draws the "START GAME" menu
 **/
-void drawStartPage ();
+void drawStartGameMenu ();
 
 
 
@@ -50,7 +50,7 @@ void drawStartPage ();
     Output:
         - draws the "RULES" screen
 **/
-void drawRulesPage ();
+void drawRulesScreen ();
 
 
 
@@ -61,7 +61,7 @@ void drawRulesPage ();
     Output:
         - draws the "OPTIONS" menu
 **/
-void drawOptionsPage ();
+void drawOptionsMenu ();
 
 
 
@@ -91,7 +91,7 @@ void drawButton (USI left, USI up, USI right, USI down, USI depth, bool drawDeta
     Output:
         - redraws the "START" button with the hover effect on it
 **/
-void hoverStart ();
+void hoverStartGame ();
 
 
 
@@ -146,7 +146,7 @@ void hoverBack ();
     Output:
         - redraws the "PLAYER vs COMPUTER" button with the hover effect on it
 **/
-void hoverSinglePlayer ();
+void hoverPlayerVsComputer ();
 
 
 
@@ -157,7 +157,7 @@ void hoverSinglePlayer ();
     Output:
         - redraws the "PLAYER vs PLAYER" button with the hover effect on it
 **/
-void hoverMultiPlayer ();
+void hoverPlayerVsPlayer ();
 
 
 
@@ -168,7 +168,7 @@ void hoverMultiPlayer ();
     Output:
         - redirects to the "START GAME" menu
 **/
-void clickOnStart ();
+void clickOnStartGame ();
 
 
 
@@ -201,7 +201,7 @@ void clickOnOptions ();
     Output:
         - permanently scans the mouse location on the screen
 **/
-void scanMousePosition ();
+void scanMouseLocation ();
 
 
 
@@ -217,7 +217,7 @@ void scanMousePosition ();
         - 3: if the user clicked on the "EXIT" button
         - 4: if the user clicked on the "OPTIONS" button
 */
-unsigned short int checkMouseLocation (double xCoordinate, double yCoordinate);
+unsigned short int getMouseLocation (double xCoordinate, double yCoordinate);
 
 
 
