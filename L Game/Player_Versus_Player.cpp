@@ -27,12 +27,12 @@ void startMultiplayerGame ()
     // Clear the window.
     cleardevice();
 
-    // Draw the game board.
+    // Draw the game board.board.cell[0][0].getPosition("ox")
     board.drawBoard(board);
     readData(board.boardData,board);
 
     printBoard(board.boardData);
-    ///board.loadNewGame(board);
+    board.loadNewGame(board);
 
 
     // Temporary: just for testing
@@ -40,6 +40,7 @@ void startMultiplayerGame ()
 
     while (true)
     {
+        std::cout<<board.cell[1][2].getPosition("ox")<<' '<<board.cell[1][2].getPosition("oy")<<'\n';
         switch (player)
         {
             // The Red Player's Turn
@@ -173,19 +174,21 @@ int Cell::getPosition(char* axis)
     Output:
         - draws the game board
 **/
-void GameBoard::drawBoard (GameBoard board)
+void GameBoard::drawBoard (GameBoard &board)
 {
     int xCoord = 0, yCoord = 0;
-    int height = GetSystemMetrics(SM_CYSCREEN);
+    int width = getmaxx();
+    int height = getmaxy();
     int cellSize = (height - 200) / 4;
+    int position = width / 2 - (3 * cellSize) / 2;
     cellSize = board.cell[xCoord][yCoord].changeCellSize(cellSize);///change the value in the class
 
-    for (int i = height / 4 + cellSize; i <= height / 4 + 4 * cellSize; i += cellSize)
+    for (int i = width / 2 - 2 * cellSize; i <= width / 2 + cellSize; i += cellSize)
     {
         for (int j = height / 4 - cellSize; j <= height / 4 + 2 * cellSize; j += cellSize)
         {
             board.cell[xCoord][yCoord].drawCell(i, j,i + cellSize, j + cellSize);///draw the cell
-            board.cell[xCoord][yCoord].setPosition(i + cellSize / 2, j + cellSize / 2);
+            board.cell[xCoord][yCoord].setPosition(i + cellSize/2, j + cellSize/2);
             board.cell[xCoord][yCoord].setColor(BLACK);///set the black color to the cells
             xCoord++;
         }
@@ -193,23 +196,10 @@ void GameBoard::drawBoard (GameBoard board)
         yCoord++;
     }
 
-    // Draw the coins.
-    board.coin.drawCoin(board.cell[0][0].getPosition("ox"),board.cell[0][0].getPosition("oy"));
-    board.coin.drawCoin(board.cell[3][3].getPosition("ox"),board.cell[3][3].getPosition("oy"));
-        // Second coin?
 
-    // Draw the red player.
-    board.cell[1][0].setColor(RED);
-    for (int i=0; i<3; i++)
-        board.cell[2][i].setColor(RED);
-
-    // Draw the blue player.
-    board.cell[2][3].setColor(BLUE);
-    for (int i=1; i<=3; i++)
-        board.cell[1][i].setColor(BLUE);
 }
 
-void GameBoard::loadNewGame(GameBoard board)
+void GameBoard::loadNewGame(GameBoard &board)
 {
     for(int i=0;i<4;i++)
         for(int j=0;j<4;j++)
@@ -219,7 +209,7 @@ void GameBoard::loadNewGame(GameBoard board)
             else if(board.boardData[i][j] == 2)
                 board.cell[i][j].setColor(BLUE);
             else if(board.boardData[i][j] == 3)
-                board.coin.drawCoin(board.cell[i][j].getPosition("ox"),board.cell[i][j].getPosition("oy"));
+                    board.cell[i][j].setColor(YELLOW);
         }
 }
 
@@ -230,7 +220,7 @@ void GameBoard::loadNewGame(GameBoard board)
     Output:
         - nuj stai sa vedem
 **/
-void GameBoard::redMove (GameBoard gameBoard)
+void GameBoard::redMove (GameBoard& gameBoard)
 {
     if (GetAsyncKeyState(VK_LBUTTON))
     {

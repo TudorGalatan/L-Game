@@ -53,7 +53,7 @@ class Cell
 {
     private:
          int dim; ///200 x 200 px each cell
-         int posX, posY; ///we store the positions used in setPosition(), the 'spawn' position.
+         int posX=666, posY=666; ///we store the positions used in setPosition(), the 'spawn' position.
          int cellColor; ///stores the color of the cell
 
     public:
@@ -63,6 +63,7 @@ class Cell
         int getColor (); ///returns the color of the cell
         void drawCell (int left, int up, int right, int bottom); ///draw the rectangle
         int changeCellSize (int newSize); ///change the size of the cell (not used yet)
+        int getCellSize(){return dim;}
 };
 
 /**
@@ -76,9 +77,9 @@ class GameBoard
         Cell cell[4][4];
         Coin coin;
         Player redL,blueL;
-        void loadNewGame(GameBoard board);
-        void redMove (GameBoard gameBoard);
-        void drawBoard (GameBoard gameBoard);
+        void loadNewGame(GameBoard& board);
+        void redMove (GameBoard& gameBoard);
+        void drawBoard (GameBoard& gameBoard);
 };
 
 void startMultiplayerGame ();///starts the player vs player mode
