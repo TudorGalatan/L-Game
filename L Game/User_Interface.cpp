@@ -11,6 +11,9 @@
 #include <Windows.h> // for the mouse cursor position inside the window
 #include <cstring> // for the "strcpy" function
 
+const unsigned short int SCREEN_WIDTH = GetSystemMetrics(SM_CXSCREEN);
+const unsigned short int SCREEN_HEIGHT = GetSystemMetrics(SM_CYSCREEN);
+
 
 
 /**
@@ -25,12 +28,8 @@ void runGUI ()
     // Exclude the C functions for higher speed.
     std::ios::sync_with_stdio(false);
 
-    // Get the size of the screen.
-    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
-
     // Draw the application window.
-    initwindow(screenWidth, screenHeight);
+    initwindow(SCREEN_WIDTH, SCREEN_HEIGHT);
 
     // Draw the main menu's buttons.
     drawMainMenuButtons();
@@ -85,20 +84,16 @@ void drawMainMenuButtons ()
     // Clear the window.
     cleardevice();
 
-    // Get the size of the screen.
-    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
-
     // Get the parameters for drawing the "START" button.
     unsigned short int distanceFromCenter = 100;
-    unsigned short int left = screenWidth / 2 - distanceFromCenter;
-    unsigned short int right = screenWidth / 2 + distanceFromCenter;
-    unsigned short int up = 200 + screenHeight - 1080;
-    unsigned short int down = 300 + screenHeight - 1080;
+    unsigned short int left = SCREEN_WIDTH / 2 - distanceFromCenter;
+    unsigned short int right = SCREEN_WIDTH / 2 + distanceFromCenter;
+    unsigned short int up = 200 + SCREEN_HEIGHT - 1080;
+    unsigned short int down = 300 + SCREEN_HEIGHT - 1080;
     unsigned short int depth = 25;
     bool drawDetails = 1;
-    unsigned short int textXCoordinate = screenWidth / 2 - 50;
-    unsigned short int textYCoordinate = 250 + screenHeight - 1080;
+    unsigned short int textXCoordinate = SCREEN_WIDTH / 2 - 50;
+    unsigned short int textYCoordinate = 250 + SCREEN_HEIGHT - 1080;
     char text[] = "START";
 
     // Draw the "START" button.
@@ -149,26 +144,22 @@ void drawMainMenuButtons ()
 */
 unsigned short int checkMouseLocation (double xCoordinate, double yCoordinate)
 {
-    // Get the size of the screen.
-    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
-
-    if (xCoordinate >= screenWidth / 2 - 100 && xCoordinate <= screenWidth / 2 + 100)
+    if (xCoordinate >= SCREEN_WIDTH / 2 - 100 && xCoordinate <= SCREEN_WIDTH / 2 + 100)
 
         // The user clicked on the "START" button.
-        if(yCoordinate >= 200 + screenHeight - 1080 && yCoordinate <= 300 + screenHeight - 1080)
+        if(yCoordinate >= 200 + SCREEN_HEIGHT - 1080 && yCoordinate <= 300 + SCREEN_HEIGHT - 1080)
             return 1;
 
         // The user clicked on the "RULES" button.
-        else if (yCoordinate >= 400 + screenHeight - 1080 && yCoordinate <= 500 + screenHeight - 1080)
+        else if (yCoordinate >= 400 + SCREEN_HEIGHT - 1080 && yCoordinate <= 500 + SCREEN_HEIGHT - 1080)
             return 2;
 
         // The user clicked on the "EXIT" button.
-        else if (yCoordinate >= 600 + screenHeight - 1080 && yCoordinate <= 700 + screenHeight - 1080)
+        else if (yCoordinate >= 600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
             return 3;
 
         // The user clicked on the "OPTIONS" button.
-        else if (yCoordinate >= 800 + screenHeight - 1080 && yCoordinate <= 900 + screenHeight - 1080)
+        else if (yCoordinate >= 800 + SCREEN_HEIGHT - 1080 && yCoordinate <= 900 + SCREEN_HEIGHT - 1080)
             return 4;
 
     // The user clicked outside the buttons.
@@ -189,20 +180,16 @@ void hoverStart ()
     // Clear the window.
     cleardevice();
 
-    // Get the size of the screen.
-    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
-
     // Get the new parameters for redrawing the "START" button.
     unsigned short int distanceFromCenter = 80;
-    unsigned short int left = screenWidth / 2 - distanceFromCenter;
-    unsigned short int right = screenWidth / 2 + distanceFromCenter + 40;
-    unsigned short int up = 180 + screenHeight - 1080;
-    unsigned short int down = 280 + screenHeight - 1080;
+    unsigned short int left = SCREEN_WIDTH / 2 - distanceFromCenter;
+    unsigned short int right = SCREEN_WIDTH / 2 + distanceFromCenter + 40;
+    unsigned short int up = 180 + SCREEN_HEIGHT - 1080;
+    unsigned short int down = 280 + SCREEN_HEIGHT - 1080;
     unsigned short int depth = 10;
     bool drawDetails = 1;
-    unsigned short int textXCoordinate = screenWidth / 2 - 30;
-    unsigned short int textYCoordinate = 230 + screenHeight - 1080;
+    unsigned short int textXCoordinate = SCREEN_WIDTH / 2 - 30;
+    unsigned short int textYCoordinate = 230 + SCREEN_HEIGHT - 1080;
     char text[] = "START";
 
     // Redraw the "START" button.
@@ -210,12 +197,12 @@ void hoverStart ()
 
     // Update the parameters for redrawing the "RULES" button.
     distanceFromCenter = 100;
-    left = screenWidth / 2 - distanceFromCenter;
-    right = screenWidth / 2 + distanceFromCenter;
-    up = 400 + screenHeight - 1080;
-    down = 500 + screenHeight - 1080;
+    left = SCREEN_WIDTH / 2 - distanceFromCenter;
+    right = SCREEN_WIDTH / 2 + distanceFromCenter;
+    up = 400 + SCREEN_HEIGHT - 1080;
+    down = 500 + SCREEN_HEIGHT - 1080;
     depth = 25;
-    textXCoordinate = screenWidth / 2 - 50;
+    textXCoordinate = SCREEN_WIDTH / 2 - 50;
     textYCoordinate = 450;
     strcpy(text, "RULES");
 
@@ -223,8 +210,8 @@ void hoverStart ()
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
     // Update the parameters for redrawing the "EXIT" button.
-    up = 600 + screenHeight - 1080;
-    down = 700 + screenHeight - 1080;
+    up = 600 + SCREEN_HEIGHT - 1080;
+    down = 700 + SCREEN_HEIGHT - 1080;
     textXCoordinate += 10;
     textYCoordinate = 650;
     strcpy(text, "EXIT");
@@ -256,20 +243,16 @@ void hoverRules ()
     // Clear the window.
     cleardevice();
 
-    // Get the size of the screen.
-    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
-
     // Get the new parameters for redrawing the "START" button.
     unsigned short int distanceFromCenter = 100;
-    unsigned short int left = screenWidth / 2 - distanceFromCenter;
-    unsigned short int right = screenWidth / 2 + distanceFromCenter;
-    unsigned short int up = 200 + screenHeight - 1080;
-    unsigned short int down = 300 + screenHeight - 1080;
+    unsigned short int left = SCREEN_WIDTH / 2 - distanceFromCenter;
+    unsigned short int right = SCREEN_WIDTH / 2 + distanceFromCenter;
+    unsigned short int up = 200 + SCREEN_HEIGHT - 1080;
+    unsigned short int down = 300 + SCREEN_HEIGHT - 1080;
     unsigned short int depth = 25;
     bool drawDetails = 1;
-    unsigned short int textXCoordinate = screenWidth / 2 - 50;
-    unsigned short int textYCoordinate = 250 + screenHeight - 1080;
+    unsigned short int textXCoordinate = SCREEN_WIDTH / 2 - 50;
+    unsigned short int textYCoordinate = 250 + SCREEN_HEIGHT - 1080;
     char text[] = "START";
 
     // Redraw the "START" button.
@@ -277,13 +260,13 @@ void hoverRules ()
 
     // Update the parameters for redrawing the "RULES" button.
     distanceFromCenter = 80;
-    left = screenWidth / 2 - distanceFromCenter;
-    right = screenWidth / 2 + distanceFromCenter + 40;
-    up = 380 + screenHeight - 1080;
-    down = 480 + screenHeight - 1080;
+    left = SCREEN_WIDTH / 2 - distanceFromCenter;
+    right = SCREEN_WIDTH / 2 + distanceFromCenter + 40;
+    up = 380 + SCREEN_HEIGHT - 1080;
+    down = 480 + SCREEN_HEIGHT - 1080;
     depth = 10;
-    textXCoordinate = screenWidth / 2 - 30;
-    textYCoordinate = 430 + screenHeight - 1080;
+    textXCoordinate = SCREEN_WIDTH / 2 - 30;
+    textYCoordinate = 430 + SCREEN_HEIGHT - 1080;
     strcpy(text, "RULES");
 
     // Redraw the "RULES" button.
@@ -291,13 +274,13 @@ void hoverRules ()
 
     // Update the parameters for redrawing the "EXIT" button.
     distanceFromCenter = 100;
-    left = screenWidth / 2 - distanceFromCenter;
-    right = screenWidth / 2 + distanceFromCenter;
-    up = 600 + screenHeight - 1080;
-    down = 700 + screenHeight - 1080;
+    left = SCREEN_WIDTH / 2 - distanceFromCenter;
+    right = SCREEN_WIDTH / 2 + distanceFromCenter;
+    up = 600 + SCREEN_HEIGHT - 1080;
+    down = 700 + SCREEN_HEIGHT - 1080;
     depth = 25;
     textXCoordinate -= 10;
-    textYCoordinate = 650 + screenHeight - 1080;
+    textYCoordinate = 650 + SCREEN_HEIGHT - 1080;
     strcpy(text, "EXIT");
 
     // Redraw the "EXIT" button.
@@ -327,29 +310,25 @@ void hoverExit ()
     // Clear the window.
     cleardevice();
 
-    // Get the size of the screen.
-    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
-
     // Get the new parameters for redrawing the "START" button.
     unsigned short int distanceFromCenter = 100;
-    unsigned short int left = screenWidth / 2 - distanceFromCenter;
-    unsigned short int right = screenWidth / 2 + distanceFromCenter;
-    unsigned short int up = 200 + screenHeight - 1080;
-    unsigned short int down = 300 + screenHeight - 1080;
+    unsigned short int left = SCREEN_WIDTH / 2 - distanceFromCenter;
+    unsigned short int right = SCREEN_WIDTH / 2 + distanceFromCenter;
+    unsigned short int up = 200 + SCREEN_HEIGHT - 1080;
+    unsigned short int down = 300 + SCREEN_HEIGHT - 1080;
     unsigned short int depth = 25;
     bool drawDetails = 1;
-    unsigned short int textXCoordinate = screenWidth / 2 - 50;
-    unsigned short int textYCoordinate = 250 + screenHeight - 1080;
+    unsigned short int textXCoordinate = SCREEN_WIDTH / 2 - 50;
+    unsigned short int textYCoordinate = 250 + SCREEN_HEIGHT - 1080;
     char text[] = "START";
 
     // Redraw the "START" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
     // Update the parameters for redrawing the "RULES" button.
-    up = 400 + screenHeight - 1080;
-    down = 500 + screenHeight - 1080;
-    textYCoordinate = 450 + screenHeight - 1080;
+    up = 400 + SCREEN_HEIGHT - 1080;
+    down = 500 + SCREEN_HEIGHT - 1080;
+    textYCoordinate = 450 + SCREEN_HEIGHT - 1080;
     strcpy(text, "RULES");
 
     // Redraw the "RULES" button.
@@ -357,13 +336,13 @@ void hoverExit ()
 
     // Update the parameters for redrawing the "EXIT" button.
     distanceFromCenter = 80;
-    left = screenWidth / 2 - distanceFromCenter;
-    right = screenWidth / 2 + distanceFromCenter + 40;
-    up = 580 + screenHeight - 1080;
-    down = 680 + screenHeight - 1080;
+    left = SCREEN_WIDTH / 2 - distanceFromCenter;
+    right = SCREEN_WIDTH / 2 + distanceFromCenter + 40;
+    up = 580 + SCREEN_HEIGHT - 1080;
+    down = 680 + SCREEN_HEIGHT - 1080;
     depth = 10;
-    textXCoordinate = screenWidth / 2 - 20;
-    textYCoordinate = 630 + screenHeight - 1080;
+    textXCoordinate = SCREEN_WIDTH / 2 - 20;
+    textYCoordinate = 630 + SCREEN_HEIGHT - 1080;
     strcpy(text, "EXIT");
 
     // Redraw the "EXIT" button.
@@ -371,12 +350,12 @@ void hoverExit ()
 
     // Update the parameters for redrawing the "OPTIONS" button.
     distanceFromCenter = 100;
-    left = screenWidth / 2 - distanceFromCenter;
-    right = screenWidth / 2 + distanceFromCenter;
+    left = SCREEN_WIDTH / 2 - distanceFromCenter;
+    right = SCREEN_WIDTH / 2 + distanceFromCenter;
     up = 800;
     down = 900;
     depth = 25;
-    textXCoordinate = screenWidth / 2 - 40;
+    textXCoordinate = SCREEN_WIDTH / 2 - 40;
     textYCoordinate = 850;
     strcpy(text, "OPTIONS");
 
@@ -398,20 +377,16 @@ void hoverOptions ()
     // Clear the window.
     cleardevice();
 
-    // Get the size of the screen.
-    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
-
     // Get the parameters for redrawing the "START" button.
     unsigned short int distanceFromCenter = 100;
-    unsigned short int left = screenWidth / 2 - distanceFromCenter;
-    unsigned short int right = screenWidth / 2 + distanceFromCenter;
-    unsigned short int up = 200 + screenHeight - 1080;
-    unsigned short int down = 300 + screenHeight - 1080;
+    unsigned short int left = SCREEN_WIDTH / 2 - distanceFromCenter;
+    unsigned short int right = SCREEN_WIDTH / 2 + distanceFromCenter;
+    unsigned short int up = 200 + SCREEN_HEIGHT - 1080;
+    unsigned short int down = 300 + SCREEN_HEIGHT - 1080;
     unsigned short int depth = 25;
     bool drawDetails = 1;
-    unsigned short int textXCoordinate = screenWidth / 2 - 50;
-    unsigned short int textYCoordinate = 250 + screenHeight - 1080;
+    unsigned short int textXCoordinate = SCREEN_WIDTH / 2 - 50;
+    unsigned short int textYCoordinate = 250 + SCREEN_HEIGHT - 1080;
     char text[] = "START";
 
     // Redraw the "START" button.
@@ -463,13 +438,9 @@ void hoverBack ()
     // Clears the window.
     cleardevice();
 
-    // Get the size of the screen.
-    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
-
-    unsigned short horizontalPosition = screenWidth / 2;
+    unsigned short horizontalPosition = SCREEN_WIDTH / 2;
     unsigned short int fontSize = 4;
-    unsigned short int verticalPosition = 100 + screenHeight - 1080;
+    unsigned short int verticalPosition = 100 + SCREEN_HEIGHT - 1080;
 
     // Write the title.
     settextstyle(BOLD_FONT, HORIZ_DIR, fontSize);
@@ -488,12 +459,12 @@ void hoverBack ()
 
     unsigned short int left = horizontalPosition - 80;
     unsigned short int right = horizontalPosition + 120;
-    unsigned short int up = 780 + screenHeight - 1080;
-    unsigned short int down = 880 + screenHeight - 1080;
+    unsigned short int up = 780 + SCREEN_HEIGHT - 1080;
+    unsigned short int down = 880 + SCREEN_HEIGHT - 1080;
     unsigned short int depth = 10;
     bool drawDetails = 1;
     unsigned short int textXCoordinate = horizontalPosition - 20;
-    unsigned short int textYCoordinate = 830 + screenHeight - 1080;
+    unsigned short int textYCoordinate = 830 + SCREEN_HEIGHT - 1080;
     char text[] = "BACK";
 
     // Draw the "BACK" button.
@@ -513,19 +484,15 @@ void hoverSinglePlayer ()
 {
     cleardevice();
 
-    // Get the size of the screen.
-    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
-
-    unsigned short int horizontalPosition = screenWidth / 2;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2;
     unsigned short int left = horizontalPosition - 150;
     unsigned short int right = horizontalPosition + 250;
-    unsigned short int up = horizontalPosition - 600 + screenHeight - 1080;
-    unsigned short int down = horizontalPosition - 500 + screenHeight - 1080;
+    unsigned short int up = horizontalPosition - 600 + SCREEN_HEIGHT - 1080;
+    unsigned short int down = horizontalPosition - 500 + SCREEN_HEIGHT - 1080;
     unsigned short int depth = 25;
     bool drawDetails = 1;
     unsigned short int textXCoordinate = horizontalPosition - 120;
-    unsigned short int textYCoordinate = screenWidth / 2 - 550 + screenHeight - 1080;
+    unsigned short int textYCoordinate = SCREEN_WIDTH / 2 - 550 + SCREEN_HEIGHT - 1080;
     char text[] = "PLAYER vs COMPUTER";
 
     // Draw the "PLAYER vs COMPUTER" button.
@@ -555,19 +522,15 @@ void hoverMultiPlayer ()
 {
     cleardevice();
 
-    // Get the size of the screen.
-    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
-
-    unsigned short int horizontalPosition = screenWidth / 2;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2;
     unsigned short int left = horizontalPosition - 150;
     unsigned short int right = horizontalPosition + 250;
-    unsigned short int up = horizontalPosition - 600 + screenHeight - 1080;
-    unsigned short int down = horizontalPosition - 500 + screenHeight - 1080;
+    unsigned short int up = horizontalPosition - 600 + SCREEN_HEIGHT - 1080;
+    unsigned short int down = horizontalPosition - 500 + SCREEN_HEIGHT - 1080;
     unsigned short int depth = 25;
     bool drawDetails = 1;
     unsigned short int textXCoordinate = horizontalPosition - 120;
-    unsigned short int textYCoordinate = screenWidth / 2 - 550 + screenHeight - 1080;
+    unsigned short int textYCoordinate = SCREEN_WIDTH / 2 - 550 + SCREEN_HEIGHT - 1080;
     char text[] = "PLAYER vs COMPUTER";
 
     // Draw the "PLAYER vs COMPUTER" button.
@@ -601,11 +564,7 @@ void drawStartPage ()
     // Clear the window.
     cleardevice();
 
-    // Get the size of the screen.
-    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
-
-    unsigned short int horizontalPosition = screenWidth / 2;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2;
     unsigned short int left = horizontalPosition - 150;
     unsigned short int right = horizontalPosition + 250;
     unsigned short int up = horizontalPosition - 600;
@@ -613,7 +572,7 @@ void drawStartPage ()
     unsigned short int depth = 25;
     bool drawDetails = 1;
     unsigned short int textXCoordinate = horizontalPosition - 120;
-    unsigned short int textYCoordinate = screenWidth / 2 - 550;
+    unsigned short int textYCoordinate = SCREEN_WIDTH / 2 - 550;
     char text[] = "PLAYER vs COMPUTER";
 
     // Draw the "SINGLE PLAYER" button.
@@ -644,13 +603,9 @@ void drawRulesPage ()
     // Clear the screen.
     cleardevice();
 
-    // Get the size of the screen.
-    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
-
-    unsigned short horizontalPosition = screenWidth / 2;
+    unsigned short horizontalPosition = SCREEN_WIDTH / 2;
     unsigned short int fontSize = 4;
-    unsigned short int verticalPosition = 100 + screenHeight - 1080;
+    unsigned short int verticalPosition = 100 + SCREEN_HEIGHT - 1080;
 
     // Write the title.
     settextstyle(BOLD_FONT, HORIZ_DIR, fontSize);
@@ -669,12 +624,12 @@ void drawRulesPage ()
 
     unsigned short int left = horizontalPosition - 100;
     unsigned short int right = horizontalPosition + 100;
-    unsigned short int up = 800 + screenHeight - 1080;
-    unsigned short int down = 900 + screenHeight - 1080;
+    unsigned short int up = 800 + SCREEN_HEIGHT - 1080;
+    unsigned short int down = 900 + SCREEN_HEIGHT - 1080;
     unsigned short int depth = 25;
     bool drawDetails = 1;
     unsigned short int textXCoordinate = horizontalPosition - 40;
-    unsigned short int textYCoordinate = 850 + screenHeight - 1080;
+    unsigned short int textYCoordinate = 850 + SCREEN_HEIGHT - 1080;
     char text[] = "BACK";
 
     // Draw the "BACK" button.
@@ -695,20 +650,16 @@ void drawOptionsPage ()
     // Clear the window.
     cleardevice();
 
-    // Get the size of the screen.
-    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
-
     // Get the parameters for drawing the "CHANGE LANGUAGE" button.
     unsigned short int distanceFromCenter = 200;
-    unsigned short int left = screenWidth / 2 - distanceFromCenter;
-    unsigned short int right = screenWidth / 2 + distanceFromCenter;
+    unsigned short int left = SCREEN_WIDTH / 2 - distanceFromCenter;
+    unsigned short int right = SCREEN_WIDTH / 2 + distanceFromCenter;
     unsigned short int up = 200;
     unsigned short int down = 300;
     unsigned short int depth = 25;
     bool drawDetails = 1;
-    unsigned short int textXCoordinate = screenWidth / 2 - 50;
-    unsigned short int textYCoordinate = 250;
+    unsigned short int textXCoordinate = left + 20;
+    unsigned short int textYCoordinate = up + 50;
     char text[] = "CHANGE LANGUAGE";
 
     // Draw the "CHANGE LANGUAGE" button.
@@ -717,7 +668,7 @@ void drawOptionsPage ()
     // Update the parameters for drawing the "TURN MUSIC ON/OFF" button.
     up = 400;
     down = 500;
-    textYCoordinate = 450;
+    textYCoordinate = up + 50;
     strcpy(text, "TURN MUSIC ON/OFF");
 
     // Draw the "TURN MUSIC ON/OFF" button.
@@ -726,7 +677,7 @@ void drawOptionsPage ()
     // Update the parameters for drawing the "CHANGE RESOLUTION" button.
     up = 600;
     down = 700;
-    textYCoordinate = 650;
+    textYCoordinate = up + 50;
     strcpy(text, "CHANGE RESOLUTION");
 
     // Draw the "CHANGE RESOLUTION" button.
@@ -743,10 +694,6 @@ void clickOnStart ()
     // Clear the window.
     cleardevice();
 
-    // Get the size of the screen.
-    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
-
     // Draws the "START" page.
     drawStartPage();
 
@@ -754,7 +701,7 @@ void clickOnStart ()
     bool changer = false;
 
     // Horizontal left position for the "RULES" button.
-    unsigned short int startPosition = screenWidth / 2;
+    unsigned short int startPosition = SCREEN_WIDTH / 2;
 
     while (onStartPage == true)
     {
@@ -775,12 +722,12 @@ void clickOnStart ()
 
             // Check if the click is inside the "SINGLE PLAYER" button.
             if (xCoordinate >= startPosition - 150 && xCoordinate <= startPosition + 150)
-                if (yCoordinate >= 300 + screenHeight - 1080 && yCoordinate <= 400 + screenHeight - 1080)
+                if (yCoordinate >= 300 + SCREEN_HEIGHT - 1080 && yCoordinate <= 400 + SCREEN_HEIGHT - 1080)
                 {
                     ///Action if user clicks on Single player
                     onStartPage = false;
                 }
-                else if(yCoordinate >=600 + screenHeight - 1080 && yCoordinate <= 700 + screenHeight - 1080)
+                else if(yCoordinate >=600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
                 {
                     ///Action if user clicks on Multiplayer
                     onStartPage = false;
@@ -788,7 +735,7 @@ void clickOnStart ()
                 }
 
         if (xCoordinate >= startPosition - 150 && xCoordinate <= startPosition + 150)
-            if (yCoordinate >= 300 + screenHeight - 1080 && yCoordinate <= 400 + screenHeight - 1080)
+            if (yCoordinate >= 300 + SCREEN_HEIGHT - 1080 && yCoordinate <= 400 + SCREEN_HEIGHT - 1080)
             {
                  if (changer == false)
                  {
@@ -797,7 +744,7 @@ void clickOnStart ()
                     hoverSinglePlayer();
                  }
             }
-            else if(yCoordinate >= 600 + screenHeight - 1080 && yCoordinate <= 700 + screenHeight - 1080)
+            else if(yCoordinate >= 600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
             {
                 if(changer == false)
                 {
@@ -842,10 +789,6 @@ void clickOnRules ()
     // Clears the screen.
     cleardevice();
 
-    // Get the size of the screen.
-    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
-
     // Draws the "RULES" page.
     drawRulesPage();
 
@@ -853,7 +796,7 @@ void clickOnRules ()
     bool changer = false;
 
     // Horizontal left position for the "RULES" button.
-    unsigned short int startPosition = screenWidth / 2;
+    unsigned short int startPosition = SCREEN_WIDTH / 2;
 
     while (onRulesPage == true)
     {
@@ -874,7 +817,7 @@ void clickOnRules ()
 
             // Check if the click is inside the "BACK" button.
             if (xCoordinate >= startPosition  - 100 && xCoordinate <= startPosition + 100)
-                if (yCoordinate >= 800 + screenHeight - 1080 && yCoordinate <= 900 + screenHeight - 1080)
+                if (yCoordinate >= 800 + SCREEN_HEIGHT - 1080 && yCoordinate <= 900 + SCREEN_HEIGHT - 1080)
                 {
                     xCoordinate = cursorPosition.x;
                     yCoordinate = cursorPosition.y;
@@ -882,7 +825,7 @@ void clickOnRules ()
                 }
 
         if (xCoordinate >= startPosition - 100 && xCoordinate <= startPosition + 100)
-            if (yCoordinate >= 800 + screenHeight - 1080 && yCoordinate <= 900 + screenHeight - 1080)
+            if (yCoordinate >= 800 + SCREEN_HEIGHT - 1080 && yCoordinate <= 900 + SCREEN_HEIGHT - 1080)
             {
                  if (changer == false)
                  {
@@ -927,20 +870,14 @@ void clickOnOptions ()
     // Clear the window.
     cleardevice();
 
-    // Get the size of the screen.
-    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
-
     // Draws the "OPTIONS" page.
     drawOptionsPage();
-
-    //////
 
     bool onOptionsPage = true;
     bool changer = false;
 
     // Horizontal left position for the "OPTIONS" button.
-    unsigned short int startPosition = screenWidth / 2;
+    unsigned short int startPosition = SCREEN_WIDTH / 2;
 
     while (onOptionsPage == true)
     {
@@ -962,20 +899,20 @@ void clickOnOptions ()
             if (xCoordinate >= startPosition - 150 && xCoordinate <= startPosition + 150)
 
                 // Do if the click is inside the "CHANGE LANGUAGE" button.
-                if (yCoordinate >= 300 + screenHeight - 1080 && yCoordinate <= 400 + screenHeight - 1080)
+                if (yCoordinate >= 300 + SCREEN_HEIGHT - 1080 && yCoordinate <= 400 + SCREEN_HEIGHT - 1080)
                     onOptionsPage = false;
 
                 // Do if the click is inside the "TURN MUSIC ON/OFF" button.
-                else if(yCoordinate >=600 + screenHeight - 1080 && yCoordinate <= 700 + screenHeight - 1080)
+                else if(yCoordinate >=600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
                     onOptionsPage = false;
 
                 // Do if the click is inside the "CHANGE RESOLUTION" button.
-                else if(yCoordinate >=600 + screenHeight - 1080 && yCoordinate <= 700 + screenHeight - 1080)
+                else if(yCoordinate >=600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
                     onOptionsPage = false;
 
         // HOVER
         if (xCoordinate >= startPosition - 150 && xCoordinate <= startPosition + 150)
-            if (yCoordinate >= 300 + screenHeight - 1080 && yCoordinate <= 400 + screenHeight - 1080)
+            if (yCoordinate >= 300 + SCREEN_HEIGHT - 1080 && yCoordinate <= 400 + SCREEN_HEIGHT - 1080)
             {
                  if (changer == false)
                  {
@@ -984,7 +921,7 @@ void clickOnOptions ()
                     // hoverSinglePlayer();
                  }
             }
-            else if(yCoordinate >= 600 + screenHeight - 1080 && yCoordinate <= 700 + screenHeight - 1080)
+            else if(yCoordinate >= 600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
             {
                 if(changer == false)
                 {
