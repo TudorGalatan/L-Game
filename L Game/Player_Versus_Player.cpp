@@ -36,7 +36,7 @@ void startMultiplayerGame ()
 
 
     // Temporary: just for testing
-    delay(1000);
+    delay(300);
 
     while (true)
     {
@@ -221,12 +221,23 @@ void GameBoard::loadNewGame(GameBoard &board)
 **/
 void GameBoard::redMove (GameBoard& gameBoard)
 {
-    if (GetAsyncKeyState(VK_LBUTTON))
+    if(GetAsyncKeyState(VK_LBUTTON))
     {
-        int playerColor = RED;
-        for (unsigned short int line = 0; line < 4; line++)
-            for (unsigned short int column = 0; column < 4; column++)
-                if (gameBoard.cell[line][column].getColor() == RED)
-                    gameBoard.cell[line][column].setColor(BLACK);
+        for(int i = 0; i < 4; i++)
+            for(int j = 0; j < 4; j++)
+                if(gameBoard.boardData[i][j] == 1)
+                {
+                    gameBoard.boardData[i][j] = 0;///deletes the positions occupied by his previous move
+                    gameBoard.cell[i][j].setColor(BLACK);///sets the color of the occupied cell to BLACK to show that it's a free cell
+                }
+        while (1)
+        {
+
+            int playerColor = RED;
+            POINT mousePos;///we'll save the cursor position in mousePos
+            mousePos.x = mousex();///get the OX coordonate
+            mousePos.y = mousey();///get the OY coordonate
+
+        }
     }
 }
