@@ -40,7 +40,6 @@ void startMultiplayerGame ()
 
     while (true)
     {
-        std::cout<<board.cell[1][2].getPosition("ox")<<' '<<board.cell[1][2].getPosition("oy")<<'\n';
         switch (player)
         {
             // The Red Player's Turn
@@ -209,7 +208,7 @@ void GameBoard::loadNewGame(GameBoard &board)
             else if(board.boardData[i][j] == 2)
                 board.cell[i][j].setColor(BLUE);
             else if(board.boardData[i][j] == 3)
-                    board.cell[i][j].setColor(YELLOW);
+                    board.coin.drawCoin(board.cell[i][j].getPosition("ox"),board.cell[i][j].getPosition("oy"));
         }
 }
 
