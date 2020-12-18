@@ -1,6 +1,6 @@
 /**
-    This is the implementation for the User Interface layer.
-    The User Interface layer is responsible with the visual side of the application.
+    This is the implementation for the User Interface module.
+    The module is responsible with the visual side of the application.
 **/
 
 #include "User_Interface.h"
@@ -16,13 +16,6 @@ const unsigned short int SCREEN_HEIGHT = GetSystemMetrics(SM_CYSCREEN);
 
 
 
-/**
-    Runs the graphical user interface.
-    Input:
-        - none
-    Output:
-        - runs the graphical user interface
-**/
 void runGUI ()
 {
     // Exclude the C functions for higher speed.
@@ -43,21 +36,6 @@ void runGUI ()
 
 
 
-/**
-    Draws a button.
-    Input:
-        - "left": the left margin of the button
-        - "up": the up margin of the button
-        - "right": the right margin of the button
-        - "down": the down margin of the button
-        - "depth": the depth of the button
-        - "drawDetails": specifies if it should draw more details
-        - "textXCoordinate": the starting X position of the text
-        - "textYCoordinate": the starting Y position of the text
-        - "text": the text of the button
-    Output:
-        - draws a button on the screen
-**/
 void drawButton (USI left, USI up, USI right, USI down, USI depth, bool drawDetails, USI textXCoordinate, USI textYCoordinate, char text[])
 {
     // Draw the button.
@@ -72,13 +50,6 @@ void drawButton (USI left, USI up, USI right, USI down, USI depth, bool drawDeta
 
 
 
-/**
-    Draws all the buttons of the main menu.
-    Input:
-        - none
-    Output:
-        - draws all the buttons of the main menu on the screen
-**/
 void drawMainMenuButtons ()
 {
     // Clear the window.
@@ -130,18 +101,6 @@ void drawMainMenuButtons ()
 
 
 
-/**
-    Determines where the user clicked on the screen.
-    Input:
-        - "xCoordinate": the x coordinate for the click
-        - "yCoordinate": the y coordinate for the click
-    Output:
-        - 0: the user clicked outside the buttons
-        - 1: the user clicked on the "START" button
-        - 2: the user clicked on the "RULES" button
-        - 3: the user clicked on the "EXIT" button
-        - 4: the user clicked on the "OPTIONS" button
-*/
 unsigned short int checkMouseLocation (double xCoordinate, double yCoordinate)
 {
     if (xCoordinate >= SCREEN_WIDTH / 2 - 100 && xCoordinate <= SCREEN_WIDTH / 2 + 100)
@@ -168,13 +127,6 @@ unsigned short int checkMouseLocation (double xCoordinate, double yCoordinate)
 
 
 
-/**
-    Redraws the "START" button with the hover effect on it.
-    Input:
-        - none
-    Output:
-        - redraws all the buttons with the hover effect on the "START" button
-**/
 void hoverStart ()
 {
     // Clear the window.
@@ -231,13 +183,6 @@ void hoverStart ()
 
 
 
-/**
-    Redraws the "RULES" button with the hover effect on it.
-    Input:
-        - none
-    Output:
-        - redraws all the buttons with the hover effect on the "RULES" button
-**/
 void hoverRules ()
 {
     // Clear the window.
@@ -298,13 +243,6 @@ void hoverRules ()
 
 
 
-/**
-    Redraws the "EXIT" button with the hover effect on it.
-    Input:
-        - none
-    Output:
-        - redraws all the buttons with the hover effect on the "EXIT" button
-**/
 void hoverExit ()
 {
     // Clear the window.
@@ -365,13 +303,6 @@ void hoverExit ()
 
 
 
-/**
-    Redraws the "OPTIONS" button with the hover effect on it.
-    Input:
-        - none
-    Output:
-        - redraws all the buttons with the hover effect on the "OPTIONS" button
-**/
 void hoverOptions ()
 {
     // Clear the window.
@@ -426,13 +357,6 @@ void hoverOptions ()
 
 
 
-/**
-    Redraws the "BACK" button with the hover effect on it.
-    Input:
-        - none
-    Output:
-        - redraws the "RULES" page with the hover effect on the "BACK" button
-**/
 void hoverBack ()
 {
     // Clears the window.
@@ -473,13 +397,6 @@ void hoverBack ()
 
 
 
-/**
-    Redraws the "PLAYER vs COMPUTER" button with the hover effect on it.
-    Input:
-        - none
-    Output:
-        - redraws the "PLAYER vs COMPUTER" button with the hover effect on it
-**/
 void hoverSinglePlayer ()
 {
     cleardevice();
@@ -511,13 +428,6 @@ void hoverSinglePlayer ()
 
 
 
-/**
-    Redraws the "PLAYER vs PLAYER" button with the hover effect on it.
-    Input:
-        - none
-    Output:
-        - redraws the "PLAYER vs PLAYER" button with the hover effect on it
-**/
 void hoverMultiPlayer ()
 {
     cleardevice();
@@ -552,13 +462,6 @@ void hoverMultiPlayer ()
 
 
 
-/**
-    Draws the "START" page.
-    Input:
-        - none
-    Output:
-        - draws the "START" page
-**/
 void drawStartPage ()
 {
     // Clear the window.
@@ -591,13 +494,6 @@ void drawStartPage ()
 
 
 
-/**
-    Draws the "RULES" page.
-    Input:
-        - none
-    Output:
-        - draws the "RULES" page
-**/
 void drawRulesPage ()
 {
     // Clear the screen.
@@ -638,13 +534,6 @@ void drawRulesPage ()
 
 
 
-/**
-    Draws the "OPTIONS" page.
-    Input:
-        - none
-    Output:
-        - draws the "OPTIONS" page
-**/
 void drawOptionsPage ()
 {
     // Clear the window.
@@ -686,9 +575,6 @@ void drawOptionsPage ()
 
 
 
-/**
-    ???
-**/
 void clickOnStart ()
 {
     // Clear the window.
@@ -777,13 +663,6 @@ void clickOnStart ()
 
 
 
-/**
-    Redirects to the "RULES" page.
-    Input:
-        - none
-    Output:
-        - redirects to the "RULES" page
-**/
 void clickOnRules ()
 {
     // Clears the screen.
@@ -858,13 +737,6 @@ void clickOnRules ()
 
 
 
-/**
-    Redirects to the "OPTIONS" page.
-    Input:
-        - none
-    Output:
-        - redirects to the "OPTIONS" page
-**/
 void clickOnOptions ()
 {
     // Clear the window.
@@ -954,13 +826,6 @@ void clickOnOptions ()
 
 
 
-/**
-    Permanently scans the mouse position.
-    Input:
-        - none
-    Output:
-        - none
-**/
 void scanMousePosition ()
 {
     HWND hwnd = GetForegroundWindow();
@@ -1059,13 +924,6 @@ void scanMousePosition ()
 
 
 
-/**
-    Closes the application.
-    Input:
-        - none
-    Output:
-        - closes the application
-**/
 void closeApplication ()
 {
     closegraph();
