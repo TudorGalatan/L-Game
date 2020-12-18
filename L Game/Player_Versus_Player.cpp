@@ -1,20 +1,16 @@
 /**
-    This is the implementation for the Player versus Player game mode module.
+    This is the implementation for the Player Versus Player game mode module.
     The module is responsible with the player versus player game mode.
 **/
 
 #include "Player_Versus_Player.h"
 #include "Controller.h"
 
-#include <graphics.h>
-#include <iostream>
-#include <Windows.h>
-
 
 
 void startPlayerVsPlayerGame ()
 {
-    GameBoard board;
+    GameBoard gameBoard;
 
     // false - the red player
     // true - the blue player
@@ -23,12 +19,12 @@ void startPlayerVsPlayerGame ()
     // Clear the window.
     cleardevice();
 
-    // Draw the game board.board.cell[0][0].getPosition("ox")
-    board.drawBoard(board);
-    readData(board.boardData, board);
+    // Draw the game board.board.cell[0][0].getPosition("ox")   ???
+    gameBoard.drawBoard(gameBoard);
+    readData(gameBoard.boardData, gameBoard);
 
-    printBoard(board.boardData);
-    board.loadNewGame(board);
+    printBoard(gameBoard.boardData);            // ???
+    gameBoard.loadNewGame(gameBoard);
 
     // Temporary: just for testing
     delay(300);
@@ -39,7 +35,7 @@ void startPlayerVsPlayerGame ()
         {
             // The red player's turn
             case false:
-                board.redMove(board);
+                gameBoard.redMove(gameBoard);
                 break;
 
             // The blue player's turn
