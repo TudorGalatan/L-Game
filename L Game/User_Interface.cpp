@@ -122,6 +122,15 @@ void drawMainMenuButtons ()
 
     // Draw the "EXIT" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+
+    // Update the parameters for drawing the "OPTIONS" button.
+    up = 800;
+    down = 900;
+    textYCoordinate += 200;     // ??? Doesn't work.
+    strcpy(text, "OPTIONS");
+
+    // Draw the "OPTIONS" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
 
 
@@ -136,6 +145,7 @@ void drawMainMenuButtons ()
         - 1: the user clicked on the "START" button
         - 2: the user clicked on the "RULES" button
         - 3: the user clicked on the "EXIT" button
+        - 4: the user clicked on the "OPTIONS" button
 */
 unsigned short int checkMouseLocation (double xCoordinate, double yCoordinate)
 {
@@ -156,6 +166,10 @@ unsigned short int checkMouseLocation (double xCoordinate, double yCoordinate)
         // The user clicked on the "EXIT" button.
         else if (yCoordinate >= 600 + screenHeight - 1080 && yCoordinate <= 700 + screenHeight - 1080)
             return 3;
+
+        // The user clicked on the "OPTIONS" button.
+        else if (yCoordinate >= 800 + screenHeight - 1080 && yCoordinate <= 900 + screenHeight - 1080)
+            return 4;
 
     // The user clicked outside the buttons.
     return 0;
@@ -216,6 +230,15 @@ void hoverStart ()
     strcpy(text, "EXIT");
 
     // Redraw the "EXIT" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+
+    // Update the parameters for redrawing the "OPTIONS" button.
+    up = 800;
+    down = 900;
+    textYCoordinate += 200;     // ??? Doesn't work.
+    strcpy(text, "OPTIONS");
+
+    // Redraw the "OPTIONS" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
 
@@ -279,6 +302,15 @@ void hoverRules ()
 
     // Redraw the "EXIT" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+
+    // Update the parameters for redrawing the "OPTIONS" button.
+    up = 800;
+    down = 900;
+    textYCoordinate += 200;     // ??? Doesn't work.
+    strcpy(text, "OPTIONS");
+
+    // Redraw the "OPTIONS" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
 
 
@@ -335,6 +367,85 @@ void hoverExit ()
     strcpy(text, "EXIT");
 
     // Redraw the "EXIT" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+
+    // Update the parameters for redrawing the "OPTIONS" button.
+    distanceFromCenter = 100;
+    left = screenWidth / 2 - distanceFromCenter;
+    right = screenWidth / 2 + distanceFromCenter;
+    up = 800;
+    down = 900;
+    depth = 25;
+    textXCoordinate = screenWidth / 2 - 40;
+    textYCoordinate = 850;
+    strcpy(text, "OPTIONS");
+
+    // Redraw the "OPTIONS" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+}
+
+
+
+/**
+    Redraws the "OPTIONS" button with the hover effect on it.
+    Input:
+        - none
+    Output:
+        - redraws all the buttons with the hover effect on the "OPTIONS" button
+**/
+void hoverOptions ()
+{
+    // Clear the window.
+    cleardevice();
+
+    // Get the size of the screen.
+    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
+    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
+
+    // Get the parameters for redrawing the "START" button.
+    unsigned short int distanceFromCenter = 100;
+    unsigned short int left = screenWidth / 2 - distanceFromCenter;
+    unsigned short int right = screenWidth / 2 + distanceFromCenter;
+    unsigned short int up = 200 + screenHeight - 1080;
+    unsigned short int down = 300 + screenHeight - 1080;
+    unsigned short int depth = 25;
+    bool drawDetails = 1;
+    unsigned short int textXCoordinate = screenWidth / 2 - 50;
+    unsigned short int textYCoordinate = 250 + screenHeight - 1080;
+    char text[] = "START";
+
+    // Redraw the "START" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+
+    // Update the parameters for redrawing the "RULES" button.
+    up = 400;
+    down = 500;
+    textYCoordinate = 450;
+    strcpy(text, "RULES");
+
+    // Redraw the "RULES" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+
+    // Update the parameters for redrawing the "EXIT" button.
+    up = 600;
+    down = 700;
+    textXCoordinate += 10;
+    textYCoordinate = 650;
+    strcpy(text, "EXIT");
+
+    // Redraw the "EXIT" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+
+    // Update the parameters for redrawing the "OPTIONS" button.
+    up = 780;
+    down = 880;
+    left += 20;
+    right += 20;
+    depth = 10;
+    textYCoordinate += 200;     // ??? Doesn't work.
+    strcpy(text, "OPTIONS");
+
+    // Redraw the "OPTIONS" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
 
@@ -798,6 +909,13 @@ void scanMousePosition ()
             case 3:
                 if (changer == false)
                     hoverExit();
+                changer = true;
+                break;
+
+            // The "OPTIONS" button
+            case 4:
+                if (changer == false)
+                    hoverOptions();
                 changer = true;
                 break;
 
