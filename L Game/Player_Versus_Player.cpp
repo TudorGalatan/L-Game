@@ -29,11 +29,10 @@ void startMultiplayerGame ()
 
     // Draw the game board.board.cell[0][0].getPosition("ox")
     board.drawBoard(board);
-    readData(board.boardData,board);
+    readData(board.boardData, board);
 
     printBoard(board.boardData);
     board.loadNewGame(board);
-
 
     // Temporary: just for testing
     delay(300);
@@ -42,7 +41,7 @@ void startMultiplayerGame ()
     {
         switch (player)
         {
-            // The Red Player's Turn
+            // The red player's Turn
             case false:
                 board.redMove(board);
                 break;
@@ -150,6 +149,7 @@ void Coin::drawCoin (int xCoord, int yCoord)            /// We have to change th
 {                                                       /// WTF DID YOU MEAN???????
                                                         /// xDDD  I changed it so the coin will spawn at some coordonates saved in each cell object. Waiting for your answer!!!
                                                         /// ...
+                                                        /// PUTIN E DE VIN... HEI, AUU, STATI  SFFG DATI-MI DRUMUL... SDFSD... FS.FSA.DFG DFG.....A SF......... .... ..SD GFDG...
     int height = GetSystemMetrics(SM_CYSCREEN);
     int cellSize = (height - 200) / 4;
     circle(xCoord, yCoord, getCoinSize());
@@ -159,12 +159,27 @@ void Coin::drawCoin (int xCoord, int yCoord)            /// We have to change th
     floodfill(xCoord, yCoord, WHITE);
 }
 
-int Cell::getPosition(char* axis)
+
+
+/**
+    ???
+    Input:
+        -
+    Output:
+        -
+**/
+int Cell::getPosition (char* axis)
 {
-    if(strcmp(axis,"ox") == 0) return posX;
-    else if(strcmp(axis,"oy") == 0) return posY;
+    if (strcmp(axis, "ox") == 0)
+        return posX;
+
+    else if (strcmp(axis, "oy") == 0)
+        return posY;
+
     return -1;
 }
+
+
 
 /**
     Draws the game board.
@@ -194,23 +209,32 @@ void GameBoard::drawBoard (GameBoard &board)
         xCoord = 0;
         yCoord++;
     }
-
-
 }
 
-void GameBoard::loadNewGame(GameBoard &board)
+
+
+/**
+    Load new game.
+    Input:
+        -
+    Output:
+        -
+**/
+void GameBoard::loadNewGame (GameBoard &board)
 {
-    for(int i=0;i<4;i++)
-        for(int j=0;j<4;j++)
+    for (int i=0;i<4;i++)
+        for (int j=0;j<4;j++)
         {
-            if(board.boardData[i][j] == 1)
+            if (board.boardData[i][j] == 1)
                 board.cell[i][j].setColor(RED);
-            else if(board.boardData[i][j] == 2)
+            else if (board.boardData[i][j] == 2)
                 board.cell[i][j].setColor(BLUE);
-            else if(board.boardData[i][j] == 3)
+            else if (board.boardData[i][j] == 3)
                     board.coin.drawCoin(board.cell[i][j].getPosition("ox"),board.cell[i][j].getPosition("oy"));
         }
 }
+
+
 
 /**
     ???
@@ -221,22 +245,21 @@ void GameBoard::loadNewGame(GameBoard &board)
 **/
 void GameBoard::redMove (GameBoard& gameBoard)
 {
-    if(GetAsyncKeyState(VK_LBUTTON))
+    if (GetAsyncKeyState(VK_LBUTTON))
     {
-        for(int i = 0; i < 4; i++)
-            for(int j = 0; j < 4; j++)
-                if(gameBoard.boardData[i][j] == 1)
+        for (int i = 0; i < 4; i++)
+            for (int j = 0; j < 4; j++)
+                if (gameBoard.boardData[i][j] == 1)
                 {
-                    gameBoard.boardData[i][j] = 0;///deletes the positions occupied by his previous move
-                    gameBoard.cell[i][j].setColor(BLACK);///sets the color of the occupied cell to BLACK to show that it's a free cell
+                    gameBoard.boardData[i][j] = 0; // deletes the positions occupied by his previous move
+                    gameBoard.cell[i][j].setColor(BLACK); // sets the color of the occupied cell to BLACK to show that it's a free cell
                 }
         while (1)
         {
-
             int playerColor = RED;
-            POINT mousePos;///we'll save the cursor position in mousePos
-            mousePos.x = mousex();///get the OX coordonate
-            mousePos.y = mousey();///get the OY coordonate
+            POINT mousePos; // we'll save the cursor position in mousePos
+            mousePos.x = mousex(); // get the OX coordonate
+            mousePos.y = mousey(); // get the OY coordonate
 
         }
     }
