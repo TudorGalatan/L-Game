@@ -22,6 +22,50 @@ void runGUI ();
 
 
 /**
+    Draws the main menu.
+    Input:
+        - none
+    Output:
+        - draws the main menu
+**/
+void drawMainMenuButtons ();
+
+
+
+/**
+    Draws the "START GAME" menu.
+    Input:
+        - none
+    Output:
+        - draws the "START GAME" menu
+**/
+void drawStartPage ();
+
+
+
+/**
+    Draws the "RULES" screen.
+    Input:
+        - none
+    Output:
+        - draws the "RULES" screen
+**/
+void drawRulesPage ();
+
+
+
+/**
+    Draws the "OPTIONS" menu.
+    Input:
+        - none
+    Output:
+        - draws the "OPTIONS" menu
+**/
+void drawOptionsPage ();
+
+
+
+/**
     Draws a button.
     Input:
         - "left": the left margin of the button
@@ -37,33 +81,6 @@ void runGUI ();
         - draws a button on the screen
 **/
 void drawButton (USI left, USI up, USI right, USI down, USI depth, bool drawDetails, USI textXCoordinate, USI textYCoordinate, char text[]);
-
-
-
-/**
-    Draws the main menu.
-    Input:
-        - none
-    Output:
-        - draws the main menu
-**/
-void drawMainMenuButtons ();
-
-
-
-/**
-    Determines where the user has clicked on the screen.
-    Input:
-        - "xCoordinate": the x coordinate for the click
-        - "yCoordinate": the y coordinate for the click
-    Output:
-        - 0: if the user clicked outside the buttons
-        - 1: if the user clicked on the "START" button
-        - 2: if the user clicked on the "RULES" button
-        - 3: if the user clicked on the "EXIT" button
-        - 4: if the user clicked on the "OPTIONS" button
-*/
-unsigned short int checkMouseLocation (double xCoordinate, double yCoordinate);
 
 
 
@@ -145,39 +162,6 @@ void hoverMultiPlayer ();
 
 
 /**
-    Draws the "START GAME" menu.
-    Input:
-        - none
-    Output:
-        - draws the "START GAME" menu
-**/
-void drawStartPage ();
-
-
-
-/**
-    Draws the "RULES" screen.
-    Input:
-        - none
-    Output:
-        - draws the "RULES" screen
-**/
-void drawRulesPage ();
-
-
-
-/**
-    Draws the "OPTIONS" menu.
-    Input:
-        - none
-    Output:
-        - draws the "OPTIONS" menu
-**/
-void drawOptionsPage ();
-
-
-
-/**
     Redirects to the "START GAME" menu.
     Input:
         - none
@@ -218,6 +202,22 @@ void clickOnOptions ();
         - permanently scans the mouse location on the screen
 **/
 void scanMousePosition ();
+
+
+
+/**
+    Determines where the user has clicked on the screen.
+    Input:
+        - "xCoordinate": the x coordinate for the click
+        - "yCoordinate": the y coordinate for the click
+    Output:
+        - 0: if the user clicked outside the buttons
+        - 1: if the user clicked on the "START" button
+        - 2: if the user clicked on the "RULES" button
+        - 3: if the user clicked on the "EXIT" button
+        - 4: if the user clicked on the "OPTIONS" button
+*/
+unsigned short int checkMouseLocation (double xCoordinate, double yCoordinate);
 
 
 

@@ -36,20 +36,6 @@ void runGUI ()
 
 
 
-void drawButton (USI left, USI up, USI right, USI down, USI depth, bool drawDetails, USI textXCoordinate, USI textYCoordinate, char text[])
-{
-    // Draw the button.
-    bar3d(left, up, right, down, depth, drawDetails);
-
-    // Set the font characteristics.
-    settextstyle(BOLD_FONT, HORIZ_DIR, FONT_SIZE);
-
-    // Write the text.
-    outtextxy(textXCoordinate, textYCoordinate, text);
-}
-
-
-
 void drawMainMenuButtons ()
 {
     // Clear the window.
@@ -101,28 +87,129 @@ void drawMainMenuButtons ()
 
 
 
-unsigned short int checkMouseLocation (double xCoordinate, double yCoordinate)
+void drawStartPage ()
 {
-    if (xCoordinate >= SCREEN_WIDTH / 2 - 100 && xCoordinate <= SCREEN_WIDTH / 2 + 100)
+    // Clear the window.
+    cleardevice();
 
-        // The user clicked on the "START" button.
-        if(yCoordinate >= 200 + SCREEN_HEIGHT - 1080 && yCoordinate <= 300 + SCREEN_HEIGHT - 1080)
-            return 1;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2;
+    unsigned short int left = horizontalPosition - 150;
+    unsigned short int right = horizontalPosition + 250;
+    unsigned short int up = horizontalPosition - 600;
+    unsigned short int down = horizontalPosition - 500;
+    unsigned short int depth = 25;
+    bool drawDetails = 1;
+    unsigned short int textXCoordinate = horizontalPosition - 120;
+    unsigned short int textYCoordinate = SCREEN_WIDTH / 2 - 550;
+    char text[] = "PLAYER vs COMPUTER";
 
-        // The user clicked on the "RULES" button.
-        else if (yCoordinate >= 400 + SCREEN_HEIGHT - 1080 && yCoordinate <= 500 + SCREEN_HEIGHT - 1080)
-            return 2;
+    // Draw the "SINGLE PLAYER" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
-        // The user clicked on the "EXIT" button.
-        else if (yCoordinate >= 600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
-            return 3;
+    //Update the values.
+    up += 300;
+    down += 300;
+    textXCoordinate += 20;
+    textYCoordinate += 300;
+    strcpy(text,"PLAYER vs PLAYER");
 
-        // The user clicked on the "OPTIONS" button.
-        else if (yCoordinate >= 800 + SCREEN_HEIGHT - 1080 && yCoordinate <= 900 + SCREEN_HEIGHT - 1080)
-            return 4;
+    //Draw the "MULTIPLAYER" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+}
 
-    // The user clicked outside the buttons.
-    return 0;
+
+
+void drawRulesPage ()
+{
+    // Clear the screen.
+    cleardevice();
+
+    unsigned short horizontalPosition = SCREEN_WIDTH / 2;
+    unsigned short int fontSize = 4;
+    unsigned short int verticalPosition = 100 + SCREEN_HEIGHT - 1080;
+
+    // Write the title.
+    settextstyle(BOLD_FONT, HORIZ_DIR, fontSize);
+    outtextxy(horizontalPosition - 200, verticalPosition, "!!!RULES OF THE GAME!!!");
+
+    horizontalPosition -= 50;
+
+    // Write the rules.
+    settextstyle(BOLD_FONT, HORIZ_DIR, fontSize / 2);
+    outtextxy(horizontalPosition - 200, verticalPosition += 150, "The board has 2 'L' shaped objects and 2 coins");
+    outtextxy(horizontalPosition - 200, verticalPosition += 50, "You can move your 'L' object and, if you wish,");
+    outtextxy(horizontalPosition - 200, verticalPosition += 50, "you can move at your choice one of the coins on");
+    outtextxy(horizontalPosition - 200, verticalPosition += 50, "a free position. You have to move your objects");
+    outtextxy(horizontalPosition - 200, verticalPosition += 50, "in such a way that you block the other player.");
+    outtextxy(horizontalPosition - 200, verticalPosition += 50, "The player who runs out of moves loses!!!");
+
+    unsigned short int left = horizontalPosition - 100;
+    unsigned short int right = horizontalPosition + 100;
+    unsigned short int up = 800 + SCREEN_HEIGHT - 1080;
+    unsigned short int down = 900 + SCREEN_HEIGHT - 1080;
+    unsigned short int depth = 25;
+    bool drawDetails = 1;
+    unsigned short int textXCoordinate = horizontalPosition - 40;
+    unsigned short int textYCoordinate = 850 + SCREEN_HEIGHT - 1080;
+    char text[] = "BACK";
+
+    // Draw the "BACK" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+}
+
+
+
+void drawOptionsPage ()
+{
+    // Clear the window.
+    cleardevice();
+
+    // Get the parameters for drawing the "CHANGE LANGUAGE" button.
+    unsigned short int distanceFromCenter = 200;
+    unsigned short int left = SCREEN_WIDTH / 2 - distanceFromCenter;
+    unsigned short int right = SCREEN_WIDTH / 2 + distanceFromCenter;
+    unsigned short int up = 200;
+    unsigned short int down = 300;
+    unsigned short int depth = 25;
+    bool drawDetails = 1;
+    unsigned short int textXCoordinate = left + 20;
+    unsigned short int textYCoordinate = up + 50;
+    char text[] = "CHANGE LANGUAGE";
+
+    // Draw the "CHANGE LANGUAGE" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+
+    // Update the parameters for drawing the "TURN MUSIC ON/OFF" button.
+    up = 400;
+    down = 500;
+    textYCoordinate = up + 50;
+    strcpy(text, "TURN MUSIC ON/OFF");
+
+    // Draw the "TURN MUSIC ON/OFF" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+
+    // Update the parameters for drawing the "CHANGE RESOLUTION" button.
+    up = 600;
+    down = 700;
+    textYCoordinate = up + 50;
+    strcpy(text, "CHANGE RESOLUTION");
+
+    // Draw the "CHANGE RESOLUTION" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+}
+
+
+
+void drawButton (USI left, USI up, USI right, USI down, USI depth, bool drawDetails, USI textXCoordinate, USI textYCoordinate, char text[])
+{
+    // Draw the button.
+    bar3d(left, up, right, down, depth, drawDetails);
+
+    // Set the font characteristics.
+    settextstyle(BOLD_FONT, HORIZ_DIR, FONT_SIZE);
+
+    // Write the text.
+    outtextxy(textXCoordinate, textYCoordinate, text);
 }
 
 
@@ -457,119 +544,6 @@ void hoverMultiPlayer ()
     strcpy(text,"PLAYER vs PLAYER");
 
     //Draw the "PLAYER vs PLAYER" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
-}
-
-
-
-void drawStartPage ()
-{
-    // Clear the window.
-    cleardevice();
-
-    unsigned short int horizontalPosition = SCREEN_WIDTH / 2;
-    unsigned short int left = horizontalPosition - 150;
-    unsigned short int right = horizontalPosition + 250;
-    unsigned short int up = horizontalPosition - 600;
-    unsigned short int down = horizontalPosition - 500;
-    unsigned short int depth = 25;
-    bool drawDetails = 1;
-    unsigned short int textXCoordinate = horizontalPosition - 120;
-    unsigned short int textYCoordinate = SCREEN_WIDTH / 2 - 550;
-    char text[] = "PLAYER vs COMPUTER";
-
-    // Draw the "SINGLE PLAYER" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
-
-    //Update the values.
-    up += 300;
-    down += 300;
-    textXCoordinate += 20;
-    textYCoordinate += 300;
-    strcpy(text,"PLAYER vs PLAYER");
-
-    //Draw the "MULTIPLAYER" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
-}
-
-
-
-void drawRulesPage ()
-{
-    // Clear the screen.
-    cleardevice();
-
-    unsigned short horizontalPosition = SCREEN_WIDTH / 2;
-    unsigned short int fontSize = 4;
-    unsigned short int verticalPosition = 100 + SCREEN_HEIGHT - 1080;
-
-    // Write the title.
-    settextstyle(BOLD_FONT, HORIZ_DIR, fontSize);
-    outtextxy(horizontalPosition - 200, verticalPosition, "!!!RULES OF THE GAME!!!");
-
-    horizontalPosition -= 50;
-
-    // Write the rules.
-    settextstyle(BOLD_FONT, HORIZ_DIR, fontSize / 2);
-    outtextxy(horizontalPosition - 200, verticalPosition += 150, "The board has 2 'L' shaped objects and 2 coins");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "You can move your 'L' object and, if you wish,");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "you can move at your choice one of the coins on");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "a free position. You have to move your objects");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "in such a way that you block the other player.");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "The player who runs out of moves loses!!!");
-
-    unsigned short int left = horizontalPosition - 100;
-    unsigned short int right = horizontalPosition + 100;
-    unsigned short int up = 800 + SCREEN_HEIGHT - 1080;
-    unsigned short int down = 900 + SCREEN_HEIGHT - 1080;
-    unsigned short int depth = 25;
-    bool drawDetails = 1;
-    unsigned short int textXCoordinate = horizontalPosition - 40;
-    unsigned short int textYCoordinate = 850 + SCREEN_HEIGHT - 1080;
-    char text[] = "BACK";
-
-    // Draw the "BACK" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
-}
-
-
-
-void drawOptionsPage ()
-{
-    // Clear the window.
-    cleardevice();
-
-    // Get the parameters for drawing the "CHANGE LANGUAGE" button.
-    unsigned short int distanceFromCenter = 200;
-    unsigned short int left = SCREEN_WIDTH / 2 - distanceFromCenter;
-    unsigned short int right = SCREEN_WIDTH / 2 + distanceFromCenter;
-    unsigned short int up = 200;
-    unsigned short int down = 300;
-    unsigned short int depth = 25;
-    bool drawDetails = 1;
-    unsigned short int textXCoordinate = left + 20;
-    unsigned short int textYCoordinate = up + 50;
-    char text[] = "CHANGE LANGUAGE";
-
-    // Draw the "CHANGE LANGUAGE" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
-
-    // Update the parameters for drawing the "TURN MUSIC ON/OFF" button.
-    up = 400;
-    down = 500;
-    textYCoordinate = up + 50;
-    strcpy(text, "TURN MUSIC ON/OFF");
-
-    // Draw the "TURN MUSIC ON/OFF" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
-
-    // Update the parameters for drawing the "CHANGE RESOLUTION" button.
-    up = 600;
-    down = 700;
-    textYCoordinate = up + 50;
-    strcpy(text, "CHANGE RESOLUTION");
-
-    // Draw the "CHANGE RESOLUTION" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
 
@@ -920,6 +894,32 @@ void scanMousePosition ()
         // Wait 30 milliseconds for performance reasons. (we don t want to scan the mouse position every millisecond)
         delay(30);
     }
+}
+
+
+
+unsigned short int checkMouseLocation (double xCoordinate, double yCoordinate)
+{
+    if (xCoordinate >= SCREEN_WIDTH / 2 - 100 && xCoordinate <= SCREEN_WIDTH / 2 + 100)
+
+        // The user clicked on the "START" button.
+        if(yCoordinate >= 200 + SCREEN_HEIGHT - 1080 && yCoordinate <= 300 + SCREEN_HEIGHT - 1080)
+            return 1;
+
+        // The user clicked on the "RULES" button.
+        else if (yCoordinate >= 400 + SCREEN_HEIGHT - 1080 && yCoordinate <= 500 + SCREEN_HEIGHT - 1080)
+            return 2;
+
+        // The user clicked on the "EXIT" button.
+        else if (yCoordinate >= 600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
+            return 3;
+
+        // The user clicked on the "OPTIONS" button.
+        else if (yCoordinate >= 800 + SCREEN_HEIGHT - 1080 && yCoordinate <= 900 + SCREEN_HEIGHT - 1080)
+            return 4;
+
+    // The user clicked outside the buttons.
+    return 0;
 }
 
 
