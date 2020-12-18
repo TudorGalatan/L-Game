@@ -591,7 +591,7 @@ void clickOnStartGame ()
                 {
                     ///Action if user clicks on Multiplayer
                     onStartPage = false;
-                    startMultiplayerGame();
+                    startPlayerVsPlayerGame();
                 }
 
         if (xCoordinate >= startPosition - 150 && xCoordinate <= startPosition + 150)
