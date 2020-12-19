@@ -10,6 +10,7 @@
 #include <graphics.h>
 #include <Windows.h>
 #include <cstring>
+#include <iostream>
 
 const unsigned short int SCREEN_WIDTH = GetSystemMetrics(SM_CXSCREEN);
 const unsigned short int SCREEN_HEIGHT = GetSystemMetrics(SM_CYSCREEN);
@@ -51,7 +52,7 @@ void drawMainMenu ()
     bool drawDetails = 1;
     unsigned short int textXCoordinate = SCREEN_WIDTH / 2 - 50;
     unsigned short int textYCoordinate = 250 + SCREEN_HEIGHT - 1080;
-    char text[] = "START";
+    char text[30] = "START";
 
     // Draw the "START" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -76,11 +77,11 @@ void drawMainMenu ()
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
     // Update the parameters for drawing the "OPTIONS" button.
+    strcpy(text, "OPTIONS");
     up = 800;
     down = 900;
+    textXCoordinate -= 25;
     textYCoordinate = 850;     // ??? Doesn't work.
-    strcpy(text, "OPTIONS");
-
     // Draw the "OPTIONS" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
@@ -176,7 +177,7 @@ void drawOptionsMenu ()
     bool drawDetails = 1;
     unsigned short int textXCoordinate = left + 20;
     unsigned short int textYCoordinate = up + 50;
-    char text[] = "CHANGE LANGUAGE";
+    char text[30] = "CHANGE LANGUAGE";
 
     // Draw the "CHANGE LANGUAGE" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -231,7 +232,7 @@ void hoverStartGame ()
     bool drawDetails = 1;
     unsigned short int textXCoordinate = SCREEN_WIDTH / 2 - 30;
     unsigned short int textYCoordinate = 230 + SCREEN_HEIGHT - 1080;
-    char text[] = "START";
+    char text[30] = "START";
 
     // Redraw the "START" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -263,6 +264,7 @@ void hoverStartGame ()
     // Update the parameters for redrawing the "OPTIONS" button.
     up = 800;
     down = 900;
+    textXCoordinate -= 25;
     textYCoordinate += 200;     // ??? Doesn't work.
     strcpy(text, "OPTIONS");
 
@@ -287,7 +289,7 @@ void hoverRules ()
     bool drawDetails = 1;
     unsigned short int textXCoordinate = SCREEN_WIDTH / 2 - 50;
     unsigned short int textYCoordinate = 250 + SCREEN_HEIGHT - 1080;
-    char text[] = "START";
+    char text[30] = "START";
 
     // Redraw the "START" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -323,6 +325,7 @@ void hoverRules ()
     // Update the parameters for redrawing the "OPTIONS" button.
     up = 800;
     down = 900;
+    textXCoordinate -= 25;
     textYCoordinate += 200;     // ??? Doesn't work.
     strcpy(text, "OPTIONS");
 
@@ -347,7 +350,7 @@ void hoverExit ()
     bool drawDetails = 1;
     unsigned short int textXCoordinate = SCREEN_WIDTH / 2 - 50;
     unsigned short int textYCoordinate = 250 + SCREEN_HEIGHT - 1080;
-    char text[] = "START";
+    char text[30] = "START";
 
     // Redraw the "START" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -382,7 +385,7 @@ void hoverExit ()
     up = 800;
     down = 900;
     depth = 25;
-    textXCoordinate = SCREEN_WIDTH / 2 - 40;
+    textXCoordinate = SCREEN_WIDTH / 2 - 65;
     textYCoordinate = 850;
     strcpy(text, "OPTIONS");
 
@@ -407,7 +410,7 @@ void hoverOptions ()
     bool drawDetails = 1;
     unsigned short int textXCoordinate = SCREEN_WIDTH / 2 - 50;
     unsigned short int textYCoordinate = 250 + SCREEN_HEIGHT - 1080;
-    char text[] = "START";
+    char text[30] = "START";
 
     // Redraw the "START" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -437,7 +440,7 @@ void hoverOptions ()
     left += 20;
     right += 20;
     depth = 10;
-    textYCoordinate += 200;     // ??? Doesn't work.
+    textYCoordinate += 180;     // ??? Doesn't work.
     strcpy(text, "OPTIONS");
 
     // Redraw the "OPTIONS" button.
@@ -758,37 +761,6 @@ void clickOnOptions ()
                 else if(yCoordinate >= 600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
                     onOptionsPage = false;
 
-        // HOVER
-        if (xCoordinate >= startPosition - 150 && xCoordinate <= startPosition + 150)
-            if (yCoordinate >= 300 + SCREEN_HEIGHT - 1080 && yCoordinate <= 400 + SCREEN_HEIGHT - 1080)
-            {
-                 if (changer == false)
-                 {
-                    changer = true;
-                    cleardevice();
-                 }
-            }
-            else if(yCoordinate >= 600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
-            {
-                if(changer == false)
-                {
-                    changer = true;
-                    cleardevice();
-                }
-            }
-            else
-            {
-                if (changer == true)
-                {
-                    changer = false;
-                    drawOptionsMenu();
-                }
-            }
-        else if (changer == true)
-        {
-            changer = false;
-            drawOptionsMenu();
-        }
     }
 
     // Redraw the main window.
