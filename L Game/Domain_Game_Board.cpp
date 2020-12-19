@@ -7,22 +7,26 @@
 
 
 
-void GameBoard::drawBoard (GameBoard &board)    /// EXplain please
+void GameBoard::drawBoard (GameBoard &board)
 {
     int xCoord = 0, yCoord = 0;
-    int width = getmaxx();      /// What does this do?
-    int height = getmaxy();
-    int cellSize = (height - 200) / 4;
-    int position = width / 2 - (3 * cellSize) / 2;
-    cellSize = board.cell[xCoord][yCoord].changeCellSize(cellSize); ///change the value in the class
 
+    // Get the size of the screen
+    int width = getmaxx();
+    int height = getmaxy();
+
+    int cellSize = (height - 200) / 4;
+
+    board.cell[xCoord][yCoord].changeCellSize(cellSize);
+
+    // Draw every cell.
     for (int i = width / 2 - 2 * cellSize; i <= width / 2 + cellSize; i += cellSize)
     {
         for (int j = height / 4 - cellSize; j <= height / 4 + 2 * cellSize; j += cellSize)
         {
-            board.cell[xCoord][yCoord].drawCell(i, j,i + cellSize, j + cellSize);///draw the cell
-            board.cell[xCoord][yCoord].setPosition(i + cellSize/2, j + cellSize/2);
-            board.cell[xCoord][yCoord].setColor(BLACK);///set the black color to the cells
+            this->cell[xCoord][yCoord].drawCell(i, j,i + cellSize, j + cellSize);///draw the cell
+            this->cell[xCoord][yCoord].setPosition(i + cellSize/2, j + cellSize/2);
+            (*this).cell[xCoord][yCoord].setColor(BLACK);///set the black color to the cells
             xCoord++;
         }
         xCoord = 0;
@@ -47,10 +51,7 @@ void GameBoard::loadNewGame (GameBoard &board)
 
             // Colour the coins.
             else if (board.boardData[line][column] == 3)
-            {
-                /// This CARNATZ must be eaten piece by piece.
                 board.coin.drawCoin(board.cell[line][column].getPosition("ox"), board.cell[line][column].getPosition("oy"));
-            }
 }
 
 
@@ -74,7 +75,7 @@ void GameBoard::redPlayerMoves (GameBoard& gameBoard)
         {
             int playerColor = RED;
             POINT mousePosition;
-            mousePosition.x = mousex();     /// ??? What is the function doing?
+            mousePosition.x = mousex();     // Get the coordinate in the window.
             mousePosition.y = mousey();
         }
     }

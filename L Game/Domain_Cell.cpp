@@ -59,8 +59,7 @@ void Cell::setPosition (int pX, int pY)
 
 
 
-int Cell::changeCellSize (int newSize)      // why do we have this fucntion?
+void Cell::changeCellSize (int newSize)
 {
-    newSize = newSize;
-    return newSize;
+    this->dim = newSize;
 }

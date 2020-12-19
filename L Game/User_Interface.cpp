@@ -45,7 +45,7 @@ void drawMainMenu ()
     unsigned short int distanceFromCenter = 100;
     unsigned short int left = SCREEN_WIDTH / 2 - distanceFromCenter;
     unsigned short int right = SCREEN_WIDTH / 2 + distanceFromCenter;
-    unsigned short int up = 200 + SCREEN_HEIGHT - 1080;                         /// WHY - 1080 ???
+    unsigned short int up = 200 + SCREEN_HEIGHT - 1080;
     unsigned short int down = 300 + SCREEN_HEIGHT - 1080;
     unsigned short int depth = 25;
     bool drawDetails = 1;
@@ -78,7 +78,7 @@ void drawMainMenu ()
     // Update the parameters for drawing the "OPTIONS" button.
     up = 800;
     down = 900;
-    textYCoordinate += 200;     // ??? Doesn't work.
+    textYCoordinate = 850;     // ??? Doesn't work.
     strcpy(text, "OPTIONS");
 
     // Draw the "OPTIONS" button.
@@ -163,6 +163,8 @@ void drawOptionsMenu ()
 {
     // Clear the window.
     cleardevice();
+
+    // TODO: Add title.
 
     // Get the parameters for drawing the "CHANGE LANGUAGE" button.
     unsigned short int distanceFromCenter = 200;
@@ -727,7 +729,7 @@ void clickOnOptions ()
 
     while (onOptionsPage == true)
     {
-        HWND hwnd = GetForegroundWindow();  /// ?????
+        HWND hwnd = GetForegroundWindow();  // a pointer to the open window
         POINT cursorPosition;
 
         // Get the mouse position.
@@ -736,7 +738,7 @@ void clickOnOptions ()
         // Get the mouse position on the window.
         ScreenToClient(hwnd, &cursorPosition);
 
-        double xCoordinate = cursorPosition.x;
+        double xCoordinate = cursorPosition.x;      // mousex()
         double yCoordinate = cursorPosition.y;
 
         // First we check if the usScreenToClient(hwnd, &p)er clicked somewhere on the screen, then we check the position.
@@ -749,11 +751,11 @@ void clickOnOptions ()
                     onOptionsPage = false;
 
                 // Do if the click is inside the "TURN MUSIC ON/OFF" button.
-                else if(yCoordinate >=600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
+                else if(yCoordinate >= 600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
                     onOptionsPage = false;
 
                 // Do if the click is inside the "CHANGE RESOLUTION" button.
-                else if(yCoordinate >=600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
+                else if(yCoordinate >= 600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
                     onOptionsPage = false;
 
         // HOVER
@@ -764,7 +766,6 @@ void clickOnOptions ()
                  {
                     changer = true;
                     cleardevice();
-                    // hoverPlayerVsComputer();
                  }
             }
             else if(yCoordinate >= 600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
@@ -773,7 +774,6 @@ void clickOnOptions ()
                 {
                     changer = true;
                     cleardevice();
-                    // hoverPlayerVsPlayer();
                 }
             }
             else

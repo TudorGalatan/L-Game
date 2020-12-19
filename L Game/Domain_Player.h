@@ -29,11 +29,11 @@ class Player
     public:
 
         /**
-            Returns the number of the cell we have clicked on.
+            Returns the number of the cell we have clicked on (1 - 16).
             Input:
                 - none
             Output:
                 - returns the number of the cell we have clicked on
         **/
-        int clickPosition ();   // 0-15 or 1-16??
+        int clickPosition ();
 };

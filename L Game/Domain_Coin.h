@@ -14,7 +14,7 @@ class Coin
 {
     private:
 
-        // the size of the coin     ??? The radius?
+        // The radius of the coin
         int coinSize = 100;
 
     public:

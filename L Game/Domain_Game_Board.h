@@ -15,14 +15,14 @@ class GameBoard
 {
     public:
 
-        // ???
+        // The back-end representation of the board
         unsigned short int boardData[4][4];
 
-        // ???
+        // The front-end representation of the board
         Cell cell[4][4];
 
-        // Just one coin?
-        Coin coin;
+        // The coins
+        Coin coin, firstCoin, secondCoin;
 
         // The players
         Player redL, blueL;
@@ -43,7 +43,7 @@ class GameBoard
             Output:
                 -
         **/
-        void loadNewGame (GameBoard& board);    // Why the parameter?
+        void loadNewGame (GameBoard& board);
 
         /**
             ???

@@ -11,14 +11,14 @@ class Cell
 {
     private:
 
-        // The dimension of the cell (200 px)
-        int dim;    // = 200 ???
+        // The dimension of the cell
+        int dim;
 
         // The colour of the cell
         int cellColor;      // we don't need to say cellColor -> this.color
 
         // The positions used in setPosition(), the 'spawn' position.
-        int posX = 666, posY = 666;
+        int posX, posY;
 
     public:
 
@@ -62,23 +62,23 @@ class Cell
         void setColor (int color);
 
         /**
-            ???
+            "ox"
             Input:
                 -
             Output:
                 -
         **/
-        int getPosition (char* axis);   // the parameter?
+        int getPosition (char* axis);
 
         /**
-            ???
+            Calculate a position inside the cell to help with the floodfill.
             Input:
                 - "pX": position on ox
                 - "pY": position on oy
             Output:
                 - changes the private variables posx and posy
         **/
-        void setPosition (int pX, int pY); // set the position to help the setColor function fill the right cell
+        void setPosition (int pX, int pY);
 
         /**
             Updates the size of the cell.
@@ -87,5 +87,5 @@ class Cell
             Output:
                 - updates the cell size
         **/
-        int changeCellSize (int newSize); // change the size of the cell (not used yet)
+        void changeCellSize (int newSize);
 };
