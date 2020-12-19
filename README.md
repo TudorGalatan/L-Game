@@ -6,3 +6,6 @@ This is the final project for the "Introduction to Programming" course from year
 ## Authors
 - Adrian Onofrei
 - Tudor Gălățan
+
+## How It Looks Like Until Now
+![A screenshot of the game](Playground.png)
