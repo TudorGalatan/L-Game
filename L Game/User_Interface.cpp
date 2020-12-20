@@ -81,7 +81,7 @@ void drawMainMenu ()
     up = 800;
     down = 900;
     textXCoordinate -= 25;
-    textYCoordinate = 850;     // ??? Doesn't work.
+    textYCoordinate = 850;
     // Draw the "OPTIONS" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
@@ -104,17 +104,29 @@ void drawStartGameMenu ()
     unsigned short int textYCoordinate = SCREEN_WIDTH / 2 - 550;
     char text[] = "PLAYER vs COMPUTER";
 
-    // Draw the "SINGLE PLAYER" button.
+    // Draw the "PLAYER vs COMPUTER" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
-    //Update the values.
+    // Update the values for the "PLAYER vs PLAYER" button.
     up += 300;
     down += 300;
     textXCoordinate += 20;
     textYCoordinate += 300;
-    strcpy(text,"PLAYER vs PLAYER");
+    strcpy(text, "PLAYER vs PLAYER");
 
-    //Draw the "MULTIPLAYER" button.
+    //Draw the "PLAYER vs PLAYER" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+
+    // Update the values for the "BACK" button.
+    left += 700;
+    right += 500;
+    up -= 150;
+    down -= 150;
+    textXCoordinate += 700;
+    textYCoordinate -= 150;
+    strcpy(text, "BACK");
+
+    //Draw the "BACK" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
 
@@ -164,7 +176,6 @@ void drawOptionsMenu ()
 {
     // Clear the window.
     cleardevice();
-
     // TODO: Add title.
 
     // Get the parameters for drawing the "CHANGE LANGUAGE" button.
@@ -516,6 +527,18 @@ void hoverPlayerVsComputer ()
 
     //Draw the "PLAYER vs PLAYER" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+
+    // Update the values for the "BACK" button.
+    left += 700;
+    right += 500;
+    up -= 150;
+    down -= 150;
+    textXCoordinate += 700;
+    textYCoordinate -= 150;
+    strcpy(text, "BACK");
+
+    //Draw the "BACK" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
 
 
@@ -549,6 +572,19 @@ void hoverPlayerVsPlayer ()
     strcpy(text,"PLAYER vs PLAYER");
 
     //Draw the "PLAYER vs PLAYER" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+
+    // Update the values for the "BACK" button.
+    left += 700 - 20;
+    right += 500 - 20;
+    up -= 150 - 20;
+    down -= 150 - 20;
+    depth += 15;
+    textXCoordinate += 700 - 20;
+    textYCoordinate -= 150 - 20;
+    strcpy(text, "BACK");
+
+    //Draw the "BACK" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
 
@@ -585,7 +621,6 @@ void clickOnStartGame ()
         // After this, we check if we can apply the hover animation on the button.
         if (GetAsyncKeyState(VK_LBUTTON))
 
-            // Check if the click is inside the "SINGLE PLAYER" button.
             if (xCoordinate >= startPosition - 150 && xCoordinate <= startPosition + 150)
             {
                 if (yCoordinate >= 300 + SCREEN_HEIGHT - 1080 && yCoordinate <= 400 + SCREEN_HEIGHT - 1080)
@@ -599,6 +634,13 @@ void clickOnStartGame ()
                     onStartPage = false;
                     startPlayerVsPlayerGame();
                 }
+                /*
+                else if (yCoordinate >=600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
+                {
+                    onStartPage = false;
+                    startPlayerVsPlayerGame();
+                }
+                */
             }
         if (xCoordinate >= startPosition - 150 && xCoordinate <= startPosition + 150)
             if (yCoordinate >= 300 + SCREEN_HEIGHT - 1080 && yCoordinate <= 400 + SCREEN_HEIGHT - 1080)
