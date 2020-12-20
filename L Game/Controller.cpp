@@ -51,6 +51,10 @@ void getNewCoordinates (std::vector < std::pair <USI, USI> >& coordinates)
 
 bool checkMove (USI gameBoard[][4], USI currentPlayer, std::vector < std::pair <USI, USI> > coordinates)
 {
+    // If all 4 cells are identical to the previous move of the player, then it's not an allowed move.
+    if (sameAsPrevious(gameBoard, currentPlayer, coordinates))
+        return false;
+
     // If not all cells are empty, then it cannot be a valid move.
     if (emptyCells(gameBoard, coordinates) == false)
         return false;
@@ -74,6 +78,29 @@ bool checkMove (USI gameBoard[][4], USI currentPlayer, std::vector < std::pair <
 
     // We have an "L" form with empty cells only, so it is a valid move.
     return true;
+}
+
+
+
+bool sameAsPrevious (USI gameBoard[][4], USI currentPlayer, std::vector < std::pair <USI, USI> > coordinates)
+{
+    unsigned short int sameCells = 0;
+
+    for (unsigned short int cell = 0; cell < 4; cell++)
+    {
+        unsigned short int line = coordinates[cell].first;
+        unsigned short int column = coordinates[cell].second;
+
+        if (gameBoard[line][column] == currentPlayer)
+            sameCells++;
+    }
+
+    // We have 4 cells identical to the previous move of the player.
+    if (sameCells == 4)
+        return true;
+
+    // It is not the same move.
+    return false;
 }
 
 

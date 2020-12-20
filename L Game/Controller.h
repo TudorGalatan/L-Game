@@ -65,6 +65,20 @@ bool checkMove (USI gameBoard[][4], USI currentPlayer, std::vector < std::pair <
 
 
 /**
+    Checks whether or not all 4 cells are identical to the previous move of the player.
+    Input:
+        - "gameBoard": the game board
+        - "currentPlayer": the current player
+        - "coordinates": the coordinates of the squares
+    Output:
+        - true: if all the cells are identical to the previous move of the player
+        - false: otherwise
+**/
+bool sameAsPrevious (USI gameBoard[][4], USI currentPlayer, std::vector < std::pair <USI, USI> > coordinates);
+
+
+
+/**
     Checks whether all the cells are empty or not.
     Input:
         - "gameBoard": the game board
