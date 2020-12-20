@@ -34,7 +34,7 @@ class GameBoard
             Output:
                 - draws the game board
         **/
-        void drawBoard (GameBoard& gameBoard);
+        void drawBoard ();
 
         /**
             Load the game.
@@ -53,5 +53,9 @@ class GameBoard
                 - nuj stai sa vedem
         **/
         void redPlayerMoves ();
-        bool checkLShape(Player& player,int color);
+
+        /**
+            ???
+        **/
+        bool checkLShape (int color);
 };

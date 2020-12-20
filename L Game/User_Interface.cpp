@@ -590,12 +590,12 @@ void clickOnStartGame ()
             {
                 if (yCoordinate >= 300 + SCREEN_HEIGHT - 1080 && yCoordinate <= 400 + SCREEN_HEIGHT - 1080)
                 {
-                    ///Action if user clicks on Single player
                     onStartPage = false;
+                    PlayerVersusEnvironment playerVersusEnvironment;
+                    playerVersusEnvironment.startGame();
                 }
-                else if(yCoordinate >=600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
+                else if (yCoordinate >=600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
                 {
-                    ///Action if user clicks on Multiplayer
                     onStartPage = false;
                     startPlayerVsPlayerGame();
                 }

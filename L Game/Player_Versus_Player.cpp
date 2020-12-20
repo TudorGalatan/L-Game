@@ -20,7 +20,7 @@ void startPlayerVsPlayerGame ()
     cleardevice();
 
     // Draw the game board.board.cell[0][0].getPosition("ox")   ???
-    gameBoard.drawBoard(gameBoard);
+    gameBoard.drawBoard();
     readData(gameBoard.boardData, gameBoard);
 
     printBoard(gameBoard.boardData);
@@ -46,6 +46,5 @@ void startPlayerVsPlayerGame ()
                     delay(1);
                 break;
         }
-
     }
 }

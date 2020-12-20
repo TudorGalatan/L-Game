@@ -12,7 +12,9 @@
 #include <iostream>
 #include <vector>
 
-void GameBoard::drawBoard (GameBoard &board)
+
+
+void GameBoard::drawBoard ()
 {
     int xCoord = 0, yCoord = 0;
 
@@ -22,7 +24,7 @@ void GameBoard::drawBoard (GameBoard &board)
 
     int cellSize = (height - 200) / 4;
 
-    board.cell[xCoord][yCoord].changeCellSize(cellSize);
+    this->cell[xCoord][yCoord].changeCellSize(cellSize);
 
     // Draw every cell.
     for (int i = width / 2 - 2 * cellSize; i <= width / 2 + cellSize; i += cellSize)
@@ -40,10 +42,11 @@ void GameBoard::drawBoard (GameBoard &board)
     }
 }
 
+
+
 /**
     Loads the game with the values from boardData.txt
-*/
-
+**/
 void GameBoard::loadNewGame ()
 {
     int start = 0;
@@ -68,10 +71,13 @@ void GameBoard::loadNewGame ()
 }
 
 
+
 /*bool GameBoard::checkLShape(Player player,int color)
 {
     return 1;//checkMove(this->boardData,color,player.positions);
 }*/
+
+
 
 void GameBoard::redPlayerMoves ()
 {
@@ -138,8 +144,5 @@ void GameBoard::redPlayerMoves ()
                 clicks = 0;
             delay(202);
         }
-
-
     }
-
 }
