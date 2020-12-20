@@ -13,33 +13,6 @@
 
 
 /**
-    Reads the data from the input file.
-    Input:
-        - "gameBoard": the game board
-    Output:
-        - none
-    Observations:
-        - 0: empty square
-        - 1: the red player
-        - 2: the blue player
-        - 3: coin
-**/
-void readData (USI gameBoard[][4], GameBoard& board);
-
-
-
-/**
-    Prints the game board on the screen.
-    Input:
-        - "gameBoard": the game board
-    Output:
-        - none
-**/
-void printBoard (USI gameBoard[][4]);
-
-
-
-/**
     Get the coordinates of the new "L" from the user.
     Input:
         - none

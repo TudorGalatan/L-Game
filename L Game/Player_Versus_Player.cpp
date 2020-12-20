@@ -19,9 +19,13 @@ void PlayerVersusPlayer::startGame ()
 
     // Draw the game board.board.cell[0][0].getPosition("ox")   ???
     this->gameBoard.drawBoard();
-    readData(this->gameBoard.boardData, this->gameBoard);
 
-    printBoard(this->gameBoard.boardData);
+    // Get the initial configuration of the game board.
+    this->gameBoard.getInitialConfiguration();
+
+    // Save the current configuration of the game board.
+    this->gameBoard.saveCurrentConfiguration();
+
     this->gameBoard.loadNewGame();
 
     // Temporary: just for testing

@@ -11,30 +11,6 @@
 
 
 
-void readData (USI gameBoard[][4], GameBoard& board)
-{
-    std::ifstream inputFile("Input.in");
-    for (unsigned short int line = 0; line < 4; line++)
-        for (unsigned short int column = 0; column < 4; column++)
-            inputFile >> gameBoard[line][column],board.boardData[line][column] = gameBoard[line][column];
-    inputFile.close();
-}
-
-
-
-void printBoard (USI gameBoard[][4])
-{
-    std::ofstream saveFile("Playground.txt");
-    for (unsigned short int line = 0; line < 4; line++)
-    {
-        for (unsigned short int column = 0; column < 4; column++)
-            saveFile << gameBoard[line][column] << ' ';
-        saveFile << '\n';
-    }
-}
-
-
-
 void getNewCoordinates (std::vector < std::pair <USI, USI> >& coordinates)
 {
     std::cout << "\nGive the coordinates of your new L:\n";

@@ -22,11 +22,11 @@ void PlayerVersusEnvironment::startGame ()
     // Draw the game board.
     gameBoard.drawBoard();
 
-    // Read the initial configuration of the table.
-    readData(gameBoard.boardData, gameBoard);
+    // Get the initial configuration of the game board.
+    this->gameBoard.getInitialConfiguration();
 
-    // Save the current game board configuration.
-    printBoard(gameBoard.boardData);
+    // Save the current configuration of the game board.
+    this->gameBoard.saveCurrentConfiguration();
 
     // Load a new game.
     gameBoard.loadNewGame();

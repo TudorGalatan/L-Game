@@ -14,6 +14,37 @@
 
 
 
+void GameBoard::getInitialConfiguration ()
+{
+    std::ifstream inputFile("Input.in");
+
+    for (unsigned short int line = 0; line < 4; line++)
+        for (unsigned short int column = 0; column < 4; column++)
+        {
+            unsigned short int cell;
+            inputFile >> cell;
+            this->boardData[line][column] = cell;
+        }
+
+    inputFile.close();
+}
+
+
+
+void GameBoard::saveCurrentConfiguration ()
+{
+    std::ofstream saveFile("Playground.txt");
+
+    for (unsigned short int line = 0; line < 4; line++)
+    {
+        for (unsigned short int column = 0; column < 4; column++)
+            saveFile << this->boardData[line][column] << ' ';
+        saveFile << '\n';
+    }
+}
+
+
+
 void GameBoard::drawBoard ()
 {
     int xCoord = 0, yCoord = 0;
