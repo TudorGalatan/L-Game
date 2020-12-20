@@ -7,11 +7,16 @@
 
 
 
-/**
-    Runs all the tests.
-    Input:
-        - none
-    Output:
-        - runs all the tests
-**/
-void runTests ();
+class Test
+{
+    public:
+
+        /**
+            Runs all the tests.
+            Input:
+                - none
+            Output:
+                - runs all the tests
+        **/
+        void runAll ();
+};

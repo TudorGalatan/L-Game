@@ -10,8 +10,11 @@
 
 int main ()
 {
+    // Create the necessary objects.
+    Test test;
+
     // Test the application.
-    runTests();
+    test.runAll();
 
     // Start the application.
     startGUI();
