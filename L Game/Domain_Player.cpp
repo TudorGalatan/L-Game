@@ -5,11 +5,15 @@
 
 #include "Domain_Player.h"
 
+#include <vector>
+#include <fstream>
 
-
-int Player::clickPosition ()
+void Player::updatePositions(int cellNo,unsigned short int x,unsigned short int y)
 {
-    int x, y;
-    getmouseclick(VK_LBUTTON, x, y);
-    // To do: check the clicked position and return the number of the cell the user clicked.
+    if(cellNo<=3)
+    {
+        std::ofstream g("test.txt");
+        this->positions.at(cellNo).first = x;
+        this->positions.at(cellNo).second = y;
+    }
 }

@@ -15,13 +15,23 @@ class Cell
         int dim;
 
         // The colour of the cell
-        int cellColor;      // we don't need to say cellColor -> this.color
+        int cellColor;
+
+        // The coordonates of the top-left corner (left is for ox, top for oy)
+        int left, top;
 
         // The positions used in setPosition(), the 'spawn' position.
         int posX, posY;
 
     public:
+        bool isInside(double xCoord, double yCoord);
 
+        void setBounds(int l,int t);
+
+
+        int getTopValue();
+
+        int getLeftValue();
         /**
             Draws a cell.
             Input:

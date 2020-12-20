@@ -11,7 +11,7 @@
 
 
 
-void readData (USI gameBoard[][4], GameBoard board)
+void readData (USI gameBoard[][4], GameBoard& board)
 {
     std::ifstream inputFile("Input.in");
     for (unsigned short int line = 0; line < 4; line++)

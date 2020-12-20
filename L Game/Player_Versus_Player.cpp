@@ -23,8 +23,8 @@ void startPlayerVsPlayerGame ()
     gameBoard.drawBoard(gameBoard);
     readData(gameBoard.boardData, gameBoard);
 
-    printBoard(gameBoard.boardData);            // ???
-    gameBoard.loadNewGame(gameBoard);
+    printBoard(gameBoard.boardData);
+    gameBoard.loadNewGame();
 
     // Temporary: just for testing
     delay(300);
@@ -35,17 +35,17 @@ void startPlayerVsPlayerGame ()
         {
             // The red player's turn
             case false:
-                gameBoard.redPlayerMoves(gameBoard);
+                gameBoard.redPlayerMoves();
+                player = true;
                 break;
 
             // The blue player's turn
             default:
-            {
                 // To add.
-            }
+                while(1)
+                    delay(1);
+                break;
         }
 
-        // Change player.
-        player = !player;
     }
 }

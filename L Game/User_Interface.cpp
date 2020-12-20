@@ -587,6 +587,7 @@ void clickOnStartGame ()
 
             // Check if the click is inside the "SINGLE PLAYER" button.
             if (xCoordinate >= startPosition - 150 && xCoordinate <= startPosition + 150)
+            {
                 if (yCoordinate >= 300 + SCREEN_HEIGHT - 1080 && yCoordinate <= 400 + SCREEN_HEIGHT - 1080)
                 {
                     ///Action if user clicks on Single player
@@ -598,7 +599,7 @@ void clickOnStartGame ()
                     onStartPage = false;
                     startPlayerVsPlayerGame();
                 }
-
+            }
         if (xCoordinate >= startPosition - 150 && xCoordinate <= startPosition + 150)
             if (yCoordinate >= 300 + SCREEN_HEIGHT - 1080 && yCoordinate <= 400 + SCREEN_HEIGHT - 1080)
             {
@@ -725,7 +726,6 @@ void clickOnOptions ()
     drawOptionsMenu();
 
     bool onOptionsPage = true;
-    bool changer = false;
 
     // Horizontal left position for the "OPTIONS" button.
     unsigned short int startPosition = SCREEN_WIDTH / 2;
@@ -748,7 +748,7 @@ void clickOnOptions ()
         // After this, we check if we can apply the hover animation on the button.
         if (GetAsyncKeyState(VK_LBUTTON))
             if (xCoordinate >= startPosition - 150 && xCoordinate <= startPosition + 150)
-
+            {
                 // Do if the click is inside the "CHANGE LANGUAGE" button.
                 if (yCoordinate >= 300 + SCREEN_HEIGHT - 1080 && yCoordinate <= 400 + SCREEN_HEIGHT - 1080)
                     onOptionsPage = false;
@@ -760,7 +760,7 @@ void clickOnOptions ()
                 // Do if the click is inside the "CHANGE RESOLUTION" button.
                 else if(yCoordinate >= 600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
                     onOptionsPage = false;
-
+            }
     }
 
     // Redraw the main window.
@@ -873,7 +873,7 @@ void scanMouseLocation ()
 unsigned short int getMouseLocation (double xCoordinate, double yCoordinate)
 {
     if (xCoordinate >= SCREEN_WIDTH / 2 - 100 && xCoordinate <= SCREEN_WIDTH / 2 + 100)
-
+    {
         // The user clicked on the "START" button.
         if(yCoordinate >= 200 + SCREEN_HEIGHT - 1080 && yCoordinate <= 300 + SCREEN_HEIGHT - 1080)
             return 1;
@@ -889,7 +889,7 @@ unsigned short int getMouseLocation (double xCoordinate, double yCoordinate)
         // The user clicked on the "OPTIONS" button.
         else if (yCoordinate >= 800 + SCREEN_HEIGHT - 1080 && yCoordinate <= 900 + SCREEN_HEIGHT - 1080)
             return 4;
-
+    }
     // The user clicked outside the buttons.
     return 0;
 }

@@ -24,7 +24,7 @@
         - 2: the blue player
         - 3: coin
 **/
-void readData (USI gameBoard[][4], GameBoard board);
+void readData (USI gameBoard[][4], GameBoard& board);
 
 
 

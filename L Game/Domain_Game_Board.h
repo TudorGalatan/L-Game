@@ -37,13 +37,13 @@ class GameBoard
         void drawBoard (GameBoard& gameBoard);
 
         /**
-            Load new game.
+            Load the game.
             Input:
                 -
             Output:
                 -
         **/
-        void loadNewGame (GameBoard& board);
+        void loadNewGame ();
 
         /**
             ???
@@ -52,5 +52,6 @@ class GameBoard
             Output:
                 - nuj stai sa vedem
         **/
-        void redPlayerMoves (GameBoard& gameBoard);
+        void redPlayerMoves ();
+        bool checkLShape(Player& player,int color);
 };

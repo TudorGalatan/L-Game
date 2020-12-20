@@ -5,35 +5,11 @@
 
 #pragma once
 
-#include <graphics.h>
-
-#define SIZE 4
-
-
+#include <vector>
 
 class Player
 {
-    private:
-
-        // The colour of the player:
-        // 1 / BLUE - the blue player
-        // 4 / RED - the red player
-        unsigned short int color;
-
-        // The shape of what ???
-        unsigned short int shape;
-
-        // The coordinates of the cells occupied by the player
-        unsigned short int positions[SIZE][SIZE];   // why not a vector of pairs?
-
     public:
-
-        /**
-            Returns the number of the cell we have clicked on (1 - 16).
-            Input:
-                - none
-            Output:
-                - returns the number of the cell we have clicked on
-        **/
-        int clickPosition ();
+        std::vector < std::pair <unsigned short int, unsigned short int> > positions;   // why not a vector of pairs?
+        void updatePositions(int cellNo,unsigned short int x,unsigned short int y);
 };

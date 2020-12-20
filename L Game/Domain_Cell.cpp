@@ -4,6 +4,7 @@
 **/
 
 #include <graphics.h>
+#include <fstream>
 #include "Domain_Cell.h"
 
 
@@ -17,23 +18,23 @@ void Cell::drawCell (int left, int up, int right, int bottom)
 
 int Cell::getCellSize ()
 {
-    return dim;
+    return this->dim;
 }
 
 
 
 int Cell::getColor ()
 {
-    return cellColor;
+    return this->cellColor;
 }
 
 
 
 void Cell::setColor (int color)
 {
-    cellColor = color;
+    this->cellColor = color;
     setfillstyle(SOLID_FILL, color);
-    floodfill(posX, posY, WHITE);
+    floodfill(this->posX, this->posY, WHITE);
 }
 
 
@@ -53,8 +54,8 @@ int Cell::getPosition (char* axis)
 
 void Cell::setPosition (int pX, int pY)
 {
-    posX = pX;
-    posY = pY;
+    this->posX = pX;
+    this->posY = pY;
 }
 
 
@@ -62,4 +63,32 @@ void Cell::setPosition (int pX, int pY)
 void Cell::changeCellSize (int newSize)
 {
     this->dim = newSize;
+}
+
+
+void Cell::setBounds (int l, int t)
+{
+    this->left = l;
+    this->top = t;
+}
+
+int Cell::getTopValue()
+{
+    return this->top;
+}
+
+int Cell::getLeftValue()
+{
+    return this->left;
+}
+
+bool Cell::isInside (double xCoord, double yCoord)
+{
+    std::ofstream g("test.txt");
+    double top = this->getTopValue();
+    double left = this->getLeftValue();
+    int cellSize = 200; /// !!!!!!!!!!! function that returns the coin size has problems!!!---------------------------------------------------------------------------------------
+    if(xCoord >= left && xCoord <= left + cellSize && yCoord >= top && yCoord <= top + cellSize)
+        return true;
+    return false;
 }
