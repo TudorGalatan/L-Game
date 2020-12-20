@@ -122,17 +122,16 @@ void GameBoard::redPlayerMoves ()
                     {
                         this->boardData[i][j] = 1;
                         this->cell[i][j].setColor(RED);
-                        this->redL.updatePositions(clicks,i,j);
-                        g<<i<<' '<<j<<'\n';
-
                         ++clicks;
+                        this->redL.updatePositions(clicks - 1,i,j);
+                        g<<i<<' '<<j<<'\n';
                         tst = true;
                         break;
                     }
             }
             if(clicks == 4 && checkMove(this->boardData,1,this->redL.positions))///if the L is valid
             {
-                break;
+                return;
             }
             ///otherwise
             else if(clicks == 4 && !checkMove(this->boardData,1,this->redL.positions))
