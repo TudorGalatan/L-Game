@@ -9,11 +9,21 @@
 
 
 
-/**
-    Starts the game in the player versus player game mode.
-    Input:
-        - none
-    Output:
-        - starts the game in the player versus player game mode
-**/
-void startPlayerVsPlayerGame ();
+class PlayerVersusPlayer
+{
+    private:
+
+        // The game board
+        GameBoard gameBoard;
+
+    public:
+
+        /**
+            Starts the game in the player versus player game mode.
+            Input:
+                - none
+            Output:
+                - starts the game in the player versus player game mode
+        **/
+        void startGame ();
+};

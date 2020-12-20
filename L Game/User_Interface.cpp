@@ -632,7 +632,8 @@ void UserInterface::clickOnStartGame ()
                 else if (yCoordinate >=600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
                 {
                     onStartPage = false;
-                    startPlayerVsPlayerGame();
+                    PlayerVersusPlayer playerVersusPlayer;
+                    playerVersusPlayer.startGame();
                 }
                 /*
                 else if (yCoordinate >=600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)

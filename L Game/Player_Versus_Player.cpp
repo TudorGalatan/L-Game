@@ -8,10 +8,8 @@
 
 
 
-void startPlayerVsPlayerGame ()
+void PlayerVersusPlayer::startGame ()
 {
-    GameBoard gameBoard;
-
     // false - the red player
     // true - the blue player
     bool player = false;
@@ -20,11 +18,11 @@ void startPlayerVsPlayerGame ()
     cleardevice();
 
     // Draw the game board.board.cell[0][0].getPosition("ox")   ???
-    gameBoard.drawBoard();
-    readData(gameBoard.boardData, gameBoard);
+    this->gameBoard.drawBoard();
+    readData(this->gameBoard.boardData, this->gameBoard);
 
-    printBoard(gameBoard.boardData);
-    gameBoard.loadNewGame();
+    printBoard(this->gameBoard.boardData);
+    this->gameBoard.loadNewGame();
 
     // Temporary: just for testing
     delay(300);
@@ -35,7 +33,7 @@ void startPlayerVsPlayerGame ()
         {
             // The red player's turn
             case false:
-                gameBoard.redPlayerMoves();
+                this->gameBoard.redPlayerMoves();
                 player = true;
                 break;
 
