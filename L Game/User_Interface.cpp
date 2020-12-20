@@ -17,7 +17,7 @@ const unsigned short int SCREEN_HEIGHT = GetSystemMetrics(SM_CYSCREEN);
 
 
 
-void startGUI ()
+void UserInterface::startGUI ()
 {
     // Exclude the C functions for higher speed.
     std::ios::sync_with_stdio(false);
@@ -37,7 +37,7 @@ void startGUI ()
 
 
 
-void drawMainMenu ()
+void UserInterface::drawMainMenu ()
 {
     // Clear the window.
     cleardevice();
@@ -88,7 +88,7 @@ void drawMainMenu ()
 
 
 
-void drawStartGameMenu ()
+void UserInterface::drawStartGameMenu ()
 {
     // Clear the window.
     cleardevice();
@@ -132,7 +132,7 @@ void drawStartGameMenu ()
 
 
 
-void drawRulesScreen ()
+void UserInterface::drawRulesScreen ()
 {
     // Clear the screen.
     cleardevice();
@@ -172,7 +172,7 @@ void drawRulesScreen ()
 
 
 
-void drawOptionsMenu ()
+void UserInterface::drawOptionsMenu ()
 {
     // Clear the window.
     cleardevice();
@@ -214,7 +214,7 @@ void drawOptionsMenu ()
 
 
 
-void drawButton (USI left, USI up, USI right, USI down, USI depth, bool drawDetails, USI textXCoordinate, USI textYCoordinate, char text[])
+void UserInterface::drawButton (USI left, USI up, USI right, USI down, USI depth, bool drawDetails, USI textXCoordinate, USI textYCoordinate, char text[])
 {
     // Draw the button.
     bar3d(left, up, right, down, depth, drawDetails);
@@ -228,7 +228,7 @@ void drawButton (USI left, USI up, USI right, USI down, USI depth, bool drawDeta
 
 
 
-void hoverStartGame ()
+void UserInterface::hoverStartGame ()
 {
     // Clear the window.
     cleardevice();
@@ -285,7 +285,7 @@ void hoverStartGame ()
 
 
 
-void hoverRules ()
+void UserInterface::hoverRules ()
 {
     // Clear the window.
     cleardevice();
@@ -346,7 +346,7 @@ void hoverRules ()
 
 
 
-void hoverExit ()
+void UserInterface::hoverExit ()
 {
     // Clear the window.
     cleardevice();
@@ -406,7 +406,7 @@ void hoverExit ()
 
 
 
-void hoverOptions ()
+void UserInterface::hoverOptions ()
 {
     // Clear the window.
     cleardevice();
@@ -460,7 +460,7 @@ void hoverOptions ()
 
 
 
-void hoverBack ()
+void UserInterface::hoverBack ()
 {
     // Clears the window.
     cleardevice();
@@ -500,7 +500,7 @@ void hoverBack ()
 
 
 
-void hoverPlayerVsComputer ()
+void UserInterface::hoverPlayerVsComputer ()
 {
     cleardevice();
 
@@ -543,7 +543,7 @@ void hoverPlayerVsComputer ()
 
 
 
-void hoverPlayerVsPlayer ()
+void UserInterface::hoverPlayerVsPlayer ()
 {
     cleardevice();
 
@@ -590,7 +590,7 @@ void hoverPlayerVsPlayer ()
 
 
 
-void clickOnStartGame ()
+void UserInterface::clickOnStartGame ()
 {
     // Clear the window.
     cleardevice();
@@ -685,7 +685,7 @@ void clickOnStartGame ()
 
 
 
-void clickOnRules ()
+void UserInterface::clickOnRules ()
 {
     // Clears the screen.
     cleardevice();
@@ -759,7 +759,7 @@ void clickOnRules ()
 
 
 
-void clickOnOptions ()
+void UserInterface::clickOnOptions ()
 {
     // Clear the window.
     cleardevice();
@@ -814,7 +814,7 @@ void clickOnOptions ()
 
 
 
-void scanMouseLocation ()
+void UserInterface::scanMouseLocation ()
 {
     HWND hwnd = GetForegroundWindow();
     POINT cursorPosition;
@@ -912,7 +912,7 @@ void scanMouseLocation ()
 
 
 
-unsigned short int getMouseLocation (double xCoordinate, double yCoordinate)
+unsigned short int UserInterface::getMouseLocation (double xCoordinate, double yCoordinate)
 {
     if (xCoordinate >= SCREEN_WIDTH / 2 - 100 && xCoordinate <= SCREEN_WIDTH / 2 + 100)
     {
@@ -938,7 +938,7 @@ unsigned short int getMouseLocation (double xCoordinate, double yCoordinate)
 
 
 
-void closeApplication ()
+void UserInterface::closeApplication ()
 {
     closegraph();
     getch();
