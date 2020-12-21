@@ -8,7 +8,9 @@
 #include <vector>
 #include <fstream>
 
-void Player::updatePositions(int cellNo,unsigned short int x,unsigned short int y)
+
+
+void Player::updatePositions (int cellNo,unsigned short int x,unsigned short int y)
 {
     if(cellNo<=3)
     {
