@@ -151,7 +151,7 @@ void GameBoard::redPlayerMoves ()
             double xCoordinate = cursorPosition.x;
             double yCoordinate = cursorPosition.y;
 
-            for(int i = 0; i < 4 && tst == false; i++)
+            for(int i = 0; i < 4 && clicks<=4; i++)
             {
                 for(int j = 0; j < 4 && tst == false; j++)
                     if(this->cell[i][j].isInside(xCoordinate,yCoordinate) && this->boardData[i][j] == 0)
@@ -160,18 +160,23 @@ void GameBoard::redPlayerMoves ()
                         this->cell[i][j].setColor(RED);
                         ++clicks;
                         this->redL.updatePositions(clicks - 1,i,j);
-                        g<<i<<' '<<j<<'\n';
+
                         tst = true;
                         break;
                     }
             }
             if(clicks == 4 && this->checkMove(this->redL.positions))///if the L is valid
             {
+
                 return;
             }
-            ///otherwise
             else if(clicks == 4 && !this->checkMove(this->redL.positions))
+            {
+                for(int i = 0;i < 4; i++)
+                    g<<this->redL.positions.at(i).first<<' '<<this->redL.positions.at(i).second<<'\n';
                 clicks = 0;
+            }
+            ///otherwise
             delay(202);
         }
     }
@@ -182,12 +187,8 @@ void GameBoard::redPlayerMoves ()
 bool GameBoard::checkMove (std::vector < std::pair <USI, USI> > coordinates)
 {
     // If all 4 cells are identical to the previous move of the player, then it's not an allowed move.
-    if (this->sameAsPrevious(coordinates))
-        return false;
-
-    // If not all cells are empty, then it cannot be a valid move.
-    if (this->emptyCells(coordinates) == false)
-        return false;
+    //if (this->sameAsPrevious(coordinates))
+    //    return 1;
 
     std::pair <USI, USI> orientation = this->getOrientation(coordinates);
 
