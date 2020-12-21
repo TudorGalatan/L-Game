@@ -11,6 +11,7 @@
 
 void Cell::drawCell (int left, int up, int right, int bottom)
 {
+    setlinestyle(SOLID_FILL,0,5);
     rectangle(left, up, right, bottom);
 }
 
