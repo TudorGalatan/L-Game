@@ -113,12 +113,16 @@ void GameBoard::redPlayerMoves ()
         {
             numberOfClicks = 0;
             for (unsigned short int line = 0; line < 4; line++)
+            {
                 for (unsigned short int column = 0; column < 4; column++)
                     if (this->boardData[line][column] == 1)
                     {
                         this->boardData[line][column] = 0;
                         this->cell[line][column].setColor(BLACK);
                     }
+                this->redL.positions[line].first = 10;
+                this->redL.positions[line].second = 10;
+            }
         }
 
         // Left click
@@ -127,12 +131,16 @@ void GameBoard::redPlayerMoves ()
             if (numberOfClicks == 0)
             {
                 for (unsigned short int line = 0; line < 4; line++)
+                {
                     for (unsigned short int column = 0; column < 4; column++)
                         if (this->boardData[line][column] == 1)
                         {
                             this->boardData[line][column] = 0;
                             this->cell[line][column].setColor(BLACK);
                         }
+                    this->redL.positions[line].first = 10;
+                    this->redL.positions[line].second = 10;
+                }
             }
 
             HWND hwnd = GetForegroundWindow();
@@ -178,8 +186,8 @@ void GameBoard::redPlayerMoves ()
 bool GameBoard::checkMove (std::vector < std::pair <USI, USI> > coordinates)
 {
     // All the cells must be free (black or the current player).
-    if (this->goodCells(coordinates) == false)
-        return false;
+    // if (this->goodCells(coordinates) == false)
+        // return false;
 
     std::pair <USI, USI> orientation = this->getOrientation(coordinates);
 
