@@ -105,7 +105,11 @@ void GameBoard::loadNewGame ()
 void GameBoard::redPlayerMoves ()
 {
     unsigned short int numberOfClicks = 0;
-
+    std::vector < std::pair <USI, USI> > prevCoordinates;
+    prevCoordinates.push_back(std::make_pair(0, 0));
+    prevCoordinates.push_back(std::make_pair(0, 0));
+    prevCoordinates.push_back(std::make_pair(0, 0));
+    prevCoordinates.push_back(std::make_pair(0, 0));
     while (numberOfClicks < 4)
     {
         // Right click
@@ -132,6 +136,9 @@ void GameBoard::redPlayerMoves ()
             {
                 for (unsigned short int line = 0; line < 4; line++)
                 {
+                    prevCoordinates[line].first = this->redL.positions[line].first;
+                    prevCoordinates[line].second = this->redL.positions[line].second;
+
                     for (unsigned short int column = 0; column < 4; column++)
                         if (this->boardData[line][column] == 1)
                         {
@@ -171,7 +178,7 @@ void GameBoard::redPlayerMoves ()
             }
 
             if (numberOfClicks == 4)
-                if (this->checkMove(this->redL.positions))
+                if (this->checkMove(this->redL.positions,prevCoordinates))
                     return;
                 else
                     numberOfClicks = 0;
@@ -183,11 +190,11 @@ void GameBoard::redPlayerMoves ()
 
 
 
-bool GameBoard::checkMove (std::vector < std::pair <USI, USI> > coordinates)
+bool GameBoard::checkMove (std::vector < std::pair <USI, USI> > coordinates, std::vector < std::pair <USI, USI> >prevCoordinates)
 {
     // All the cells must be free (black or the current player).
-    // if (this->goodCells(coordinates) == false)
-        // return false;
+     if (this->goodCells(prevCoordinates) == false)
+         return false;
 
     std::pair <USI, USI> orientation = this->getOrientation(coordinates);
 
