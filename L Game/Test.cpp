@@ -15,6 +15,7 @@ void Test::runAll ()
     this->checkMove();
     this->goodCells();
     this->getOrientation();
+    this->hasGap();
 }
 
 
@@ -105,5 +106,48 @@ std::pair <USI, USI> Test::getOrientation ()
     coordinates[3] = std::make_pair(2, 2);
     ourResult = this->gameBoard.getOrientation(coordinates);
     correctResult = std::make_pair(0, 0);
+    assert(ourResult == correctResult);
+}
+
+
+
+bool Test::hasGap ()
+{
+    std::vector < std::pair <USI, USI> > coordinates;
+
+    // Test 1 - Has a gap (horizontal orientation)
+    coordinates.push_back(std::make_pair(0, 0));
+    coordinates.push_back(std::make_pair(0, 1));
+    coordinates.push_back(std::make_pair(0, 3));
+    coordinates.push_back(std::make_pair(1, 0));
+    bool ourResult = this->gameBoard.hasGap(coordinates);
+    bool correctResult = true;
+    assert(ourResult == correctResult);
+
+    // Test 2 - Does not have a gap (horizontal orientation)
+    coordinates[0] = std::make_pair(0, 0);
+    coordinates[1] = std::make_pair(0, 1);
+    coordinates[2] = std::make_pair(0, 2);
+    coordinates[3] = std::make_pair(1, 0);
+    ourResult = this->gameBoard.hasGap(coordinates);
+    correctResult = false;
+    assert(ourResult == correctResult);
+
+    // Test 3 - Has a gap (vertical orientation)
+    coordinates[0] = std::make_pair(0, 1);
+    coordinates[1] = std::make_pair(1, 1);
+    coordinates[2] = std::make_pair(3, 1);
+    coordinates[3] = std::make_pair(3, 2);
+    ourResult = this->gameBoard.hasGap(coordinates);
+    correctResult = true;
+    assert(ourResult == correctResult);
+
+    // Test 4 - Does not have a gap (vertical orientation)
+    coordinates[0] = std::make_pair(0, 1);
+    coordinates[1] = std::make_pair(1, 1);
+    coordinates[2] = std::make_pair(2, 1);
+    coordinates[3] = std::make_pair(2, 2);
+    ourResult = this->gameBoard.hasGap(coordinates);
+    correctResult = false;
     assert(ourResult == correctResult);
 }

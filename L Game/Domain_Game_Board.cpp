@@ -314,14 +314,38 @@ bool GameBoard::hasGap (std::vector < std::pair <USI, USI> > coordinates)
     // We have a horizontal orientation.
     if (orientation.first == 1)
     {
-        unsigned short int line = orientation.second;
-        if (this->boardData[line][0] == this->currentPlayer && this->boardData[line][3] == this->currentPlayer)
+        bool hasColumnZero = false, hasColumnThree = false;
+
+        for (unsigned short int cell = 0; cell < 4; cell++)
+        {
+            unsigned short int column = coordinates[cell].second;
+
+            if (column == 0)
+                hasColumnZero = true;
+
+            if (column == 3)
+                hasColumnThree = true;
+        }
+
+        if (hasColumnZero && hasColumnThree)
             return true;
     }
 
     // We have a vertical orientation.
-    unsigned short int column = orientation.second;
-    if (this->boardData[0][column] == this->currentPlayer && this->boardData[3][column] == this->currentPlayer)
+    bool hasLineZero = false, hasLineThree = false;
+
+    for (unsigned short int cell = 0; cell < 4; cell++)
+    {
+        unsigned short int line = coordinates[cell].first;
+
+        if (line == 0)
+            hasLineZero = true;
+
+        if (line == 3)
+            hasLineThree = true;
+    }
+
+    if (hasLineZero && hasLineThree)
         return true;
 
     // We don't have a gap.

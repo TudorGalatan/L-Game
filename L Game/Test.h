@@ -55,4 +55,14 @@ class Test
                 - assertion fail, otherwise
         **/
         std::pair <USI, USI> getOrientation ();
+
+        /**
+            Tests the "hasGap" function from the "Game Board" module.
+            Input:
+                - none
+            Output:
+                - nothing happens, if the "hasGap" function works correctly
+                - assertion fail, otherwise
+        **/
+        bool hasGap ();
 };
