@@ -147,16 +147,18 @@ void GameBoard::redPlayerMoves ()
             double xCoordinate = cursorPosition.x;
             double yCoordinate = cursorPosition.y;
 
-            for (unsigned short int line = 0; line < 4 && numberOfClicks <= 4; line++)
+            bool stop = false;
+
+            for (unsigned short int line = 0; line < 4 && numberOfClicks <= 4 && stop == false; line++)
             {
-                for (unsigned short int column = 0; column < 4; column++)
+                for (unsigned short int column = 0; column < 4 && stop == false; column++)
                     if (this->cell[line][column].isInside(xCoordinate, yCoordinate) && this->boardData[line][column] == 0)
                     {
                         this->boardData[line][column] = 1;
                         this->cell[line][column].setColor(RED);
                         ++numberOfClicks;
                         this->redL.updatePositions(numberOfClicks - 1, line, column);
-                        break;
+                        stop = true;
                     }
             }
 
