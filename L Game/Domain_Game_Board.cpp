@@ -162,11 +162,11 @@ void GameBoard::redPlayerMoves ()
                     }
             }
 
-            if (numberOfClicks == 4 && this->checkMove(this->redL.positions))
-                return;
-
-            else if (numberOfClicks == 4 && !this->checkMove(this->redL.positions))
-                numberOfClicks = 0;
+            if (numberOfClicks == 4)
+                if (this->checkMove(this->redL.positions))
+                    return;
+                else
+                    numberOfClicks = 0;
 
             delay(202);
         }
