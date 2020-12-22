@@ -12,6 +12,158 @@
 #include <vector>
 
 
+void emptyVector(std::vector < std::pair <unsigned short int, unsigned short int> > &pos)
+{
+	for (int i = 0; i < pos.size(); i++)
+		pos[i].first = -1, pos[i].second = -1;
+}
+void putValues(std::vector < std::pair <unsigned short int, unsigned short int> > &pos, int index, int x, int y)
+{
+	pos[index].first = x;
+	pos[index].second = y;
+}
+bool GameBoard::checkVect(std::vector < std::pair <unsigned short int, unsigned short int> > pos,int color)
+{
+	for (int i = 0; i < 4; i++)
+		if (pos[i].first == -1 || pos[i].second == -1)
+			return false;
+   /* Player* playerRef;
+    if(color==1)//red
+        playerRef=&this->redL;
+    else if(color==2)//blue
+        playerRef=&this->blueL;
+    bool found=false;
+    for(int i=0;i<4;i++)
+    {
+        for(int j=0;j<4;j++)
+            if(pos[i].first == playerRef->positions[j].first && pos[i].second == playerRef->positions[j].second)
+                found=true;
+        if(found==false)
+            return false;
+        found=false;
+    }*/
+	return true;
+}
+bool GameBoard::checkWinner(unsigned short int aa[4][4],int color)//true if we have space, false if we don't
+{
+    int a[4][4];
+    for(int i=0;i<4;i++)
+        for(int j=0;j<4;j++)
+        {
+            if(aa[i][j]==color)
+                a[i][j]=0;
+            else
+                a[i][j]=aa[i][j];
+        }
+	std::vector < std::pair <unsigned short int, unsigned short int> > pos;
+	pos.push_back(std::make_pair(-1, -1));
+	pos.push_back(std::make_pair(-1, -1));
+	pos.push_back(std::make_pair(-1, -1));
+	pos.push_back(std::make_pair(-1, -1));
+	int number = 0, col = 0;
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j <= 2; j++)
+			if (a[j][i] == 0)
+				number++, col = i, pos[j].first = j, pos[j].second = i;
+		if (number == 3)
+		{
+			if (a[0][col - 1] == 0)
+				putValues(pos, 3, 0, col - 1);
+			else if (a[0][col + 1] == 0)
+				putValues(pos, 3, 0, col + 1);
+			else if (a[2][col - 1] == 0)
+				putValues(pos, 3, 2, col - 1);
+			else if (a[2][col + 1] == 0)
+				putValues(pos, 3, 2, col + 1);
+		}
+		if(checkVect(pos,color)==true)
+			return true;
+		emptyVector(pos);
+		number = 0;
+	}
+
+	if (number < 3)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 1; j <= 3; j++)
+				if (a[j][i] == 0)
+					number++, col = i;
+			if (number == 3)
+			{
+				if (a[1][col - 1] == 0)
+					putValues(pos, 3, 1, col - 1);
+				else if (a[1][col + 1] == 0)
+					putValues(pos, 3, 1, col + 1);
+				else if (a[3][col - 1] == 0)
+					putValues(pos, 3, 3, col - 1);
+				else if (a[3][col + 1] == 0)
+					putValues(pos, 3, 3, col + 1);
+			}
+			if (checkVect(pos,color) == true)
+				return true;
+			emptyVector(pos);
+			number = 0;
+		}
+	}
+
+	if (checkVect(pos,color) == true)
+		return true;
+	emptyVector(pos);
+	number = 0;
+	int lin = 0;
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j <= 2; j++)
+			if (a[i][j] == 0)
+				number++, lin = i;
+		if (number == 3)
+		{
+			if (a[lin - 1][0] == 0)
+				putValues(pos, 3, lin-1, 0);
+			else if (a[lin + 1][0] == 0)
+				putValues(pos, 3, lin+1, 0);
+			else if (a[lin - 1][2] == 0)
+				putValues(pos, 3, lin-1, 2);
+			else if (a[lin + 1][2] == 0)
+				putValues(pos, 3, lin+1, 2);
+		}
+		if (checkVect(pos,color) == true)
+			return true;
+		emptyVector(pos);
+		number = 0;
+	}
+
+	if (number < 3)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 1; j <= 3; j++)
+				if (a[i][j] == 0)
+					number++, lin = i;
+			if (number == 3)
+			{
+				if (a[lin - 1][1] == 0)
+					putValues(pos, 3, lin - 1, 1);
+				else if (a[lin + 1][1] == 0)
+					putValues(pos, 3, lin + 1, 1);
+				else if (a[lin - 1][3] == 0)
+					putValues(pos, 3, lin - 1, 3);
+				else if (a[lin + 1][3] == 0)
+					putValues(pos, 3, lin + 1, 3);
+			}
+			if (checkVect(pos,color) == true)
+				return true;
+			emptyVector(pos);
+			number = 0;
+		}
+	}
+
+
+	return false;
+}
+
 
 void GameBoard::getInitialConfiguration ()
 {
@@ -93,17 +245,102 @@ void GameBoard::loadNewGame ()
 
     // Colour the blue player.
             else if (this->boardData[line][column] == 2)
+            {
                 this->cell[line][column].setColor(BLUE);
+                this->blueL.positions.push_back(std::make_pair(line, column));
+            }
 
     // Colour the coins.
             else if (this->boardData[line][column] == 3)
-                this->coin.drawCoin(this->cell[line][column].getPosition("ox"), this->cell[line][column].getPosition("oy"));
+            {
+                this->firstCoin.drawCoin(this->cell[line][column].getPosition("ox"), this->cell[line][column].getPosition("oy"));
+                if(this->firstCoin.getXIndex() == -1)
+                {
+                    this->firstCoin.setXIndex(line);
+                    this->firstCoin.setYIndex(column);
+                }
+                else
+                {
+                    this->secondCoin.setXIndex(line);
+                    this->secondCoin.setYIndex(column);
+                }
+            }
 }
 
+void GameBoard::drawButton(int color)
+{
+    settextstyle(BOLD_FONT,HORIZ_DIR,3);
+    setcolor(color);
+    int maxx = getmaxx()/10;
+    int maxy = getmaxy()/2;
+    outtextxy(maxx, maxy,"SKIP MOVING");
+}
 
+void GameBoard::moveCoin ()
+{
+    int x = this->firstCoin.getXIndex(),y=this->firstCoin.getYIndex();
+    unsigned short int line,column;
+    Coin* coinRef = NULL;
+    while(true)
+    {
+        HWND hwnd = GetForegroundWindow();
+        POINT cursorPosition;
 
+        // Get the mouse position.
+        GetCursorPos(&cursorPosition);
+
+        // Get the mouse position on the window.
+        ScreenToClient(hwnd, &cursorPosition);
+
+        double xCoordinate = cursorPosition.x;
+        double yCoordinate = cursorPosition.y;
+
+        if(GetAsyncKeyState(VK_LBUTTON) && xCoordinate >= getmaxx()/10 && xCoordinate <= getmaxx()/10 + 300 && yCoordinate>=getmaxy()/2-100 && yCoordinate<=getmaxy()/2+100)
+            return;
+        if(GetAsyncKeyState(VK_LBUTTON) && coinRef == NULL)
+        {
+
+            for (line = 0; line < 4 && coinRef == NULL; line++)
+            {
+                for (column = 0; column < 4; column++)
+                    if (this->cell[line][column].isInside(xCoordinate, yCoordinate) && this->boardData[line][column] == 3)
+                        if(line == x)
+                        {
+                            this->boardData[line][column]=0;
+                            coinRef = &this->firstCoin;
+                            this->firstCoin.deleteCoin(this->cell[line][column].getPosition("ox"),this->cell[line][column].getPosition("oy"));
+                        }
+                        else
+                        {
+                            this->boardData[line][column]=0;
+                            coinRef = &this->secondCoin;
+                            this->secondCoin.deleteCoin(this->cell[line][column].getPosition("ox"),this->cell[line][column].getPosition("oy"));
+                        }
+            }
+            delay(100);
+        }
+        else if(GetAsyncKeyState(VK_LBUTTON) && coinRef != NULL)
+        {
+
+            coinRef->setXIndex(line);
+            coinRef->setYIndex(column);
+            for (unsigned short int line = 0; line < 4; line++)
+            {
+                for (unsigned short int column = 0; column < 4; column++)
+                    if (this->cell[line][column].isInside(xCoordinate, yCoordinate) && this->boardData[line][column] == 0)
+                    {
+                        coinRef->drawCoin(this->cell[line][column].getPosition("ox"),this->cell[line][column].getPosition("oy"));
+                        this->boardData[line][column] = 3;
+                        return;
+                    }
+            }
+        }
+    }
+
+}
 void GameBoard::redPlayerMoves ()
 {
+    drawButton(DARKGRAY);
     unsigned short int numberOfClicks = 0;
     std::vector < std::pair <USI, USI> > prevCoordinates;
     prevCoordinates.push_back(std::make_pair(0, 0));
@@ -176,10 +413,103 @@ void GameBoard::redPlayerMoves ()
                         stop = true;
                     }
             }
-
             if (numberOfClicks == 4)
                 if (this->checkMove(this->redL.positions,prevCoordinates))
-                    return;
+                {
+                    drawButton(WHITE);
+                    moveCoin();
+                }
+                else
+                    numberOfClicks = 0;
+            else if(numberOfClicks > 4)
+                numberOfClicks = 0;
+
+            delay(202);
+        }
+    }
+}
+
+void GameBoard::bluePlayerMoves()
+{
+    drawButton(DARKGRAY);
+    unsigned short int numberOfClicks = 0;
+    std::vector < std::pair <USI, USI> > prevCoordinates;
+    prevCoordinates.push_back(std::make_pair(0, 0));
+    prevCoordinates.push_back(std::make_pair(0, 0));
+    prevCoordinates.push_back(std::make_pair(0, 0));
+    prevCoordinates.push_back(std::make_pair(0, 0));
+    while (numberOfClicks < 4)
+    {
+        // Right click
+        if (GetAsyncKeyState(VK_RBUTTON))
+        {
+            numberOfClicks = 0;
+            for (unsigned short int line = 0; line < 4; line++)
+            {
+                for (unsigned short int column = 0; column < 4; column++)
+                    if (this->boardData[line][column] == 2)
+                    {
+                        this->boardData[line][column] = 0;
+                        this->cell[line][column].setColor(BLACK);
+                    }
+                this->blueL.positions[line].first = 10;
+                this->blueL.positions[line].second = 10;
+            }
+        }
+
+        // Left click
+        if (GetAsyncKeyState(VK_LBUTTON))
+        {
+            if (numberOfClicks == 0)
+            {
+                for (unsigned short int line = 0; line < 4; line++)
+                {
+                    prevCoordinates[line].first = this->blueL.positions[line].first;
+                    prevCoordinates[line].second = this->blueL.positions[line].second;
+
+                    for (unsigned short int column = 0; column < 4; column++)
+                        if (this->boardData[line][column] == 2)
+                        {
+                            this->boardData[line][column] = 0;
+                            this->cell[line][column].setColor(BLACK);
+                        }
+                    this->blueL.positions[line].first = 10;
+                    this->blueL.positions[line].second = 10;
+                }
+            }
+
+            HWND hwnd = GetForegroundWindow();
+            POINT cursorPosition;
+
+            // Get the mouse position.
+            GetCursorPos(&cursorPosition);
+
+            // Get the mouse position on the window.
+            ScreenToClient(hwnd, &cursorPosition);
+
+            double xCoordinate = cursorPosition.x;
+            double yCoordinate = cursorPosition.y;
+
+            bool stop = false;
+
+            for (unsigned short int line = 0; line < 4 && numberOfClicks <= 4 && stop == false; line++)
+            {
+                for (unsigned short int column = 0; column < 4 && stop == false; column++)
+                    if (this->cell[line][column].isInside(xCoordinate, yCoordinate) && this->boardData[line][column] == 0)
+                    {
+                        this->boardData[line][column] = 2;
+                        this->cell[line][column].setColor(BLUE);
+                        ++numberOfClicks;
+                        this->blueL.updatePositions(numberOfClicks - 1, line, column);
+                        stop = true;
+                    }
+            }
+            if (numberOfClicks == 4)
+                if (this->checkMove(this->blueL.positions,prevCoordinates))
+                {
+                    drawButton(WHITE);
+                    moveCoin();
+                }
                 else
                     numberOfClicks = 0;
 
@@ -188,13 +518,11 @@ void GameBoard::redPlayerMoves ()
     }
 }
 
-
-
 bool GameBoard::checkMove (std::vector < std::pair <USI, USI> > coordinates, std::vector < std::pair <USI, USI> >prevCoordinates)
 {
     // All the cells must be free (black or the current player).
-     if (this->goodCells(prevCoordinates) == false)
-         return false;
+    if (this->goodCells(prevCoordinates) == false)
+        return false;
 
     std::pair <USI, USI> orientation = this->getOrientation(coordinates);
 

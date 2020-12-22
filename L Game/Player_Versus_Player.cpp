@@ -36,17 +36,27 @@ void PlayerVersusPlayer::startGame ()
         {
             // The red player's turn
             case false:
+                this->gameBoard.currentPlayer=1;
                 this->gameBoard.redPlayerMoves();
                 player = true;
                 break;
 
             // The blue player's turn
             default:
-                // To add.
-                while(1)
-                    delay(1);
+                this->gameBoard.currentPlayer=2;
+                this->gameBoard.bluePlayerMoves();
                 player = false;
                 break;
+        }
+        if(this->gameBoard.checkWinner(this->gameBoard.boardData,1)==false && player == false)
+        {
+            cleardevice();
+            outtextxy(getmaxx()/2,getmaxy()/2,"BLUE WINS");
+        }
+        else if(this->gameBoard.checkWinner(this->gameBoard.boardData,2)==false && player == true)
+        {
+            cleardevice();
+            outtextxy(getmaxx()/2,getmaxy()/2,"RED WINS");
         }
     }
 }

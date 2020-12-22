@@ -82,6 +82,8 @@ class GameBoard
         **/
         void redPlayerMoves ();
 
+        void bluePlayerMoves ();
+
         /**
             Checks whether the coordinates can represent a valid move on the game board.
             Input:
@@ -168,4 +170,11 @@ class GameBoard
                 - false: otherwise
         **/
         bool onValidPosition (std::vector < std::pair <USI, USI> > coordinates);
+
+        void moveCoin();
+
+        void drawButton(int color);
+
+        bool checkWinner(unsigned short int aa[4][4],int color);
+        bool checkVect(std::vector < std::pair <unsigned short int, unsigned short int> > pos,int color);
 };
