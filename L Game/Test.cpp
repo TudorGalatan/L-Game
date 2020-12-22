@@ -42,6 +42,13 @@ bool Test::goodCells ()
     assert(this->gameBoard.goodCells(coordinates) == false);
 
     // Test 2
+    coordinates[0] = std::make_pair(1, 2);
+    coordinates[0] = std::make_pair(1, 3);
+    coordinates[0] = std::make_pair(2, 3);
+    coordinates[0] = std::make_pair(3, 3);
+    assert(this->gameBoard.goodCells(coordinates) == false);
+
+    // Test 3
     coordinates[0] = std::make_pair(2, 0);
     coordinates[0] = std::make_pair(2, 1);
     coordinates[0] = std::make_pair(2, 2);
