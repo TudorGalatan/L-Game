@@ -87,7 +87,7 @@ void GameBoard::loadNewGame ()
             if (this->boardData[line][column] == 1)
             {
                 this->cell[line][column].setColor(RED);
-                this->redL.positions.push_back(std::make_pair(line, column));
+                this->redPlayer.positions.push_back(std::make_pair(line, column));
                 ++start;
             }
 
@@ -124,8 +124,8 @@ void GameBoard::redPlayerMoves ()
                         this->boardData[line][column] = 0;
                         this->cell[line][column].setColor(BLACK);
                     }
-                this->redL.positions[line].first = 10;
-                this->redL.positions[line].second = 10;
+                this->redPlayer.positions[line].first = 10;
+                this->redPlayer.positions[line].second = 10;
             }
         }
 
@@ -136,8 +136,8 @@ void GameBoard::redPlayerMoves ()
             {
                 for (unsigned short int line = 0; line < 4; line++)
                 {
-                    prevCoordinates[line].first = this->redL.positions[line].first;
-                    prevCoordinates[line].second = this->redL.positions[line].second;
+                    prevCoordinates[line].first = this->redPlayer.positions[line].first;
+                    prevCoordinates[line].second = this->redPlayer.positions[line].second;
 
                     for (unsigned short int column = 0; column < 4; column++)
                         if (this->boardData[line][column] == 1)
@@ -145,8 +145,8 @@ void GameBoard::redPlayerMoves ()
                             this->boardData[line][column] = 0;
                             this->cell[line][column].setColor(BLACK);
                         }
-                    this->redL.positions[line].first = 10;
-                    this->redL.positions[line].second = 10;
+                    this->redPlayer.positions[line].first = 10;
+                    this->redPlayer.positions[line].second = 10;
                 }
             }
 
@@ -172,13 +172,13 @@ void GameBoard::redPlayerMoves ()
                         this->boardData[line][column] = 1;
                         this->cell[line][column].setColor(RED);
                         ++numberOfClicks;
-                        this->redL.updatePositions(numberOfClicks - 1, line, column);
+                        this->redPlayer.updatePositions(numberOfClicks - 1, line, column);
                         stop = true;
                     }
             }
 
             if (numberOfClicks == 4)
-                if (this->checkMove(this->redL.positions,prevCoordinates))
+                if (this->checkMove(this->redPlayer.positions, prevCoordinates))
                     return;
                 else
                     numberOfClicks = 0;
@@ -186,6 +186,14 @@ void GameBoard::redPlayerMoves ()
             delay(202);
         }
     }
+}
+
+
+
+unsigned short int GameBoard::checkWinner ()
+{
+    // This doesn't look good.
+    std::vector < std::vector < std::pair <USI, USI> > > possibleMoves;
 }
 
 

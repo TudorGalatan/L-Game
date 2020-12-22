@@ -30,7 +30,7 @@ class GameBoard
         Coin coin, firstCoin, secondCoin;
 
         // The players
-        Player redL, blueL;
+        Player redPlayer, bluePlayer;
 
         /**
             Gets the initial configuration of the game board from the input file.
@@ -81,6 +81,17 @@ class GameBoard
                 - nuj stai sa vedem
         **/
         void redPlayerMoves ();
+
+        /**
+            Checks whether or not a player won.
+            Input:
+                - none
+            Output:
+                - 0: if the game is still on
+                - 1: if the red player won
+                - 2: if the blue player won
+        **/
+        unsigned short int checkWinner ();
 
         /**
             Checks whether the coordinates can represent a valid move on the game board.
