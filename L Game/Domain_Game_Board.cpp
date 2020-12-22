@@ -190,10 +190,6 @@ bool GameBoard::checkMove (std::vector < std::pair <USI, USI> > coordinates)
     if (this->goodCells(coordinates) == false)
         return false;
 
-    // If all 4 cells are identical to the previous move of the player, then it's not an allowed move.
-    //if (this->sameAsPrevious(coordinates))
-    //    return false;
-
     std::pair <USI, USI> orientation = this->getOrientation(coordinates);
 
     // If we have neither a horizontal, nor a vertical orientation, then it is not an "L".
@@ -236,41 +232,29 @@ void GameBoard::makeMove (std::vector < std::pair <USI, USI> > newCoordinates)
 
 
 
-bool GameBoard::sameAsPrevious (std::vector < std::pair <USI, USI> > coordinates)
-{
-    unsigned short int sameCells = 0;
-
-    for (unsigned short int cell = 0; cell < 4; cell++)
-    {
-        unsigned short int line = coordinates[cell].first;
-        unsigned short int column = coordinates[cell].second;
-
-        if (this->boardData[line][column] == this->currentPlayer)
-            sameCells++;
-    }
-
-    // We have 4 cells identical to the previous move of the player.
-    if (sameCells == 4)
-        return true;
-
-    // It is not the same move.
-    return false;
-}
-
-
-
 bool GameBoard::goodCells (std::vector < std::pair <USI, USI> > coordinates)
 {
     unsigned short int goodCells = 0;
+    unsigned short int sameMoves = 0;
     for (unsigned short int cell = 0; cell < 4; cell++)
     {
         unsigned short int line = coordinates.at(cell).first;
         unsigned short int column = coordinates.at(cell).second;
 
-        if (this->boardData[line][column] == this->currentPlayer || this->boardData[line][column] == 0)
+        if (this->boardData[line][column] == this->currentPlayer)
+        {
+            goodCells++;
+            sameMoves++;
+        }
+        else if (this->boardData[line][column] == 0)
             goodCells++;
     }
 
+    // You cannot make the same move.
+    if (sameMoves == 4)
+        return false;
+
+    // All cells must be good (black or current player).
     if (goodCells != 4)
         return false;
 

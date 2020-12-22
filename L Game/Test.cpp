@@ -37,7 +37,7 @@ bool Test::goodCells ()
 {
     std::vector < std::pair <USI, USI> > coordinates;
 
-    // Test 1
+    // Test 1 - Over a coin
     coordinates.push_back(std::make_pair(0, 0));
     coordinates.push_back(std::make_pair(0, 1));
     coordinates.push_back(std::make_pair(0, 2));
@@ -46,7 +46,7 @@ bool Test::goodCells ()
     bool correctResult = false;
     assert(ourResult == correctResult);
 
-    // Test 2
+    // Test 2 - Over a coin and the other player
     coordinates[0] = std::make_pair(1, 2);
     coordinates[1] = std::make_pair(1, 3);
     coordinates[2] = std::make_pair(2, 3);
@@ -55,13 +55,22 @@ bool Test::goodCells ()
     correctResult = false;
     assert(ourResult == correctResult);
 
-    // Test 3
+    // Test 3 - Almost the same move
     coordinates[0] = std::make_pair(2, 0);
     coordinates[1] = std::make_pair(2, 1);
     coordinates[2] = std::make_pair(2, 2);
     coordinates[3] = std::make_pair(3, 0);
     ourResult = this->gameBoard.goodCells(coordinates);
     correctResult = true;
+    assert(ourResult == correctResult);
+
+    // Test 4 - Same move
+    coordinates[0] = std::make_pair(1, 0);
+    coordinates[1] = std::make_pair(2, 0);
+    coordinates[2] = std::make_pair(2, 1);
+    coordinates[3] = std::make_pair(2, 2);
+    ourResult = this->gameBoard.goodCells(coordinates);
+    correctResult = false;
     assert(ourResult == correctResult);
 }
 

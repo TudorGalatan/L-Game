@@ -111,18 +111,6 @@ class GameBoard
         void makeMove (std::vector < std::pair <USI, USI> > newCoordinates);
 
         /**
-            Checks whether or not all 4 cells are identical to the previous move of the player.
-            Input:
-                - "gameBoard": the game board
-                - "currentPlayer": the current player
-                - "coordinates": the coordinates of the squares
-            Output:
-                - true: if all the cells are identical to the previous move of the player
-                - false: otherwise
-        **/
-        bool sameAsPrevious (std::vector < std::pair <USI, USI> > coordinates);
-
-        /**
             Checks whether all the cells are good or not (black or the current player).
             Input:
                 - "gameBoard": the game board
