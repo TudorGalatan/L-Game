@@ -65,4 +65,24 @@ class Test
                 - assertion fail, otherwise
         **/
         bool hasGap ();
+
+        /**
+            Tests the "getStartEndPositions" function from the "Game Board" module.
+            Input:
+                - none
+            Output:
+                - nothing happens, if the "getStartEndPositions" function works correctly
+                - assertion fail, otherwise
+        **/
+        std::pair <USI, USI> getStartEndPositions ();
+
+        /**
+            Tests the "onValidPosition" function from the "Game Board" module.
+            Input:
+                - none
+            Output:
+                - nothing happens, if the "onValidPosition" function works correctly
+                - assertion fail, otherwise
+        **/
+        bool onValidPosition ();
 };

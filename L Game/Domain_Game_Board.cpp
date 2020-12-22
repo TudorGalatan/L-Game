@@ -204,10 +204,10 @@ bool GameBoard::checkMove (std::vector < std::pair <USI, USI> > coordinates)
     std::pair <USI, USI> startEndPositions = this->getStartEndPositions(coordinates);
 
     // If the fourth square of the possible "L" is not on a valid position, then it cannot be an "L".
-    if (this->onValidPosition(coordinates) == 0)
+    if (this->onValidPosition(coordinates) == false)
         return false;
 
-    // We have an "L" form with empty cells only, so it is a valid move.
+    // We have an "L" form with free cells only, so it is a valid move.
     return true;
 }
 
@@ -364,16 +364,32 @@ std::pair <USI, USI> GameBoard::getStartEndPositions (std::vector < std::pair <U
     // We have a horizontal orientation.
     if (orientation.first == 1)
     {
-        unsigned short int line = orientation.second;
-        if (this->boardData[line][0] != this->currentPlayer)
+        bool startOnPosition_1 = true;
+
+        for (unsigned short int cell = 0; cell < 4; cell++)
+        {
+            unsigned short int column = coordinates[cell].second;
+            if (column == 0)
+                startOnPosition_1 = false;
+        }
+
+        if (startOnPosition_1)
             startPosition = 1;
     }
 
     // We have a vertical orientation.
     else
     {
-        unsigned short int column = orientation.second;
-        if (this->boardData[0][column] != this->currentPlayer)
+        bool startOnPosition_1 = true;
+
+        for (unsigned short int cell = 0; cell < 4; cell++)
+        {
+            unsigned short int line = coordinates[cell].first;
+            if (line == 0)
+                startOnPosition_1 = false;
+        }
+
+        if (startOnPosition_1)
             startPosition = 1;
     }
 
@@ -390,8 +406,9 @@ std::pair <USI, USI> GameBoard::getStartEndPositions (std::vector < std::pair <U
 
 bool GameBoard::onValidPosition (std::vector < std::pair <USI, USI> > coordinates)
 {
-    unsigned short int startPosition = this->getStartEndPositions(coordinates).first;
-    unsigned short int endPosition = this->getStartEndPositions(coordinates).second;
+    std::pair <USI, USI> startEndPositions = this->getStartEndPositions(coordinates);
+    unsigned short int startPosition = startEndPositions.first;
+    unsigned short int endPosition = startEndPositions.second;
 
     std::vector < std::pair <USI, USI> > possibleCoordinates;
 
@@ -401,29 +418,42 @@ bool GameBoard::onValidPosition (std::vector < std::pair <USI, USI> > coordinate
     if (orientation.first == 1)
     {
         unsigned short int line = orientation.second;
-        possibleCoordinates.push_back(std::make_pair(line - 1, startPosition));
-        possibleCoordinates.push_back(std::make_pair(line + 1, startPosition));
-        possibleCoordinates.push_back(std::make_pair(line - 1, endPosition));
-        possibleCoordinates.push_back(std::make_pair(line + 1, endPosition));
+        if (line > 0)
+        {
+            possibleCoordinates.push_back(std::make_pair(line - 1, startPosition));
+            possibleCoordinates.push_back(std::make_pair(line - 1, endPosition));
+        }
+
+        if (line < 3)
+        {
+            possibleCoordinates.push_back(std::make_pair(line + 1, startPosition));
+            possibleCoordinates.push_back(std::make_pair(line + 1, endPosition));
+        }
     }
 
     // We have a vertical orientation.
     else
     {
         unsigned short int column = orientation.second;
-        possibleCoordinates.push_back(std::make_pair(startPosition, column - 1));
-        possibleCoordinates.push_back(std::make_pair(startPosition, column + 1));
-        possibleCoordinates.push_back(std::make_pair(endPosition, column - 1));
-        possibleCoordinates.push_back(std::make_pair(endPosition, column + 1));
+
+        if (column > 0)
+        {
+            possibleCoordinates.push_back(std::make_pair(startPosition, column - 1));
+            possibleCoordinates.push_back(std::make_pair(endPosition, column - 1));
+        }
+
+        if (column < 3)
+        {
+            possibleCoordinates.push_back(std::make_pair(startPosition, column + 1));
+            possibleCoordinates.push_back(std::make_pair(endPosition, column + 1));
+        }
     }
 
     for (unsigned short int possibleSquare = 0; possibleSquare < possibleCoordinates.size(); possibleSquare++)
     {
-        unsigned short int line = possibleCoordinates.at(possibleSquare).first;
-        unsigned short int column = possibleCoordinates.at(possibleSquare).second;
-
-        if (this->boardData[line][column] == this->currentPlayer)
-            return true;
+        for (unsigned short int square = 0; square < 4; square++)
+            if (possibleCoordinates[possibleSquare] == coordinates[square])
+                return true;
     }
 
     // The other square is not on a valid position.
