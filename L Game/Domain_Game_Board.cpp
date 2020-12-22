@@ -186,9 +186,13 @@ void GameBoard::redPlayerMoves ()
 
 bool GameBoard::checkMove (std::vector < std::pair <USI, USI> > coordinates)
 {
+    // All the cells must be free (black or the current player).
+    if (this->goodCells(coordinates) == false)
+        return false;
+
     // If all 4 cells are identical to the previous move of the player, then it's not an allowed move.
     //if (this->sameAsPrevious(coordinates))
-    //    return 1;
+    //    return false;
 
     std::pair <USI, USI> orientation = this->getOrientation(coordinates);
 
@@ -255,19 +259,21 @@ bool GameBoard::sameAsPrevious (std::vector < std::pair <USI, USI> > coordinates
 
 
 
-bool GameBoard::emptyCells (std::vector < std::pair <USI, USI> > coordinates)
+bool GameBoard::goodCells (std::vector < std::pair <USI, USI> > coordinates)
 {
+    unsigned short int goodCells = 0;
     for (unsigned short int cell = 0; cell < 4; cell++)
     {
-        unsigned short int line = coordinates[cell].first;
-        unsigned short int column = coordinates[cell].second;
+        unsigned short int line = coordinates.at(cell).first;
+        unsigned short int column = coordinates.at(cell).second;
 
-        // We have a non-empty cell.
-        if (this->boardData[line][column] != 0)
-            return false;
+        if (this->boardData[line][column] == this->currentPlayer || this->boardData[line][column] == 0)
+            goodCells++;
     }
 
-    // We have empty cells only.
+    if (goodCells != 4)
+        return false;
+
     return true;
 }
 

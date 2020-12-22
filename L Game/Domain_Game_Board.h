@@ -123,15 +123,15 @@ class GameBoard
         bool sameAsPrevious (std::vector < std::pair <USI, USI> > coordinates);
 
         /**
-            Checks whether all the cells are empty or not.
+            Checks whether all the cells are good or not (black or the current player).
             Input:
                 - "gameBoard": the game board
                 - "coordinates": the coordinates of the squares
             Output:
-                - true: if all the cells are empty
+                - true: if all the cells are good (black or the current player)
                 - false: otherwise
         **/
-        bool emptyCells (std::vector < std::pair <USI, USI> > coordinates);
+        bool goodCells (std::vector < std::pair <USI, USI> > coordinates);
 
         /**
             Gets the orientation for the possible "L".

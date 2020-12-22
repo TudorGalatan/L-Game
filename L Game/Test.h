@@ -5,11 +5,17 @@
 
 #pragma once
 
+#include <assert.h>
+#include "Domain_Game_Board.h"
+
 
 
 class Test
 {
     public:
+
+        // A game board
+        GameBoard gameBoard;
 
         /**
             Runs all the tests.
@@ -19,4 +25,24 @@ class Test
                 - runs all the tests
         **/
         void runAll ();
+
+        /**
+            Tests the "checkMove" function from the "Game Board" module.
+            Input:
+                - none
+            Output:
+                - nothing happens, if the "checkMove" function works correctly
+                - assertion fail, otherwise
+        **/
+        void checkMove ();
+
+        /**
+            Tests the "goodCells" function from the "Game Board" module.
+            Input:
+                - none
+            Output:
+                - nothing happens, if the "goodCells" function works correctly
+                - assertion fail, otherwise
+        **/
+        bool goodCells ();
 };
