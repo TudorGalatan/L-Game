@@ -103,7 +103,7 @@ class GameBoard
                 - true: if the coordinates represent a valid move on the game board
                 - false: otherwise
         **/
-        bool checkMove (std::vector < std::pair <USI, USI> > coordinates, std::vector < std::pair <USI, USI> > prevCoordinates);
+        bool checkMove (std::vector < std::pair <USI, USI> > newCoordinates, std::vector < std::pair <USI, USI> > previousCoordinates);
 
         /**
             It performs the current move of the current player, considering that all validations were already done.

@@ -74,9 +74,6 @@ void GameBoard::drawBoard ()
 
 
 
-/**
-    Loads the game with the values from boardData.txt
-**/
 void GameBoard::loadNewGame ()
 {
     int start = 0;
@@ -91,11 +88,11 @@ void GameBoard::loadNewGame ()
                 ++start;
             }
 
-    // Colour the blue player.
+            // Colour the blue player.
             else if (this->boardData[line][column] == 2)
                 this->cell[line][column].setColor(BLUE);
 
-    // Colour the coins.
+            // Colour the coins.
             else if (this->boardData[line][column] == 3)
                 this->coin.drawCoin(this->cell[line][column].getPosition("ox"), this->cell[line][column].getPosition("oy"));
 }
@@ -105,11 +102,11 @@ void GameBoard::loadNewGame ()
 void GameBoard::redPlayerMoves ()
 {
     unsigned short int numberOfClicks = 0;
-    std::vector < std::pair <USI, USI> > prevCoordinates;
-    prevCoordinates.push_back(std::make_pair(0, 0));
-    prevCoordinates.push_back(std::make_pair(0, 0));
-    prevCoordinates.push_back(std::make_pair(0, 0));
-    prevCoordinates.push_back(std::make_pair(0, 0));
+    std::vector < std::pair <USI, USI> > previousCoordinates;
+    previousCoordinates.push_back(std::make_pair(0, 0));
+    previousCoordinates.push_back(std::make_pair(0, 0));
+    previousCoordinates.push_back(std::make_pair(0, 0));
+    previousCoordinates.push_back(std::make_pair(0, 0));
     while (numberOfClicks < 4)
     {
         // Right click
@@ -136,8 +133,8 @@ void GameBoard::redPlayerMoves ()
             {
                 for (unsigned short int line = 0; line < 4; line++)
                 {
-                    prevCoordinates[line].first = this->redPlayer.coordinates[line].first;
-                    prevCoordinates[line].second = this->redPlayer.coordinates[line].second;
+                    previousCoordinates[line].first = this->redPlayer.coordinates[line].first;
+                    previousCoordinates[line].second = this->redPlayer.coordinates[line].second;
 
                     for (unsigned short int column = 0; column < 4; column++)
                         if (this->boardData[line][column] == 1)
@@ -175,7 +172,7 @@ void GameBoard::redPlayerMoves ()
             }
 
             if (numberOfClicks == 4)
-                if (this->checkMove(this->redPlayer.coordinates, prevCoordinates))
+                if (this->checkMove(this->redPlayer.coordinates, previousCoordinates))
                     return;
                 else
                     numberOfClicks = 0;
@@ -195,27 +192,27 @@ unsigned short int GameBoard::checkWinner ()
 
 
 
-bool GameBoard::checkMove (std::vector < std::pair <USI, USI> > coordinates, std::vector < std::pair <USI, USI> >prevCoordinates)
+bool GameBoard::checkMove (std::vector < std::pair <USI, USI> > newCoordinates, std::vector < std::pair <USI, USI> > previousCoordinates)
 {
     // All the cells must be free (black or the current player).
-     if (this->goodCells(prevCoordinates) == false)
+     if (this->goodCells(previousCoordinates) == false)
          return false;
 
-    std::pair <USI, USI> orientation = this->getOrientation(coordinates);
+    std::pair <USI, USI> orientation = this->getOrientation(newCoordinates);
 
     // If we have neither a horizontal, nor a vertical orientation, then it is not an "L".
     if (orientation.first == 0)
         return false;
 
     // If there is a gap between the three squares that should form an "L", then it cannot be an "L".
-    if (this->hasGap(coordinates))
+    if (this->hasGap(newCoordinates))
         return false;
 
     // Get the start and end positions for the body of the "L" form.
-    std::pair <USI, USI> startEndPositions = this->getStartEndPositions(coordinates);
+    std::pair <USI, USI> startEndPositions = this->getStartEndPositions(newCoordinates);
 
     // If the fourth square of the possible "L" is not on a valid position, then it cannot be an "L".
-    if (this->onValidPosition(coordinates) == false)
+    if (this->onValidPosition(newCoordinates) == false)
         return false;
 
     // We have an "L" form with free cells only, so it is a valid move.

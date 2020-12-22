@@ -13,17 +13,16 @@ class PlayerVersusEnvironment
 {
     private:
 
-        // The game board
         GameBoard gameBoard;
 
     public:
 
         /**
-            Starts a new game in the player versus environment mode.
+            Starts a new game in the player versus environment game mode.
             Input:
                 - none
             Output:
-                - starts a new game in the player versus environment mode
+                - starts a new game in the player versus environment game mode
         **/
         void startGame ();
 };

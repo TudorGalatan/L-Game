@@ -13,7 +13,6 @@ class PlayerVersusPlayer
 {
     private:
 
-        // The game board
         GameBoard gameBoard;
 
     public:

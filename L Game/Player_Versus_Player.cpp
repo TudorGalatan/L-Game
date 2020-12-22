@@ -9,29 +9,23 @@
 
 void PlayerVersusPlayer::startGame ()
 {
-    // false - the red player
-    // true - the blue player
-    bool player = false;
-
-    // Clear the window.
     cleardevice();
 
-    // Draw the game board.board.cell[0][0].getPosition("ox")   ???
-    this->gameBoard.drawBoard();
-
-    // Get the initial configuration of the game board.
     this->gameBoard.getInitialConfiguration();
-
-    // Save the current configuration of the game board.
     this->gameBoard.saveCurrentConfiguration();
-
+    this->gameBoard.drawBoard();
     this->gameBoard.loadNewGame();
 
-    // Temporary: just for testing
     delay(300);
 
+    /*
+        false - the red player
+        true - the blue player
+    */
+    bool player = false;
+
+    // Run the game.
     while (true)
-    {
         switch (player)
         {
             // The red player's turn
@@ -42,11 +36,8 @@ void PlayerVersusPlayer::startGame ()
 
             // The blue player's turn
             default:
-                // To add.
-                while(1)
+                while (true)
                     delay(1);
                 player = false;
-                break;
         }
-    }
 }

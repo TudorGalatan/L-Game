@@ -9,29 +9,20 @@
 
 void PlayerVersusEnvironment::startGame ()
 {
+    cleardevice();
+
+    this->gameBoard.getInitialConfiguration();
+    this->gameBoard.saveCurrentConfiguration();
+    this->gameBoard.drawBoard();
+    this->gameBoard.loadNewGame();
+
+    delay(300);
+
     /*
         false - the red player
         true - the blue player
     */
     bool player = false;
-
-    // Clear the window.
-    cleardevice();
-
-    // Draw the game board.
-    gameBoard.drawBoard();
-
-    // Get the initial configuration of the game board.
-    this->gameBoard.getInitialConfiguration();
-
-    // Save the current configuration of the game board.
-    this->gameBoard.saveCurrentConfiguration();
-
-    // Load a new game.
-    gameBoard.loadNewGame();
-
-    // Temporary - just for testing
-    delay(300);
 
     // Run the game.
     while (true)
@@ -42,5 +33,11 @@ void PlayerVersusEnvironment::startGame ()
                 gameBoard.redPlayerMoves();
                 player = true;
                 break;
+
+            // The blue player's turn
+            default:
+                while (true)
+                    delay(1);
+                player = false;
         }
 }
