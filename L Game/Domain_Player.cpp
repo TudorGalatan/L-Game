@@ -10,12 +10,11 @@
 
 
 
-void Player::updatePositions (int cellNo,unsigned short int x,unsigned short int y)
+void Player::updatePositions (unsigned short int cellNumber, unsigned short int line, unsigned short int column)
 {
-    if(cellNo<=3)
+    if (cellNumber < 4)
     {
-        std::ofstream g("test.txt");
-        this->positions.at(cellNo).first = x;
-        this->positions.at(cellNo).second = y;
+        this->positions[cellNumber].first = line;
+        this->positions[cellNumber].second = column;
     }
 }

@@ -45,6 +45,7 @@ void PlayerVersusPlayer::startGame ()
                 // To add.
                 while(1)
                     delay(1);
+                player = false;
                 break;
         }
     }

@@ -102,81 +102,70 @@ void GameBoard::loadNewGame ()
 
 
 
-/*bool GameBoard::checkLShape(Player player,int color)
-{
-    return 1;//checkMove(this->boardData,color,player.positions);
-}*/
-
-
-
 void GameBoard::redPlayerMoves ()
 {
-    std::ofstream g("test.txt");
-    unsigned short int clicks = 0;///counts the clicks (you need 4 clicks to draw the letter 'L')
-    bool tst = false;
-    while(clicks < 4)
+    unsigned short int numberOfClicks = 0;
+
+    while (numberOfClicks < 4)
     {
-        if(GetAsyncKeyState(VK_RBUTTON))///on right mouse click deletes the red 'L'
+        // Right click
+        if (GetAsyncKeyState(VK_RBUTTON))
         {
-            clicks = 0;
-            for(int i = 0; i < 4; i++)
-                for(int j = 0; j < 4; j++)
-                    if(this->boardData[i][j] == 1)
+            numberOfClicks = 0;
+            for (unsigned short int line = 0; line < 4; line++)
+                for (unsigned short int column = 0; column < 4; column++)
+                    if (this->boardData[line][column] == 1)
                     {
-                        this->boardData[i][j] = 0;
-                        this->cell[i][j].setColor(BLACK);
+                        this->boardData[line][column] = 0;
+                        this->cell[line][column].setColor(BLACK);
                     }
         }
-        if(GetAsyncKeyState(VK_LBUTTON))
+
+        // Left click
+        if (GetAsyncKeyState(VK_LBUTTON))
         {
-            if(clicks == 0)
+            if (numberOfClicks == 0)
             {
-                for(int i = 0; i < 4; i++)
-                    for(int j = 0; j < 4; j++)
-                        if(this->boardData[i][j] == 1)
+                for (unsigned short int line = 0; line < 4; line++)
+                    for (unsigned short int column = 0; column < 4; column++)
+                        if (this->boardData[line][column] == 1)
                         {
-                            this->boardData[i][j] = 0;
-                            this->cell[i][j].setColor(BLACK);
+                            this->boardData[line][column] = 0;
+                            this->cell[line][column].setColor(BLACK);
                         }
             }
-            tst = false;
+
             HWND hwnd = GetForegroundWindow();
             POINT cursorPosition;
 
             // Get the mouse position.
             GetCursorPos(&cursorPosition);
+
             // Get the mouse position on the window.
-            ScreenToClient(hwnd,&cursorPosition);
+            ScreenToClient(hwnd, &cursorPosition);
 
             double xCoordinate = cursorPosition.x;
             double yCoordinate = cursorPosition.y;
 
-            for(int i = 0; i < 4 && clicks<=4; i++)
+            for (unsigned short int line = 0; line < 4 && numberOfClicks <= 4; line++)
             {
-                for(int j = 0; j < 4 && tst == false; j++)
-                    if(this->cell[i][j].isInside(xCoordinate,yCoordinate) && this->boardData[i][j] == 0)
+                for (unsigned short int column = 0; column < 4; column++)
+                    if (this->cell[line][column].isInside(xCoordinate, yCoordinate) && this->boardData[line][column] == 0)
                     {
-                        this->boardData[i][j] = 1;
-                        this->cell[i][j].setColor(RED);
-                        ++clicks;
-                        this->redL.updatePositions(clicks - 1,i,j);
-
-                        tst = true;
+                        this->boardData[line][column] = 1;
+                        this->cell[line][column].setColor(RED);
+                        ++numberOfClicks;
+                        this->redL.updatePositions(numberOfClicks - 1, line, column);
                         break;
                     }
             }
-            if(clicks == 4 && this->checkMove(this->redL.positions))///if the L is valid
-            {
 
+            if (numberOfClicks == 4 && this->checkMove(this->redL.positions))
                 return;
-            }
-            else if(clicks == 4 && !this->checkMove(this->redL.positions))
-            {
-                for(int i = 0;i < 4; i++)
-                    g<<this->redL.positions.at(i).first<<' '<<this->redL.positions.at(i).second<<'\n';
-                clicks = 0;
-            }
-            ///otherwise
+
+            else if (numberOfClicks == 4 && !this->checkMove(this->redL.positions))
+                numberOfClicks = 0;
+
             delay(202);
         }
     }

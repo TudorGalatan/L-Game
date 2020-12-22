@@ -83,11 +83,6 @@ class GameBoard
         void redPlayerMoves ();
 
         /**
-            ???
-        **/
-        bool checkLShape (int color);
-
-        /**
             Checks whether the coordinates can represent a valid move on the game board.
             Input:
                 - "gameBoard": the game board
