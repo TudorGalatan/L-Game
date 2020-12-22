@@ -87,7 +87,7 @@ void GameBoard::loadNewGame ()
             if (this->boardData[line][column] == 1)
             {
                 this->cell[line][column].setColor(RED);
-                this->redPlayer.positions.push_back(std::make_pair(line, column));
+                this->redPlayer.coordinates.push_back(std::make_pair(line, column));
                 ++start;
             }
 
@@ -124,8 +124,8 @@ void GameBoard::redPlayerMoves ()
                         this->boardData[line][column] = 0;
                         this->cell[line][column].setColor(BLACK);
                     }
-                this->redPlayer.positions[line].first = 10;
-                this->redPlayer.positions[line].second = 10;
+                this->redPlayer.coordinates[line].first = 10;
+                this->redPlayer.coordinates[line].second = 10;
             }
         }
 
@@ -136,8 +136,8 @@ void GameBoard::redPlayerMoves ()
             {
                 for (unsigned short int line = 0; line < 4; line++)
                 {
-                    prevCoordinates[line].first = this->redPlayer.positions[line].first;
-                    prevCoordinates[line].second = this->redPlayer.positions[line].second;
+                    prevCoordinates[line].first = this->redPlayer.coordinates[line].first;
+                    prevCoordinates[line].second = this->redPlayer.coordinates[line].second;
 
                     for (unsigned short int column = 0; column < 4; column++)
                         if (this->boardData[line][column] == 1)
@@ -145,8 +145,8 @@ void GameBoard::redPlayerMoves ()
                             this->boardData[line][column] = 0;
                             this->cell[line][column].setColor(BLACK);
                         }
-                    this->redPlayer.positions[line].first = 10;
-                    this->redPlayer.positions[line].second = 10;
+                    this->redPlayer.coordinates[line].first = 10;
+                    this->redPlayer.coordinates[line].second = 10;
                 }
             }
 
@@ -162,23 +162,20 @@ void GameBoard::redPlayerMoves ()
             double xCoordinate = cursorPosition.x;
             double yCoordinate = cursorPosition.y;
 
-            bool stop = false;
-
-            for (unsigned short int line = 0; line < 4 && numberOfClicks <= 4 && stop == false; line++)
+            for (unsigned short int line = 0; line < 4 && numberOfClicks <= 4; line++)
             {
-                for (unsigned short int column = 0; column < 4 && stop == false; column++)
+                for (unsigned short int column = 0; column < 4; column++)
                     if (this->cell[line][column].isInside(xCoordinate, yCoordinate) && this->boardData[line][column] == 0)
                     {
                         this->boardData[line][column] = 1;
                         this->cell[line][column].setColor(RED);
                         ++numberOfClicks;
-                        this->redPlayer.updatePositions(numberOfClicks - 1, line, column);
-                        stop = true;
+                        this->redPlayer.updateCoordinates(numberOfClicks - 1, line, column);
                     }
             }
 
             if (numberOfClicks == 4)
-                if (this->checkMove(this->redPlayer.positions, prevCoordinates))
+                if (this->checkMove(this->redPlayer.coordinates, prevCoordinates))
                     return;
                 else
                     numberOfClicks = 0;
