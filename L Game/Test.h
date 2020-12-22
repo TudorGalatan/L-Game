@@ -45,4 +45,14 @@ class Test
                 - assertion fail, otherwise
         **/
         bool goodCells ();
+
+        /**
+            Tests the "getOrientation" function from the "Game Board" module.
+            Input:
+                - none
+            Output:
+                - nothing happens, if the "getOrientation" function works correctly
+                - assertion fail, otherwise
+        **/
+        std::pair <USI, USI> getOrientation ();
 };
