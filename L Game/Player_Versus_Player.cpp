@@ -5,10 +5,12 @@
 
 #include "Player_Versus_Player.h"
 
-
+#include <fstream>
 
 void PlayerVersusPlayer::startGame ()
 {
+    std::ofstream g("test.in");
+    std::vector<std::pair<USI, USI> > positions;
     // false - the red player
     // true - the blue player
     bool player = false;
@@ -48,15 +50,42 @@ void PlayerVersusPlayer::startGame ()
                 player = false;
                 break;
         }
-        if(this->gameBoard.checkWinner(this->gameBoard.boardData,1)==false && player == false)
+        this->gameBoard.saveCurrentConfiguration();
+        if(this->gameBoard.findMove(this->gameBoard.boardData,1,1,positions)== false && player == false)
         {
-            cleardevice();
-            outtextxy(getmaxx()/2,getmaxy()/2,"BLUE WINS");
+            for(int i=0;i<positions.size();i++)
+                g<<positions[i].first<<' '<<positions[i].second<<'\n';
+            delay(200);
+            int xCoord = getmaxx()/2,yCoord=getmaxy()/2;
+            for(int i=10;i<=2000;i+=10)
+            {///aici o sa fie cv animatie de win
+                setcolor(WHITE);
+                outtextxy(xCoord-50,yCoord-10,"BLUE WINS");
+                setcolor(BLUE);
+                setlinestyle(SOLID_LINE,0,5);
+                circle(xCoord, yCoord, i);
+                setfillstyle(SOLID_FILL, BLUE);
+                floodfill(xCoord, yCoord, WHITE);
+            }
+            return;
         }
-        else if(this->gameBoard.checkWinner(this->gameBoard.boardData,2)==false && player == true)
+        else if(this->gameBoard.findMove(this->gameBoard.boardData,2,2,positions)==false && player == true)
         {
-            cleardevice();
-            outtextxy(getmaxx()/2,getmaxy()/2,"RED WINS");
+            for(int i=0;i<positions.size();i++)
+                g<<positions[i].first<<' '<<positions[i].second<<'\n';
+            delay(200);
+            int xCoord = getmaxx()/2,yCoord=getmaxy()/2;
+            for(int i=10;i<=2000;i+=4)
+            {///si aici o sa fie cv animatie de win
+                setcolor(WHITE);
+                outtextxy(xCoord-50,yCoord-10,"RED WINS");
+                setcolor(RED);
+                setlinestyle(SOLID_LINE,0,5);
+                circle(xCoord, yCoord, i);
+                setfillstyle(SOLID_FILL, RED);
+                floodfill(xCoord, yCoord, WHITE);
+            }
+            return;
         }
     }
 }

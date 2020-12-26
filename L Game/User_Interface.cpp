@@ -216,9 +216,9 @@ void UserInterface::drawOptionsMenu ()
 
 void UserInterface::drawButton (USI left, USI up, USI right, USI down, USI depth, bool drawDetails, USI textXCoordinate, USI textYCoordinate, char text[])
 {
+    setfillstyle(SOLID_FILL,YELLOW);
     // Draw the button.
     bar3d(left, up, right, down, depth, drawDetails);
-
     // Set the font characteristics.
     settextstyle(BOLD_FONT, HORIZ_DIR, FONT_SIZE);
 

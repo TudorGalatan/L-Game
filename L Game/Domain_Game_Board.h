@@ -16,7 +16,7 @@
 class GameBoard
 {
     public:
-
+        std::vector < std::pair <USI, USI> > prevCoordinates;
         // The back-end representation of the board
         unsigned short int boardData[4][4];
 
@@ -175,6 +175,5 @@ class GameBoard
 
         void drawButton(int color);
 
-        bool checkWinner(unsigned short int aa[4][4],int color);
-        bool checkVect(std::vector < std::pair <unsigned short int, unsigned short int> > pos,int color);
+        bool findMove(unsigned short int aa[4][4],int color,int player,std::vector<std::pair<USI, USI> > &positions);
 };
