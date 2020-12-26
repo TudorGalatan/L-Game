@@ -50,20 +50,21 @@ void PlayerVersusEnvironment::startGame ()
                 gameBoard.currentPlayer = 1;
                 gameBoard.redPlayerMoves();
                 player = true;
-                if(gameBoard.findMove(this->gameBoard.boardData,1,1,pos) == 0)
+                if(this->gameBoard.findMove(this->gameBoard.boardData,1,1,pos)== false && player == false)
                 {
+                    for(int i=0;i<4;i++)
+                        for(int j=0;j<4;j++)
+                            if(this->gameBoard.boardData[i][j]==1)
+                            {
+                                this->gameBoard.cell[i][j].setColor(LIGHTBLUE);
+                                delay(500);
+                            }
+                    delay(1000);
                     cleardevice();
-                    int xCoord = getmaxx()/2,yCoord=getmaxy()/2;
-                    for(int i=10;i<=2000;i+=10)
-                    {///aici o sa fie cv animatie de win
-                        setcolor(WHITE);
-                        outtextxy(xCoord-50,yCoord-10,"BLUE WINS");
-                        setcolor(BLUE);
-                        setlinestyle(SOLID_LINE,0,5);
-                        circle(xCoord, yCoord, i);
-                        setfillstyle(SOLID_FILL, BLUE);
-                        floodfill(xCoord, yCoord, WHITE);
-                    }
+                    setfillstyle(SOLID_FILL,BLUE);
+                    floodfill(10,10,1);
+                    settextjustify(CENTER_TEXT,CENTER_TEXT);
+                    outtextxy(getmaxx()/2,getmaxy()/2,"BLUE PLAYER WINS");
                 }
                 break;
             case true://BLUE
@@ -85,28 +86,28 @@ void PlayerVersusEnvironment::startGame ()
                     }
                     for(int i=0;i<pos.size();i++)
                     {
-                        std::cout<<pos[i].first<<' '<<pos[i].second<<'\n';
                         this->gameBoard.boardData[pos[i].first][pos[i].second] = 2;
                         this->gameBoard.cell[pos[i].first][pos[i].second].setColor(BLUE);
                         this->gameBoard.blueL.positions[i].first = pos[i].first;
                         this->gameBoard.blueL.positions[i].second = pos[i].second;
                     }
-                    std::cout<<"\nEND\n";
                     //std::cout<<pos.size();
                 }
                 else
                 {
+                    for(int i=0;i<4;i++)
+                        for(int j=0;j<4;j++)
+                            if(this->gameBoard.boardData[i][j]==1)
+                            {
+                                this->gameBoard.cell[i][j].setColor(LIGHTRED);
+                                delay(500);
+                            }
+                    delay(1000);
                     cleardevice();
-                    int xCoord = getmaxx()/2,yCoord=getmaxy()/2;
-                    for(int i=10;i<=2000;i+=5)
-                    {///aici o sa fie cv animatie de win
-                        outtextxy(xCoord-50,yCoord-10,"RED WINS");
-                        //setcolor(RED);
-                        setlinestyle(SOLID_LINE,0,5);
-                        circle(xCoord-50, yCoord - 50, i);
-                        setfillstyle(SOLID_FILL, RED);
-                        floodfill(xCoord, yCoord, RED);
-                    }
+                    setfillstyle(SOLID_FILL,RED);
+                    floodfill(10,10,1);
+                    settextjustify(CENTER_TEXT,CENTER_TEXT);
+                    outtextxy(getmaxx()/2,getmaxy()/2,"RED PLAYER WINS");
                 }
 
         }

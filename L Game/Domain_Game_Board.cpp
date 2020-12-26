@@ -289,6 +289,16 @@ bool GameBoard::findMove(unsigned short int aa[4][4], int color, int player,std:
         if(areEqualVectors(obj->positions,positions)==false)
             return true;
     }
+    positions.clear();
+    if(a[2][0]+a[3][0]+a[3][1]+a[3][2]==0)
+    {
+        positions.push_back(std::make_pair(2,0));
+        positions.push_back(std::make_pair(3,0));
+        positions.push_back(std::make_pair(3,1));
+        positions.push_back(std::make_pair(3,2));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
 
     return false;
 }
