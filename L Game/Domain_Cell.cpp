@@ -88,7 +88,7 @@ bool Cell::isInside (double xCoord, double yCoord)
     std::ofstream g("test.txt");
     double top = this->getTopValue();
     double left = this->getLeftValue();
-    int cellSize = 200; /// !!!!!!!!!!! function that returns the coin size has problems!!!---------------------------------------------------------------------------------------
+    int cellSize = 200; /// !!!!!!!!!!! function that returns the cell size has problems!!!---------------------------------------------------------------------------------------
     if(xCoord >= left && xCoord <= left + cellSize && yCoord >= top && yCoord <= top + cellSize)
         return true;
     return false;

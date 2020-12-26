@@ -16,7 +16,7 @@
 class GameBoard
 {
     public:
-
+        std::vector < std::pair <USI, USI> > prevCoordinates;
         // The back-end representation of the board
         unsigned short int boardData[4][4];
 
@@ -30,7 +30,7 @@ class GameBoard
         Coin coin, firstCoin, secondCoin;
 
         // The players
-        Player redPlayer, bluePlayer;
+        Player redL, blueL;
 
         /**
             Gets the initial configuration of the game board from the input file.
@@ -82,16 +82,7 @@ class GameBoard
         **/
         void redPlayerMoves ();
 
-        /**
-            Checks whether or not a player won.
-            Input:
-                - none
-            Output:
-                - 0: if the game is still on
-                - 1: if the red player won
-                - 2: if the blue player won
-        **/
-        unsigned short int checkWinner ();
+        void bluePlayerMoves ();
 
         /**
             Checks whether the coordinates can represent a valid move on the game board.
@@ -103,7 +94,7 @@ class GameBoard
                 - true: if the coordinates represent a valid move on the game board
                 - false: otherwise
         **/
-        bool checkMove (std::vector < std::pair <USI, USI> > newCoordinates, std::vector < std::pair <USI, USI> > previousCoordinates);
+        bool checkMove (std::vector < std::pair <USI, USI> > coordinates, std::vector < std::pair <USI, USI> > prevCoordinates);
 
         /**
             It performs the current move of the current player, considering that all validations were already done.
@@ -179,4 +170,10 @@ class GameBoard
                 - false: otherwise
         **/
         bool onValidPosition (std::vector < std::pair <USI, USI> > coordinates);
+
+        void moveCoin();
+
+        void drawButton(int color);
+
+        bool checkWinner(unsigned short int aa[4][4],int color,int player,std::vector<std::pair<USI, USI> > &positions);
 };

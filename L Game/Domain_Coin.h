@@ -16,6 +16,7 @@ class Coin
 
         // The radius of the coin
         int coinSize = 100;
+        int xIndex = -1,yIndex;
 
     public:
 
@@ -36,5 +37,15 @@ class Coin
             Output:
                 - the size of the coin
         **/
+
+        void deleteCoin(int xCoord,int yCoord);
+
         int getCoinSize ();
+        void onClickAction();
+
+        int getXIndex();
+        int getYIndex();
+
+        void setXIndex(int value);
+        void setYIndex(int value);
 };
