@@ -442,7 +442,7 @@ void GameBoard::moveCoin ()
             {
                 for (column = 0; column < 4; column++)
                     if (this->cell[line][column].isInside(xCoordinate, yCoordinate) && this->boardData[line][column] == 3)
-                        if(line == x)
+                        if(line == x && column == y)
                         {
                             this->boardData[line][column]=0;
                             coinRef = &this->firstCoin;

@@ -95,24 +95,37 @@ void PlayerVersusEnvironment::startGame ()
                     bool changed = false;
                     for(int i=0;i<4 && changed == false;i++)
                         for(int j=0;j<4 && changed == false;j++)
-                            if(this->gameBoard.boardData[i][j]==0)
+                            if(this->gameBoard.boardData[i][j]==3)
                             {
-                                changed = true;
                                 srand(time(NULL));
                                 int val = rand()%2+1;
                                 Coin* obj;
                                 if(val==1)
+                                {
                                     obj=&this->gameBoard.firstCoin;
+
+                                }
                                 else
+                                {
                                     obj=&this->gameBoard.secondCoin;
+                                }
                                 obj->deleteCoin(this->gameBoard.cell[i][j].getPosition("ox"),this->gameBoard.cell[i][j].getPosition("oy"));
-                                this->gameBoard.boardData[i][j]=0;
-                                obj->setXIndex(this->gameBoard.cell[i][j].getPosition("ox"));
-                                obj->setYIndex(this->gameBoard.cell[i][j].getPosition("oy"));
-                                obj->drawCoin(obj->getXIndex(),obj->getYIndex());
-                                this->gameBoard.boardData[i][j]=3;
+
+                                for(int l=0;l<4 && changed == false;l++)
+                                    for(int c=0;c<4 && changed == false;c++)
+                                    {
+                                        if(this->gameBoard.boardData[l][c]==0)
+                                        {
+                                            this->gameBoard.boardData[i][j] = 0;
+                                            this->gameBoard.boardData[l][c] = 3;
+                                            obj->setXIndex(l);
+                                            obj->setYIndex(c);
+                                            obj->drawCoin(this->gameBoard.cell[l][c].getPosition("ox"),
+                                                          this->gameBoard.cell[l][c].getPosition("oy"));
+                                            changed = true;
+                                        }
+                                    }
                             }
-                    //std::cout<<pos.size();
                 }
                 else
                 {
