@@ -36,56 +36,50 @@ void PlayerVersusPlayer::startGame ()
     {
         switch (player)
         {
-            // The red player's turn
-            case false:
-                this->gameBoard.currentPlayer=1;
-                this->gameBoard.redPlayerMoves();
-                player = true;
-                break;
+        // The red player's turn
+        case false:
+            this->gameBoard.currentPlayer=1;
+            this->gameBoard.redPlayerMoves();
+            player = true;
+            break;
 
-            // The blue player's turn
-            default:
-                this->gameBoard.currentPlayer=2;
-                this->gameBoard.bluePlayerMoves();
-                player = false;
-                break;
+        // The blue player's turn
+        default:
+            this->gameBoard.currentPlayer=2;
+            this->gameBoard.bluePlayerMoves();
+            player = false;
+            break;
         }
         this->gameBoard.saveCurrentConfiguration();
         if(this->gameBoard.findMove(this->gameBoard.boardData,1,1,positions)== false && player == false)
         {
-            for(int i=0;i<positions.size();i++)
-                g<<positions[i].first<<' '<<positions[i].second<<'\n';
-            delay(200);
-            int xCoord = getmaxx()/2,yCoord=getmaxy()/2;
-            for(int i=10;i<=2000;i+=10)
-            {///aici o sa fie cv animatie de win
-                setcolor(WHITE);
-                outtextxy(xCoord-50,yCoord-10,"BLUE WINS");
-                setcolor(BLUE);
-                setlinestyle(SOLID_LINE,0,5);
-                circle(xCoord, yCoord, i);
-                setfillstyle(SOLID_FILL, BLUE);
-                floodfill(xCoord, yCoord, WHITE);
-            }
-            return;
+            for(int i=0; i<4; i++)
+                for(int j=0; j<4; j++)
+                    if(this->gameBoard.boardData[i][j]==2)
+                    {
+                        this->gameBoard.cell[i][j].setColor(LIGHTBLUE);
+                        delay(500);
+                    }
+            delay(1000);
+            cleardevice();
+            setfillstyle(SOLID_FILL,BLUE);
+            floodfill(10,10,1);
+            outtextxy(getmaxx()/2-100,getmaxy()/2,"BLUE PLAYER WINS");
         }
         else if(this->gameBoard.findMove(this->gameBoard.boardData,2,2,positions)==false && player == true)
         {
-            for(int i=0;i<positions.size();i++)
-                g<<positions[i].first<<' '<<positions[i].second<<'\n';
-            delay(200);
-            int xCoord = getmaxx()/2,yCoord=getmaxy()/2;
-            for(int i=10;i<=2000;i+=4)
-            {///si aici o sa fie cv animatie de win
-                setcolor(WHITE);
-                outtextxy(xCoord-50,yCoord-10,"RED WINS");
-                setcolor(RED);
-                setlinestyle(SOLID_LINE,0,5);
-                circle(xCoord, yCoord, i);
-                setfillstyle(SOLID_FILL, RED);
-                floodfill(xCoord, yCoord, WHITE);
-            }
-            return;
+            for(int i=0; i<4; i++)
+                for(int j=0; j<4; j++)
+                    if(this->gameBoard.boardData[i][j]==1)
+                    {
+                        this->gameBoard.cell[i][j].setColor(LIGHTRED);
+                        delay(500);
+                    }
+            delay(1000);
+            cleardevice();
+            setfillstyle(SOLID_FILL,RED);
+            floodfill(10,10,1);
+            outtextxy(getmaxx()/2-100,getmaxy()/2,"RED PLAYER WINS");
         }
     }
 }

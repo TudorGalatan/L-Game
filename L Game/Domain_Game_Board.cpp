@@ -36,11 +36,11 @@ bool areEqualVectors(std::vector < std::pair <USI, USI> > prevCoordinates, std::
 }
 bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,std::vector<std::pair<USI, USI> > &positions)
 {
-    Player* obj;
+    Player* playerRef;
     if(player==1)
-        obj = &this->redL;
+        playerRef = &this->redL;
     else
-        obj = &this->blueL;
+        playerRef = &this->blueL;
 
     unsigned short int a[4][4];
     for(int i=0; i<4; i++)
@@ -57,7 +57,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(1,2));
         positions.push_back(std::make_pair(2,2));
         positions.push_back(std::make_pair(2,1));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
         {
             srand(time(NULL));
             int val = rand()%2+1;
@@ -85,7 +85,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(1,2));
         positions.push_back(std::make_pair(2,2));
         positions.push_back(std::make_pair(2,1));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
         {
             srand(time(NULL));
             int val = rand()%2+1;
@@ -101,7 +101,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
                 obj->setXIndex(0);
                 obj->setYIndex(2);
                 this->boardData[0][2]=3;
-                obj->drawCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
+                obj->drawCoin(this->cell[0][2].getPosition("ox"),this->cell[0][2].getPosition("oy"));
             }
             return true;
         }
@@ -113,7 +113,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(1,1));
         positions.push_back(std::make_pair(2,1));
         positions.push_back(std::make_pair(2,2));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
         {
             srand(time(NULL));
             int val = rand()%2+1;
@@ -129,7 +129,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
                 obj->setXIndex(2);
                 obj->setYIndex(3);
                 this->boardData[2][3]=3;
-                obj->drawCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
+                obj->drawCoin(this->cell[2][3].getPosition("ox"),this->cell[2][3].getPosition("oy"));
             }
             return true;
         }
@@ -141,7 +141,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(1,1));
         positions.push_back(std::make_pair(2,1));
         positions.push_back(std::make_pair(2,2));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
         {
             srand(time(NULL));
             int val = rand()%2+1;
@@ -157,7 +157,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
                 obj->setXIndex(0);
                 obj->setYIndex(1);
                 this->boardData[0][1]=3;
-                obj->drawCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
+                obj->drawCoin(this->cell[1][0].getPosition("ox"),this->cell[1][0].getPosition("oy"));
             }
             return true;
         }
@@ -169,7 +169,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(2,1));
         positions.push_back(std::make_pair(1,1));
         positions.push_back(std::make_pair(1,2));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
         {
             srand(time(NULL));
             int val = rand()%2+1;
@@ -185,7 +185,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
                 obj->setXIndex(1);
                 obj->setYIndex(3);
                 this->boardData[1][3]=3;
-                obj->drawCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
+                obj->drawCoin(this->cell[1][3].getPosition("ox"),this->cell[1][3].getPosition("oy"));
             }
             return true;
         }
@@ -197,7 +197,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(2,1));
         positions.push_back(std::make_pair(1,1));
         positions.push_back(std::make_pair(1,2));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
         {
             srand(time(NULL));
             int val = rand()%2+1;
@@ -213,7 +213,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
                 obj->setXIndex(3);
                 obj->setYIndex(1);
                 this->boardData[3][1]=3;
-                obj->drawCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
+                obj->drawCoin(this->cell[3][1].getPosition("ox"),this->cell[3][1].getPosition("oy"));
             }
             return true;
         }
@@ -225,7 +225,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(2,2));
         positions.push_back(std::make_pair(1,2));
         positions.push_back(std::make_pair(1,1));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
         {
             srand(time(NULL));
             int val = rand()%2+1;
@@ -241,7 +241,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
                 obj->setXIndex(1);
                 obj->setYIndex(0);
                 this->boardData[1][0]=3;
-                obj->drawCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
+                obj->drawCoin(this->cell[1][0].getPosition("ox"),this->cell[1][0].getPosition("oy"));
             }
             return true;
         }
@@ -253,14 +253,13 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(2,2));
         positions.push_back(std::make_pair(1,2));
         positions.push_back(std::make_pair(1,1));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
         {
             srand(time(NULL));
             int val = rand()%2+1;
             Coin* obj;
             if(val==1)
                 obj=&this->firstCoin;
-            else
                 obj=&this->secondCoin;
             if(this->boardData[3][2]==0)
             {
@@ -269,7 +268,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
                 obj->setXIndex(3);
                 obj->setYIndex(2);
                 this->boardData[3][2]=3;
-                obj->drawCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
+                obj->drawCoin(this->cell[3][2].getPosition("ox"),this->cell[3][2].getPosition("oy"));
             }
             return true;
         }
@@ -283,7 +282,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(1,0));
         positions.push_back(std::make_pair(2,0));
         positions.push_back(std::make_pair(0,1));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -293,7 +292,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(1,1));
         positions.push_back(std::make_pair(2,1));
         positions.push_back(std::make_pair(0,2));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -303,7 +302,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(1,2));
         positions.push_back(std::make_pair(2,2));
         positions.push_back(std::make_pair(0,3));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -313,7 +312,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(0,1));
         positions.push_back(std::make_pair(1,1));
         positions.push_back(std::make_pair(2,1));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -323,7 +322,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(0,2));
         positions.push_back(std::make_pair(1,2));
         positions.push_back(std::make_pair(2,2));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -333,7 +332,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(0,3));
         positions.push_back(std::make_pair(1,3));
         positions.push_back(std::make_pair(2,3));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -343,7 +342,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(2,0));
         positions.push_back(std::make_pair(3,0));
         positions.push_back(std::make_pair(1,1));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -353,7 +352,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(2,1));
         positions.push_back(std::make_pair(3,1));
         positions.push_back(std::make_pair(1,2));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -363,7 +362,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(2,2));
         positions.push_back(std::make_pair(3,2));
         positions.push_back(std::make_pair(1,3));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -373,7 +372,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(1,1));
         positions.push_back(std::make_pair(2,1));
         positions.push_back(std::make_pair(3,1));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -383,7 +382,17 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(1,2));
         positions.push_back(std::make_pair(2,2));
         positions.push_back(std::make_pair(3,2));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[3][2]+a[3][3]+a[2][3]+a[1][3]==0)
+    {
+        positions.push_back(std::make_pair(1,3));
+        positions.push_back(std::make_pair(3,2));
+        positions.push_back(std::make_pair(3,3));
+        positions.push_back(std::make_pair(2,3));
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -393,7 +402,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(1,3));
         positions.push_back(std::make_pair(2,3));
         positions.push_back(std::make_pair(3,3));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -403,7 +412,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(0,1));
         positions.push_back(std::make_pair(0,2));
         positions.push_back(std::make_pair(1,0));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -413,7 +422,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(1,1));
         positions.push_back(std::make_pair(1,2));
         positions.push_back(std::make_pair(2,0));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -423,7 +432,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(2,1));
         positions.push_back(std::make_pair(2,2));
         positions.push_back(std::make_pair(3,0));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -433,7 +442,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(0,1));
         positions.push_back(std::make_pair(0,2));
         positions.push_back(std::make_pair(0,3));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -443,7 +452,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(1,1));
         positions.push_back(std::make_pair(1,2));
         positions.push_back(std::make_pair(1,3));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -453,7 +462,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(2,1));
         positions.push_back(std::make_pair(2,2));
         positions.push_back(std::make_pair(2,3));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -463,7 +472,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(1,1));
         positions.push_back(std::make_pair(1,2));
         positions.push_back(std::make_pair(0,2));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -473,7 +482,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(2,1));
         positions.push_back(std::make_pair(2,2));
         positions.push_back(std::make_pair(1,2));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -483,7 +492,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(3,1));
         positions.push_back(std::make_pair(3,2));
         positions.push_back(std::make_pair(2,2));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -493,7 +502,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(1,2));
         positions.push_back(std::make_pair(1,3));
         positions.push_back(std::make_pair(0,3));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -503,7 +512,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(2,2));
         positions.push_back(std::make_pair(2,3));
         positions.push_back(std::make_pair(1,3));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -513,7 +522,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(3,2));
         positions.push_back(std::make_pair(3,3));
         positions.push_back(std::make_pair(2,3));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
     positions.clear();
@@ -523,7 +532,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(3,0));
         positions.push_back(std::make_pair(3,1));
         positions.push_back(std::make_pair(3,2));
-        if(areEqualVectors(obj->positions,positions)==false)
+        if(areEqualVectors(playerRef->positions,positions)==false)
             return true;
     }
 
@@ -653,6 +662,16 @@ bool GameBoard::findMove(unsigned short int aa[4][4], int color, int player,std:
         positions.push_back(std::make_pair(1,2));
         positions.push_back(std::make_pair(2,2));
         positions.push_back(std::make_pair(3,2));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[3][2]+a[3][3]+a[2][3]+a[1][3]==0)
+    {
+        positions.push_back(std::make_pair(3,2));
+        positions.push_back(std::make_pair(3,3));
+        positions.push_back(std::make_pair(2,3));
+        positions.push_back(std::make_pair(1,3));
         if(areEqualVectors(obj->positions,positions)==false)
             return true;
     }
