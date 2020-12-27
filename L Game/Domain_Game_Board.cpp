@@ -33,6 +33,275 @@ bool areEqualVectors(std::vector < std::pair <USI, USI> > prevCoordinates, std::
 	}
 	return true;
 }
+bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,std::vector<std::pair<USI, USI> > &positions)
+{
+    Player* obj;
+    if(player==1)
+        obj = &this->redL;
+    else
+        obj = &this->blueL;
+
+	unsigned short int a[4][4];
+	for(int i=0;i<4;i++)
+        for(int j=0;j<4;j++)
+            if(aa[i][j]==color)
+                a[i][j]=0;
+            else
+                a[i][j]=aa[i][j];
+    positions.clear();
+    if(a[0][0]+a[1][0]+a[2][0]+a[0][1]==0)
+    {
+        positions.push_back(std::make_pair(0,0));
+        positions.push_back(std::make_pair(1,0));
+        positions.push_back(std::make_pair(2,0));
+        positions.push_back(std::make_pair(0,1));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[0][1]+a[1][1]+a[2][1]+a[0][2]==0)
+    {
+        positions.push_back(std::make_pair(0,1));
+        positions.push_back(std::make_pair(1,1));
+        positions.push_back(std::make_pair(2,1));
+        positions.push_back(std::make_pair(0,2));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[0][2]+a[1][2]+a[2][2]+a[0][3]==0)
+    {
+        positions.push_back(std::make_pair(0,2));
+        positions.push_back(std::make_pair(1,2));
+        positions.push_back(std::make_pair(2,2));
+        positions.push_back(std::make_pair(0,3));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[0][0]+a[0][1]+a[1][1]+a[2][1]==0)
+    {
+        positions.push_back(std::make_pair(0,0));
+        positions.push_back(std::make_pair(0,1));
+        positions.push_back(std::make_pair(1,1));
+        positions.push_back(std::make_pair(2,1));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[0][1]+a[0][2]+a[1][2]+a[2][2]==0)
+    {
+        positions.push_back(std::make_pair(0,1));
+        positions.push_back(std::make_pair(0,2));
+        positions.push_back(std::make_pair(1,2));
+        positions.push_back(std::make_pair(2,2));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[0][2]+a[0][3]+a[1][3]+a[2][3]==0)
+    {
+        positions.push_back(std::make_pair(0,2));
+        positions.push_back(std::make_pair(0,3));
+        positions.push_back(std::make_pair(1,3));
+        positions.push_back(std::make_pair(2,3));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[1][0]+a[2][0]+a[3][0]+a[1][1]==0)
+    {
+        positions.push_back(std::make_pair(1,0));
+        positions.push_back(std::make_pair(2,0));
+        positions.push_back(std::make_pair(3,0));
+        positions.push_back(std::make_pair(1,1));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[1][1]+a[2][1]+a[3][1]+a[1][2]==0)
+    {
+        positions.push_back(std::make_pair(1,1));
+        positions.push_back(std::make_pair(2,1));
+        positions.push_back(std::make_pair(3,1));
+        positions.push_back(std::make_pair(1,2));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[1][2]+a[2][2]+a[3][2]+a[1][3]==0)
+    {
+        positions.push_back(std::make_pair(1,2));
+        positions.push_back(std::make_pair(2,2));
+        positions.push_back(std::make_pair(3,2));
+        positions.push_back(std::make_pair(1,3));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[1][0]+a[1][1]+a[2][1]+a[3][1]==0)
+    {
+        positions.push_back(std::make_pair(1,0));
+        positions.push_back(std::make_pair(1,1));
+        positions.push_back(std::make_pair(2,1));
+        positions.push_back(std::make_pair(3,1));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[1][1]+a[1][2]+a[2][2]+a[3][2]==0)
+    {
+        positions.push_back(std::make_pair(1,1));
+        positions.push_back(std::make_pair(1,2));
+        positions.push_back(std::make_pair(2,2));
+        positions.push_back(std::make_pair(3,2));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[1][2]+a[1][3]+a[2][3]+a[3][3]==0)
+    {
+        positions.push_back(std::make_pair(1,2));
+        positions.push_back(std::make_pair(1,3));
+        positions.push_back(std::make_pair(2,3));
+        positions.push_back(std::make_pair(3,3));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[0][0]+a[0][1]+a[0][2]+a[1][0]==0)
+    {
+        positions.push_back(std::make_pair(0,0));
+        positions.push_back(std::make_pair(0,1));
+        positions.push_back(std::make_pair(0,2));
+        positions.push_back(std::make_pair(1,0));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[1][0]+a[1][1]+a[1][2]+a[2][0]==0)
+    {
+        positions.push_back(std::make_pair(1,0));
+        positions.push_back(std::make_pair(1,1));
+        positions.push_back(std::make_pair(1,2));
+        positions.push_back(std::make_pair(2,0));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[2][0]+a[2][1]+a[2][2]+a[3][0]==0)
+    {
+        positions.push_back(std::make_pair(2,0));
+        positions.push_back(std::make_pair(2,1));
+        positions.push_back(std::make_pair(2,2));
+        positions.push_back(std::make_pair(3,0));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[1][1]+a[0][1]+a[0][2]+a[0][3]==0)
+    {
+        positions.push_back(std::make_pair(1,1));
+        positions.push_back(std::make_pair(0,1));
+        positions.push_back(std::make_pair(0,2));
+        positions.push_back(std::make_pair(0,3));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[2][1]+a[1][1]+a[1][2]+a[1][3]==0)
+    {
+        positions.push_back(std::make_pair(2,1));
+        positions.push_back(std::make_pair(1,1));
+        positions.push_back(std::make_pair(1,2));
+        positions.push_back(std::make_pair(1,3));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[3][1]+a[2][1]+a[2][2]+a[2][3]==0)
+    {
+        positions.push_back(std::make_pair(3,1));
+        positions.push_back(std::make_pair(2,1));
+        positions.push_back(std::make_pair(2,2));
+        positions.push_back(std::make_pair(2,3));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[1][0]+a[1][1]+a[1][2]+a[0][2]==0)
+    {
+        positions.push_back(std::make_pair(1,0));
+        positions.push_back(std::make_pair(1,1));
+        positions.push_back(std::make_pair(1,2));
+        positions.push_back(std::make_pair(0,2));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[2][0]+a[2][1]+a[2][2]+a[1][2]==0)
+    {
+        positions.push_back(std::make_pair(2,0));
+        positions.push_back(std::make_pair(2,1));
+        positions.push_back(std::make_pair(2,2));
+        positions.push_back(std::make_pair(1,2));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[3][0]+a[3][1]+a[3][2]+a[2][2]==0)
+    {
+        positions.push_back(std::make_pair(3,0));
+        positions.push_back(std::make_pair(3,1));
+        positions.push_back(std::make_pair(3,2));
+        positions.push_back(std::make_pair(2,2));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[1][1]+a[1][2]+a[1][3]+a[0][3]==0)
+    {
+        positions.push_back(std::make_pair(1,1));
+        positions.push_back(std::make_pair(1,2));
+        positions.push_back(std::make_pair(1,3));
+        positions.push_back(std::make_pair(0,3));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[2][1]+a[2][2]+a[2][3]+a[1][3]==0)
+    {
+        positions.push_back(std::make_pair(2,1));
+        positions.push_back(std::make_pair(2,2));
+        positions.push_back(std::make_pair(2,3));
+        positions.push_back(std::make_pair(1,3));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[3][1]+a[3][2]+a[3][3]+a[2][3]==0)
+    {
+        positions.push_back(std::make_pair(3,1));
+        positions.push_back(std::make_pair(3,2));
+        positions.push_back(std::make_pair(3,3));
+        positions.push_back(std::make_pair(2,3));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+    positions.clear();
+    if(a[2][0]+a[3][0]+a[3][1]+a[3][2]==0)
+    {
+        positions.push_back(std::make_pair(2,0));
+        positions.push_back(std::make_pair(3,0));
+        positions.push_back(std::make_pair(3,1));
+        positions.push_back(std::make_pair(3,2));
+        if(areEqualVectors(obj->positions,positions)==false)
+            return true;
+    }
+
+    return false;
+}
+
 
 bool GameBoard::findMove(unsigned short int aa[4][4], int color, int player,std::vector<std::pair<USI, USI> > &positions)
 {

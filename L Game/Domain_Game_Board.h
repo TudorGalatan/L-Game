@@ -176,4 +176,5 @@ class GameBoard
         void drawButton(int color);
 
         bool findMove(unsigned short int aa[4][4],int color,int player,std::vector<std::pair<USI, USI> > &positions);
+        bool findBestMove(unsigned short int aa[4][4],int color,int player,std::vector<std::pair<USI, USI> > &positions);
 };
