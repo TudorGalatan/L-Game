@@ -10,6 +10,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <time.h>
 
 #define HORIZONTAL 1
 #define VERTICAL 2
@@ -17,21 +18,21 @@
 
 bool areEqualVectors(std::vector < std::pair <USI, USI> > prevCoordinates, std::vector < std::pair <USI, USI> > currentCoordinates)
 {
-	int prevDim = prevCoordinates.size();
-	int currentDim = currentCoordinates.size();
-	int nrOfFounds = 0;
-	bool found = false;
-	for (int i = 0; i < currentDim; i++)
-	{
-		for (int j = 0; j < prevDim; j++)
-			if (prevCoordinates[i].first == currentCoordinates[j].first &&
-				prevCoordinates[i].second == currentCoordinates[j].second)
-				found = true;
-		if (found == false)
-			return false;
-		found = false;
-	}
-	return true;
+    int prevDim = prevCoordinates.size();
+    int currentDim = currentCoordinates.size();
+    int nrOfFounds = 0;
+    bool found = false;
+    for (int i = 0; i < currentDim; i++)
+    {
+        for (int j = 0; j < prevDim; j++)
+            if (prevCoordinates[i].first == currentCoordinates[j].first &&
+                    prevCoordinates[i].second == currentCoordinates[j].second)
+                found = true;
+        if (found == false)
+            return false;
+        found = false;
+    }
+    return true;
 }
 bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,std::vector<std::pair<USI, USI> > &positions)
 {
@@ -41,13 +42,240 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
     else
         obj = &this->blueL;
 
-	unsigned short int a[4][4];
-	for(int i=0;i<4;i++)
-        for(int j=0;j<4;j++)
+    unsigned short int a[4][4];
+    for(int i=0; i<4; i++)
+        for(int j=0; j<4; j++)
             if(aa[i][j]==color)
                 a[i][j]=0;
             else
                 a[i][j]=aa[i][j];
+    ///HUNTS A COUPLE OF SPOTS
+    positions.clear();
+    if(a[0][2]+a[1][2]+a[2][2]+a[2][1]==0)
+    {
+        positions.push_back(std::make_pair(0,2));
+        positions.push_back(std::make_pair(1,2));
+        positions.push_back(std::make_pair(2,2));
+        positions.push_back(std::make_pair(2,1));
+        if(areEqualVectors(obj->positions,positions)==false)
+        {
+            srand(time(NULL));
+            int val = rand()%2+1;
+            Coin* obj;
+            if(val==1)
+                obj=&this->firstCoin;
+            else
+                obj=&this->secondCoin;
+            if(this->boardData[2][0]==0)
+            {
+                obj->deleteCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
+                this->boardData[obj->getXIndex()][obj->getYIndex()]=0;
+                obj->setXIndex(2);
+                obj->setYIndex(0);
+                this->boardData[2][0]=3;
+                obj->drawCoin(this->cell[2][0].getPosition("ox"),this->cell[2][0].getPosition("oy"));
+            }
+            return true;
+        }
+    }
+    positions.clear();
+    if(a[2][0]+a[1][2]+a[2][2]+a[2][1]==0)
+    {
+        positions.push_back(std::make_pair(2,0));
+        positions.push_back(std::make_pair(1,2));
+        positions.push_back(std::make_pair(2,2));
+        positions.push_back(std::make_pair(2,1));
+        if(areEqualVectors(obj->positions,positions)==false)
+        {
+            srand(time(NULL));
+            int val = rand()%2+1;
+            Coin* obj;
+            if(val==1)
+                obj=&this->firstCoin;
+            else
+                obj=&this->secondCoin;
+            if(this->boardData[0][2]==0)
+            {
+                obj->deleteCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
+                this->boardData[obj->getXIndex()][obj->getYIndex()]=0;
+                obj->setXIndex(0);
+                obj->setYIndex(2);
+                this->boardData[0][2]=3;
+                obj->drawCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
+            }
+            return true;
+        }
+    }
+    positions.clear();
+    if(a[0][1]+a[1][1]+a[2][1]+a[2][2]==0)
+    {
+        positions.push_back(std::make_pair(0,1));
+        positions.push_back(std::make_pair(1,1));
+        positions.push_back(std::make_pair(2,1));
+        positions.push_back(std::make_pair(2,2));
+        if(areEqualVectors(obj->positions,positions)==false)
+        {
+            srand(time(NULL));
+            int val = rand()%2+1;
+            Coin* obj;
+            if(val==1)
+                obj=&this->firstCoin;
+            else
+                obj=&this->secondCoin;
+            if(this->boardData[2][3]==0)
+            {
+                obj->deleteCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
+                this->boardData[obj->getXIndex()][obj->getYIndex()]=0;
+                obj->setXIndex(2);
+                obj->setYIndex(3);
+                this->boardData[2][3]=3;
+                obj->drawCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
+            }
+            return true;
+        }
+    }
+    positions.clear();
+    if(a[2][3]+a[1][1]+a[2][1]+a[2][2]==0)
+    {
+        positions.push_back(std::make_pair(2,3));
+        positions.push_back(std::make_pair(1,1));
+        positions.push_back(std::make_pair(2,1));
+        positions.push_back(std::make_pair(2,2));
+        if(areEqualVectors(obj->positions,positions)==false)
+        {
+            srand(time(NULL));
+            int val = rand()%2+1;
+            Coin* obj;
+            if(val==1)
+                obj=&this->firstCoin;
+            else
+                obj=&this->secondCoin;
+            if(this->boardData[1][0]==0)
+            {
+                obj->deleteCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
+                this->boardData[obj->getXIndex()][obj->getYIndex()]=0;
+                obj->setXIndex(0);
+                obj->setYIndex(1);
+                this->boardData[0][1]=3;
+                obj->drawCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
+            }
+            return true;
+        }
+    }
+    positions.clear();
+    if(a[3][1]+a[2][1]+a[1][1]+a[1][2]==0)
+    {
+        positions.push_back(std::make_pair(3,1));
+        positions.push_back(std::make_pair(2,1));
+        positions.push_back(std::make_pair(1,1));
+        positions.push_back(std::make_pair(1,2));
+        if(areEqualVectors(obj->positions,positions)==false)
+        {
+            srand(time(NULL));
+            int val = rand()%2+1;
+            Coin* obj;
+            if(val==1)
+                obj=&this->firstCoin;
+            else
+                obj=&this->secondCoin;
+            if(this->boardData[1][3]==0)
+            {
+                obj->deleteCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
+                this->boardData[obj->getXIndex()][obj->getYIndex()]=0;
+                obj->setXIndex(1);
+                obj->setYIndex(3);
+                this->boardData[1][3]=3;
+                obj->drawCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
+            }
+            return true;
+        }
+    }
+    positions.clear();
+    if(a[1][3]+a[2][1]+a[1][1]+a[1][2]==0)
+    {
+        positions.push_back(std::make_pair(1,3));
+        positions.push_back(std::make_pair(2,1));
+        positions.push_back(std::make_pair(1,1));
+        positions.push_back(std::make_pair(1,2));
+        if(areEqualVectors(obj->positions,positions)==false)
+        {
+            srand(time(NULL));
+            int val = rand()%2+1;
+            Coin* obj;
+            if(val==1)
+                obj=&this->firstCoin;
+            else
+                obj=&this->secondCoin;
+            if(this->boardData[3][1]==0)
+            {
+                obj->deleteCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
+                this->boardData[obj->getXIndex()][obj->getYIndex()]=0;
+                obj->setXIndex(3);
+                obj->setYIndex(1);
+                this->boardData[3][1]=3;
+                obj->drawCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
+            }
+            return true;
+        }
+    }
+    positions.clear();
+    if(a[3][2]+a[2][2]+a[1][2]+a[1][1]==0)
+    {
+        positions.push_back(std::make_pair(3,2));
+        positions.push_back(std::make_pair(2,2));
+        positions.push_back(std::make_pair(1,2));
+        positions.push_back(std::make_pair(1,1));
+        if(areEqualVectors(obj->positions,positions)==false)
+        {
+            srand(time(NULL));
+            int val = rand()%2+1;
+            Coin* obj;
+            if(val==1)
+                obj=&this->firstCoin;
+            else
+                obj=&this->secondCoin;
+            if(this->boardData[1][0]==0)
+            {
+                obj->deleteCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
+                this->boardData[obj->getXIndex()][obj->getYIndex()]=0;
+                obj->setXIndex(1);
+                obj->setYIndex(0);
+                this->boardData[1][0]=3;
+                obj->drawCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
+            }
+            return true;
+        }
+    }
+    positions.clear();
+    if(a[1][0]+a[2][2]+a[1][2]+a[1][1]==0)
+    {
+        positions.push_back(std::make_pair(1,0));
+        positions.push_back(std::make_pair(2,2));
+        positions.push_back(std::make_pair(1,2));
+        positions.push_back(std::make_pair(1,1));
+        if(areEqualVectors(obj->positions,positions)==false)
+        {
+            srand(time(NULL));
+            int val = rand()%2+1;
+            Coin* obj;
+            if(val==1)
+                obj=&this->firstCoin;
+            else
+                obj=&this->secondCoin;
+            if(this->boardData[3][2]==0)
+            {
+                obj->deleteCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
+                this->boardData[obj->getXIndex()][obj->getYIndex()]=0;
+                obj->setXIndex(3);
+                obj->setYIndex(2);
+                this->boardData[3][2]=3;
+                obj->drawCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
+            }
+            return true;
+        }
+    }
+    ///END OF THE 'HUNTING' - Adi 2020
+
     positions.clear();
     if(a[0][0]+a[1][0]+a[2][0]+a[0][1]==0)
     {
@@ -311,9 +539,9 @@ bool GameBoard::findMove(unsigned short int aa[4][4], int color, int player,std:
     else
         obj = &this->blueL;
 
-	unsigned short int a[4][4];
-	for(int i=0;i<4;i++)
-        for(int j=0;j<4;j++)
+    unsigned short int a[4][4];
+    for(int i=0; i<4; i++)
+        for(int j=0; j<4; j++)
             if(aa[i][j]==color)
                 a[i][j]=0;
             else
