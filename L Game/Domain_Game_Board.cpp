@@ -260,6 +260,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
             Coin* obj;
             if(val==1)
                 obj=&this->firstCoin;
+            else
                 obj=&this->secondCoin;
             if(this->boardData[3][2]==0)
             {
