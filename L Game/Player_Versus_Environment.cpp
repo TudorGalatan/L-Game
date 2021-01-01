@@ -84,15 +84,13 @@ void PlayerVersusEnvironment::startGame ()
                                     this->gameBoard.cell[z][z2].setColor(BLACK);
                                     this->gameBoard.boardData[z][z2] = 0;
                                 }
-                            this->gameBoard.blueL.positions[z].first = 10;
-                            this->gameBoard.blueL.positions[z].second = 10;
+                            this->gameBoard.blueL.setCoordinatesOfCell(z, 10, 10);
                         }
                         for(int i=0;i<pos.size();i++)
                         {
                             this->gameBoard.boardData[pos[i].first][pos[i].second] = 2;
                             this->gameBoard.cell[pos[i].first][pos[i].second].setColor(BLUE);
-                            this->gameBoard.blueL.positions[i].first = pos[i].first;
-                            this->gameBoard.blueL.positions[i].second = pos[i].second;
+                            this->gameBoard.blueL.setCoordinatesOfCell(i, pos[i].first, pos[i].second);
                         }
 
                     }
@@ -128,15 +126,13 @@ void PlayerVersusEnvironment::startGame ()
                                     this->gameBoard.cell[z][z2].setColor(BLACK);
                                     this->gameBoard.boardData[z][z2] = 0;
                                 }
-                            this->gameBoard.blueL.positions[z].first = 10;
-                            this->gameBoard.blueL.positions[z].second = 10;
+                            this->gameBoard.blueL.setCoordinatesOfCell(z, 10, 10);
                         }
                         for(int i=0;i<pos.size();i++)
                         {
                             this->gameBoard.boardData[pos[i].first][pos[i].second] = 2;
                             this->gameBoard.cell[pos[i].first][pos[i].second].setColor(BLUE);
-                            this->gameBoard.blueL.positions[i].first = pos[i].first;
-                            this->gameBoard.blueL.positions[i].second = pos[i].second;
+                            this->gameBoard.blueL.setCoordinatesOfCell(i, pos[i].first, pos[i].second);
                         }
 
                     }
@@ -157,6 +153,5 @@ void PlayerVersusEnvironment::startGame ()
                         outtextxy(getmaxx()/2,getmaxy()/2,"RED PLAYER WINS");
                     }
                 }
-
         }
 }

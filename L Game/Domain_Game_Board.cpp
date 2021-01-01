@@ -34,7 +34,7 @@ bool areEqualVectors(std::vector < std::pair <USI, USI> > prevCoordinates, std::
     }
     return true;
 }
-bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,std::vector<std::pair<USI, USI> > &positions)
+bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,std::vector<std::pair<USI, USI> > &coordinates)
 {
     Player* playerRef;
     if(player==1)
@@ -50,14 +50,14 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
             else
                 a[i][j]=aa[i][j];
     ///HUNTS A COUPLE OF SPOTS
-    positions.clear();
+    coordinates.clear();
     if(a[0][2]+a[1][2]+a[2][2]+a[2][1]==0)
     {
-        positions.push_back(std::make_pair(0,2));
-        positions.push_back(std::make_pair(1,2));
-        positions.push_back(std::make_pair(2,2));
-        positions.push_back(std::make_pair(2,1));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(0,2));
+        coordinates.push_back(std::make_pair(1,2));
+        coordinates.push_back(std::make_pair(2,2));
+        coordinates.push_back(std::make_pair(2,1));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
         {
             srand(time(NULL));
             int val = rand()%2+1;
@@ -78,14 +78,14 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
             return true;
         }
     }
-    positions.clear();
+    coordinates.clear();
     if(a[2][0]+a[1][2]+a[2][2]+a[2][1]==0)
     {
-        positions.push_back(std::make_pair(2,0));
-        positions.push_back(std::make_pair(1,2));
-        positions.push_back(std::make_pair(2,2));
-        positions.push_back(std::make_pair(2,1));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(2,0));
+        coordinates.push_back(std::make_pair(1,2));
+        coordinates.push_back(std::make_pair(2,2));
+        coordinates.push_back(std::make_pair(2,1));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
         {
             srand(time(NULL));
             int val = rand()%2+1;
@@ -106,14 +106,14 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
             return true;
         }
     }
-    positions.clear();
+    coordinates.clear();
     if(a[0][1]+a[1][1]+a[2][1]+a[2][2]==0)
     {
-        positions.push_back(std::make_pair(0,1));
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(2,1));
-        positions.push_back(std::make_pair(2,2));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(0,1));
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(2,1));
+        coordinates.push_back(std::make_pair(2,2));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
         {
             srand(time(NULL));
             int val = rand()%2+1;
@@ -134,14 +134,14 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
             return true;
         }
     }
-    positions.clear();
+    coordinates.clear();
     if(a[2][3]+a[1][1]+a[2][1]+a[2][2]==0)
     {
-        positions.push_back(std::make_pair(2,3));
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(2,1));
-        positions.push_back(std::make_pair(2,2));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(2,3));
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(2,1));
+        coordinates.push_back(std::make_pair(2,2));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
         {
             srand(time(NULL));
             int val = rand()%2+1;
@@ -162,14 +162,14 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
             return true;
         }
     }
-    positions.clear();
+    coordinates.clear();
     if(a[3][1]+a[2][1]+a[1][1]+a[1][2]==0)
     {
-        positions.push_back(std::make_pair(3,1));
-        positions.push_back(std::make_pair(2,1));
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(1,2));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(3,1));
+        coordinates.push_back(std::make_pair(2,1));
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(1,2));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
         {
             srand(time(NULL));
             int val = rand()%2+1;
@@ -190,14 +190,14 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
             return true;
         }
     }
-    positions.clear();
+    coordinates.clear();
     if(a[1][3]+a[2][1]+a[1][1]+a[1][2]==0)
     {
-        positions.push_back(std::make_pair(1,3));
-        positions.push_back(std::make_pair(2,1));
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(1,2));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,3));
+        coordinates.push_back(std::make_pair(2,1));
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(1,2));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
         {
             srand(time(NULL));
             int val = rand()%2+1;
@@ -218,14 +218,14 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
             return true;
         }
     }
-    positions.clear();
+    coordinates.clear();
     if(a[3][2]+a[2][2]+a[1][2]+a[1][1]==0)
     {
-        positions.push_back(std::make_pair(3,2));
-        positions.push_back(std::make_pair(2,2));
-        positions.push_back(std::make_pair(1,2));
-        positions.push_back(std::make_pair(1,1));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(3,2));
+        coordinates.push_back(std::make_pair(2,2));
+        coordinates.push_back(std::make_pair(1,2));
+        coordinates.push_back(std::make_pair(1,1));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
         {
             srand(time(NULL));
             int val = rand()%2+1;
@@ -246,14 +246,14 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
             return true;
         }
     }
-    positions.clear();
+    coordinates.clear();
     if(a[1][0]+a[2][2]+a[1][2]+a[1][1]==0)
     {
-        positions.push_back(std::make_pair(1,0));
-        positions.push_back(std::make_pair(2,2));
-        positions.push_back(std::make_pair(1,2));
-        positions.push_back(std::make_pair(1,1));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,0));
+        coordinates.push_back(std::make_pair(2,2));
+        coordinates.push_back(std::make_pair(1,2));
+        coordinates.push_back(std::make_pair(1,1));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
         {
             srand(time(NULL));
             int val = rand()%2+1;
@@ -276,264 +276,264 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
     }
     ///END OF THE 'HUNTING' - Adi 2020
 
-    positions.clear();
+    coordinates.clear();
     if(a[0][0]+a[1][0]+a[2][0]+a[0][1]==0)
     {
-        positions.push_back(std::make_pair(0,0));
-        positions.push_back(std::make_pair(1,0));
-        positions.push_back(std::make_pair(2,0));
-        positions.push_back(std::make_pair(0,1));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(0,0));
+        coordinates.push_back(std::make_pair(1,0));
+        coordinates.push_back(std::make_pair(2,0));
+        coordinates.push_back(std::make_pair(0,1));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[0][1]+a[1][1]+a[2][1]+a[0][2]==0)
     {
-        positions.push_back(std::make_pair(0,1));
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(2,1));
-        positions.push_back(std::make_pair(0,2));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(0,1));
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(2,1));
+        coordinates.push_back(std::make_pair(0,2));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[0][2]+a[1][2]+a[2][2]+a[0][3]==0)
     {
-        positions.push_back(std::make_pair(0,2));
-        positions.push_back(std::make_pair(1,2));
-        positions.push_back(std::make_pair(2,2));
-        positions.push_back(std::make_pair(0,3));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(0,2));
+        coordinates.push_back(std::make_pair(1,2));
+        coordinates.push_back(std::make_pair(2,2));
+        coordinates.push_back(std::make_pair(0,3));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[0][0]+a[0][1]+a[1][1]+a[2][1]==0)
     {
-        positions.push_back(std::make_pair(0,0));
-        positions.push_back(std::make_pair(0,1));
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(2,1));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(0,0));
+        coordinates.push_back(std::make_pair(0,1));
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(2,1));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[0][1]+a[0][2]+a[1][2]+a[2][2]==0)
     {
-        positions.push_back(std::make_pair(0,1));
-        positions.push_back(std::make_pair(0,2));
-        positions.push_back(std::make_pair(1,2));
-        positions.push_back(std::make_pair(2,2));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(0,1));
+        coordinates.push_back(std::make_pair(0,2));
+        coordinates.push_back(std::make_pair(1,2));
+        coordinates.push_back(std::make_pair(2,2));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[0][2]+a[0][3]+a[1][3]+a[2][3]==0)
     {
-        positions.push_back(std::make_pair(0,2));
-        positions.push_back(std::make_pair(0,3));
-        positions.push_back(std::make_pair(1,3));
-        positions.push_back(std::make_pair(2,3));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(0,2));
+        coordinates.push_back(std::make_pair(0,3));
+        coordinates.push_back(std::make_pair(1,3));
+        coordinates.push_back(std::make_pair(2,3));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[1][0]+a[2][0]+a[3][0]+a[1][1]==0)
     {
-        positions.push_back(std::make_pair(1,0));
-        positions.push_back(std::make_pair(2,0));
-        positions.push_back(std::make_pair(3,0));
-        positions.push_back(std::make_pair(1,1));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,0));
+        coordinates.push_back(std::make_pair(2,0));
+        coordinates.push_back(std::make_pair(3,0));
+        coordinates.push_back(std::make_pair(1,1));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[1][1]+a[2][1]+a[3][1]+a[1][2]==0)
     {
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(2,1));
-        positions.push_back(std::make_pair(3,1));
-        positions.push_back(std::make_pair(1,2));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(2,1));
+        coordinates.push_back(std::make_pair(3,1));
+        coordinates.push_back(std::make_pair(1,2));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[1][2]+a[2][2]+a[3][2]+a[1][3]==0)
     {
-        positions.push_back(std::make_pair(1,2));
-        positions.push_back(std::make_pair(2,2));
-        positions.push_back(std::make_pair(3,2));
-        positions.push_back(std::make_pair(1,3));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,2));
+        coordinates.push_back(std::make_pair(2,2));
+        coordinates.push_back(std::make_pair(3,2));
+        coordinates.push_back(std::make_pair(1,3));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[1][0]+a[1][1]+a[2][1]+a[3][1]==0)
     {
-        positions.push_back(std::make_pair(1,0));
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(2,1));
-        positions.push_back(std::make_pair(3,1));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,0));
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(2,1));
+        coordinates.push_back(std::make_pair(3,1));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[1][1]+a[1][2]+a[2][2]+a[3][2]==0)
     {
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(1,2));
-        positions.push_back(std::make_pair(2,2));
-        positions.push_back(std::make_pair(3,2));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(1,2));
+        coordinates.push_back(std::make_pair(2,2));
+        coordinates.push_back(std::make_pair(3,2));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[3][2]+a[3][3]+a[2][3]+a[1][3]==0)
     {
-        positions.push_back(std::make_pair(1,3));
-        positions.push_back(std::make_pair(3,2));
-        positions.push_back(std::make_pair(3,3));
-        positions.push_back(std::make_pair(2,3));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,3));
+        coordinates.push_back(std::make_pair(3,2));
+        coordinates.push_back(std::make_pair(3,3));
+        coordinates.push_back(std::make_pair(2,3));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[1][2]+a[1][3]+a[2][3]+a[3][3]==0)
     {
-        positions.push_back(std::make_pair(1,2));
-        positions.push_back(std::make_pair(1,3));
-        positions.push_back(std::make_pair(2,3));
-        positions.push_back(std::make_pair(3,3));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,2));
+        coordinates.push_back(std::make_pair(1,3));
+        coordinates.push_back(std::make_pair(2,3));
+        coordinates.push_back(std::make_pair(3,3));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[0][0]+a[0][1]+a[0][2]+a[1][0]==0)
     {
-        positions.push_back(std::make_pair(0,0));
-        positions.push_back(std::make_pair(0,1));
-        positions.push_back(std::make_pair(0,2));
-        positions.push_back(std::make_pair(1,0));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(0,0));
+        coordinates.push_back(std::make_pair(0,1));
+        coordinates.push_back(std::make_pair(0,2));
+        coordinates.push_back(std::make_pair(1,0));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[1][0]+a[1][1]+a[1][2]+a[2][0]==0)
     {
-        positions.push_back(std::make_pair(1,0));
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(1,2));
-        positions.push_back(std::make_pair(2,0));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,0));
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(1,2));
+        coordinates.push_back(std::make_pair(2,0));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[2][0]+a[2][1]+a[2][2]+a[3][0]==0)
     {
-        positions.push_back(std::make_pair(2,0));
-        positions.push_back(std::make_pair(2,1));
-        positions.push_back(std::make_pair(2,2));
-        positions.push_back(std::make_pair(3,0));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(2,0));
+        coordinates.push_back(std::make_pair(2,1));
+        coordinates.push_back(std::make_pair(2,2));
+        coordinates.push_back(std::make_pair(3,0));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[1][1]+a[0][1]+a[0][2]+a[0][3]==0)
     {
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(0,1));
-        positions.push_back(std::make_pair(0,2));
-        positions.push_back(std::make_pair(0,3));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(0,1));
+        coordinates.push_back(std::make_pair(0,2));
+        coordinates.push_back(std::make_pair(0,3));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[2][1]+a[1][1]+a[1][2]+a[1][3]==0)
     {
-        positions.push_back(std::make_pair(2,1));
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(1,2));
-        positions.push_back(std::make_pair(1,3));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(2,1));
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(1,2));
+        coordinates.push_back(std::make_pair(1,3));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[3][1]+a[2][1]+a[2][2]+a[2][3]==0)
     {
-        positions.push_back(std::make_pair(3,1));
-        positions.push_back(std::make_pair(2,1));
-        positions.push_back(std::make_pair(2,2));
-        positions.push_back(std::make_pair(2,3));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(3,1));
+        coordinates.push_back(std::make_pair(2,1));
+        coordinates.push_back(std::make_pair(2,2));
+        coordinates.push_back(std::make_pair(2,3));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[1][0]+a[1][1]+a[1][2]+a[0][2]==0)
     {
-        positions.push_back(std::make_pair(1,0));
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(1,2));
-        positions.push_back(std::make_pair(0,2));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,0));
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(1,2));
+        coordinates.push_back(std::make_pair(0,2));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[2][0]+a[2][1]+a[2][2]+a[1][2]==0)
     {
-        positions.push_back(std::make_pair(2,0));
-        positions.push_back(std::make_pair(2,1));
-        positions.push_back(std::make_pair(2,2));
-        positions.push_back(std::make_pair(1,2));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(2,0));
+        coordinates.push_back(std::make_pair(2,1));
+        coordinates.push_back(std::make_pair(2,2));
+        coordinates.push_back(std::make_pair(1,2));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[3][0]+a[3][1]+a[3][2]+a[2][2]==0)
     {
-        positions.push_back(std::make_pair(3,0));
-        positions.push_back(std::make_pair(3,1));
-        positions.push_back(std::make_pair(3,2));
-        positions.push_back(std::make_pair(2,2));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(3,0));
+        coordinates.push_back(std::make_pair(3,1));
+        coordinates.push_back(std::make_pair(3,2));
+        coordinates.push_back(std::make_pair(2,2));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[1][1]+a[1][2]+a[1][3]+a[0][3]==0)
     {
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(1,2));
-        positions.push_back(std::make_pair(1,3));
-        positions.push_back(std::make_pair(0,3));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(1,2));
+        coordinates.push_back(std::make_pair(1,3));
+        coordinates.push_back(std::make_pair(0,3));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[2][1]+a[2][2]+a[2][3]+a[1][3]==0)
     {
-        positions.push_back(std::make_pair(2,1));
-        positions.push_back(std::make_pair(2,2));
-        positions.push_back(std::make_pair(2,3));
-        positions.push_back(std::make_pair(1,3));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(2,1));
+        coordinates.push_back(std::make_pair(2,2));
+        coordinates.push_back(std::make_pair(2,3));
+        coordinates.push_back(std::make_pair(1,3));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[3][1]+a[3][2]+a[3][3]+a[2][3]==0)
     {
-        positions.push_back(std::make_pair(3,1));
-        positions.push_back(std::make_pair(3,2));
-        positions.push_back(std::make_pair(3,3));
-        positions.push_back(std::make_pair(2,3));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(3,1));
+        coordinates.push_back(std::make_pair(3,2));
+        coordinates.push_back(std::make_pair(3,3));
+        coordinates.push_back(std::make_pair(2,3));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[2][0]+a[3][0]+a[3][1]+a[3][2]==0)
     {
-        positions.push_back(std::make_pair(2,0));
-        positions.push_back(std::make_pair(3,0));
-        positions.push_back(std::make_pair(3,1));
-        positions.push_back(std::make_pair(3,2));
-        if(areEqualVectors(playerRef->positions,positions)==false)
+        coordinates.push_back(std::make_pair(2,0));
+        coordinates.push_back(std::make_pair(3,0));
+        coordinates.push_back(std::make_pair(3,1));
+        coordinates.push_back(std::make_pair(3,2));
+        if(areEqualVectors(playerRef->getCoordinates(),coordinates)==false)
             return true;
     }
 
@@ -541,7 +541,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
 }
 
 
-bool GameBoard::findMove(unsigned short int aa[4][4], int color, int player,std::vector<std::pair<USI, USI> > &positions)
+bool GameBoard::findMove(unsigned short int aa[4][4], int color, int player,std::vector<std::pair<USI, USI> > &coordinates)
 {
     Player* obj;
     if(player==1)
@@ -556,264 +556,264 @@ bool GameBoard::findMove(unsigned short int aa[4][4], int color, int player,std:
                 a[i][j]=0;
             else
                 a[i][j]=aa[i][j];
-    positions.clear();
+    coordinates.clear();
     if(a[0][0]+a[1][0]+a[2][0]+a[0][1]==0)
     {
-        positions.push_back(std::make_pair(0,0));
-        positions.push_back(std::make_pair(1,0));
-        positions.push_back(std::make_pair(2,0));
-        positions.push_back(std::make_pair(0,1));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(0,0));
+        coordinates.push_back(std::make_pair(1,0));
+        coordinates.push_back(std::make_pair(2,0));
+        coordinates.push_back(std::make_pair(0,1));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[0][1]+a[1][1]+a[2][1]+a[0][2]==0)
     {
-        positions.push_back(std::make_pair(0,1));
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(2,1));
-        positions.push_back(std::make_pair(0,2));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(0,1));
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(2,1));
+        coordinates.push_back(std::make_pair(0,2));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[0][2]+a[1][2]+a[2][2]+a[0][3]==0)
     {
-        positions.push_back(std::make_pair(0,2));
-        positions.push_back(std::make_pair(1,2));
-        positions.push_back(std::make_pair(2,2));
-        positions.push_back(std::make_pair(0,3));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(0,2));
+        coordinates.push_back(std::make_pair(1,2));
+        coordinates.push_back(std::make_pair(2,2));
+        coordinates.push_back(std::make_pair(0,3));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[0][0]+a[0][1]+a[1][1]+a[2][1]==0)
     {
-        positions.push_back(std::make_pair(0,0));
-        positions.push_back(std::make_pair(0,1));
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(2,1));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(0,0));
+        coordinates.push_back(std::make_pair(0,1));
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(2,1));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[0][1]+a[0][2]+a[1][2]+a[2][2]==0)
     {
-        positions.push_back(std::make_pair(0,1));
-        positions.push_back(std::make_pair(0,2));
-        positions.push_back(std::make_pair(1,2));
-        positions.push_back(std::make_pair(2,2));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(0,1));
+        coordinates.push_back(std::make_pair(0,2));
+        coordinates.push_back(std::make_pair(1,2));
+        coordinates.push_back(std::make_pair(2,2));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[0][2]+a[0][3]+a[1][3]+a[2][3]==0)
     {
-        positions.push_back(std::make_pair(0,2));
-        positions.push_back(std::make_pair(0,3));
-        positions.push_back(std::make_pair(1,3));
-        positions.push_back(std::make_pair(2,3));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(0,2));
+        coordinates.push_back(std::make_pair(0,3));
+        coordinates.push_back(std::make_pair(1,3));
+        coordinates.push_back(std::make_pair(2,3));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[1][0]+a[2][0]+a[3][0]+a[1][1]==0)
     {
-        positions.push_back(std::make_pair(1,0));
-        positions.push_back(std::make_pair(2,0));
-        positions.push_back(std::make_pair(3,0));
-        positions.push_back(std::make_pair(1,1));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,0));
+        coordinates.push_back(std::make_pair(2,0));
+        coordinates.push_back(std::make_pair(3,0));
+        coordinates.push_back(std::make_pair(1,1));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[1][1]+a[2][1]+a[3][1]+a[1][2]==0)
     {
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(2,1));
-        positions.push_back(std::make_pair(3,1));
-        positions.push_back(std::make_pair(1,2));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(2,1));
+        coordinates.push_back(std::make_pair(3,1));
+        coordinates.push_back(std::make_pair(1,2));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[1][2]+a[2][2]+a[3][2]+a[1][3]==0)
     {
-        positions.push_back(std::make_pair(1,2));
-        positions.push_back(std::make_pair(2,2));
-        positions.push_back(std::make_pair(3,2));
-        positions.push_back(std::make_pair(1,3));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,2));
+        coordinates.push_back(std::make_pair(2,2));
+        coordinates.push_back(std::make_pair(3,2));
+        coordinates.push_back(std::make_pair(1,3));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[1][0]+a[1][1]+a[2][1]+a[3][1]==0)
     {
-        positions.push_back(std::make_pair(1,0));
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(2,1));
-        positions.push_back(std::make_pair(3,1));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,0));
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(2,1));
+        coordinates.push_back(std::make_pair(3,1));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[1][1]+a[1][2]+a[2][2]+a[3][2]==0)
     {
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(1,2));
-        positions.push_back(std::make_pair(2,2));
-        positions.push_back(std::make_pair(3,2));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(1,2));
+        coordinates.push_back(std::make_pair(2,2));
+        coordinates.push_back(std::make_pair(3,2));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[3][2]+a[3][3]+a[2][3]+a[1][3]==0)
     {
-        positions.push_back(std::make_pair(3,2));
-        positions.push_back(std::make_pair(3,3));
-        positions.push_back(std::make_pair(2,3));
-        positions.push_back(std::make_pair(1,3));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(3,2));
+        coordinates.push_back(std::make_pair(3,3));
+        coordinates.push_back(std::make_pair(2,3));
+        coordinates.push_back(std::make_pair(1,3));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[1][2]+a[1][3]+a[2][3]+a[3][3]==0)
     {
-        positions.push_back(std::make_pair(1,2));
-        positions.push_back(std::make_pair(1,3));
-        positions.push_back(std::make_pair(2,3));
-        positions.push_back(std::make_pair(3,3));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,2));
+        coordinates.push_back(std::make_pair(1,3));
+        coordinates.push_back(std::make_pair(2,3));
+        coordinates.push_back(std::make_pair(3,3));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[0][0]+a[0][1]+a[0][2]+a[1][0]==0)
     {
-        positions.push_back(std::make_pair(0,0));
-        positions.push_back(std::make_pair(0,1));
-        positions.push_back(std::make_pair(0,2));
-        positions.push_back(std::make_pair(1,0));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(0,0));
+        coordinates.push_back(std::make_pair(0,1));
+        coordinates.push_back(std::make_pair(0,2));
+        coordinates.push_back(std::make_pair(1,0));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[1][0]+a[1][1]+a[1][2]+a[2][0]==0)
     {
-        positions.push_back(std::make_pair(1,0));
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(1,2));
-        positions.push_back(std::make_pair(2,0));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,0));
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(1,2));
+        coordinates.push_back(std::make_pair(2,0));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[2][0]+a[2][1]+a[2][2]+a[3][0]==0)
     {
-        positions.push_back(std::make_pair(2,0));
-        positions.push_back(std::make_pair(2,1));
-        positions.push_back(std::make_pair(2,2));
-        positions.push_back(std::make_pair(3,0));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(2,0));
+        coordinates.push_back(std::make_pair(2,1));
+        coordinates.push_back(std::make_pair(2,2));
+        coordinates.push_back(std::make_pair(3,0));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[1][1]+a[0][1]+a[0][2]+a[0][3]==0)
     {
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(0,1));
-        positions.push_back(std::make_pair(0,2));
-        positions.push_back(std::make_pair(0,3));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(0,1));
+        coordinates.push_back(std::make_pair(0,2));
+        coordinates.push_back(std::make_pair(0,3));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[2][1]+a[1][1]+a[1][2]+a[1][3]==0)
     {
-        positions.push_back(std::make_pair(2,1));
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(1,2));
-        positions.push_back(std::make_pair(1,3));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(2,1));
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(1,2));
+        coordinates.push_back(std::make_pair(1,3));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[3][1]+a[2][1]+a[2][2]+a[2][3]==0)
     {
-        positions.push_back(std::make_pair(3,1));
-        positions.push_back(std::make_pair(2,1));
-        positions.push_back(std::make_pair(2,2));
-        positions.push_back(std::make_pair(2,3));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(3,1));
+        coordinates.push_back(std::make_pair(2,1));
+        coordinates.push_back(std::make_pair(2,2));
+        coordinates.push_back(std::make_pair(2,3));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[1][0]+a[1][1]+a[1][2]+a[0][2]==0)
     {
-        positions.push_back(std::make_pair(1,0));
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(1,2));
-        positions.push_back(std::make_pair(0,2));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,0));
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(1,2));
+        coordinates.push_back(std::make_pair(0,2));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[2][0]+a[2][1]+a[2][2]+a[1][2]==0)
     {
-        positions.push_back(std::make_pair(2,0));
-        positions.push_back(std::make_pair(2,1));
-        positions.push_back(std::make_pair(2,2));
-        positions.push_back(std::make_pair(1,2));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(2,0));
+        coordinates.push_back(std::make_pair(2,1));
+        coordinates.push_back(std::make_pair(2,2));
+        coordinates.push_back(std::make_pair(1,2));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[3][0]+a[3][1]+a[3][2]+a[2][2]==0)
     {
-        positions.push_back(std::make_pair(3,0));
-        positions.push_back(std::make_pair(3,1));
-        positions.push_back(std::make_pair(3,2));
-        positions.push_back(std::make_pair(2,2));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(3,0));
+        coordinates.push_back(std::make_pair(3,1));
+        coordinates.push_back(std::make_pair(3,2));
+        coordinates.push_back(std::make_pair(2,2));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[1][1]+a[1][2]+a[1][3]+a[0][3]==0)
     {
-        positions.push_back(std::make_pair(1,1));
-        positions.push_back(std::make_pair(1,2));
-        positions.push_back(std::make_pair(1,3));
-        positions.push_back(std::make_pair(0,3));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(1,1));
+        coordinates.push_back(std::make_pair(1,2));
+        coordinates.push_back(std::make_pair(1,3));
+        coordinates.push_back(std::make_pair(0,3));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[2][1]+a[2][2]+a[2][3]+a[1][3]==0)
     {
-        positions.push_back(std::make_pair(2,1));
-        positions.push_back(std::make_pair(2,2));
-        positions.push_back(std::make_pair(2,3));
-        positions.push_back(std::make_pair(1,3));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(2,1));
+        coordinates.push_back(std::make_pair(2,2));
+        coordinates.push_back(std::make_pair(2,3));
+        coordinates.push_back(std::make_pair(1,3));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[3][1]+a[3][2]+a[3][3]+a[2][3]==0)
     {
-        positions.push_back(std::make_pair(3,1));
-        positions.push_back(std::make_pair(3,2));
-        positions.push_back(std::make_pair(3,3));
-        positions.push_back(std::make_pair(2,3));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(3,1));
+        coordinates.push_back(std::make_pair(3,2));
+        coordinates.push_back(std::make_pair(3,3));
+        coordinates.push_back(std::make_pair(2,3));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
-    positions.clear();
+    coordinates.clear();
     if(a[2][0]+a[3][0]+a[3][1]+a[3][2]==0)
     {
-        positions.push_back(std::make_pair(2,0));
-        positions.push_back(std::make_pair(3,0));
-        positions.push_back(std::make_pair(3,1));
-        positions.push_back(std::make_pair(3,2));
-        if(areEqualVectors(obj->positions,positions)==false)
+        coordinates.push_back(std::make_pair(2,0));
+        coordinates.push_back(std::make_pair(3,0));
+        coordinates.push_back(std::make_pair(3,1));
+        coordinates.push_back(std::make_pair(3,2));
+        if(areEqualVectors(obj->getCoordinates(),coordinates)==false)
             return true;
     }
 
@@ -886,6 +886,7 @@ void GameBoard::drawBoard ()
 **/
 void GameBoard::loadNewGame ()
 {
+    std::vector < std::pair <USI, USI> > redPlayerCoordinates, bluePlayerCoordinates;
     int start = 0;
     for (unsigned short int line = 0; line < 4; line++)
         for (unsigned short int column = 0; column < 4; column++)
@@ -894,18 +895,18 @@ void GameBoard::loadNewGame ()
             if (this->boardData[line][column] == 1)
             {
                 this->cell[line][column].setColor(RED);
-                this->redL.positions.push_back(std::make_pair(line, column));
+                redPlayerCoordinates.push_back(std::make_pair(line, column));
                 ++start;
             }
 
-    // Colour the blue player.
+            // Colour the blue player.
             else if (this->boardData[line][column] == 2)
             {
                 this->cell[line][column].setColor(BLUE);
-                this->blueL.positions.push_back(std::make_pair(line, column));
+                bluePlayerCoordinates.push_back(std::make_pair(line, column));
             }
 
-    // Colour the coins.
+            // Colour the coins.
             else if (this->boardData[line][column] == 3)
             {
                 this->firstCoin.drawCoin(this->cell[line][column].getPosition("ox"), this->cell[line][column].getPosition("oy"));
@@ -920,6 +921,9 @@ void GameBoard::loadNewGame ()
                     this->secondCoin.setYIndex(column);
                 }
             }
+
+    this->redL.setCoordinates(redPlayerCoordinates);
+    this->blueL.setCoordinates(bluePlayerCoordinates);
 }
 
 void GameBoard::drawButton(int color)
@@ -1016,8 +1020,7 @@ void GameBoard::redPlayerMoves ()
                         this->boardData[line][column] = 0;
                         this->cell[line][column].setColor(BLACK);
                     }
-                this->redL.positions[line].first = 10;
-                this->redL.positions[line].second = 10;
+                    this->redL.setCoordinatesOfCell(line, 10, 10);
             }
         }
 
@@ -1028,8 +1031,8 @@ void GameBoard::redPlayerMoves ()
             {
                 for (unsigned short int line = 0; line < 4; line++)
                 {
-                    prevCoordinates[line].first = this->redL.positions[line].first;
-                    prevCoordinates[line].second = this->redL.positions[line].second;
+                    prevCoordinates[line].first = this->redL.getLineCoordinateOfCell(line);
+                    prevCoordinates[line].second = this->redL.getColumnCoordinateOfCell(line);
 
                     for (unsigned short int column = 0; column < 4; column++)
                         if (this->boardData[line][column] == 1)
@@ -1037,8 +1040,7 @@ void GameBoard::redPlayerMoves ()
                             this->boardData[line][column] = 0;
                             this->cell[line][column].setColor(BLACK);
                         }
-                    this->redL.positions[line].first = 10;
-                    this->redL.positions[line].second = 10;
+                    this->redL.setCoordinatesOfCell(line, 10, 10);
                 }
             }
 
@@ -1064,12 +1066,12 @@ void GameBoard::redPlayerMoves ()
                         this->boardData[line][column] = 1;
                         this->cell[line][column].setColor(RED);
                         ++numberOfClicks;
-                        this->redL.updatePositions(numberOfClicks - 1, line, column);
+                        this->redL.setCoordinatesOfCell(numberOfClicks - 1, line, column);
                         stop = true;
                     }
             }
             if (numberOfClicks == 4)
-                if (this->checkMove(this->redL.positions,prevCoordinates))
+                if (this->checkMove(this->redL.getCoordinates(), prevCoordinates))
                 {
                     drawButton(WHITE);
                     moveCoin();
@@ -1107,8 +1109,7 @@ void GameBoard::bluePlayerMoves()
                         this->boardData[line][column] = 0;
                         this->cell[line][column].setColor(BLACK);
                     }
-                this->blueL.positions[line].first = 10;
-                this->blueL.positions[line].second = 10;
+                this->blueL.setCoordinatesOfCell(line, 10, 10);
             }
         }
 
@@ -1119,8 +1120,8 @@ void GameBoard::bluePlayerMoves()
             {
                 for (unsigned short int line = 0; line < 4; line++)
                 {
-                    prevCoordinates[line].first = this->blueL.positions[line].first;
-                    prevCoordinates[line].second = this->blueL.positions[line].second;
+                    prevCoordinates[line].first = this->blueL.getLineCoordinateOfCell(line);
+                    prevCoordinates[line].second = this->blueL.getColumnCoordinateOfCell(line);
 
                     for (unsigned short int column = 0; column < 4; column++)
                         if (this->boardData[line][column] == 2)
@@ -1128,8 +1129,7 @@ void GameBoard::bluePlayerMoves()
                             this->boardData[line][column] = 0;
                             this->cell[line][column].setColor(BLACK);
                         }
-                    this->blueL.positions[line].first = 10;
-                    this->blueL.positions[line].second = 10;
+                    this->blueL.setCoordinatesOfCell(line, 10, 10);
                 }
             }
 
@@ -1155,12 +1155,12 @@ void GameBoard::bluePlayerMoves()
                         this->boardData[line][column] = 2;
                         this->cell[line][column].setColor(BLUE);
                         ++numberOfClicks;
-                        this->blueL.updatePositions(numberOfClicks - 1, line, column);
+                        this->blueL.setCoordinatesOfCell(numberOfClicks - 1, line, column);
                         stop = true;
                     }
             }
             if (numberOfClicks == 4)
-                if (this->checkMove(this->blueL.positions,prevCoordinates))
+                if (this->checkMove(this->blueL.getCoordinates(),prevCoordinates))
                 {
                     drawButton(WHITE);
                     moveCoin();
@@ -1189,7 +1189,7 @@ bool GameBoard::checkMove (std::vector < std::pair <USI, USI> > coordinates, std
     if (this->hasGap(coordinates))
         return false;
 
-    // Get the start and end positions for the body of the "L" form.
+    // Get the start and end coordinates for the body of the "L" form.
     std::pair <USI, USI> startEndPositions = this->getStartEndPositions(coordinates);
 
     // If the fourth square of the possible "L" is not on a valid position, then it cannot be an "L".
