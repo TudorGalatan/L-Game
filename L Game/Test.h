@@ -12,10 +12,71 @@
 
 class Test
 {
-    public:
+    private:
 
-        // A game board
         GameBoard gameBoard;
+
+        /**
+            Tests the "checkMove" function from the "Game Board" module.
+            Input:
+                - none
+            Output:
+                - the application runs normally, if the "checkMove" function works correctly
+                - an assertion failure dialog box appears on the screen, otherwise
+        **/
+        void checkMove ();
+
+        /**
+            Tests the "goodCells" function from the "Game Board" module.
+            Input:
+                - none
+            Output:
+                - the application runs normally, if the "goodCells" function works correctly
+                - an assertion failure dialog box appears on the screen, otherwise
+        **/
+        bool goodCells ();
+
+        /**
+            Tests the "getOrientation" function from the "Game Board" module.
+            Input:
+                - none
+            Output:
+                - the application runs normally, if the "getOrientation" function works correctly
+                - an assertion failure dialog box appears on the screen, otherwise
+        **/
+        std::pair <unsigned short int, unsigned short int> getOrientation ();
+
+        /**
+            Tests the "hasGap" function from the "Game Board" module.
+            Input:
+                - none
+            Output:
+                - the application runs normally, if the "hasGap" function works correctly
+                - an assertion failure dialog box appears on the screen, otherwise
+        **/
+        bool hasGap ();
+
+        /**
+            Tests the "getStartEndPositions" function from the "Game Board" module.
+            Input:
+                - none
+            Output:
+                - the application runs normally, if the "getStartEndPositions" function works correctly
+                - an assertion failure dialog box appears on the screen, otherwise
+        **/
+        std::pair <unsigned short int, unsigned short int> getStartEndPositions ();
+
+        /**
+            Tests the "onValidPosition" function from the "Game Board" module.
+            Input:
+                - none
+            Output:
+                - the application runs normally, if the "onValidPosition" function works correctly
+                - an assertion failure dialog box appears on the screen, otherwise
+        **/
+        bool onValidPosition ();
+
+    public:
 
         /**
             Runs all the tests.
@@ -25,64 +86,4 @@ class Test
                 - runs all the tests
         **/
         void runAll ();
-
-        /**
-            Tests the "checkMove" function from the "Game Board" module.
-            Input:
-                - none
-            Output:
-                - nothing happens, if the "checkMove" function works correctly
-                - assertion fail, otherwise
-        **/
-        void checkMove ();
-
-        /**
-            Tests the "goodCells" function from the "Game Board" module.
-            Input:
-                - none
-            Output:
-                - nothing happens, if the "goodCells" function works correctly
-                - assertion fail, otherwise
-        **/
-        bool goodCells ();
-
-        /**
-            Tests the "getOrientation" function from the "Game Board" module.
-            Input:
-                - none
-            Output:
-                - nothing happens, if the "getOrientation" function works correctly
-                - assertion fail, otherwise
-        **/
-        std::pair <USI, USI> getOrientation ();
-
-        /**
-            Tests the "hasGap" function from the "Game Board" module.
-            Input:
-                - none
-            Output:
-                - nothing happens, if the "hasGap" function works correctly
-                - assertion fail, otherwise
-        **/
-        bool hasGap ();
-
-        /**
-            Tests the "getStartEndPositions" function from the "Game Board" module.
-            Input:
-                - none
-            Output:
-                - nothing happens, if the "getStartEndPositions" function works correctly
-                - assertion fail, otherwise
-        **/
-        std::pair <USI, USI> getStartEndPositions ();
-
-        /**
-            Tests the "onValidPosition" function from the "Game Board" module.
-            Input:
-                - none
-            Output:
-                - nothing happens, if the "onValidPosition" function works correctly
-                - assertion fail, otherwise
-        **/
-        bool onValidPosition ();
 };
