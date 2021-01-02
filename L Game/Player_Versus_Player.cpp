@@ -48,13 +48,13 @@ void PlayerVersusPlayer::startGame ()
         this->gameBoard.saveCurrentConfiguration();
 
         // The blue player won.
-        if (this->gameBoard.findMove(this->gameBoard.boardData, 1, 1, positions) == false && player == false)
+        if (this->gameBoard.findMove(this->gameBoard.data, 1, 1, positions) == false && player == false)
         {
             for (unsigned short int line = 0; line < 4; line++)
                 for (unsigned short int column = 0; column < 4; column++)
-                    if (this->gameBoard.boardData[line][column] == 2)
+                    if (this->gameBoard.data[line][column] == 2)
                     {
-                        this->gameBoard.cell[line][column].setColour(LIGHTBLUE);
+                        this->gameBoard.cells[line][column].setColour(LIGHTBLUE);
                         delay(500);
                     }
 
@@ -67,13 +67,13 @@ void PlayerVersusPlayer::startGame ()
         }
 
         // The red player won.
-        else if (this->gameBoard.findMove(this->gameBoard.boardData, 2, 2, positions) == false && player == true)
+        else if (this->gameBoard.findMove(this->gameBoard.data, 2, 2, positions) == false && player == true)
         {
             for (unsigned short int line = 0; line < 4; line++)
                 for (unsigned short int column = 0; column < 4; column++)
-                    if (this->gameBoard.boardData[line][column] == 1)
+                    if (this->gameBoard.data[line][column] == 1)
                     {
-                        this->gameBoard.cell[line][column].setColour(LIGHTRED);
+                        this->gameBoard.cells[line][column].setColour(LIGHTRED);
                         delay(500);
                     }
 

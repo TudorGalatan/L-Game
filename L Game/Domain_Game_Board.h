@@ -16,21 +16,16 @@
 class GameBoard
 {
     public:
-        std::vector < std::pair <USI, USI> > prevCoordinates;
-        // The back-end representation of the board
-        unsigned short int boardData[4][4];
 
-        // The red player (1) is the first.
-        unsigned short int currentPlayer = 1;
+        unsigned short int data[4][4];
+        Cell cells[4][4];
+        Player redPlayer, bluePlayer;
+        Coin firstCoin, secondCoin;
 
-        // The front-end representation of the board
-        Cell cell[4][4];
+        std::vector < std::pair <USI, USI> > previousCoordinates;
 
-        // The coins
-        Coin coin, firstCoin, secondCoin;
-
-        // The players
-        Player redL, blueL;
+        // 1 - red, 2 - blue
+        bool currentPlayer = 1;
 
         /**
             Gets the initial configuration of the game board from the input file.
@@ -94,7 +89,7 @@ class GameBoard
                 - true: if the coordinates represent a valid move on the game board
                 - false: otherwise
         **/
-        bool checkMove (std::vector < std::pair <USI, USI> > coordinates, std::vector < std::pair <USI, USI> > prevCoordinates);
+        bool checkMove (std::vector < std::pair <USI, USI> > coordinates, std::vector < std::pair <USI, USI> > previousCoordinates);
 
         /**
             It performs the current move of the current player, considering that all validations were already done.
@@ -172,9 +167,8 @@ class GameBoard
         bool onValidPosition (std::vector < std::pair <USI, USI> > coordinates);
 
         void moveCoin();
+        void drawButton (int color);
 
-        void drawButton(int color);
-
-        bool findMove(unsigned short int aa[4][4],int color,int player,std::vector<std::pair<USI, USI> > &positions);
-        bool findBestMove(unsigned short int aa[4][4],int color,int player,std::vector<std::pair<USI, USI> > &positions);
+        bool findMove (unsigned short int aa[4][4], int color, int player, std::vector<std::pair<USI, USI> > &positions);
+        bool findBestMove (unsigned short int aa[4][4], int color, int player, std::vector<std::pair<USI, USI> > &positions);
 };

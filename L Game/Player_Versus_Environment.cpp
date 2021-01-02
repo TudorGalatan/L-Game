@@ -40,13 +40,13 @@ void PlayerVersusEnvironment::startGame ()
                 player = true;
 
                 // The blue player won.
-                if (this->gameBoard.findMove(this->gameBoard.boardData, 1, 1, pos) == false && player == false)
+                if (this->gameBoard.findMove(this->gameBoard.data, 1, 1, pos) == false && player == false)
                 {
                     for (unsigned short int line = 0; line < 4; line++)
                         for (unsigned short int column = 0; column < 4; column++)
-                            if (this->gameBoard.boardData[line][column] == 1)
+                            if (this->gameBoard.data[line][column] == 1)
                             {
-                                this->gameBoard.cell[line][column].setColour(LIGHTBLUE);
+                                this->gameBoard.cells[line][column].setColour(LIGHTBLUE);
                                 delay(500);
                             }
 
@@ -70,23 +70,23 @@ void PlayerVersusEnvironment::startGame ()
                     player = false;
                     pos.clear();
 
-                    if (gameBoard.findMove(this->gameBoard.boardData, 2, 2, pos) == 1)
+                    if (gameBoard.findMove(this->gameBoard.data, 2, 2, pos) == 1)
                     {
                         for (unsigned short int line = 0; line < 4; line++)
                         {
                             for (unsigned short int column = 0; column < 4; column++)
-                                if (this->gameBoard.boardData[line][column] == 2)
+                                if (this->gameBoard.data[line][column] == 2)
                                 {
-                                    this->gameBoard.cell[line][column].setColour(BLACK);
-                                    this->gameBoard.boardData[line][column] = 0;
+                                    this->gameBoard.cells[line][column].setColour(BLACK);
+                                    this->gameBoard.data[line][column] = 0;
                                 }
-                            this->gameBoard.blueL.setCoordinatesOfCell(line, 10, 10);
+                            this->gameBoard.bluePlayer.setCoordinatesOfCell(line, 10, 10);
                         }
                         for (int i = 0; i < pos.size(); i++)
                         {
-                            this->gameBoard.boardData[pos[i].first][pos[i].second] = 2;
-                            this->gameBoard.cell[pos[i].first][pos[i].second].setColour(BLUE);
-                            this->gameBoard.blueL.setCoordinatesOfCell(i, pos[i].first, pos[i].second);
+                            this->gameBoard.data[pos[i].first][pos[i].second] = 2;
+                            this->gameBoard.cells[pos[i].first][pos[i].second].setColour(BLUE);
+                            this->gameBoard.bluePlayer.setCoordinatesOfCell(i, pos[i].first, pos[i].second);
                         }
                     }
 
@@ -94,9 +94,9 @@ void PlayerVersusEnvironment::startGame ()
                     {
                         for (unsigned short int line = 0; line < 4; line++)
                             for (unsigned short int column = 0; column < 4; column++)
-                                if (this->gameBoard.boardData[line][column]==1)
+                                if (this->gameBoard.data[line][column]==1)
                                 {
-                                    this->gameBoard.cell[line][column].setColour(LIGHTRED);
+                                    this->gameBoard.cells[line][column].setColour(LIGHTRED);
                                     delay(500);
                                 }
 
@@ -117,32 +117,32 @@ void PlayerVersusEnvironment::startGame ()
                     player = false;
                     pos.clear();
 
-                    if (gameBoard.findBestMove(this->gameBoard.boardData, 2, 2, pos) == 1)
+                    if (gameBoard.findBestMove(this->gameBoard.data, 2, 2, pos) == 1)
                     {
                         for (unsigned short int line = 0; line < 4; line++)
                         {
                             for (unsigned short int column = 0; column < 4; column++)
-                                if (this->gameBoard.boardData[line][column] == 2)
+                                if (this->gameBoard.data[line][column] == 2)
                                 {
-                                    this->gameBoard.cell[line][column].setColour(BLACK);
-                                    this->gameBoard.boardData[line][column] = 0;
+                                    this->gameBoard.cells[line][column].setColour(BLACK);
+                                    this->gameBoard.data[line][column] = 0;
                                 }
-                            this->gameBoard.blueL.setCoordinatesOfCell(line, 10, 10);
+                            this->gameBoard.bluePlayer.setCoordinatesOfCell(line, 10, 10);
                         }
                         for (int i = 0; i < pos.size(); i++)
                         {
-                            this->gameBoard.boardData[pos[i].first][pos[i].second] = 2;
-                            this->gameBoard.cell[pos[i].first][pos[i].second].setColour(BLUE);
-                            this->gameBoard.blueL.setCoordinatesOfCell(i, pos[i].first, pos[i].second);
+                            this->gameBoard.data[pos[i].first][pos[i].second] = 2;
+                            this->gameBoard.cells[pos[i].first][pos[i].second].setColour(BLUE);
+                            this->gameBoard.bluePlayer.setCoordinatesOfCell(i, pos[i].first, pos[i].second);
                         }
                     }
                     else
                     {
                         for (unsigned short int line = 0; line < 4; line++)
                             for (unsigned short int column = 0; column < 4; column++)
-                                if (this->gameBoard.boardData[line][column] == 1)
+                                if (this->gameBoard.data[line][column] == 1)
                                 {
-                                    this->gameBoard.cell[line][column].setColour(LIGHTRED);
+                                    this->gameBoard.cells[line][column].setColour(LIGHTRED);
                                     delay(500);
                                 }
 
