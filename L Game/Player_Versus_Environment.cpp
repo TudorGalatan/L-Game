@@ -57,7 +57,7 @@ void PlayerVersusEnvironment::startGame ()
                         for(int j=0;j<4;j++)
                             if(this->gameBoard.boardData[i][j]==1)
                             {
-                                this->gameBoard.cell[i][j].setColor(LIGHTBLUE);
+                                this->gameBoard.cell[i][j].setColour(LIGHTBLUE);
                                 delay(500);
                             }
                     delay(1000);
@@ -81,7 +81,7 @@ void PlayerVersusEnvironment::startGame ()
                             for(int z2=0;z2<4;z2++)
                                 if(this->gameBoard.boardData[z][z2] == 2)
                                 {
-                                    this->gameBoard.cell[z][z2].setColor(BLACK);
+                                    this->gameBoard.cell[z][z2].setColour(BLACK);
                                     this->gameBoard.boardData[z][z2] = 0;
                                 }
                             this->gameBoard.blueL.setCoordinatesOfCell(z, 10, 10);
@@ -89,7 +89,7 @@ void PlayerVersusEnvironment::startGame ()
                         for(int i=0;i<pos.size();i++)
                         {
                             this->gameBoard.boardData[pos[i].first][pos[i].second] = 2;
-                            this->gameBoard.cell[pos[i].first][pos[i].second].setColor(BLUE);
+                            this->gameBoard.cell[pos[i].first][pos[i].second].setColour(BLUE);
                             this->gameBoard.blueL.setCoordinatesOfCell(i, pos[i].first, pos[i].second);
                         }
 
@@ -100,7 +100,7 @@ void PlayerVersusEnvironment::startGame ()
                             for(int j=0;j<4;j++)
                                 if(this->gameBoard.boardData[i][j]==1)
                                 {
-                                    this->gameBoard.cell[i][j].setColor(LIGHTRED);
+                                    this->gameBoard.cell[i][j].setColour(LIGHTRED);
                                     delay(500);
                                 }
                         delay(1000);
@@ -123,7 +123,7 @@ void PlayerVersusEnvironment::startGame ()
                             for(int z2=0;z2<4;z2++)
                                 if(this->gameBoard.boardData[z][z2] == 2)
                                 {
-                                    this->gameBoard.cell[z][z2].setColor(BLACK);
+                                    this->gameBoard.cell[z][z2].setColour(BLACK);
                                     this->gameBoard.boardData[z][z2] = 0;
                                 }
                             this->gameBoard.blueL.setCoordinatesOfCell(z, 10, 10);
@@ -131,7 +131,7 @@ void PlayerVersusEnvironment::startGame ()
                         for(int i=0;i<pos.size();i++)
                         {
                             this->gameBoard.boardData[pos[i].first][pos[i].second] = 2;
-                            this->gameBoard.cell[pos[i].first][pos[i].second].setColor(BLUE);
+                            this->gameBoard.cell[pos[i].first][pos[i].second].setColour(BLUE);
                             this->gameBoard.blueL.setCoordinatesOfCell(i, pos[i].first, pos[i].second);
                         }
 
@@ -142,7 +142,7 @@ void PlayerVersusEnvironment::startGame ()
                             for(int j=0;j<4;j++)
                                 if(this->gameBoard.boardData[i][j]==1)
                                 {
-                                    this->gameBoard.cell[i][j].setColor(LIGHTRED);
+                                    this->gameBoard.cell[i][j].setColour(LIGHTRED);
                                     delay(500);
                                 }
                         delay(50000);

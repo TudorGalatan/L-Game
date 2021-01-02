@@ -861,7 +861,7 @@ void GameBoard::drawBoard ()
 
     int cellSize = (height - 200) / 4;
 
-    this->cell[xCoord][yCoord].changeCellSize(cellSize);
+    this->cell[xCoord][yCoord].setDimension(cellSize);
 
     // Draw every cell.
     for (int i = width / 2 - 2 * cellSize; i <= width / 2 + cellSize; i += cellSize)
@@ -870,8 +870,8 @@ void GameBoard::drawBoard ()
         {
             this->cell[xCoord][yCoord].drawCell(i, j,i + cellSize, j + cellSize);///draw the cell
             this->cell[xCoord][yCoord].setPosition(i + cellSize / 2, j + cellSize / 2);///coordonates for the floodfill
-            this->cell[xCoord][yCoord].setBounds(i,j);///saves the left and top in this object
-            this->cell[xCoord][yCoord].setColor(BLACK);///set the black color to the cells
+            this->cell[xCoord][yCoord].setTopLeftMargins(j,i);///saves the left and top in this object
+            this->cell[xCoord][yCoord].setColour(BLACK);///set the black color to the cells
             xCoord++;
         }
         xCoord = 0;
@@ -894,7 +894,7 @@ void GameBoard::loadNewGame ()
             // Colour the red player.
             if (this->boardData[line][column] == 1)
             {
-                this->cell[line][column].setColor(RED);
+                this->cell[line][column].setColour(RED);
                 redPlayerCoordinates.push_back(std::make_pair(line, column));
                 ++start;
             }
@@ -902,7 +902,7 @@ void GameBoard::loadNewGame ()
             // Colour the blue player.
             else if (this->boardData[line][column] == 2)
             {
-                this->cell[line][column].setColor(BLUE);
+                this->cell[line][column].setColour(BLUE);
                 bluePlayerCoordinates.push_back(std::make_pair(line, column));
             }
 
@@ -1018,7 +1018,7 @@ void GameBoard::redPlayerMoves ()
                     if (this->boardData[line][column] == 1)
                     {
                         this->boardData[line][column] = 0;
-                        this->cell[line][column].setColor(BLACK);
+                        this->cell[line][column].setColour(BLACK);
                     }
                     this->redL.setCoordinatesOfCell(line, 10, 10);
             }
@@ -1038,7 +1038,7 @@ void GameBoard::redPlayerMoves ()
                         if (this->boardData[line][column] == 1)
                         {
                             this->boardData[line][column] = 0;
-                            this->cell[line][column].setColor(BLACK);
+                            this->cell[line][column].setColour(BLACK);
                         }
                     this->redL.setCoordinatesOfCell(line, 10, 10);
                 }
@@ -1064,7 +1064,7 @@ void GameBoard::redPlayerMoves ()
                     if (this->cell[line][column].isInside(xCoordinate, yCoordinate) && this->boardData[line][column] == 0)
                     {
                         this->boardData[line][column] = 1;
-                        this->cell[line][column].setColor(RED);
+                        this->cell[line][column].setColour(RED);
                         ++numberOfClicks;
                         this->redL.setCoordinatesOfCell(numberOfClicks - 1, line, column);
                         stop = true;
@@ -1107,7 +1107,7 @@ void GameBoard::bluePlayerMoves()
                     if (this->boardData[line][column] == 2)
                     {
                         this->boardData[line][column] = 0;
-                        this->cell[line][column].setColor(BLACK);
+                        this->cell[line][column].setColour(BLACK);
                     }
                 this->blueL.setCoordinatesOfCell(line, 10, 10);
             }
@@ -1127,7 +1127,7 @@ void GameBoard::bluePlayerMoves()
                         if (this->boardData[line][column] == 2)
                         {
                             this->boardData[line][column] = 0;
-                            this->cell[line][column].setColor(BLACK);
+                            this->cell[line][column].setColour(BLACK);
                         }
                     this->blueL.setCoordinatesOfCell(line, 10, 10);
                 }
@@ -1153,7 +1153,7 @@ void GameBoard::bluePlayerMoves()
                     if (this->cell[line][column].isInside(xCoordinate, yCoordinate) && this->boardData[line][column] == 0)
                     {
                         this->boardData[line][column] = 2;
-                        this->cell[line][column].setColor(BLUE);
+                        this->cell[line][column].setColour(BLUE);
                         ++numberOfClicks;
                         this->blueL.setCoordinatesOfCell(numberOfClicks - 1, line, column);
                         stop = true;

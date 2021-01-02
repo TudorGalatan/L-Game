@@ -5,53 +5,46 @@
 
 #pragma once
 
+#define USI unsigned short int
 
 
 class Cell
 {
     private:
 
-        // The dimension of the cell
-        int dim;
-
-        // The colour of the cell
-        int cellColor;
-
-        // The coordonates of the top-left corner (left is for ox, top for oy)
-        int left, top;
-
-        // The positions used in setPosition(), the 'spawn' position.
-        int posX, posY;
+        unsigned short int dimension;
+        unsigned short int colour;
+        unsigned short int topMargin, leftMargin;
+        unsigned short int horizontalPosition, verticalPosition;
 
     public:
-        bool isInside(double xCoord, double yCoord);
-
-        void setBounds(int l,int t);
-
-
-        int getTopValue();
-
-        int getLeftValue();
-        /**
-            Draws a cell.
-            Input:
-                - "left": the left margin of the cell
-                - "up": the upper margin of the cell
-                - "right": the right margin of the cell
-                - "bottom": the bottom margin of the cell
-            Output:
-                - draws the cell
-        **/
-        void drawCell (int left, int up, int right, int bottom);
 
         /**
-            Gets the size of the cell.
+            Creates the default constructor.
             Input:
                 - none
             Output:
-                - the size of the cell
+                - the default constructor is created
         **/
-        int getCellSize ();
+        Cell ();
+
+        /**
+            Gets the dimension of the cell.
+            Input:
+                - none
+            Output:
+                - the dimension of the cell
+        **/
+        unsigned short int getDimension ();
+
+        /**
+            Sets the new size of the cell.
+            Input:
+                - "newDimension": the new dimension of the cell
+            Output:
+                - the cell is updated with its new dimension
+        **/
+        void setDimension (unsigned short int newDimension);
 
         /**
             Gets the colour of the cell.
@@ -60,42 +53,84 @@ class Cell
             Output:
                 - the colour of the cell
         **/
-        int getColor ();
+        unsigned short int getColour ();
 
         /**
             Sets the colour of the cell.
             Input:
-                - "color": the colour of the cell
+                - "newColour": the new colour of the cell
             Output:
-                - sets the colour of the cell to its new, given value
+                - the cell is updated with its new colour
         **/
-        void setColor (int color);
+        void setColour (unsigned short int newColour);
 
         /**
-            "ox"
+            Gets the top margin of the cell.
             Input:
-                -
+                - none
             Output:
-                -
+                - the top margin of the cell
         **/
-        int getPosition (char* axis);
+        unsigned short int getTopMargin ();
 
         /**
-            Calculate a position inside the cell to help with the floodfill.
+            Gets the left margin of the cell.
             Input:
-                - "pX": position on ox
-                - "pY": position on oy
+                - none
             Output:
-                - changes the private variables posx and posy
+                - the left margin of the cell
         **/
-        void setPosition (int pX, int pY);
+        unsigned short int getLeftMargin ();
 
         /**
-            Updates the size of the cell.
+            Sets the top and left margins of the cell.
             Input:
-                - "newSize": the new size of the cell
+                - "newTopMargin": the new top margin of the cell
+                - "newLeftMargin": the new left margin of the cell
             Output:
-                - updates the cell size
+                - the cell is updated with its new top and left margins
         **/
-        void changeCellSize (int newSize);
+        void setTopLeftMargins (unsigned short int newTopMargin, unsigned short int newLeftMargin);
+
+        /**
+            Gets the appropriate position based on a given axis.
+            Input:
+                - "axis": the axis ("ox" or "oy")
+            Output:
+                - the appropriate position based on the given axis
+        **/
+        short int getPosition (char* axis);
+
+        /**
+            Sets the position of the inside point.
+            Input:
+                - "newHorizontalPosition": the new horizontal position of the point
+                - "newVerticalPosition": the new vertical position of the point
+            Output:
+                - the cell is updated with its new inside point
+        **/
+        void setPosition (unsigned short int newHorizontalPosition, unsigned short int newVerticalPosition);
+
+        /**
+            Checks whether or not a point is inside the cell.
+            Input:
+                - "horizontalCoordinate": the horizontal coordinate of the point
+                - "verticalCoordinate": the vertical coordinate of the point
+            Output:
+                - true, if the point is inside the cell
+                - false, otherwise
+        **/
+        bool isInside (double horizontalCoordinate, double verticalCoordinate);
+
+        /**
+            Draws a cell.
+            Input:
+                - "left": the left margin of the cell
+                - "up": the upper margin of the cell
+                - "right": the right margin of the cell
+                - "bottom": the bottom margin of the cell
+            Output:
+                - the cell is drawn
+        **/
+        void drawCell (USI left, USI up, USI right, USI bottom);
 };

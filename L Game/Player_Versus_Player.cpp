@@ -57,7 +57,7 @@ void PlayerVersusPlayer::startGame ()
                 for(int j=0; j<4; j++)
                     if(this->gameBoard.boardData[i][j]==2)
                     {
-                        this->gameBoard.cell[i][j].setColor(LIGHTBLUE);
+                        this->gameBoard.cell[i][j].setColour(LIGHTBLUE);
                         delay(500);
                     }
             delay(1000);
@@ -72,7 +72,7 @@ void PlayerVersusPlayer::startGame ()
                 for(int j=0; j<4; j++)
                     if(this->gameBoard.boardData[i][j]==1)
                     {
-                        this->gameBoard.cell[i][j].setColor(LIGHTRED);
+                        this->gameBoard.cell[i][j].setColour(LIGHTRED);
                         delay(500);
                     }
             delay(1000);
