@@ -5,81 +5,84 @@
 
 #include "Player_Versus_Player.h"
 
-#include <fstream>
 
 void PlayerVersusPlayer::startGame ()
 {
-    std::ofstream g("test.in");
-    std::vector<std::pair<USI, USI> > positions;
-    // false - the red player
-    // true - the blue player
+    /*
+        false - the red player
+        true - the blue player
+    */
     bool player = false;
 
-    // Clear the window.
+    std::vector <std::pair <unsigned short int, unsigned short int> > positions;
+
     cleardevice();
 
-    // Draw the game board.board.cell[0][0].getPosition("ox")   ???
-    this->gameBoard.drawBoard();
-
-    // Get the initial configuration of the game board.
     this->gameBoard.getInitialConfiguration();
-
-    // Save the current configuration of the game board.
     this->gameBoard.saveCurrentConfiguration();
-
+    this->gameBoard.drawBoard();
     this->gameBoard.loadNewGame();
 
-    // Temporary: just for testing
     delay(300);
 
+    // Run the game.
     while (true)
     {
         switch (player)
         {
-        // The red player's turn
-        case false:
-            this->gameBoard.currentPlayer=1;
-            this->gameBoard.redPlayerMoves();
-            player = true;
-            break;
+            // It's red player's turn.
+            case false:
+                this->gameBoard.currentPlayer = 1;
+                this->gameBoard.redPlayerMoves();
+                player = true;
+                break;
 
-        // The blue player's turn
-        default:
-            this->gameBoard.currentPlayer=2;
-            this->gameBoard.bluePlayerMoves();
-            player = false;
-            break;
+            // It's blue player's turn.
+            default:
+                this->gameBoard.currentPlayer = 2;
+                this->gameBoard.bluePlayerMoves();
+                player = false;
+                break;
         }
+
         this->gameBoard.saveCurrentConfiguration();
-        if(this->gameBoard.findMove(this->gameBoard.boardData,1,1,positions)== false && player == false)
+
+        // The blue player won.
+        if (this->gameBoard.findMove(this->gameBoard.boardData, 1, 1, positions) == false && player == false)
         {
-            for(int i=0; i<4; i++)
-                for(int j=0; j<4; j++)
-                    if(this->gameBoard.boardData[i][j]==2)
+            for (unsigned short int line = 0; line < 4; line++)
+                for (unsigned short int column = 0; column < 4; column++)
+                    if (this->gameBoard.boardData[line][column] == 2)
                     {
-                        this->gameBoard.cell[i][j].setColour(LIGHTBLUE);
+                        this->gameBoard.cell[line][column].setColour(LIGHTBLUE);
                         delay(500);
                     }
+
             delay(1000);
             cleardevice();
-            setfillstyle(SOLID_FILL,BLUE);
-            floodfill(10,10,1);
-            outtextxy(getmaxx()/2-100,getmaxy()/2,"BLUE PLAYER WINS");
+
+            setfillstyle(SOLID_FILL, BLUE);
+            floodfill(10, 10, 1);
+            outtextxy(getmaxx() / 2 - 100, getmaxy() / 2, "The blue player won.");
         }
-        else if(this->gameBoard.findMove(this->gameBoard.boardData,2,2,positions)==false && player == true)
+
+        // The red player won.
+        else if (this->gameBoard.findMove(this->gameBoard.boardData, 2, 2, positions) == false && player == true)
         {
-            for(int i=0; i<4; i++)
-                for(int j=0; j<4; j++)
-                    if(this->gameBoard.boardData[i][j]==1)
+            for (unsigned short int line = 0; line < 4; line++)
+                for (unsigned short int column = 0; column < 4; column++)
+                    if (this->gameBoard.boardData[line][column] == 1)
                     {
-                        this->gameBoard.cell[i][j].setColour(LIGHTRED);
+                        this->gameBoard.cell[line][column].setColour(LIGHTRED);
                         delay(500);
                     }
+
             delay(1000);
             cleardevice();
-            setfillstyle(SOLID_FILL,RED);
-            floodfill(10,10,1);
-            outtextxy(getmaxx()/2-100,getmaxy()/2,"RED PLAYER WINS");
+
+            setfillstyle(SOLID_FILL, RED);
+            floodfill(10, 10, 1);
+            outtextxy(getmaxx() / 2 - 100, getmaxy() / 2, "The red player won.");
         }
     }
 }

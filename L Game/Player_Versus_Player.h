@@ -8,12 +8,10 @@
 #include "Domain_Game_Board.h"
 
 
-
 class PlayerVersusPlayer
 {
     private:
 
-        // The game board
         GameBoard gameBoard;
 
     public:
