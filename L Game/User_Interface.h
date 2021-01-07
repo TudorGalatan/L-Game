@@ -191,12 +191,12 @@ class UserInterface
                 - "yCoordinate": the y coordinate for the click
             Output:
                 - 0: if the user clicked outside the buttons
-                - 1: if the user clicked on the "START" button
-                - 2: if the user clicked on the "RULES" button
-                - 3: if the user clicked on the "EXIT" button
-                - 4: if the user clicked on the "OPTIONS" button
+                - 1: if the user clicked on the "Play" button
+                - 2: if the user clicked on the "Options" button
+                - 3: if the user clicked on the "Rules" button
+                - 4: if the user clicked on the "Exit" button
         */
-        unsigned short int getMouseLocationMainMenu (double xCoordinate, double yCoordinate);
+        unsigned short int getMouseLocationMainMenu (double horizontalCoordinate, double verticalCoordinate);
 
         /**
             Closes the application.

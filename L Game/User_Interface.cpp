@@ -42,48 +42,55 @@ void UserInterface::drawMainMenu ()
     // Clear the window.
     cleardevice();
 
-    // Get the parameters for drawing the "START" button.
-    unsigned short int distanceFromCenter = 100;
-    unsigned short int left = SCREEN_WIDTH / 2 - distanceFromCenter;
-    unsigned short int right = SCREEN_WIDTH / 2 + distanceFromCenter;
-    unsigned short int up = 200 + SCREEN_HEIGHT - 1080;
-    unsigned short int down = 300 + SCREEN_HEIGHT - 1080;
+    // Get the parameters for drawing the "Play" button.
+    unsigned short int left = SCREEN_WIDTH / 2 - 84;
+    unsigned short int right = SCREEN_WIDTH / 2 + 84;
+    unsigned short int up = 200;
+    unsigned short int down = 300;
     unsigned short int depth = 25;
     bool drawDetails = 1;
-    unsigned short int textXCoordinate = SCREEN_WIDTH / 2 - 50;
-    unsigned short int textYCoordinate = 250 + SCREEN_HEIGHT - 1080;
-    char text[30] = "START";
+    unsigned short int horizontalPosition = left + 22;
+    unsigned short int verticalPosition = 225;
+    char text[30] = "Play";
 
-    // Draw the "START" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+    // Draw the "Play" button.
+    drawButton(left, up, right, down, depth, drawDetails, horizontalPosition, verticalPosition, text);
 
-    // Update the parameters for drawing the "RULES" button.
+    // Get the parameters for drawing the "Options" button.
+    left = SCREEN_WIDTH / 2 - 130;
+    right = SCREEN_WIDTH / 2 + 130;
     up = 400;
     down = 500;
-    textYCoordinate = 450;
-    strcpy(text, "RULES");
+    horizontalPosition = left + 22;
+    verticalPosition = 425;
+    strcpy(text, "Options");
 
-    // Draw the "RULES" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+    // Draw the "Options" button.
+    drawButton(left, up, right, down, depth, drawDetails, horizontalPosition, verticalPosition, text);
 
-    // Update the parameters for drawing the "EXIT" button.
+    // Get the parameters for drawing the "Rules" button.
+    left = SCREEN_WIDTH / 2 - 100;
+    right = SCREEN_WIDTH / 2 + 100;
     up = 600;
     down = 700;
-    textXCoordinate += 10;
-    textYCoordinate = 650;
-    strcpy(text, "EXIT");
+    horizontalPosition = left + 22;
+    verticalPosition = 625;
+    strcpy(text, "Rules");
 
-    // Draw the "EXIT" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+    // Draw the "Rules" button.
+    drawButton(left, up, right, down, depth, drawDetails, horizontalPosition, verticalPosition, text);
 
-    // Update the parameters for drawing the "OPTIONS" button.
-    strcpy(text, "OPTIONS");
+    // Get the parameters for drawing the "Exit" button.
+    left = SCREEN_WIDTH / 2 - 84;
+    right = SCREEN_WIDTH / 2 + 84;
     up = 800;
     down = 900;
-    textXCoordinate -= 25;
-    textYCoordinate = 850;
-    // Draw the "OPTIONS" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+    horizontalPosition = left + 22;
+    verticalPosition = 825;
+    strcpy(text, "Exit");
+
+    // Draw the "Exit" button.
+    drawButton(left, up, right, down, depth, drawDetails, horizontalPosition, verticalPosition, text);
 }
 
 
@@ -280,56 +287,116 @@ void UserInterface::hoverStartGame ()
     // Clear the window.
     cleardevice();
 
-    // Get the new parameters for redrawing the "START" button.
-    unsigned short int distanceFromCenter = 80;
-    unsigned short int left = SCREEN_WIDTH / 2 - distanceFromCenter;
-    unsigned short int right = SCREEN_WIDTH / 2 + distanceFromCenter + 40;
-    unsigned short int up = 180 + SCREEN_HEIGHT - 1080;
-    unsigned short int down = 280 + SCREEN_HEIGHT - 1080;
+    // Get the parameters for drawing the "Play" button.
+    unsigned short int left = SCREEN_WIDTH / 2 - 64;
+    unsigned short int right = SCREEN_WIDTH / 2 + 104;
+    unsigned short int up = 180;
+    unsigned short int down = 280;
     unsigned short int depth = 10;
     bool drawDetails = 1;
-    unsigned short int textXCoordinate = SCREEN_WIDTH / 2 - 30;
-    unsigned short int textYCoordinate = 230 + SCREEN_HEIGHT - 1080;
-    char text[30] = "START";
+    unsigned short int horizontalPosition = left + 22;
+    unsigned short int verticalPosition = 205;
+    char text[30] = "Play";
 
-    // Redraw the "START" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+    // Draw the "Play" button.
+    drawButton(left, up, right, down, depth, drawDetails, horizontalPosition, verticalPosition, text);
 
-    // Update the parameters for redrawing the "RULES" button.
-    distanceFromCenter = 100;
-    left = SCREEN_WIDTH / 2 - distanceFromCenter;
-    right = SCREEN_WIDTH / 2 + distanceFromCenter;
-    up = 400 + SCREEN_HEIGHT - 1080;
-    down = 500 + SCREEN_HEIGHT - 1080;
+    // Get the parameters for drawing the "Options" button.
     depth = 25;
-    textXCoordinate = SCREEN_WIDTH / 2 - 50;
-    textYCoordinate = 450;
-    strcpy(text, "RULES");
+    left = SCREEN_WIDTH / 2 - 130;
+    right = SCREEN_WIDTH / 2 + 130;
+    up = 400;
+    down = 500;
+    horizontalPosition = left + 22;
+    verticalPosition = 425;
+    strcpy(text, "Options");
 
-    // Redraw the "RULES" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+    // Draw the "Options" button.
+    drawButton(left, up, right, down, depth, drawDetails, horizontalPosition, verticalPosition, text);
 
-    // Update the parameters for redrawing the "EXIT" button.
-    up = 600 + SCREEN_HEIGHT - 1080;
-    down = 700 + SCREEN_HEIGHT - 1080;
-    textXCoordinate += 10;
-    textYCoordinate = 650;
-    strcpy(text, "EXIT");
+    // Get the parameters for drawing the "Rules" button.
+    left = SCREEN_WIDTH / 2 - 100;
+    right = SCREEN_WIDTH / 2 + 100;
+    up = 600;
+    down = 700;
+    horizontalPosition = left + 22;
+    verticalPosition = 625;
+    strcpy(text, "Rules");
 
-    // Redraw the "EXIT" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+    // Draw the "Rules" button.
+    drawButton(left, up, right, down, depth, drawDetails, horizontalPosition, verticalPosition, text);
 
-    // Update the parameters for redrawing the "OPTIONS" button.
+    // Get the parameters for drawing the "Exit" button.
+    left = SCREEN_WIDTH / 2 - 84;
+    right = SCREEN_WIDTH / 2 + 84;
     up = 800;
     down = 900;
-    textXCoordinate -= 25;
-    textYCoordinate += 200;     // ??? Doesn't work.
-    strcpy(text, "OPTIONS");
+    horizontalPosition = left + 22;
+    verticalPosition = 825;
+    strcpy(text, "Exit");
 
-    // Redraw the "OPTIONS" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+    // Draw the "Exit" button.
+    drawButton(left, up, right, down, depth, drawDetails, horizontalPosition, verticalPosition, text);
 }
 
+
+void UserInterface::hoverOptions ()
+{
+    // Clear the window.
+    cleardevice();
+
+    // Get the parameters for drawing the "Play" button.
+    unsigned short int left = SCREEN_WIDTH / 2 - 84;
+    unsigned short int right = SCREEN_WIDTH / 2 + 84;
+    unsigned short int up = 200;
+    unsigned short int down = 300;
+    unsigned short int depth = 25;
+    bool drawDetails = 1;
+    unsigned short int horizontalPosition = left + 22;
+    unsigned short int verticalPosition = 225;
+    char text[30] = "Play";
+
+    // Draw the "Play" button.
+    drawButton(left, up, right, down, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the parameters for drawing the "Options" button.
+    left = SCREEN_WIDTH / 2 - 110;
+    right = SCREEN_WIDTH / 2 + 150;
+    up = 380;
+    down = 480;
+    depth = 10;
+    horizontalPosition = left + 22;
+    verticalPosition = 405;
+    strcpy(text, "Options");
+
+    // Draw the "Options" button.
+    drawButton(left, up, right, down, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the parameters for drawing the "Rules" button.
+    left = SCREEN_WIDTH / 2 - 100;
+    right = SCREEN_WIDTH / 2 + 100;
+    up = 600;
+    down = 700;
+    depth = 25;
+    horizontalPosition = left + 22;
+    verticalPosition = 625;
+    strcpy(text, "Rules");
+
+    // Draw the "Rules" button.
+    drawButton(left, up, right, down, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the parameters for drawing the "Exit" button.
+    left = SCREEN_WIDTH / 2 - 84;
+    right = SCREEN_WIDTH / 2 + 84;
+    up = 800;
+    down = 900;
+    horizontalPosition = left + 22;
+    verticalPosition = 825;
+    strcpy(text, "Exit");
+
+    // Draw the "Exit" button.
+    drawButton(left, up, right, down, depth, drawDetails, horizontalPosition, verticalPosition, text);
+}
 
 
 void UserInterface::hoverRules ()
@@ -337,58 +404,57 @@ void UserInterface::hoverRules ()
     // Clear the window.
     cleardevice();
 
-    // Get the new parameters for redrawing the "START" button.
-    unsigned short int distanceFromCenter = 100;
-    unsigned short int left = SCREEN_WIDTH / 2 - distanceFromCenter;
-    unsigned short int right = SCREEN_WIDTH / 2 + distanceFromCenter;
-    unsigned short int up = 200 + SCREEN_HEIGHT - 1080;
-    unsigned short int down = 300 + SCREEN_HEIGHT - 1080;
+    // Get the parameters for drawing the "Play" button.
+    unsigned short int left = SCREEN_WIDTH / 2 - 84;
+    unsigned short int right = SCREEN_WIDTH / 2 + 84;
+    unsigned short int up = 200;
+    unsigned short int down = 300;
     unsigned short int depth = 25;
     bool drawDetails = 1;
-    unsigned short int textXCoordinate = SCREEN_WIDTH / 2 - 50;
-    unsigned short int textYCoordinate = 250 + SCREEN_HEIGHT - 1080;
-    char text[30] = "START";
+    unsigned short int horizontalPosition = left + 22;
+    unsigned short int verticalPosition = 225;
+    char text[30] = "Play";
 
-    // Redraw the "START" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+    // Draw the "Play" button.
+    drawButton(left, up, right, down, depth, drawDetails, horizontalPosition, verticalPosition, text);
 
-    // Update the parameters for redrawing the "RULES" button.
-    distanceFromCenter = 80;
-    left = SCREEN_WIDTH / 2 - distanceFromCenter;
-    right = SCREEN_WIDTH / 2 + distanceFromCenter + 40;
-    up = 380 + SCREEN_HEIGHT - 1080;
-    down = 480 + SCREEN_HEIGHT - 1080;
+    // Get the parameters for drawing the "Options" button.
+    left = SCREEN_WIDTH / 2 - 130;
+    right = SCREEN_WIDTH / 2 + 130;
+    up = 400;
+    down = 500;
+    horizontalPosition = left + 22;
+    verticalPosition = 425;
+    strcpy(text, "Options");
+
+    // Draw the "Options" button.
+    drawButton(left, up, right, down, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the parameters for drawing the "Rules" button.
+    left = SCREEN_WIDTH / 2 - 80;
+    right = SCREEN_WIDTH / 2 + 120;
+    up = 580;
+    down = 680;
     depth = 10;
-    textXCoordinate = SCREEN_WIDTH / 2 - 30;
-    textYCoordinate = 430 + SCREEN_HEIGHT - 1080;
-    strcpy(text, "RULES");
+    horizontalPosition = left + 22;
+    verticalPosition = 605;
+    strcpy(text, "Rules");
 
-    // Redraw the "RULES" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+    // Draw the "Rules" button.
+    drawButton(left, up, right, down, depth, drawDetails, horizontalPosition, verticalPosition, text);
 
-    // Update the parameters for redrawing the "EXIT" button.
-    distanceFromCenter = 100;
-    left = SCREEN_WIDTH / 2 - distanceFromCenter;
-    right = SCREEN_WIDTH / 2 + distanceFromCenter;
-    up = 600 + SCREEN_HEIGHT - 1080;
-    down = 700 + SCREEN_HEIGHT - 1080;
-    depth = 25;
-    textXCoordinate -= 10;
-    textYCoordinate = 650 + SCREEN_HEIGHT - 1080;
-    strcpy(text, "EXIT");
-
-    // Redraw the "EXIT" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
-
-    // Update the parameters for redrawing the "OPTIONS" button.
+    // Get the parameters for drawing the "Exit" button.
+    left = SCREEN_WIDTH / 2 - 84;
+    right = SCREEN_WIDTH / 2 + 84;
     up = 800;
     down = 900;
-    textXCoordinate -= 25;
-    textYCoordinate += 200;     // ??? Doesn't work.
-    strcpy(text, "OPTIONS");
+    depth = 25;
+    horizontalPosition = left + 22;
+    verticalPosition = 825;
+    strcpy(text, "Exit");
 
-    // Redraw the "OPTIONS" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+    // Draw the "Exit" button.
+    drawButton(left, up, right, down, depth, drawDetails, horizontalPosition, verticalPosition, text);
 }
 
 
@@ -398,113 +464,57 @@ void UserInterface::hoverExit ()
     // Clear the window.
     cleardevice();
 
-    // Get the new parameters for redrawing the "START" button.
-    unsigned short int distanceFromCenter = 100;
-    unsigned short int left = SCREEN_WIDTH / 2 - distanceFromCenter;
-    unsigned short int right = SCREEN_WIDTH / 2 + distanceFromCenter;
-    unsigned short int up = 200 + SCREEN_HEIGHT - 1080;
-    unsigned short int down = 300 + SCREEN_HEIGHT - 1080;
+    // Get the parameters for drawing the "Play" button.
+    unsigned short int left = SCREEN_WIDTH / 2 - 84;
+    unsigned short int right = SCREEN_WIDTH / 2 + 84;
+    unsigned short int up = 200;
+    unsigned short int down = 300;
     unsigned short int depth = 25;
     bool drawDetails = 1;
-    unsigned short int textXCoordinate = SCREEN_WIDTH / 2 - 50;
-    unsigned short int textYCoordinate = 250 + SCREEN_HEIGHT - 1080;
-    char text[30] = "START";
+    unsigned short int horizontalPosition = left + 22;
+    unsigned short int verticalPosition = 225;
+    char text[30] = "Play";
 
-    // Redraw the "START" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+    // Draw the "Play" button.
+    drawButton(left, up, right, down, depth, drawDetails, horizontalPosition, verticalPosition, text);
 
-    // Update the parameters for redrawing the "RULES" button.
-    up = 400 + SCREEN_HEIGHT - 1080;
-    down = 500 + SCREEN_HEIGHT - 1080;
-    textYCoordinate = 450 + SCREEN_HEIGHT - 1080;
-    strcpy(text, "RULES");
-
-    // Redraw the "RULES" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
-
-    // Update the parameters for redrawing the "EXIT" button.
-    distanceFromCenter = 80;
-    left = SCREEN_WIDTH / 2 - distanceFromCenter;
-    right = SCREEN_WIDTH / 2 + distanceFromCenter + 40;
-    up = 580 + SCREEN_HEIGHT - 1080;
-    down = 680 + SCREEN_HEIGHT - 1080;
-    depth = 10;
-    textXCoordinate = SCREEN_WIDTH / 2 - 20;
-    textYCoordinate = 630 + SCREEN_HEIGHT - 1080;
-    strcpy(text, "EXIT");
-
-    // Redraw the "EXIT" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
-
-    // Update the parameters for redrawing the "OPTIONS" button.
-    distanceFromCenter = 100;
-    left = SCREEN_WIDTH / 2 - distanceFromCenter;
-    right = SCREEN_WIDTH / 2 + distanceFromCenter;
-    up = 800;
-    down = 900;
-    depth = 25;
-    textXCoordinate = SCREEN_WIDTH / 2 - 65;
-    textYCoordinate = 850;
-    strcpy(text, "OPTIONS");
-
-    // Redraw the "OPTIONS" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
-}
-
-
-
-void UserInterface::hoverOptions ()
-{
-    // Clear the window.
-    cleardevice();
-
-    // Get the parameters for redrawing the "START" button.
-    unsigned short int distanceFromCenter = 100;
-    unsigned short int left = SCREEN_WIDTH / 2 - distanceFromCenter;
-    unsigned short int right = SCREEN_WIDTH / 2 + distanceFromCenter;
-    unsigned short int up = 200 + SCREEN_HEIGHT - 1080;
-    unsigned short int down = 300 + SCREEN_HEIGHT - 1080;
-    unsigned short int depth = 25;
-    bool drawDetails = 1;
-    unsigned short int textXCoordinate = SCREEN_WIDTH / 2 - 50;
-    unsigned short int textYCoordinate = 250 + SCREEN_HEIGHT - 1080;
-    char text[30] = "START";
-
-    // Redraw the "START" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
-
-    // Update the parameters for redrawing the "RULES" button.
+    // Get the parameters for drawing the "Options" button.
+    left = SCREEN_WIDTH / 2 - 130;
+    right = SCREEN_WIDTH / 2 + 130;
     up = 400;
     down = 500;
-    textYCoordinate = 450;
-    strcpy(text, "RULES");
+    horizontalPosition = left + 22;
+    verticalPosition = 425;
+    strcpy(text, "Options");
 
-    // Redraw the "RULES" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+    // Draw the "Options" button.
+    drawButton(left, up, right, down, depth, drawDetails, horizontalPosition, verticalPosition, text);
 
-    // Update the parameters for redrawing the "EXIT" button.
+    // Get the parameters for drawing the "Rules" button.
+    left = SCREEN_WIDTH / 2 - 100;
+    right = SCREEN_WIDTH / 2 + 100;
     up = 600;
     down = 700;
-    textXCoordinate += 10;
-    textYCoordinate = 650;
-    strcpy(text, "EXIT");
+    horizontalPosition = left + 22;
+    verticalPosition = 625;
+    strcpy(text, "Rules");
 
-    // Redraw the "EXIT" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+    // Draw the "Rules" button.
+    drawButton(left, up, right, down, depth, drawDetails, horizontalPosition, verticalPosition, text);
 
-    // Update the parameters for redrawing the "OPTIONS" button.
+    // Get the parameters for drawing the "Exit" button.
+    left = SCREEN_WIDTH / 2 - 64;
+    right = SCREEN_WIDTH / 2 + 104;
     up = 780;
     down = 880;
-    left += 20;
-    right += 20;
     depth = 10;
-    textYCoordinate += 180;
-    strcpy(text, "OPTIONS");
+    horizontalPosition = left + 22;
+    verticalPosition = 805;
+    strcpy(text, "Exit");
 
-    // Redraw the "OPTIONS" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+    // Draw the "Exit" button.
+    drawButton(left, up, right, down, depth, drawDetails, horizontalPosition, verticalPosition, text);
 }
-
 
 
 void UserInterface::hoverBackRules ()
@@ -691,13 +701,6 @@ void UserInterface::clickOnStartGame ()
                     PlayerVersusPlayer playerVersusPlayer;
                     playerVersusPlayer.startGame();
                 }
-                /*
-                else if (yCoordinate >=600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
-                {
-                    onStartPage = false;
-                    startPlayerVsPlayerGame();
-                }
-                */
             }
         if (xCoordinate >= startPosition - 150 && xCoordinate <= startPosition + 150)
             if (yCoordinate >= 300 + SCREEN_HEIGHT - 1080 && yCoordinate <= 400 + SCREEN_HEIGHT - 1080)
@@ -869,7 +872,7 @@ void UserInterface::scanMouseLocationMainMenu ()
 
         switch (button)
         {
-            // The user hovered over the "Start" button.
+            // The user hovered over the "Play" button.
             case 1:
                 if (hoveredOverButton == false)
                 {
@@ -878,8 +881,17 @@ void UserInterface::scanMouseLocationMainMenu ()
                 }
                 break;
 
-            // The user hovered over the "Rules" button.
+            // The user hovered over the "Options" button.
             case 2:
+                if (hoveredOverButton == false)
+                {
+                    this->hoverOptions();
+                    hoveredOverButton = true;
+                }
+                break;
+
+            // The user hovered over the "Rules" button.
+            case 3:
                 if (hoveredOverButton == false)
                 {
                     this->hoverRules();
@@ -888,19 +900,10 @@ void UserInterface::scanMouseLocationMainMenu ()
                 break;
 
             // The user hovered over the "Exit" button.
-            case 3:
-                if (hoveredOverButton == false)
-                {
-                    this->hoverExit();
-                    hoveredOverButton = true;
-                }
-                break;
-
-            // The user hovered over the "Options" button.
             case 4:
                 if (hoveredOverButton == false)
                 {
-                    this->hoverOptions();
+                    this->hoverExit();
                     hoveredOverButton = true;
                 }
                 break;
@@ -910,7 +913,7 @@ void UserInterface::scanMouseLocationMainMenu ()
                 if (hoveredOverButton == true)
                 {
                     cleardevice();
-                    drawMainMenu();
+                    this->drawMainMenu();
                 }
                 hoveredOverButton = false;
         }
@@ -918,53 +921,54 @@ void UserInterface::scanMouseLocationMainMenu ()
         if (GetAsyncKeyState(VK_LBUTTON))
             switch (button)
             {
-                // The user clicked on the "Start" button.
+                // The user clicked on the "Play" button.
                 case 1:
                     this->clickOnStartGame();
                     buttonPressed = true;
                     break;
 
-                // The user clicked on the "Rules" button.
+                // The user clicked on the "Options" button.
                 case 2:
+                    this->clickOnOptions();
+                    buttonPressed = true;
+                    break;
+
+                // The user clicked on the "Rules" button.
+                case 3:
                     this->clickOnRules();
                     buttonPressed = true;
                     break;
 
                 // The user clicked on the "Exit" button.
-                case 3:
-                    this->clickOnExit();
-                    buttonPressed = true;
-                    break;
-
-                // The user clicked on the "Options" button.
                 case 4:
-                    this->clickOnOptions();
+                    this->clickOnExit();
                     buttonPressed = true;
             }
     }
 }
 
 
-unsigned short int UserInterface::getMouseLocationMainMenu (double xCoordinate, double yCoordinate)
+unsigned short int UserInterface::getMouseLocationMainMenu (double horizontalCoordinate, double verticalCoordinate)
 {
-    if (xCoordinate >= SCREEN_WIDTH / 2 - 100 && xCoordinate <= SCREEN_WIDTH / 2 + 100)
-    {
-        // The user clicked on the "START" button.
-        if(yCoordinate >= 200 + SCREEN_HEIGHT - 1080 && yCoordinate <= 300 + SCREEN_HEIGHT - 1080)
-            return 1;
+    // The user clicked on the "Play" button.
+    if (horizontalCoordinate >= SCREEN_WIDTH / 2 - 84 && horizontalCoordinate <= SCREEN_WIDTH / 2 + 84 &&
+        verticalCoordinate >= 200 && verticalCoordinate <= 300)
+        return 1;
 
-        // The user clicked on the "RULES" button.
-        else if (yCoordinate >= 400 + SCREEN_HEIGHT - 1080 && yCoordinate <= 500 + SCREEN_HEIGHT - 1080)
-            return 2;
+    // The user clicked on the "Options" button.
+    if (horizontalCoordinate >= SCREEN_WIDTH / 2 - 130 && horizontalCoordinate <= SCREEN_WIDTH / 2 + 130 &&
+        verticalCoordinate >= 400 && verticalCoordinate <= 500)
+        return 2;
 
-        // The user clicked on the "EXIT" button.
-        else if (yCoordinate >= 600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
-            return 3;
+    // The user clicked on the "Rules" button.
+    if (horizontalCoordinate >= SCREEN_WIDTH / 2 - 100 && horizontalCoordinate <= SCREEN_WIDTH / 2 + 100 &&
+        verticalCoordinate >= 600 && verticalCoordinate <= 700)
+        return 3;
 
-        // The user clicked on the "OPTIONS" button.
-        else if (yCoordinate >= 800 + SCREEN_HEIGHT - 1080 && yCoordinate <= 900 + SCREEN_HEIGHT - 1080)
-            return 4;
-    }
+    // The user clicked on the "Exit" button.
+    if (horizontalCoordinate >= SCREEN_WIDTH / 2 - 84 && horizontalCoordinate <= SCREEN_WIDTH / 2 + 84 &&
+        verticalCoordinate >= 800 && verticalCoordinate <= 900)
+        return 4;
 
     // The user clicked outside the buttons.
     return 0;
