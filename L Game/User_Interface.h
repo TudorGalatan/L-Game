@@ -83,7 +83,7 @@ class UserInterface
             Output:
                 - draws a button on the screen
         **/
-        void drawButton (USI left, USI up, USI right, USI down, USI depth, bool drawDetails, USI textXCoordinate, USI textYCoordinate, char text[]);
+        void drawButton (USI leftMargin, USI upperMargin, USI rightMargin, USI downMargin, USI depth, bool drawDetails, USI horizontalPosition, USI verticalPosition, char text[]);
 
         /**
             Redraws the "START" button with the hover effect on it.
@@ -128,7 +128,7 @@ class UserInterface
             Output:
                 - redraws the "BACK" button with the hover effect on it
         **/
-        void hoverBack ();
+        void hoverBackRules ();
 
         /**
             Redraws the "PLAYER vs COMPUTER" button with the hover effect on it.

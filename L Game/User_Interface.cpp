@@ -135,40 +135,49 @@ void UserInterface::drawStartGameMenu ()
 
 void UserInterface::drawRulesScreen ()
 {
-    // Clear the screen.
+    // Clear the window.
     cleardevice();
 
-    unsigned short horizontalPosition = SCREEN_WIDTH / 2;
-    unsigned short int fontSize = 4;
-    unsigned short int verticalPosition = 100 + SCREEN_HEIGHT - 1080;
+    // Get the necessary parameters for writing the title.
+    unsigned short int fontStyle = COMPLEX_FONT;
+    unsigned short int fontDirection = HORIZ_DIR;
+    unsigned short int fontSize = 7;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 170;
+    unsigned short int verticalPosition = 100;
+    char text[] = "GAME RULES";
 
     // Write the title.
-    settextstyle(BOLD_FONT, HORIZ_DIR, fontSize);
-    outtextxy(horizontalPosition - 200, verticalPosition, "!!!RULES OF THE GAME!!!");
+    settextstyle(fontStyle, fontDirection, fontSize);
+    outtextxy(horizontalPosition, verticalPosition, text);
 
-    horizontalPosition -= 50;
+    // Get the necessary parameters for writing the rules.
+    fontSize = 4;
+    horizontalPosition = SCREEN_WIDTH / 2 - 550;
+    verticalPosition = 300;
 
     // Write the rules.
-    settextstyle(BOLD_FONT, HORIZ_DIR, fontSize / 2);
-    outtextxy(horizontalPosition - 200, verticalPosition += 150, "The board has 2 'L' shaped objects and 2 coins");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "You can move your 'L' object and, if you wish,");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "you can move at your choice one of the coins on");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "a free position. You have to move your objects");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "in such a way that you block the other player.");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "The player who runs out of moves loses!!!");
+    settextstyle(fontStyle, fontDirection, fontSize);
+    outtextxy(horizontalPosition, verticalPosition, "The game board  has  2 'L' shaped objects  and  2 coins.");
+    outtextxy(horizontalPosition, verticalPosition += 60, "You can  move  your 'L' object and, if you wish, you can");
+    outtextxy(horizontalPosition, verticalPosition += 60, "also  move  one  of  the  coins  on a free position. You");
+    outtextxy(horizontalPosition, verticalPosition += 60, "have  to move  your  objects  in  such  a  way  that you");
+    outtextxy(horizontalPosition, verticalPosition += 60, "block  the  other player.  When  a player can't move his");
+    outtextxy(horizontalPosition, verticalPosition += 60, "or her 'L' object, the other player wins. The red player");
+    outtextxy(horizontalPosition, verticalPosition += 60, "is the first one.");
 
-    unsigned short int left = horizontalPosition - 100;
-    unsigned short int right = horizontalPosition + 100;
-    unsigned short int up = 800 + SCREEN_HEIGHT - 1080;
-    unsigned short int down = 900 + SCREEN_HEIGHT - 1080;
+    // Get the necessary parameters for drawing the "Back" button.
+    unsigned short int leftMargin = SCREEN_WIDTH / 2 - 100;
+    unsigned short int rightMargin = SCREEN_WIDTH / 2 + 100;
+    unsigned short int upperMargin = 850;
+    unsigned short int downMargin = 950;
     unsigned short int depth = 25;
     bool drawDetails = 1;
-    unsigned short int textXCoordinate = horizontalPosition - 40;
-    unsigned short int textYCoordinate = 850 + SCREEN_HEIGHT - 1080;
-    char text[] = "BACK";
+    horizontalPosition = leftMargin + 38;
+    verticalPosition = 875;
+    strcpy(text, "Back");
 
-    // Draw the "BACK" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+    // Draw the "Back" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
 }
 
 
@@ -177,26 +186,32 @@ void UserInterface::drawOptionsMenu ()
 {
     // Clear the window.
     cleardevice();
-    // TODO: Add title.
+
+    // Write the title.
+    settextstyle(BOLD_FONT, HORIZ_DIR, FONT_SIZE);
+    unsigned short int textXCoordinate = SCREEN_WIDTH / 2 - 50;
+    unsigned short int textYCoordinate = 200;
+    char text[30] = "OPTIONS";
+    outtextxy(textXCoordinate, textYCoordinate, text);
 
     // Get the parameters for drawing the "CHANGE LANGUAGE" button.
     unsigned short int distanceFromCenter = 200;
     unsigned short int left = SCREEN_WIDTH / 2 - distanceFromCenter;
     unsigned short int right = SCREEN_WIDTH / 2 + distanceFromCenter;
-    unsigned short int up = 200;
-    unsigned short int down = 300;
+    unsigned short int up = 400;
+    unsigned short int down = 500;
     unsigned short int depth = 25;
     bool drawDetails = 1;
-    unsigned short int textXCoordinate = left + 20;
-    unsigned short int textYCoordinate = up + 50;
-    char text[30] = "CHANGE LANGUAGE";
+    textXCoordinate = left + 20;
+    textYCoordinate = up + 50;
+    strcpy(text, "CHANGE LANGUAGE");
 
     // Draw the "CHANGE LANGUAGE" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
     // Update the parameters for drawing the "TURN MUSIC ON/OFF" button.
-    up = 400;
-    down = 500;
+    up = 600;
+    down = 700;
     textYCoordinate = up + 50;
     strcpy(text, "TURN MUSIC ON/OFF");
 
@@ -204,8 +219,8 @@ void UserInterface::drawOptionsMenu ()
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
     // Update the parameters for drawing the "CHANGE RESOLUTION" button.
-    up = 600;
-    down = 700;
+    up = 800;
+    down = 900;
     textYCoordinate = up + 50;
     strcpy(text, "CHANGE RESOLUTION");
 
@@ -215,16 +230,28 @@ void UserInterface::drawOptionsMenu ()
 
 
 
-void UserInterface::drawButton (USI left, USI up, USI right, USI down, USI depth, bool drawDetails, USI textXCoordinate, USI textYCoordinate, char text[])
+void UserInterface::drawButton (USI leftMargin, USI upperMargin, USI rightMargin, USI downMargin, USI depth, bool drawDetails, USI horizontalPosition, USI verticalPosition, char text[])
 {
-    setfillstyle(SOLID_FILL,YELLOW);
-    // Draw the button.
-    bar3d(left, up, right, down, depth, drawDetails);
-    // Set the font characteristics.
-    settextstyle(BOLD_FONT, HORIZ_DIR, FONT_SIZE);
+    // Set the style of the button.
+    unsigned short int pattern = SOLID_FILL;
+    unsigned short int colour = RED;
+    setfillstyle(pattern, colour);
 
-    // Write the text.
-    outtextxy(textXCoordinate, textYCoordinate, text);
+    // Draw the button.
+    bar3d(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails);
+
+    // Set the style of the text for the button.
+    unsigned short int fontStyle = BOLD_FONT;
+    unsigned short int fontDirection = HORIZ_DIR;
+    unsigned short int fontSize = 6;
+    settextstyle(fontStyle, fontDirection, fontSize);
+    setcolor(LIGHTBLUE);
+
+    // Write the text of the button.
+    outtextxy(horizontalPosition, verticalPosition, text);
+
+    // Come back to the default colour.
+    setcolor(WHITE);
 }
 
 
@@ -452,7 +479,7 @@ void UserInterface::hoverOptions ()
     left += 20;
     right += 20;
     depth = 10;
-    textYCoordinate += 180;     // ??? Doesn't work.
+    textYCoordinate += 180;
     strcpy(text, "OPTIONS");
 
     // Redraw the "OPTIONS" button.
@@ -461,42 +488,51 @@ void UserInterface::hoverOptions ()
 
 
 
-void UserInterface::hoverBack ()
+void UserInterface::hoverBackRules ()
 {
-    // Clears the window.
+    // Clear the window.
     cleardevice();
 
-    unsigned short horizontalPosition = SCREEN_WIDTH / 2;
-    unsigned short int fontSize = 4;
-    unsigned short int verticalPosition = 100 + SCREEN_HEIGHT - 1080;
+    // Get the necessary parameters for writing the title.
+    unsigned short int fontStyle = COMPLEX_FONT;
+    unsigned short int fontDirection = HORIZ_DIR;
+    unsigned short int fontSize = 7;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 170;
+    unsigned short int verticalPosition = 100;
+    char text[] = "GAME RULES";
 
     // Write the title.
-    settextstyle(BOLD_FONT, HORIZ_DIR, fontSize);
-    outtextxy(horizontalPosition - 200, verticalPosition, "!!!RULES OF THE GAME!!!");
+    settextstyle(fontStyle, fontDirection, fontSize);
+    outtextxy(horizontalPosition, verticalPosition, text);
 
-    horizontalPosition -= 50;
+    // Get the necessary parameters for writing the rules.
+    fontSize = 4;
+    horizontalPosition = SCREEN_WIDTH / 2 - 550;
+    verticalPosition = 300;
 
     // Write the rules.
-    settextstyle(BOLD_FONT, HORIZ_DIR, fontSize / 2);
-    outtextxy(horizontalPosition - 200, verticalPosition += 150, "The board has 2 'L' shaped objects and 2 coins");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "You can move your 'L' object and, if you wish,");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "you can move at your choice one of the coins on");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "a free position. You have to move your objects");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "in such a way that you block the other player.");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "The player who runs out of moves loses!!!");
+    settextstyle(fontStyle, fontDirection, fontSize);
+    outtextxy(horizontalPosition, verticalPosition, "The game board  has  2 'L' shaped objects  and  2 coins.");
+    outtextxy(horizontalPosition, verticalPosition += 60, "You can  move  your 'L' object and, if you wish, you can");
+    outtextxy(horizontalPosition, verticalPosition += 60, "also  move  one  of  the  coins  on a free position. You");
+    outtextxy(horizontalPosition, verticalPosition += 60, "have  to move  your  objects  in  such  a  way  that you");
+    outtextxy(horizontalPosition, verticalPosition += 60, "block  the  other player.  When  a player can't move his");
+    outtextxy(horizontalPosition, verticalPosition += 60, "or her 'L' object, the other player wins. The red player");
+    outtextxy(horizontalPosition, verticalPosition += 60, "is the first one.");
 
-    unsigned short int left = horizontalPosition - 80;
-    unsigned short int right = horizontalPosition + 120;
-    unsigned short int up = 780 + SCREEN_HEIGHT - 1080;
-    unsigned short int down = 880 + SCREEN_HEIGHT - 1080;
+    // Get the necessary parameters for drawing the "Back" button.
+    unsigned short int leftMargin = SCREEN_WIDTH / 2 - 80;
+    unsigned short int rightMargin = SCREEN_WIDTH / 2 + 120;
+    unsigned short int upperMargin = 830;
+    unsigned short int downMargin = 930;
     unsigned short int depth = 10;
     bool drawDetails = 1;
-    unsigned short int textXCoordinate = horizontalPosition - 20;
-    unsigned short int textYCoordinate = 830 + SCREEN_HEIGHT - 1080;
-    char text[] = "BACK";
+    horizontalPosition = leftMargin + 38;
+    verticalPosition = 855;
+    strcpy(text, "Back");
 
-    // Draw the "BACK" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+    // Draw the "Back" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
 }
 
 
@@ -689,52 +725,39 @@ void UserInterface::clickOnStartGame ()
 
 void UserInterface::clickOnRules ()
 {
-    // Clears the screen.
     cleardevice();
-
-    // Draws the "RULES" page.
-    drawRulesScreen();
+    this->drawRulesScreen();
 
     bool onRulesPage = true;
     bool changer = false;
 
-    // Horizontal left position for the "RULES" button.
-    unsigned short int startPosition = SCREEN_WIDTH / 2;
+    // The left margin of the "BACK" button.
+    unsigned short int leftMargin = SCREEN_WIDTH / 2 - 100;
+    unsigned short int rightMargin = SCREEN_WIDTH / 2 + 100;
 
-    while (onRulesPage == true)
+    while (onRulesPage)
     {
-        HWND hwnd = GetForegroundWindow();
+        HWND foregroundWindowHandler = GetForegroundWindow();
         POINT cursorPosition;
-
-        // Get the mouse position.
         GetCursorPos(&cursorPosition);
-        // Get the mouse position on the window.
-        ScreenToClient(hwnd,&cursorPosition);
+        ScreenToClient(foregroundWindowHandler, &cursorPosition);
+        double horizontalPosition = cursorPosition.x;
+        double verticalPosition = cursorPosition.y;
 
-        double xCoordinate = cursorPosition.x;
-        double yCoordinate = cursorPosition.y;
-
-        // First we check if the usScreenToClient(hwnd, &p)er clicked somewhere on the screen, then we check the position.
-        // After this, we check if we can apply the hover animation on the button.
+        // Check if the click is inside the "BACK" button.
         if (GetAsyncKeyState(VK_LBUTTON))
-
-            // Check if the click is inside the "BACK" button.
-            if (xCoordinate >= startPosition  - 100 && xCoordinate <= startPosition + 100)
-                if (yCoordinate >= 800 + SCREEN_HEIGHT - 1080 && yCoordinate <= 900 + SCREEN_HEIGHT - 1080)
-                {
-                    xCoordinate = cursorPosition.x;
-                    yCoordinate = cursorPosition.y;
+            if (horizontalPosition >= leftMargin && horizontalPosition <= rightMargin)
+                if (verticalPosition >= 800 && verticalPosition <= 900)
                     onRulesPage = false;
-                }
 
-        if (xCoordinate >= startPosition - 100 && xCoordinate <= startPosition + 100)
-            if (yCoordinate >= 800 + SCREEN_HEIGHT - 1080 && yCoordinate <= 900 + SCREEN_HEIGHT - 1080)
+        if (horizontalPosition >= leftMargin && horizontalPosition <= rightMargin)
+            if (verticalPosition >= 800 && verticalPosition <= 900)
             {
                  if (changer == false)
                  {
                     changer = true;
                     cleardevice();
-                    hoverBack();
+                    hoverBackRules();
                  }
             }
             else
@@ -752,11 +775,9 @@ void UserInterface::clickOnRules ()
         }
     }
 
-    // Redraw the main window.
-    drawMainMenu();
-
-    // Look for the mouse position.
-    scanMouseLocation();
+    cleardevice();
+    this->drawMainMenu();
+    this->scanMouseLocation();
 }
 
 
@@ -772,7 +793,8 @@ void UserInterface::clickOnOptions ()
     bool onOptionsPage = true;
 
     // Horizontal left position for the "OPTIONS" button.
-    unsigned short int startPosition = SCREEN_WIDTH / 2;
+    unsigned short int startPosition = SCREEN_WIDTH / 2 - 200;
+    unsigned short int endPosition = SCREEN_WIDTH / 2 + 200;
 
     while (onOptionsPage == true)
     {
@@ -785,33 +807,29 @@ void UserInterface::clickOnOptions ()
         // Get the mouse position on the window.
         ScreenToClient(hwnd, &cursorPosition);
 
-        double xCoordinate = cursorPosition.x;      // mousex()
+        double xCoordinate = cursorPosition.x;
         double yCoordinate = cursorPosition.y;
 
-        // First we check if the usScreenToClient(hwnd, &p)er clicked somewhere on the screen, then we check the position.
-        // After this, we check if we can apply the hover animation on the button.
         if (GetAsyncKeyState(VK_LBUTTON))
-            if (xCoordinate >= startPosition - 150 && xCoordinate <= startPosition + 150)
+            if (xCoordinate >= startPosition && xCoordinate <= endPosition)
             {
                 // Do if the click is inside the "CHANGE LANGUAGE" button.
-                if (yCoordinate >= 300 + SCREEN_HEIGHT - 1080 && yCoordinate <= 400 + SCREEN_HEIGHT - 1080)
+                if (yCoordinate >= 400 && yCoordinate <= 500)
                     onOptionsPage = false;
 
                 // Do if the click is inside the "TURN MUSIC ON/OFF" button.
-                else if(yCoordinate >= 600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
+                else if (yCoordinate >= 600 && yCoordinate <= 700)
                     onOptionsPage = false;
 
                 // Do if the click is inside the "CHANGE RESOLUTION" button.
-                else if(yCoordinate >= 600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
+                else if (yCoordinate >= 800 && yCoordinate <= 900)
                     onOptionsPage = false;
             }
     }
 
-    // Redraw the main window.
-    drawMainMenu();
-
-    // Look for the mouse position.
-    scanMouseLocation();
+    cleardevice();
+    this->drawMainMenu();
+    this->scanMouseLocation();
 }
 
 
@@ -827,8 +845,9 @@ void UserInterface::scanMouseLocation ()
     {
         // Get the mouse position.
         GetCursorPos(&cursorPosition);
+
         // Get the mouse position on the screen.
-        ScreenToClient(hwnd,&cursorPosition);
+        ScreenToClient(hwnd, &cursorPosition);
         double xCoordinate = cursorPosition.x;
         double yCoordinate = cursorPosition.y;
 
@@ -897,7 +916,9 @@ void UserInterface::scanMouseLocation ()
 
                 // The "EXIT" button
                 case 3:
+                    buttonPressed = true;
                     exit(0);
+                    break;
 
                 // The "OPTIONS" button
                 case 4:
