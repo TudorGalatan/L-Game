@@ -181,53 +181,73 @@ void UserInterface::drawRulesScreen ()
 }
 
 
-
 void UserInterface::drawOptionsMenu ()
 {
     // Clear the window.
     cleardevice();
 
-    // Write the title.
-    settextstyle(BOLD_FONT, HORIZ_DIR, FONT_SIZE);
-    unsigned short int textXCoordinate = SCREEN_WIDTH / 2 - 50;
-    unsigned short int textYCoordinate = 200;
-    char text[30] = "OPTIONS";
-    outtextxy(textXCoordinate, textYCoordinate, text);
+    // Get the necessary parameters for writing the title.
+    unsigned short int fontStyle = COMPLEX_FONT;
+    unsigned short int fontDirection = HORIZ_DIR;
+    unsigned short int fontSize = 7;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 125;
+    unsigned short int verticalPosition = 100;
+    char text[] = "OPTIONS";
 
-    // Get the parameters for drawing the "CHANGE LANGUAGE" button.
-    unsigned short int distanceFromCenter = 200;
-    unsigned short int left = SCREEN_WIDTH / 2 - distanceFromCenter;
-    unsigned short int right = SCREEN_WIDTH / 2 + distanceFromCenter;
-    unsigned short int up = 400;
-    unsigned short int down = 500;
+    // Write the title.
+    settextstyle(fontStyle, fontDirection, fontSize);
+    outtextxy(horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Music" button.
+    unsigned short int leftMargin = SCREEN_WIDTH / 2 - 100;
+    unsigned short int rightMargin = SCREEN_WIDTH / 2 + 100;
+    unsigned short int upperMargin = 250;
+    unsigned short int downMargin = 350;
     unsigned short int depth = 25;
     bool drawDetails = 1;
-    textXCoordinate = left + 20;
-    textYCoordinate = up + 50;
-    strcpy(text, "CHANGE LANGUAGE");
+    horizontalPosition = leftMargin + 25;
+    verticalPosition = 275;
+    strcpy(text, "Music");
 
-    // Draw the "CHANGE LANGUAGE" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+    // Draw the "Music" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
 
-    // Update the parameters for drawing the "TURN MUSIC ON/OFF" button.
-    up = 600;
-    down = 700;
-    textYCoordinate = up + 50;
-    strcpy(text, "TURN MUSIC ON/OFF");
+    // Get the necessary parameters for drawing the "Language" button.
+    leftMargin = SCREEN_WIDTH / 2 - 145;
+    rightMargin = SCREEN_WIDTH / 2 + 145;
+    upperMargin = 450;
+    downMargin = 550;
+    horizontalPosition = leftMargin + 21;
+    verticalPosition = 475;
+    strcpy(text, "Language");
 
-    // Draw the "TURN MUSIC ON/OFF" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+    // Draw the "Language" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
 
-    // Update the parameters for drawing the "CHANGE RESOLUTION" button.
-    up = 800;
-    down = 900;
-    textYCoordinate = up + 50;
-    strcpy(text, "CHANGE RESOLUTION");
+    // Get the necessary parameters for drawing the "Resolution" button.
+    leftMargin = SCREEN_WIDTH / 2 - 175;
+    rightMargin = SCREEN_WIDTH / 2 + 175;
+    upperMargin = 650;
+    downMargin = 750;
+    horizontalPosition = leftMargin + 20;
+    verticalPosition = 675;
+    strcpy(text, "Resolution");
 
-    // Draw the "CHANGE RESOLUTION" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+    // Draw the "Resolution" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Back" button.
+    leftMargin = SCREEN_WIDTH / 2 - 83;
+    rightMargin = SCREEN_WIDTH / 2 + 83;
+    upperMargin = 850;
+    downMargin = 950;
+    horizontalPosition = leftMargin + 22;
+    verticalPosition = 875;
+    strcpy(text, "Back");
+
+    // Draw the "Back" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
 }
-
 
 
 void UserInterface::drawButton (USI leftMargin, USI upperMargin, USI rightMargin, USI downMargin, USI depth, bool drawDetails, USI horizontalPosition, USI verticalPosition, char text[])
