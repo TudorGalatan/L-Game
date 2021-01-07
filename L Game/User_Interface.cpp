@@ -8,13 +8,13 @@
 #include "Player_Versus_Player.h"
 
 #include <graphics.h>
-#include <Windows.h>
+#include <windows.h>
+#include <mmsystem.h>
 #include <cstring>
 #include <iostream>
 
 const unsigned short int SCREEN_WIDTH = GetSystemMetrics(SM_CXSCREEN);
 const unsigned short int SCREEN_HEIGHT = GetSystemMetrics(SM_CYSCREEN);
-
 
 
 void UserInterface::startGUI ()
@@ -25,16 +25,17 @@ void UserInterface::startGUI ()
     // Draw the application window.
     initwindow(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    // Draw the main menu.
-    drawMainMenu();
-
-    // Permanently scan the mouse location on the screen.
-    scanMouseLocation();
-
-    // Close the application.
-    closeApplication();
+    this->playMusic();
+    this->drawMainMenu();
+    this->scanMouseLocation();
+    this->closeApplication();
 }
 
+
+void UserInterface::playMusic ()
+{
+    // mciSendString("play Kahoot_Soundtrack.mp3 repeat", NULL, 0, NULL);
+}
 
 
 void UserInterface::drawMainMenu ()

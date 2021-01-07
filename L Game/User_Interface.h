@@ -24,6 +24,15 @@ class UserInterface
         void startGUI ();
 
         /**
+            Starts playing the background music.
+            Input:
+                - none
+            Output:
+                - the background music is played
+        **/
+        void playMusic ();
+
+        /**
             Draws the main menu.
             Input:
                 - none
