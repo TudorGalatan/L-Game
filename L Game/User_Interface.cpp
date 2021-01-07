@@ -876,11 +876,6 @@ void UserInterface::scanMouseLocationMainMenu ()
                     this->hoverStartGame();
                     hoveredOverButton = true;
                 }
-                if (GetAsyncKeyState(VK_LBUTTON))
-                {
-                    this->clickOnStartGame();
-                    buttonPressed = true;
-                }
                 break;
 
             // The user hovered over the "Rules" button.
@@ -889,11 +884,6 @@ void UserInterface::scanMouseLocationMainMenu ()
                 {
                     this->hoverRules();
                     hoveredOverButton = true;
-                }
-                if (GetAsyncKeyState(VK_LBUTTON))
-                {
-                    this->clickOnRules();
-                    buttonPressed = true;
                 }
                 break;
 
@@ -904,11 +894,6 @@ void UserInterface::scanMouseLocationMainMenu ()
                     this->hoverExit();
                     hoveredOverButton = true;
                 }
-                if (GetAsyncKeyState(VK_LBUTTON))
-                {
-                    this->clickOnExit();
-                    buttonPressed = true;
-                }
                 break;
 
             // The user hovered over the "Options" button.
@@ -918,18 +903,44 @@ void UserInterface::scanMouseLocationMainMenu ()
                     this->hoverOptions();
                     hoveredOverButton = true;
                 }
-                if (GetAsyncKeyState(VK_LBUTTON))
-                {
-                    this->clickOnOptions();
-                    buttonPressed = true;
-                }
                 break;
 
-            // The user did not hover over any button.
+            // The click is outside the buttons.
             default:
                 if (hoveredOverButton == true)
-                    hoveredOverButton = false;
+                {
+                    cleardevice();
+                    drawMainMenu();
+                }
+                hoveredOverButton = false;
         }
+
+        if (GetAsyncKeyState(VK_LBUTTON))
+            switch (button)
+            {
+                // The user clicked on the "Start" button.
+                case 1:
+                    this->clickOnStartGame();
+                    buttonPressed = true;
+                    break;
+
+                // The user clicked on the "Rules" button.
+                case 2:
+                    this->clickOnRules();
+                    buttonPressed = true;
+                    break;
+
+                // The user clicked on the "Exit" button.
+                case 3:
+                    this->clickOnExit();
+                    buttonPressed = true;
+                    break;
+
+                // The user clicked on the "Options" button.
+                case 4:
+                    this->clickOnOptions();
+                    buttonPressed = true;
+            }
     }
 }
 
