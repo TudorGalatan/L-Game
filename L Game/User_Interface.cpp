@@ -920,8 +920,8 @@ void UserInterface::scanMouseLocationMainMenu ()
                 }
                 if (GetAsyncKeyState(VK_LBUTTON))
                 {
-                    buttonPressed = true;
                     this->clickOnOptions();
+                    buttonPressed = true;
                 }
                 break;
 
