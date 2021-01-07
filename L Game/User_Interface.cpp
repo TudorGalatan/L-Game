@@ -27,8 +27,7 @@ void UserInterface::startGUI ()
 
     this->playMusic();
     this->drawMainMenu();
-    this->scanMouseLocation();
-    this->closeApplication();
+    this->scanMouseLocationMainMenu();
 }
 
 
@@ -738,7 +737,7 @@ void UserInterface::clickOnStartGame ()
     drawMainMenu();
 
     // Look for the mouse position.
-    scanMouseLocation();
+    scanMouseLocationMainMenu();
 }
 
 
@@ -797,7 +796,7 @@ void UserInterface::clickOnRules ()
 
     cleardevice();
     this->drawMainMenu();
-    this->scanMouseLocation();
+    this->scanMouseLocationMainMenu();
 }
 
 
@@ -849,113 +848,93 @@ void UserInterface::clickOnOptions ()
 
     cleardevice();
     this->drawMainMenu();
-    this->scanMouseLocation();
+    this->scanMouseLocationMainMenu();
 }
 
 
-
-void UserInterface::scanMouseLocation ()
+void UserInterface::scanMouseLocationMainMenu ()
 {
-    HWND hwnd = GetForegroundWindow();
-    POINT cursorPosition;
+    bool hoveredOverButton = false;
     bool buttonPressed = false;
-    bool changer = false;
 
-    while (buttonPressed == false)
+    while (not buttonPressed)
     {
-        // Get the mouse position.
+        HWND foregroundWindowHandler = GetForegroundWindow();
+        POINT cursorPosition;
         GetCursorPos(&cursorPosition);
-
-        // Get the mouse position on the screen.
-        ScreenToClient(hwnd, &cursorPosition);
-        double xCoordinate = cursorPosition.x;
-        double yCoordinate = cursorPosition.y;
-
-        // Check if the click is on a button.
-        unsigned short int button = getMouseLocation(xCoordinate, yCoordinate);
+        ScreenToClient(foregroundWindowHandler, &cursorPosition);
+        double horizontalPosition = cursorPosition.x;
+        double verticalPosition = cursorPosition.y;
+        unsigned short int button = getMouseLocationMainMenu(horizontalPosition, verticalPosition);
 
         switch (button)
         {
-            // The "START" button
+            // The user hovered over the "Start" button.
             case 1:
-                if (changer == false)
-                    hoverStartGame();
-                changer = true;
-                break;
-
-            // The "RULES" button
-            case 2:
-                if (changer == false)
-                    hoverRules();
-                changer = true;
-                break;
-
-            // The "EXIT" button
-            case 3:
-                if (changer == false)
-                    hoverExit();
-                changer = true;
-                break;
-
-            // The "OPTIONS" button
-            case 4:
-                if (changer == false)
-                    hoverOptions();
-                changer = true;
-                break;
-
-            // The click is outside the buttons.
-            default:
-                if (changer == true)
+                if (hoveredOverButton == false)
                 {
-                    cleardevice();
-                    drawMainMenu();
+                    this->hoverStartGame();
+                    hoveredOverButton = true;
                 }
-                changer = false;
+                if (GetAsyncKeyState(VK_LBUTTON))
+                {
+                    this->clickOnStartGame();
+                    buttonPressed = true;
+                }
+                break;
+
+            // The user hovered over the "Rules" button.
+            case 2:
+                if (hoveredOverButton == false)
+                {
+                    this->hoverRules();
+                    hoveredOverButton = true;
+                }
+                if (GetAsyncKeyState(VK_LBUTTON))
+                {
+                    this->clickOnRules();
+                    buttonPressed = true;
+                }
+                break;
+
+            // The user hovered over the "Exit" button.
+            case 3:
+                if (hoveredOverButton == false)
+                {
+                    this->hoverExit();
+                    hoveredOverButton = true;
+                }
+                if (GetAsyncKeyState(VK_LBUTTON))
+                {
+                    this->clickOnExit();
+                    buttonPressed = true;
+                }
+                break;
+
+            // The user hovered over the "Options" button.
+            case 4:
+                if (hoveredOverButton == false)
+                {
+                    this->hoverOptions();
+                    hoveredOverButton = true;
+                }
+                if (GetAsyncKeyState(VK_LBUTTON))
+                {
+                    buttonPressed = true;
+                    this->clickOnOptions();
+                }
+                break;
+
+            // The user did not hover over any button.
+            default:
+                if (hoveredOverButton == true)
+                    hoveredOverButton = false;
         }
-
-        // If you pressed left click
-        if (GetAsyncKeyState(VK_LBUTTON))
-        {
-            // Get the position of the cursor.
-            int button = getMouseLocation(xCoordinate, yCoordinate);
-
-            switch (button)
-            {
-                // The "START" button
-                case 1:
-                    buttonPressed = true;
-                    clickOnStartGame();
-                    break;
-
-                // The "RULES" button
-                case 2:
-                    buttonPressed = true;
-                    clickOnRules();
-                    break;
-
-                // The "EXIT" button
-                case 3:
-                    buttonPressed = true;
-                    exit(0);
-                    break;
-
-                // The "OPTIONS" button
-                case 4:
-                    buttonPressed = true;
-                    clickOnOptions();
-                    break;
-            }
-        }
-
-        // Wait 30 milliseconds for performance reasons. (we don t want to scan the mouse position every millisecond)
-        delay(30);
     }
 }
 
 
-
-unsigned short int UserInterface::getMouseLocation (double xCoordinate, double yCoordinate)
+unsigned short int UserInterface::getMouseLocationMainMenu (double xCoordinate, double yCoordinate)
 {
     if (xCoordinate >= SCREEN_WIDTH / 2 - 100 && xCoordinate <= SCREEN_WIDTH / 2 + 100)
     {
@@ -975,14 +954,15 @@ unsigned short int UserInterface::getMouseLocation (double xCoordinate, double y
         else if (yCoordinate >= 800 + SCREEN_HEIGHT - 1080 && yCoordinate <= 900 + SCREEN_HEIGHT - 1080)
             return 4;
     }
+
     // The user clicked outside the buttons.
     return 0;
 }
 
 
-
-void UserInterface::closeApplication ()
+void UserInterface::clickOnExit ()
 {
+    exit(0);
     closegraph();
     getch();
 }

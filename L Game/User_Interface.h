@@ -182,7 +182,7 @@ class UserInterface
             Output:
                 - permanently scans the mouse location on the screen
         **/
-        void scanMouseLocation ();
+        void scanMouseLocationMainMenu ();
 
         /**
             Determines where the user has clicked on the screen.
@@ -196,7 +196,7 @@ class UserInterface
                 - 3: if the user clicked on the "EXIT" button
                 - 4: if the user clicked on the "OPTIONS" button
         */
-        unsigned short int getMouseLocation (double xCoordinate, double yCoordinate);
+        unsigned short int getMouseLocationMainMenu (double xCoordinate, double yCoordinate);
 
         /**
             Closes the application.
@@ -205,5 +205,5 @@ class UserInterface
             Output:
                 - closes the application
         **/
-        void closeApplication ();
+        void clickOnExit ();
 };
