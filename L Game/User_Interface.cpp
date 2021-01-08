@@ -27,7 +27,7 @@ void UserInterface::startGUI ()
     // Draw the application window.
     initwindow(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    this->playMusic();
+    // this->playMusic();
     this->drawMainMenu();
     this->scanMouseLocationMainMenu();
 }
@@ -102,40 +102,54 @@ void UserInterface::drawStartGameMenu ()
     // Clear the window.
     cleardevice();
 
-    unsigned short int horizontalPosition = SCREEN_WIDTH / 2;
-    unsigned short int left = horizontalPosition - 150;
-    unsigned short int right = horizontalPosition + 250;
-    unsigned short int up = horizontalPosition - 600;
-    unsigned short int down = horizontalPosition - 500;
+    // Get the necessary parameters for writing the title.
+    unsigned short int fontStyle = COMPLEX_FONT;
+    unsigned short int fontDirection = HORIZ_DIR;
+    unsigned short int fontSize = 7;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 65;
+    unsigned short int verticalPosition = 100;
+    char text[20] = "PLAY";
+
+    // Write the title.
+    settextstyle(fontStyle, fontDirection, fontSize);
+    outtextxy(horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Player vs Computer" button.
+    unsigned short int left = SCREEN_WIDTH / 2 - 300;
+    unsigned short int right = SCREEN_WIDTH / 2 + 300;
+    unsigned short int up = 350;
+    unsigned short int down = 450;
     unsigned short int depth = 25;
     bool drawDetails = 1;
-    unsigned short int textXCoordinate = horizontalPosition - 120;
-    unsigned short int textYCoordinate = SCREEN_WIDTH / 2 - 550;
-    char text[] = "PLAYER vs COMPUTER";
+    unsigned short int textXCoordinate = left + 21;
+    unsigned short int textYCoordinate = 375;
+    strcpy(text, "Player vs Computer");
 
-    // Draw the "PLAYER vs COMPUTER" button.
+    // Draw the "Player vs Computer" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
-    // Update the values for the "PLAYER vs PLAYER" button.
-    up += 300;
-    down += 300;
-    textXCoordinate += 20;
-    textYCoordinate += 300;
-    strcpy(text, "PLAYER vs PLAYER");
+    // Get the necessary parameters for drawing the "Player vs Player" button.
+    left = SCREEN_WIDTH / 2 - 268;
+    right = SCREEN_WIDTH / 2 + 268;
+    up = 550;
+    down = 650;
+    textXCoordinate = left + 21;
+    textYCoordinate = 575;
+    strcpy(text, "Player vs Player");
 
-    //Draw the "PLAYER vs PLAYER" button.
+    //Draw the "Player vs Player" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
-    // Update the values for the "BACK" button.
-    left += 700;
-    right += 500;
-    up -= 150;
-    down -= 150;
-    textXCoordinate += 700;
-    textYCoordinate -= 150;
-    strcpy(text, "BACK");
+    // Get the necessary parameters for drawing the "Back" button.
+    left = SCREEN_WIDTH / 2 - 83;
+    right = SCREEN_WIDTH / 2 + 83;
+    up = 750;
+    down = 850;
+    textXCoordinate = left + 21;
+    textYCoordinate = 775;
+    strcpy(text, "Back");
 
-    //Draw the "BACK" button.
+    //Draw the "Back" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
 
@@ -152,7 +166,7 @@ void UserInterface::drawRulesScreen ()
     unsigned short int fontSize = 7;
     unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 170;
     unsigned short int verticalPosition = 100;
-    char text[] = "GAME RULES";
+    char text[20] = "GAME RULES";
 
     // Write the title.
     settextstyle(fontStyle, fontDirection, fontSize);
@@ -200,7 +214,7 @@ void UserInterface::drawOptionsMenu ()
     unsigned short int fontSize = 7;
     unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 125;
     unsigned short int verticalPosition = 100;
-    char text[] = "OPTIONS";
+    char text[20] = "OPTIONS";
 
     // Write the title.
     settextstyle(fontStyle, fontDirection, fontSize);
@@ -567,45 +581,60 @@ void UserInterface::hoverBackRules ()
 }
 
 
-
 void UserInterface::hoverPlayerVsComputer ()
 {
+    // Clear the window.
     cleardevice();
 
-    unsigned short int horizontalPosition = SCREEN_WIDTH / 2;
-    unsigned short int left = horizontalPosition - 150;
-    unsigned short int right = horizontalPosition + 250;
-    unsigned short int up = horizontalPosition - 600 + SCREEN_HEIGHT - 1080;
-    unsigned short int down = horizontalPosition - 500 + SCREEN_HEIGHT - 1080;
-    unsigned short int depth = 25;
+    // Get the necessary parameters for writing the title.
+    unsigned short int fontStyle = COMPLEX_FONT;
+    unsigned short int fontDirection = HORIZ_DIR;
+    unsigned short int fontSize = 7;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 65;
+    unsigned short int verticalPosition = 100;
+    char text[20] = "PLAY";
+
+    // Write the title.
+    settextstyle(fontStyle, fontDirection, fontSize);
+    outtextxy(horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Player vs Computer" button.
+    unsigned short int left = SCREEN_WIDTH / 2 - 280;
+    unsigned short int right = SCREEN_WIDTH / 2 + 320;
+    unsigned short int up = 330;
+    unsigned short int down = 430;
+    unsigned short int depth = 10;
     bool drawDetails = 1;
-    unsigned short int textXCoordinate = horizontalPosition - 120;
-    unsigned short int textYCoordinate = SCREEN_WIDTH / 2 - 550 + SCREEN_HEIGHT - 1080;
-    char text[] = "PLAYER vs COMPUTER";
+    unsigned short int textXCoordinate = left + 21;
+    unsigned short int textYCoordinate = 355;
+    strcpy(text, "Player vs Computer");
 
-    // Draw the "PLAYER vs COMPUTER" button.
-    drawButton(left + 20, up - 20, right + 20, down - 20, depth - 15, drawDetails, textXCoordinate + 20, textYCoordinate - 20, text);
-
-    //Update the values.
-    up += 300;
-    down += 300;
-    textXCoordinate += 20;
-    textYCoordinate += 300;
-    strcpy(text, "PLAYER vs PLAYER");
-
-    //Draw the "PLAYER vs PLAYER" button.
+    // Draw the "Player vs Computer" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
-    // Update the values for the "BACK" button.
-    left += 700;
-    right += 500;
-    up -= 150;
-    down -= 150;
-    textXCoordinate += 700;
-    textYCoordinate -= 150;
-    strcpy(text, "BACK");
+    // Get the necessary parameters for drawing the "Player vs Player" button.
+    left = SCREEN_WIDTH / 2 - 268;
+    right = SCREEN_WIDTH / 2 + 268;
+    up = 550;
+    down = 650;
+    depth = 25;
+    textXCoordinate = left + 21;
+    textYCoordinate = 575;
+    strcpy(text, "Player vs Player");
 
-    //Draw the "BACK" button.
+    //Draw the "Player vs Player" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+
+    // Get the necessary parameters for drawing the "Back" button.
+    left = SCREEN_WIDTH / 2 - 83;
+    right = SCREEN_WIDTH / 2 + 83;
+    up = 750;
+    down = 850;
+    textXCoordinate = left + 21;
+    textYCoordinate = 775;
+    strcpy(text, "Back");
+
+    //Draw the "Back" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
 
@@ -613,138 +642,212 @@ void UserInterface::hoverPlayerVsComputer ()
 
 void UserInterface::hoverPlayerVsPlayer ()
 {
+    // Clear the window.
     cleardevice();
 
-    unsigned short int horizontalPosition = SCREEN_WIDTH / 2;
-    unsigned short int left = horizontalPosition - 150;
-    unsigned short int right = horizontalPosition + 250;
-    unsigned short int up = horizontalPosition - 600 + SCREEN_HEIGHT - 1080;
-    unsigned short int down = horizontalPosition - 500 + SCREEN_HEIGHT - 1080;
+    // Get the necessary parameters for writing the title.
+    unsigned short int fontStyle = COMPLEX_FONT;
+    unsigned short int fontDirection = HORIZ_DIR;
+    unsigned short int fontSize = 7;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 65;
+    unsigned short int verticalPosition = 100;
+    char text[20] = "PLAY";
+
+    // Write the title.
+    settextstyle(fontStyle, fontDirection, fontSize);
+    outtextxy(horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Player vs Computer" button.
+    unsigned short int left = SCREEN_WIDTH / 2 - 300;
+    unsigned short int right = SCREEN_WIDTH / 2 + 300;
+    unsigned short int up = 350;
+    unsigned short int down = 450;
     unsigned short int depth = 25;
     bool drawDetails = 1;
-    unsigned short int textXCoordinate = horizontalPosition - 120;
-    unsigned short int textYCoordinate = SCREEN_WIDTH / 2 - 550 + SCREEN_HEIGHT - 1080;
-    char text[] = "PLAYER vs COMPUTER";
+    unsigned short int textXCoordinate = left + 21;
+    unsigned short int textYCoordinate = 375;
+    strcpy(text, "Player vs Computer");
 
-    // Draw the "PLAYER vs COMPUTER" button.
+    // Draw the "Player vs Computer" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
-    //Update the values.
-    up += 280;
-    down += 280;
-    left += 20;
-    right +=20;
+    // Get the necessary parameters for drawing the "Player vs Player" button.
+    left = SCREEN_WIDTH / 2 - 248;
+    right = SCREEN_WIDTH / 2 + 288;
+    up = 530;
+    down = 630;
     depth = 10;
-    textXCoordinate += 40;
-    textYCoordinate += 280;
-    strcpy(text,"PLAYER vs PLAYER");
+    textXCoordinate = left + 21;
+    textYCoordinate = 555;
+    strcpy(text, "Player vs Player");
 
-    //Draw the "PLAYER vs PLAYER" button.
+    //Draw the "Player vs Player" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
-    // Update the values for the "BACK" button.
-    left += 700 - 20;
-    right += 500 - 20;
-    up -= 150 - 20;
-    down -= 150 - 20;
-    depth += 15;
-    textXCoordinate += 700 - 20;
-    textYCoordinate -= 150 - 20;
-    strcpy(text, "BACK");
+    // Get the necessary parameters for drawing the "Back" button.
+    left = SCREEN_WIDTH / 2 - 83;
+    right = SCREEN_WIDTH / 2 + 83;
+    up = 750;
+    down = 850;
+    depth = 25;
+    textXCoordinate = left + 21;
+    textYCoordinate = 775;
+    strcpy(text, "Back");
 
-    //Draw the "BACK" button.
+    //Draw the "Back" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
 
 
-
-void UserInterface::clickOnStartGame ()
+void UserInterface::hoverBackPlay ()
 {
     // Clear the window.
     cleardevice();
 
-    // Draws the "START" page.
-    drawStartGameMenu();
+    // Get the necessary parameters for writing the title.
+    unsigned short int fontStyle = COMPLEX_FONT;
+    unsigned short int fontDirection = HORIZ_DIR;
+    unsigned short int fontSize = 7;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 65;
+    unsigned short int verticalPosition = 100;
+    char text[20] = "PLAY";
 
-    bool onStartPage = true;
-    bool changer = false;
+    // Write the title.
+    settextstyle(fontStyle, fontDirection, fontSize);
+    outtextxy(horizontalPosition, verticalPosition, text);
 
-    // Horizontal left position for the "RULES" button.
-    unsigned short int startPosition = SCREEN_WIDTH / 2;
+    // Get the necessary parameters for drawing the "Player vs Computer" button.
+    unsigned short int left = SCREEN_WIDTH / 2 - 300;
+    unsigned short int right = SCREEN_WIDTH / 2 + 300;
+    unsigned short int up = 350;
+    unsigned short int down = 450;
+    unsigned short int depth = 25;
+    bool drawDetails = 1;
+    unsigned short int textXCoordinate = left + 21;
+    unsigned short int textYCoordinate = 375;
+    strcpy(text, "Player vs Computer");
 
-    while (onStartPage == true)
-    {
-        HWND hwnd = GetForegroundWindow();  /// ?????
-        POINT cursorPosition;
+    // Draw the "Player vs Computer" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
-        // Get the mouse position.
-        GetCursorPos(&cursorPosition);
-        // Get the mouse position on the window.
-        ScreenToClient(hwnd,&cursorPosition);
+    // Get the necessary parameters for drawing the "Player vs Player" button.
+    left = SCREEN_WIDTH / 2 - 268;
+    right = SCREEN_WIDTH / 2 + 268;
+    up = 550;
+    down = 650;
+    textXCoordinate = left + 21;
+    textYCoordinate = 575;
+    strcpy(text, "Player vs Player");
 
-        double xCoordinate = cursorPosition.x;
-        double yCoordinate = cursorPosition.y;
+    //Draw the "Player vs Player" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
-        // First we check if the usScreenToClient(hwnd, &p)er clicked somewhere on the screen, then we check the position.
-        // After this, we check if we can apply the hover animation on the button.
-        if (GetAsyncKeyState(VK_LBUTTON))
+    // Get the necessary parameters for drawing the "Back" button.
+    left = SCREEN_WIDTH / 2 - 63;
+    right = SCREEN_WIDTH / 2 + 103;
+    up = 730;
+    down = 830;
+    depth = 10;
+    textXCoordinate = left + 21;
+    textYCoordinate = 755;
+    strcpy(text, "Back");
 
-            if (xCoordinate >= startPosition - 150 && xCoordinate <= startPosition + 150)
-            {
-                if (yCoordinate >= 300 + SCREEN_HEIGHT - 1080 && yCoordinate <= 400 + SCREEN_HEIGHT - 1080)
-                {
-                    onStartPage = false;
-                    PlayerVersusEnvironment playerVersusEnvironment;
-                    playerVersusEnvironment.startGame();
-                }
-                else if (yCoordinate >=600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
-                {
-                    onStartPage = false;
-                    PlayerVersusPlayer playerVersusPlayer;
-                    playerVersusPlayer.startGame();
-                }
-            }
-        if (xCoordinate >= startPosition - 150 && xCoordinate <= startPosition + 150)
-            if (yCoordinate >= 300 + SCREEN_HEIGHT - 1080 && yCoordinate <= 400 + SCREEN_HEIGHT - 1080)
-            {
-                 if (changer == false)
-                 {
-                    changer = true;
-                    cleardevice();
-                    hoverPlayerVsComputer();
-                 }
-            }
-            else if(yCoordinate >= 600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
-            {
-                if(changer == false)
-                {
-                    changer = true;
-                    cleardevice();
-                    hoverPlayerVsPlayer();
-                }
-            }
-            else
-            {
-                if (changer == true)
-                {
-                    changer = false;
-                    drawStartGameMenu();
-                }
-            }
-        else if (changer == true)
-        {
-            changer = false;
-            drawStartGameMenu();
-        }
-    }
-
-    // Redraw the main window.
-    drawMainMenu();
-
-    // Look for the mouse position.
-    scanMouseLocationMainMenu();
+    //Draw the "Back" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
 
+
+void UserInterface::clickOnStartGame ()
+{
+    cleardevice();
+    this->drawStartGameMenu();
+
+    bool onPlayScreen = true;
+    bool hoveredOverButton = false;
+
+    while (onPlayScreen)
+    {
+        HWND foregroundWindowHandler = GetForegroundWindow();
+        POINT cursorPosition;
+        GetCursorPos(&cursorPosition);
+        ScreenToClient(foregroundWindowHandler, &cursorPosition);
+        double horizontalPosition = cursorPosition.x;
+        double verticalPosition = cursorPosition.y;
+
+        if (GetAsyncKeyState(VK_LBUTTON))
+
+            // The user clicked on the "Player vs Computer" button.
+            if (horizontalPosition >= SCREEN_WIDTH / 2 - 300 && horizontalPosition <= SCREEN_WIDTH / 2 + 300 &&
+                verticalPosition >= 350 && verticalPosition <= 450)
+            {
+                PlayerVersusEnvironment playerVersusEnvironment;
+                playerVersusEnvironment.startGame();
+                onPlayScreen = false;
+            }
+
+            // The user clicked on the "Player vs Player" button.
+            else if (horizontalPosition >= SCREEN_WIDTH / 2 - 268 && horizontalPosition <= SCREEN_WIDTH / 2 + 268 &&
+                verticalPosition >= 550 && verticalPosition <= 650)
+            {
+                PlayerVersusPlayer playerVersusPlayer;
+                playerVersusPlayer.startGame();
+                onPlayScreen = false;
+            }
+
+            // The user clicked on the "Back" button.
+            else if (horizontalPosition >= SCREEN_WIDTH / 2 - 83 && horizontalPosition <= SCREEN_WIDTH / 2 + 83 &&
+                verticalPosition >= 750 && verticalPosition <= 850)
+            {
+                cleardevice();
+                this->drawMainMenu();
+                this->scanMouseLocationMainMenu();
+                onPlayScreen = false;
+            }
+
+        // The user hovered over the "Player vs Computer" button.
+        if (horizontalPosition >= SCREEN_WIDTH / 2 - 300 && horizontalPosition <= SCREEN_WIDTH / 2 + 300 &&
+            verticalPosition >= 350 && verticalPosition <= 450)
+        {
+             if (hoveredOverButton == false)
+             {
+                hoveredOverButton = true;
+                cleardevice();
+                this->hoverPlayerVsComputer();
+             }
+        }
+
+        // The user hovered over the "Player vs Player" button.
+        else if (horizontalPosition >= SCREEN_WIDTH / 2 - 268 && horizontalPosition <= SCREEN_WIDTH / 2 + 268 &&
+            verticalPosition >= 550 && verticalPosition <= 650)
+        {
+            if (hoveredOverButton == false)
+            {
+                hoveredOverButton = true;
+                cleardevice();
+                this->hoverPlayerVsPlayer();
+            }
+        }
+
+        // The user hovered over the "Back" button.
+        else if (horizontalPosition >= SCREEN_WIDTH / 2 - 83 && horizontalPosition <= SCREEN_WIDTH / 2 + 83 &&
+                verticalPosition >= 750 && verticalPosition <= 850)
+        {
+            if (hoveredOverButton == false)
+            {
+                hoveredOverButton = true;
+                cleardevice();
+                this->hoverBackPlay();
+            }
+        }
+
+        // The user does not hover over any button anymore.
+        else if (hoveredOverButton == true)
+        {
+            hoveredOverButton = false;
+            this->drawStartGameMenu();
+        }
+    }
+}
 
 
 void UserInterface::clickOnRules ()

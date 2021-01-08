@@ -131,6 +131,15 @@ class UserInterface
         void hoverBackRules ();
 
         /**
+            Redraws the "BACK" button with the hover effect on it.
+            Input:
+                - none
+            Output:
+                - redraws the "BACK" button with the hover effect on it
+        **/
+        void hoverBackPlay ();
+
+        /**
             Redraws the "PLAYER vs COMPUTER" button with the hover effect on it.
             Input:
                 - none
