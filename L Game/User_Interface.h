@@ -140,6 +140,15 @@ class UserInterface
         void hoverBackPlay ();
 
         /**
+            Redraws the "BACK" button with the hover effect on it.
+            Input:
+                - none
+            Output:
+                - redraws the "BACK" button with the hover effect on it
+        **/
+        void hoverBackOptions ();
+
+        /**
             Redraws the "PLAYER vs COMPUTER" button with the hover effect on it.
             Input:
                 - none
@@ -156,6 +165,33 @@ class UserInterface
                 - redraws the "PLAYER vs PLAYER" button with the hover effect on it
         **/
         void hoverPlayerVsPlayer ();
+
+        /**
+            Redraws the "Music" button with the hover effect on it.
+            Input:
+                - none
+            Output:
+                - redraws the "Music" button with the hover effect on it
+        **/
+        void hoverMusic ();
+
+        /**
+            Redraws the "Language" button with the hover effect on it.
+            Input:
+                - none
+            Output:
+                - redraws the "Language" button with the hover effect on it
+        **/
+        void hoverLangauge ();
+
+        /**
+            Redraws the "Difficulty" button with the hover effect on it.
+            Input:
+                - none
+            Output:
+                - redraws the "Difficulty" button with the hover effect on it
+        **/
+        void hoverDifficulty ();
 
         /**
             Redirects to the "START GAME" menu.

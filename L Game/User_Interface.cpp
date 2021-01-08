@@ -246,16 +246,16 @@ void UserInterface::drawOptionsMenu ()
     // Draw the "Language" button.
     this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
 
-    // Get the necessary parameters for drawing the "Resolution" button.
+    // Get the necessary parameters for drawing the "Difficulty" button.
     leftMargin = SCREEN_WIDTH / 2 - 175;
     rightMargin = SCREEN_WIDTH / 2 + 175;
     upperMargin = 650;
     downMargin = 750;
     horizontalPosition = leftMargin + 20;
     verticalPosition = 675;
-    strcpy(text, "Resolution");
+    strcpy(text, "Difficulty");
 
-    // Draw the "Resolution" button.
+    // Draw the "Difficulty" button.
     this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
 
     // Get the necessary parameters for drawing the "Back" button.
@@ -295,7 +295,6 @@ void UserInterface::drawButton (USI leftMargin, USI upperMargin, USI rightMargin
     // Come back to the default colour.
     setcolor(WHITE);
 }
-
 
 
 void UserInterface::hoverStartGame ()
@@ -911,52 +910,103 @@ void UserInterface::clickOnRules ()
 
 void UserInterface::clickOnOptions ()
 {
-    // Clear the window.
     cleardevice();
+    this->drawOptionsMenu();
 
-    // Draws the "OPTIONS" page.
-    drawOptionsMenu();
+    bool onOptionsScreen = true;
+    bool hoveredOverButton = false;
 
-    bool onOptionsPage = true;
-
-    // Horizontal left position for the "OPTIONS" button.
-    unsigned short int startPosition = SCREEN_WIDTH / 2 - 200;
-    unsigned short int endPosition = SCREEN_WIDTH / 2 + 200;
-
-    while (onOptionsPage == true)
+    while (onOptionsScreen)
     {
-        HWND hwnd = GetForegroundWindow();  // a pointer to the open window
+        HWND foregroundWindowHandler = GetForegroundWindow();
         POINT cursorPosition;
-
-        // Get the mouse position.
         GetCursorPos(&cursorPosition);
-
-        // Get the mouse position on the window.
-        ScreenToClient(hwnd, &cursorPosition);
-
-        double xCoordinate = cursorPosition.x;
-        double yCoordinate = cursorPosition.y;
+        ScreenToClient(foregroundWindowHandler, &cursorPosition);
+        double horizontalPosition = cursorPosition.x;
+        double verticalPosition = cursorPosition.y;
 
         if (GetAsyncKeyState(VK_LBUTTON))
-            if (xCoordinate >= startPosition && xCoordinate <= endPosition)
+
+            // The user clicked on the "Music" button.
+            if (horizontalPosition >= SCREEN_WIDTH / 2 - 100 && horizontalPosition <= SCREEN_WIDTH / 2 + 100 &&
+                verticalPosition >= 250 && verticalPosition <= 350)
+                onOptionsScreen = false;
+
+            // The user clicked on the "Language" button.
+            else if (horizontalPosition >= SCREEN_WIDTH / 2 - 145 && horizontalPosition <= SCREEN_WIDTH / 2 + 145 &&
+                verticalPosition >= 450 && verticalPosition <= 550)
+                onOptionsScreen = false;
+
+            // The user clicked on the "Difficulty" button.
+            else if (horizontalPosition >= SCREEN_WIDTH / 2 - 175 && horizontalPosition <= SCREEN_WIDTH / 2 + 175 &&
+                verticalPosition >= 650 && verticalPosition <= 750)
+                onOptionsScreen = false;
+
+            // The user clicked on the "Back" button.
+            else if (horizontalPosition >= SCREEN_WIDTH / 2 - 83 && horizontalPosition <= SCREEN_WIDTH / 2 + 83 &&
+                verticalPosition >= 850 && verticalPosition <= 950)
+                {
+                    cleardevice();
+                    this->drawMainMenu();
+                    this->scanMouseLocationMainMenu();
+                    onOptionsScreen = false;
+                }
+
+        // The user hovered over the "Music" button.
+        if (horizontalPosition >= SCREEN_WIDTH / 2 - 100 && horizontalPosition <= SCREEN_WIDTH / 2 + 100 &&
+            verticalPosition >= 250 && verticalPosition <= 350)
+        {
+            if (hoveredOverButton == false)
             {
-                // Do if the click is inside the "CHANGE LANGUAGE" button.
-                if (yCoordinate >= 400 && yCoordinate <= 500)
-                    onOptionsPage = false;
-
-                // Do if the click is inside the "TURN MUSIC ON/OFF" button.
-                else if (yCoordinate >= 600 && yCoordinate <= 700)
-                    onOptionsPage = false;
-
-                // Do if the click is inside the "CHANGE RESOLUTION" button.
-                else if (yCoordinate >= 800 && yCoordinate <= 900)
-                    onOptionsPage = false;
+                hoveredOverButton = true;
+                cleardevice();
+                this->hoverMusic();
             }
-    }
+        }
 
-    cleardevice();
-    this->drawMainMenu();
-    this->scanMouseLocationMainMenu();
+        // The user hovered over the "Langauge" button.
+        else if (horizontalPosition >= SCREEN_WIDTH / 2 - 145 && horizontalPosition <= SCREEN_WIDTH / 2 + 145 &&
+            verticalPosition >= 450 && verticalPosition <= 550)
+        {
+            if (hoveredOverButton == false)
+            {
+                hoveredOverButton = true;
+                cleardevice();
+                this->hoverLangauge();
+            }
+        }
+
+        // The user hovered over the "Difficulty" button.
+        else if (horizontalPosition >= SCREEN_WIDTH / 2 - 175 && horizontalPosition <= SCREEN_WIDTH / 2 + 175 &&
+            verticalPosition >= 650 && verticalPosition <= 750)
+        {
+            if (hoveredOverButton == false)
+            {
+                hoveredOverButton = true;
+                cleardevice();
+                this->hoverDifficulty();
+            }
+        }
+
+        // The user hovered over the "Back" button.
+        else if (horizontalPosition >= SCREEN_WIDTH / 2 - 83 && horizontalPosition <= SCREEN_WIDTH / 2 + 83 &&
+            verticalPosition >= 850 && verticalPosition <= 950)
+        {
+            if (hoveredOverButton == false)
+            {
+                hoveredOverButton = true;
+                cleardevice();
+                this->hoverBackOptions();
+            }
+        }
+
+        // The user does not hover over any button anymore.
+        else if (hoveredOverButton == true)
+        {
+            hoveredOverButton = false;
+            this->drawOptionsMenu();
+        }
+    }
 }
 
 
@@ -1019,8 +1069,8 @@ void UserInterface::scanMouseLocationMainMenu ()
                 {
                     cleardevice();
                     this->drawMainMenu();
+                    hoveredOverButton = false;
                 }
-                hoveredOverButton = false;
         }
 
         if (GetAsyncKeyState(VK_LBUTTON))
@@ -1085,4 +1135,286 @@ void UserInterface::clickOnExit ()
     exit(0);
     closegraph();
     getch();
+}
+
+
+void UserInterface::hoverMusic ()
+{
+    // Clear the window.
+    cleardevice();
+
+    // Get the necessary parameters for writing the title.
+    unsigned short int fontStyle = COMPLEX_FONT;
+    unsigned short int fontDirection = HORIZ_DIR;
+    unsigned short int fontSize = 7;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 125;
+    unsigned short int verticalPosition = 100;
+    char text[20] = "OPTIONS";
+
+    // Write the title.
+    settextstyle(fontStyle, fontDirection, fontSize);
+    outtextxy(horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Music" button.
+    unsigned short int leftMargin = SCREEN_WIDTH / 2 - 80;
+    unsigned short int rightMargin = SCREEN_WIDTH / 2 + 120;
+    unsigned short int upperMargin = 230;
+    unsigned short int downMargin = 330;
+    unsigned short int depth = 10;
+    bool drawDetails = 1;
+    horizontalPosition = leftMargin + 25;
+    verticalPosition = 255;
+    strcpy(text, "Music");
+
+    // Draw the "Music" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Language" button.
+    leftMargin = SCREEN_WIDTH / 2 - 145;
+    rightMargin = SCREEN_WIDTH / 2 + 145;
+    upperMargin = 450;
+    downMargin = 550;
+    depth = 25;
+    horizontalPosition = leftMargin + 21;
+    verticalPosition = 475;
+    strcpy(text, "Language");
+
+    // Draw the "Language" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Difficulty" button.
+    leftMargin = SCREEN_WIDTH / 2 - 175;
+    rightMargin = SCREEN_WIDTH / 2 + 175;
+    upperMargin = 650;
+    downMargin = 750;
+    horizontalPosition = leftMargin + 20;
+    verticalPosition = 675;
+    strcpy(text, "Difficulty");
+
+    // Draw the "Difficulty" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Back" button.
+    leftMargin = SCREEN_WIDTH / 2 - 83;
+    rightMargin = SCREEN_WIDTH / 2 + 83;
+    upperMargin = 850;
+    downMargin = 950;
+    horizontalPosition = leftMargin + 22;
+    verticalPosition = 875;
+    strcpy(text, "Back");
+
+    // Draw the "Back" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+}
+
+
+void UserInterface::hoverLangauge ()
+{
+    // Clear the window.
+    cleardevice();
+
+    // Get the necessary parameters for writing the title.
+    unsigned short int fontStyle = COMPLEX_FONT;
+    unsigned short int fontDirection = HORIZ_DIR;
+    unsigned short int fontSize = 7;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 125;
+    unsigned short int verticalPosition = 100;
+    char text[20] = "OPTIONS";
+
+    // Write the title.
+    settextstyle(fontStyle, fontDirection, fontSize);
+    outtextxy(horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Music" button.
+    unsigned short int leftMargin = SCREEN_WIDTH / 2 - 100;
+    unsigned short int rightMargin = SCREEN_WIDTH / 2 + 100;
+    unsigned short int upperMargin = 250;
+    unsigned short int downMargin = 350;
+    unsigned short int depth = 25;
+    bool drawDetails = 1;
+    horizontalPosition = leftMargin + 25;
+    verticalPosition = 275;
+    strcpy(text, "Music");
+
+    // Draw the "Music" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Language" button.
+    leftMargin = SCREEN_WIDTH / 2 - 125;
+    rightMargin = SCREEN_WIDTH / 2 + 165;
+    upperMargin = 430;
+    downMargin = 530;
+    depth = 10;
+    horizontalPosition = leftMargin + 21;
+    verticalPosition = 455;
+    strcpy(text, "Language");
+
+    // Draw the "Language" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Difficulty" button.
+    leftMargin = SCREEN_WIDTH / 2 - 175;
+    rightMargin = SCREEN_WIDTH / 2 + 175;
+    upperMargin = 650;
+    downMargin = 750;
+    depth = 25;
+    horizontalPosition = leftMargin + 20;
+    verticalPosition = 675;
+    strcpy(text, "Difficulty");
+
+    // Draw the "Difficulty" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Back" button.
+    leftMargin = SCREEN_WIDTH / 2 - 83;
+    rightMargin = SCREEN_WIDTH / 2 + 83;
+    upperMargin = 850;
+    downMargin = 950;
+    horizontalPosition = leftMargin + 22;
+    verticalPosition = 875;
+    strcpy(text, "Back");
+
+    // Draw the "Back" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+}
+
+
+void UserInterface::hoverDifficulty ()
+{
+    // Clear the window.
+    cleardevice();
+
+    // Get the necessary parameters for writing the title.
+    unsigned short int fontStyle = COMPLEX_FONT;
+    unsigned short int fontDirection = HORIZ_DIR;
+    unsigned short int fontSize = 7;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 125;
+    unsigned short int verticalPosition = 100;
+    char text[20] = "OPTIONS";
+
+    // Write the title.
+    settextstyle(fontStyle, fontDirection, fontSize);
+    outtextxy(horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Music" button.
+    unsigned short int leftMargin = SCREEN_WIDTH / 2 - 100;
+    unsigned short int rightMargin = SCREEN_WIDTH / 2 + 100;
+    unsigned short int upperMargin = 250;
+    unsigned short int downMargin = 350;
+    unsigned short int depth = 25;
+    bool drawDetails = 1;
+    horizontalPosition = leftMargin + 25;
+    verticalPosition = 275;
+    strcpy(text, "Music");
+
+    // Draw the "Music" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Language" button.
+    leftMargin = SCREEN_WIDTH / 2 - 145;
+    rightMargin = SCREEN_WIDTH / 2 + 145;
+    upperMargin = 450;
+    downMargin = 550;
+    horizontalPosition = leftMargin + 21;
+    verticalPosition = 475;
+    strcpy(text, "Language");
+
+    // Draw the "Language" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Difficulty" button.
+    leftMargin = SCREEN_WIDTH / 2 - 155;
+    rightMargin = SCREEN_WIDTH / 2 + 195;
+    upperMargin = 630;
+    downMargin = 730;
+    depth = 10;
+    horizontalPosition = leftMargin + 20;
+    verticalPosition = 655;
+    strcpy(text, "Difficulty");
+
+    // Draw the "Difficulty" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Back" button.
+    leftMargin = SCREEN_WIDTH / 2 - 83;
+    rightMargin = SCREEN_WIDTH / 2 + 83;
+    upperMargin = 850;
+    downMargin = 950;
+    depth = 25;
+    horizontalPosition = leftMargin + 22;
+    verticalPosition = 875;
+    strcpy(text, "Back");
+
+    // Draw the "Back" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+}
+
+
+void UserInterface::hoverBackOptions ()
+{
+    // Clear the window.
+    cleardevice();
+
+    // Get the necessary parameters for writing the title.
+    unsigned short int fontStyle = COMPLEX_FONT;
+    unsigned short int fontDirection = HORIZ_DIR;
+    unsigned short int fontSize = 7;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 125;
+    unsigned short int verticalPosition = 100;
+    char text[20] = "OPTIONS";
+
+    // Write the title.
+    settextstyle(fontStyle, fontDirection, fontSize);
+    outtextxy(horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Music" button.
+    unsigned short int leftMargin = SCREEN_WIDTH / 2 - 100;
+    unsigned short int rightMargin = SCREEN_WIDTH / 2 + 100;
+    unsigned short int upperMargin = 250;
+    unsigned short int downMargin = 350;
+    unsigned short int depth = 25;
+    bool drawDetails = 1;
+    horizontalPosition = leftMargin + 25;
+    verticalPosition = 275;
+    strcpy(text, "Music");
+
+    // Draw the "Music" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Language" button.
+    leftMargin = SCREEN_WIDTH / 2 - 145;
+    rightMargin = SCREEN_WIDTH / 2 + 145;
+    upperMargin = 450;
+    downMargin = 550;
+    horizontalPosition = leftMargin + 21;
+    verticalPosition = 475;
+    strcpy(text, "Language");
+
+    // Draw the "Language" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Difficulty" button.
+    leftMargin = SCREEN_WIDTH / 2 - 175;
+    rightMargin = SCREEN_WIDTH / 2 + 175;
+    upperMargin = 650;
+    downMargin = 750;
+    horizontalPosition = leftMargin + 20;
+    verticalPosition = 675;
+    strcpy(text, "Difficulty");
+
+    // Draw the "Difficulty" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Back" button.
+    leftMargin = SCREEN_WIDTH / 2 - 63;
+    rightMargin = SCREEN_WIDTH / 2 + 103;
+    upperMargin = 830;
+    downMargin = 930;
+    depth = 10;
+    horizontalPosition = leftMargin + 22;
+    verticalPosition = 855;
+    strcpy(text, "Back");
+
+    // Draw the "Back" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
 }
