@@ -60,6 +60,15 @@ class UserInterface
         void drawRulesScreen ();
 
         /**
+            Draws the "Difficulty" screen.
+            Input:
+                - none
+            Output:
+                - draws the "Difficulty" screen
+        **/
+        void drawDifficultyScreen ();
+
+        /**
             Draws the "OPTIONS" menu.
             Input:
                 - none

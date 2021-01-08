@@ -940,7 +940,11 @@ void UserInterface::clickOnOptions ()
             // The user clicked on the "Difficulty" button.
             else if (horizontalPosition >= SCREEN_WIDTH / 2 - 175 && horizontalPosition <= SCREEN_WIDTH / 2 + 175 &&
                 verticalPosition >= 650 && verticalPosition <= 750)
-                onOptionsScreen = false;
+                {
+                    cleardevice();
+                    this->drawDifficultyScreen();
+                    onOptionsScreen = false;
+                }
 
             // The user clicked on the "Back" button.
             else if (horizontalPosition >= SCREEN_WIDTH / 2 - 83 && horizontalPosition <= SCREEN_WIDTH / 2 + 83 &&
@@ -1413,6 +1417,75 @@ void UserInterface::hoverBackOptions ()
     depth = 10;
     horizontalPosition = leftMargin + 22;
     verticalPosition = 855;
+    strcpy(text, "Back");
+
+    // Draw the "Back" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+}
+
+
+void UserInterface::drawDifficultyScreen ()
+{
+    // Clear the window.
+    cleardevice();
+
+    // Get the necessary parameters for writing the title.
+    unsigned short int fontStyle = COMPLEX_FONT;
+    unsigned short int fontDirection = HORIZ_DIR;
+    unsigned short int fontSize = 7;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 125;
+    unsigned short int verticalPosition = 100;
+    char text[20] = "DIFFICULTY";
+
+    // Write the title.
+    settextstyle(fontStyle, fontDirection, fontSize);
+    outtextxy(horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Easy" button.
+    unsigned short int leftMargin = SCREEN_WIDTH / 2 - 100;
+    unsigned short int rightMargin = SCREEN_WIDTH / 2 + 100;
+    unsigned short int upperMargin = 250;
+    unsigned short int downMargin = 350;
+    unsigned short int depth = 25;
+    bool drawDetails = 1;
+    horizontalPosition = leftMargin + 25;
+    verticalPosition = 275;
+    strcpy(text, "Easy");
+
+    // Draw the "Easy" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Hard" button.
+    leftMargin = SCREEN_WIDTH / 2 - 145;
+    rightMargin = SCREEN_WIDTH / 2 + 145;
+    upperMargin = 450;
+    downMargin = 550;
+    horizontalPosition = leftMargin + 21;
+    verticalPosition = 475;
+    strcpy(text, "Hard");
+
+    // Draw the "Hard" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Legendary" button.
+    leftMargin = SCREEN_WIDTH / 2 - 175;
+    rightMargin = SCREEN_WIDTH / 2 + 175;
+    upperMargin = 650;
+    downMargin = 750;
+    horizontalPosition = leftMargin + 20;
+    verticalPosition = 675;
+    strcpy(text, "Legendary");
+
+    // Draw the "Legendary" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Back" button.
+    leftMargin = SCREEN_WIDTH / 2 - 83;
+    rightMargin = SCREEN_WIDTH / 2 + 83;
+    upperMargin = 850;
+    downMargin = 950;
+    horizontalPosition = leftMargin + 22;
+    verticalPosition = 875;
     strcpy(text, "Back");
 
     // Draw the "Back" button.
