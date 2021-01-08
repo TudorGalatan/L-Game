@@ -3,6 +3,8 @@
     The module is responsible with the visual side of the application.
 **/
 
+#pragma comment(lib, "winmm.lib")
+
 #include "User_Interface.h"
 #include "Player_Versus_Environment.h"
 #include "Player_Versus_Player.h"
@@ -33,7 +35,7 @@ void UserInterface::startGUI ()
 
 void UserInterface::playMusic ()
 {
-    // mciSendString("play Kahoot_Soundtrack.mp3 repeat", NULL, 0, NULL);
+    mciSendString("play Kahoot_Soundtrack.mp3 repeat", NULL, 0, NULL);
 }
 
 
