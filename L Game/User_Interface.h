@@ -10,7 +10,16 @@
 
 class UserInterface
 {
+    private:
+
+        bool musicIsOn;
+
     public:
+
+        /**
+            This is the default constructor.
+        **/
+        UserInterface ();
 
         /**
             Starts the graphical user interface.
@@ -20,15 +29,6 @@ class UserInterface
                 - the graphical user interface is being started
         **/
         void startGUI ();
-
-        /**
-            Starts playing the background music.
-            Input:
-                - none
-            Output:
-                - the background music starts playing
-        **/
-        void playMusic ();
 
         /**
             Draws the Main screen.
@@ -65,6 +65,24 @@ class UserInterface
                 - the Rules screen is drawn
         **/
         void drawRulesScreen ();
+
+        /**
+            Draws the Music screen.
+            Input:
+                - none
+            Output:
+                - the Music screen is drawn
+        **/
+        void drawMusicScreen ();
+
+        /**
+            Draws the Language screen.
+            Input:
+                - none
+            Output:
+                - the Language screen is drawn
+        **/
+        void drawLanguageScreen ();
 
         /**
             Draws the Difficulty screen.
@@ -239,7 +257,8 @@ class UserInterface
         /**
             Gets the mouse location on the Main screen.
             Input:
-                - "horizontalPosition": the horizontal position of the mouse
+                - "horizontalPosition": the horizontal                 cleardevice();
+                this->drawMusicScreen();position of the mouse
                 - "verticalPosition": the vertical position of the mouse
             Output:
                 - 0: if the mouse is outside the buttons
@@ -249,6 +268,16 @@ class UserInterface
                 - 4: if the mouse is on the Exit button
         */
         unsigned short int getMouseLocationOnMainScreen (double horizontalPosition, double verticalPosition);
+
+        /**
+            Turns the music on or off.
+            Input:
+                - none
+            Output:
+                - the music is turned on if it was off
+                - the music is turned off if it was on
+        **/
+        void turnMusicOnOff ();
 
         /**
             Exits the game.

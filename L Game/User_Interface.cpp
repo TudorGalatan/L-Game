@@ -19,6 +19,13 @@ const unsigned short int SCREEN_WIDTH = GetSystemMetrics(SM_CXSCREEN);
 const unsigned short int SCREEN_HEIGHT = GetSystemMetrics(SM_CYSCREEN);
 
 
+UserInterface::UserInterface ()
+{
+    this->musicIsOn = false;
+    this->turnMusicOnOff();
+}
+
+
 void UserInterface::startGUI ()
 {
     // Exclude the C functions for higher speed.
@@ -27,15 +34,8 @@ void UserInterface::startGUI ()
     // Draw the application window.
     initwindow(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    this->playMusic();
     this->drawMainScreen();
     this->onMainScreen();
-}
-
-
-void UserInterface::playMusic ()
-{
-    mciSendString("play Kahoot_Soundtrack.mp3 repeat", NULL, 0, NULL);
 }
 
 
@@ -267,6 +267,82 @@ void UserInterface::drawRulesScreen ()
 
     // Draw the "Back" button.
     this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+}
+
+
+void UserInterface::drawMusicScreen ()
+{
+    // Clear the window.
+    cleardevice();
+
+    // Get the necessary parameters for writing the title.
+    unsigned short int fontStyle = COMPLEX_FONT;
+    unsigned short int fontDirection = HORIZ_DIR;
+    unsigned short int fontSize = 7;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 125;
+    unsigned short int verticalPosition = 100;
+    char text[20] = "MUSIC";
+
+    // Write the title.
+    settextstyle(fontStyle, fontDirection, fontSize);
+    outtextxy(horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Turn Music ON/OFF" button.
+    unsigned short int leftMargin = SCREEN_WIDTH / 2 - 100;
+    unsigned short int rightMargin = SCREEN_WIDTH / 2 + 100;
+    unsigned short int upperMargin = 250;
+    unsigned short int downMargin = 350;
+    unsigned short int depth = 25;
+    bool drawDetails = 1;
+    horizontalPosition = leftMargin + 25;
+    verticalPosition = 275;
+    strcpy(text, "Turn Music ON/OFF");
+
+    // Draw the "Turn Music ON/OFF" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Back" button.
+    leftMargin = SCREEN_WIDTH / 2 - 83;
+    rightMargin = SCREEN_WIDTH / 2 + 83;
+    upperMargin = 850;
+    downMargin = 950;
+    horizontalPosition = leftMargin + 22;
+    verticalPosition = 875;
+    strcpy(text, "Back");
+
+    // Draw the "Back" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+}
+
+
+void UserInterface::drawLanguageScreen ()
+{
+    // Clear the window.
+    cleardevice();
+
+    // Get the necessary parameters for writing the title.
+    unsigned short int fontStyle = COMPLEX_FONT;
+    unsigned short int fontDirection = HORIZ_DIR;
+    unsigned short int fontSize = 7;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 125;
+    unsigned short int verticalPosition = 100;
+    char text[200] = "LANGUAGE";
+
+    // Write the title.
+    settextstyle(fontStyle, fontDirection, fontSize);
+    outtextxy(horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the text.
+    fontStyle = COMPLEX_FONT;
+    fontDirection = HORIZ_DIR;
+    fontSize = 4;
+    horizontalPosition = SCREEN_WIDTH / 2 - 300;
+    verticalPosition = 100;
+    strcpy(text, "Sorry, this functionality is under construction.");
+
+    // Write the text.
+    settextstyle(fontStyle, fontDirection, fontSize);
+    outtextxy(horizontalPosition, verticalPosition, text);
 }
 
 
@@ -1311,12 +1387,20 @@ void UserInterface::onOptionsScreen ()
             // The user clicked on the "Music" button.
             if (horizontalPosition >= SCREEN_WIDTH / 2 - 100 && horizontalPosition <= SCREEN_WIDTH / 2 + 100 &&
                 verticalPosition >= 250 && verticalPosition <= 350)
+            {
+                cleardevice();
+                this->drawMusicScreen();
                 onOptionsScreen = false;
+            }
 
             // The user clicked on the "Language" button.
             else if (horizontalPosition >= SCREEN_WIDTH / 2 - 145 && horizontalPosition <= SCREEN_WIDTH / 2 + 145 &&
                 verticalPosition >= 450 && verticalPosition <= 550)
+            {
+                cleardevice();
+                this->drawLanguageScreen();
                 onOptionsScreen = false;
+            }
 
             // The user clicked on the "Difficulty" button.
             else if (horizontalPosition >= SCREEN_WIDTH / 2 - 175 && horizontalPosition <= SCREEN_WIDTH / 2 + 175 &&
@@ -1477,6 +1561,21 @@ unsigned short int UserInterface::getMouseLocationOnMainScreen (double horizonta
 
     // The user clicked outside the buttons.
     return 0;
+}
+
+
+void UserInterface::turnMusicOnOff ()
+{
+    if (this->musicIsOn)
+    {
+        mciSendString("close Kahoot_Soundtrack.mp3", NULL, 0, NULL);
+        this->musicIsOn = false;
+    }
+    else
+    {
+        mciSendString("play Kahoot_Soundtrack.mp3 repeat", NULL, 0, NULL);
+        this->musicIsOn = true;
+    }
 }
 
 
