@@ -6,8 +6,6 @@
 #pragma once
 
 #define USI unsigned short int
-#define FONT_SIZE 4
-
 
 
 class UserInterface
@@ -19,7 +17,7 @@ class UserInterface
             Input:
                 - none
             Output:
-                - starts the graphical user interface
+                - the graphical user interface is being started
         **/
         void startGUI ();
 
@@ -28,236 +26,236 @@ class UserInterface
             Input:
                 - none
             Output:
-                - the background music is played
+                - the background music starts playing
         **/
         void playMusic ();
 
         /**
-            Draws the main menu.
+            Draws the Main screen.
             Input:
                 - none
             Output:
-                - draws the main menu
+                - the Main screen is drawn
         **/
-        void drawMainMenu ();
+        void drawMainScreen ();
 
         /**
-            Draws the "START GAME" menu.
+            Draws the Play screen.
             Input:
                 - none
             Output:
-                - draws the "START GAME" menu
+                - the Play screen is drawn
         **/
-        void drawStartGameMenu ();
+        void drawPlayScreen ();
 
         /**
-            Draws the "RULES" screen.
+            Draws the Options screen.
             Input:
                 - none
             Output:
-                - draws the "RULES" screen
+                - the Options screen is drawn
+        **/
+        void drawOptionsScreen ();
+
+        /**
+            Draws the Rules screen.
+            Input:
+                - none
+            Output:
+                - the Rules screen is drawn
         **/
         void drawRulesScreen ();
 
         /**
-            Draws the "Difficulty" screen.
+            Draws the Difficulty screen.
             Input:
                 - none
             Output:
-                - draws the "Difficulty" screen
+                - the Difficulty screen is drawn
         **/
         void drawDifficultyScreen ();
 
         /**
-            Draws the "OPTIONS" menu.
-            Input:
-                - none
-            Output:
-                - draws the "OPTIONS" menu
-        **/
-        void drawOptionsMenu ();
-
-        /**
             Draws a button.
             Input:
-                - "left": the left margin of the button
-                - "up": the upper margin of the button
-                - "right": the right margin of the button
-                - "down": the down margin of the button
+                - "leftMargin": the left margin of the button
+                - "upperMargin": the upper margin of the button
+                - "rightMargin": the right margin of the button
+                - "downMargin": the down margin of the button
                 - "depth": the depth of the button
-                - "drawDetails": specifies if it should draw more details
-                - "textXCoordinate": the starting X position of the text
-                - "textYCoordinate": the starting Y position of the text
+                - "drawDetails": specifies whether or not to draw more details
+                - "horizontalPosition": the horizontal position of the text
+                - "verticalPosition": the vertical position of the text
                 - "text": the text to be displayed on the button
             Output:
-                - draws a button on the screen
+                - the button is drawn
         **/
         void drawButton (USI leftMargin, USI upperMargin, USI rightMargin, USI downMargin, USI depth, bool drawDetails, USI horizontalPosition, USI verticalPosition, char text[]);
 
         /**
-            Redraws the "START" button with the hover effect on it.
+            Draws the Main screen with a hover effect on the Play button.
             Input:
                 - none
             Output:
-                - redraws the "START" button with the hover effect on it
+                - the Main screen with a hover effect on the Play button is drawn
         **/
-        void hoverStartGame ();
+        void hoverPlay ();
 
         /**
-            Redraws the "RULES" button with the hover effect on it.
+            Draws the Main screen with a hover effect on the Options button.
             Input:
                 - none
             Output:
-                - redraws the "RULES" button with the hover effect on it
-        **/
-        void hoverRules ();
-
-        /**
-            Redraws the "EXIT" button with the hover effect on it.
-            Input:
-                - none
-            Output:
-                - redraws the "EXIT" button with the hover effect on it
-        **/
-        void hoverExit ();
-
-        /**
-            Redraws the "OPTIONS" button with the hover effect on it.
-            Input:
-                - none
-            Output:
-                - redraws the "OPTIONS" button with the hover effect on it
+                - the Main screen with a hover effect on the Options button is drawn
         **/
         void hoverOptions ();
 
         /**
-            Redraws the "BACK" button with the hover effect on it.
+            Draws the Main screen with a hover effect on the Rules button.
             Input:
                 - none
             Output:
-                - redraws the "BACK" button with the hover effect on it
+                - the Main screen with a hover effect on the Rules button is drawn
         **/
-        void hoverBackRules ();
+        void hoverRules ();
 
         /**
-            Redraws the "BACK" button with the hover effect on it.
+            Draws the Main screen with a hover effect on the Exit button.
             Input:
                 - none
             Output:
-                - redraws the "BACK" button with the hover effect on it
+                - the Main screen with a hover effect on the Exit button is drawn
         **/
-        void hoverBackPlay ();
+        void hoverExit ();
 
         /**
-            Redraws the "BACK" button with the hover effect on it.
+            Draws the Play screen with a hover effect on the Player vs Computer button.
             Input:
                 - none
             Output:
-                - redraws the "BACK" button with the hover effect on it
-        **/
-        void hoverBackOptions ();
-
-        /**
-            Redraws the "PLAYER vs COMPUTER" button with the hover effect on it.
-            Input:
-                - none
-            Output:
-                - redraws the "PLAYER vs COMPUTER" button with the hover effect on it
+                - the Play screen with a hover effect on the Player vs Computer button is drawn
         **/
         void hoverPlayerVsComputer ();
 
         /**
-            Redraws the "PLAYER vs PLAYER" button with the hover effect on it.
+            Draws the Play screen with a hover effect on the Player vs Player button.
             Input:
                 - none
             Output:
-                - redraws the "PLAYER vs PLAYER" button with the hover effect on it
+                - the Play screen with a hover effect on the Player vs Player button is drawn
         **/
         void hoverPlayerVsPlayer ();
 
         /**
-            Redraws the "Music" button with the hover effect on it.
+            Draws the Play screen with a hover effect on the Back button.
             Input:
                 - none
             Output:
-                - redraws the "Music" button with the hover effect on it
+                - the Play screen with a hover effect on the Back button is drawn
+        **/
+        void hoverBackPlay ();
+
+        /**
+            Draws the Options screen with a hover effect on the Music button.
+            Input:
+                - none
+            Output:
+                - the Options screen with a hover effect on the Music button is drawn
         **/
         void hoverMusic ();
 
         /**
-            Redraws the "Language" button with the hover effect on it.
+            Draws the Options screen with a hover effect on the Language button.
             Input:
                 - none
             Output:
-                - redraws the "Language" button with the hover effect on it
+                - the Options screen with a hover effect on the Language button is drawn
         **/
         void hoverLangauge ();
 
         /**
-            Redraws the "Difficulty" button with the hover effect on it.
+            Draws the Options screen with a hover effect on the Difficulty button.
             Input:
                 - none
             Output:
-                - redraws the "Difficulty" button with the hover effect on it
+                - the Options screen with a hover effect on the Difficulty button is drawn
         **/
         void hoverDifficulty ();
 
         /**
-            Redirects to the "START GAME" menu.
+            Draws the Options screen with a hover effect on the Back button.
             Input:
                 - none
             Output:
-                - redirects to the "START GAME" menu
+                - the Options screen with a hover effect on the Back button is drawn
         **/
-        void clickOnStartGame ();
+        void hoverBackOptions ();
 
         /**
-            Redirects to the "RULES" screen.
+            Draws the Rules screen with a hover effect on the Back button.
             Input:
                 - none
             Output:
-                - redirects to the "RULES" screen
+                - the Rules screen with a hover effect on the Back button is drawn
         **/
-        void clickOnRules ();
+        void hoverBackRules ();
 
         /**
-            Redirects to the "OPTIONS" menu.
+            Handles user's actions on the Main screen.
             Input:
                 - none
             Output:
-                - redirects to the "OPTIONS" menu
+                - user's actions on the Main screen are being handled
         **/
-        void clickOnOptions ();
+        void onMainScreen ();
 
         /**
-            Permanently scans the mouse location on the screen.
+            Handles user's actions on the Play screen.
             Input:
                 - none
             Output:
-                - permanently scans the mouse location on the screen
+                - user's actions on the Play screen are being handled
         **/
-        void scanMouseLocationMainMenu ();
+        void onPlayScreen ();
 
         /**
-            Determines where the user has clicked on the screen.
+            Handles user's actions on the Options screen.
             Input:
-                - "xCoordinate": the x coordinate for the click
-                - "yCoordinate": the y coordinate for the click
+                - none
             Output:
-                - 0: if the user clicked outside the buttons
-                - 1: if the user clicked on the "Play" button
-                - 2: if the user clicked on the "Options" button
-                - 3: if the user clicked on the "Rules" button
-                - 4: if the user clicked on the "Exit" button
+                - user's actions on the Options screen are being handled
+        **/
+        void onOptionsScreen ();
+
+        /**
+            Handles user's actions on the Rules screen.
+            Input:
+                - none
+            Output:
+                - user's actions on the Rules screen are being handled
+        **/
+        void onRulesScreen ();
+
+        /**
+            Gets the mouse location on the Main screen.
+            Input:
+                - "horizontalPosition": the horizontal position of the mouse
+                - "verticalPosition": the vertical position of the mouse
+            Output:
+                - 0: if the mouse is outside the buttons
+                - 1: if the mouse is on the Play button
+                - 2: if the mouse is on the Options button
+                - 3: if the mouse is on the Rules button
+                - 4: if the mouse is on the Exit button
         */
-        unsigned short int getMouseLocationMainMenu (double horizontalCoordinate, double verticalCoordinate);
+        unsigned short int getMouseLocationOnMainScreen (double horizontalPosition, double verticalPosition);
 
         /**
-            Closes the application.
+            Exits the game.
             Input:
                 - none
             Output:
-                - closes the application
+                - the game is exited
         **/
-        void clickOnExit ();
+        void exitGame ();
 };

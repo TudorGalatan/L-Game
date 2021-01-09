@@ -27,9 +27,9 @@ void UserInterface::startGUI ()
     // Draw the application window.
     initwindow(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    // this->playMusic();
-    this->drawMainMenu();
-    this->scanMouseLocationMainMenu();
+    this->playMusic();
+    this->drawMainScreen();
+    this->onMainScreen();
 }
 
 
@@ -39,7 +39,7 @@ void UserInterface::playMusic ()
 }
 
 
-void UserInterface::drawMainMenu ()
+void UserInterface::drawMainScreen ()
 {
     // Clear the window.
     cleardevice();
@@ -96,8 +96,7 @@ void UserInterface::drawMainMenu ()
 }
 
 
-
-void UserInterface::drawStartGameMenu ()
+void UserInterface::drawPlayScreen ()
 {
     // Clear the window.
     cleardevice();
@@ -154,56 +153,7 @@ void UserInterface::drawStartGameMenu ()
 }
 
 
-
-void UserInterface::drawRulesScreen ()
-{
-    // Clear the window.
-    cleardevice();
-
-    // Get the necessary parameters for writing the title.
-    unsigned short int fontStyle = COMPLEX_FONT;
-    unsigned short int fontDirection = HORIZ_DIR;
-    unsigned short int fontSize = 7;
-    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 170;
-    unsigned short int verticalPosition = 100;
-    char text[20] = "GAME RULES";
-
-    // Write the title.
-    settextstyle(fontStyle, fontDirection, fontSize);
-    outtextxy(horizontalPosition, verticalPosition, text);
-
-    // Get the necessary parameters for writing the rules.
-    fontSize = 4;
-    horizontalPosition = SCREEN_WIDTH / 2 - 550;
-    verticalPosition = 300;
-
-    // Write the rules.
-    settextstyle(fontStyle, fontDirection, fontSize);
-    outtextxy(horizontalPosition, verticalPosition, "The game board  has  2 'L' shaped objects  and  2 coins.");
-    outtextxy(horizontalPosition, verticalPosition += 60, "You can  move  your 'L' object and, if you wish, you can");
-    outtextxy(horizontalPosition, verticalPosition += 60, "also  move  one  of  the  coins  on a free position. You");
-    outtextxy(horizontalPosition, verticalPosition += 60, "have  to move  your  objects  in  such  a  way  that you");
-    outtextxy(horizontalPosition, verticalPosition += 60, "block  the  other player.  When  a player can't move his");
-    outtextxy(horizontalPosition, verticalPosition += 60, "or her 'L' object, the other player wins. The red player");
-    outtextxy(horizontalPosition, verticalPosition += 60, "is the first one.");
-
-    // Get the necessary parameters for drawing the "Back" button.
-    unsigned short int leftMargin = SCREEN_WIDTH / 2 - 100;
-    unsigned short int rightMargin = SCREEN_WIDTH / 2 + 100;
-    unsigned short int upperMargin = 850;
-    unsigned short int downMargin = 950;
-    unsigned short int depth = 25;
-    bool drawDetails = 1;
-    horizontalPosition = leftMargin + 38;
-    verticalPosition = 875;
-    strcpy(text, "Back");
-
-    // Draw the "Back" button.
-    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
-}
-
-
-void UserInterface::drawOptionsMenu ()
+void UserInterface::drawOptionsScreen ()
 {
     // Clear the window.
     cleardevice();
@@ -272,6 +222,123 @@ void UserInterface::drawOptionsMenu ()
 }
 
 
+void UserInterface::drawRulesScreen ()
+{
+    // Clear the window.
+    cleardevice();
+
+    // Get the necessary parameters for writing the title.
+    unsigned short int fontStyle = COMPLEX_FONT;
+    unsigned short int fontDirection = HORIZ_DIR;
+    unsigned short int fontSize = 7;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 170;
+    unsigned short int verticalPosition = 100;
+    char text[20] = "GAME RULES";
+
+    // Write the title.
+    settextstyle(fontStyle, fontDirection, fontSize);
+    outtextxy(horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for writing the rules.
+    fontSize = 4;
+    horizontalPosition = SCREEN_WIDTH / 2 - 550;
+    verticalPosition = 300;
+
+    // Write the rules.
+    settextstyle(fontStyle, fontDirection, fontSize);
+    outtextxy(horizontalPosition, verticalPosition, "The game board  has  2 'L' shaped objects  and  2 coins.");
+    outtextxy(horizontalPosition, verticalPosition += 60, "You can  move  your 'L' object and, if you wish, you can");
+    outtextxy(horizontalPosition, verticalPosition += 60, "also  move  one  of  the  coins  on a free position. You");
+    outtextxy(horizontalPosition, verticalPosition += 60, "have  to move  your  objects  in  such  a  way  that you");
+    outtextxy(horizontalPosition, verticalPosition += 60, "block  the  other player.  When  a player can't move his");
+    outtextxy(horizontalPosition, verticalPosition += 60, "or her 'L' object, the other player wins. The red player");
+    outtextxy(horizontalPosition, verticalPosition += 60, "is the first one.");
+
+    // Get the necessary parameters for drawing the "Back" button.
+    unsigned short int leftMargin = SCREEN_WIDTH / 2 - 100;
+    unsigned short int rightMargin = SCREEN_WIDTH / 2 + 100;
+    unsigned short int upperMargin = 850;
+    unsigned short int downMargin = 950;
+    unsigned short int depth = 25;
+    bool drawDetails = 1;
+    horizontalPosition = leftMargin + 38;
+    verticalPosition = 875;
+    strcpy(text, "Back");
+
+    // Draw the "Back" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+}
+
+
+void UserInterface::drawDifficultyScreen ()
+{
+    // Clear the window.
+    cleardevice();
+
+    // Get the necessary parameters for writing the title.
+    unsigned short int fontStyle = COMPLEX_FONT;
+    unsigned short int fontDirection = HORIZ_DIR;
+    unsigned short int fontSize = 7;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 125;
+    unsigned short int verticalPosition = 100;
+    char text[20] = "DIFFICULTY";
+
+    // Write the title.
+    settextstyle(fontStyle, fontDirection, fontSize);
+    outtextxy(horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Easy" button.
+    unsigned short int leftMargin = SCREEN_WIDTH / 2 - 100;
+    unsigned short int rightMargin = SCREEN_WIDTH / 2 + 100;
+    unsigned short int upperMargin = 250;
+    unsigned short int downMargin = 350;
+    unsigned short int depth = 25;
+    bool drawDetails = 1;
+    horizontalPosition = leftMargin + 25;
+    verticalPosition = 275;
+    strcpy(text, "Easy");
+
+    // Draw the "Easy" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Hard" button.
+    leftMargin = SCREEN_WIDTH / 2 - 145;
+    rightMargin = SCREEN_WIDTH / 2 + 145;
+    upperMargin = 450;
+    downMargin = 550;
+    horizontalPosition = leftMargin + 21;
+    verticalPosition = 475;
+    strcpy(text, "Hard");
+
+    // Draw the "Hard" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Legendary" button.
+    leftMargin = SCREEN_WIDTH / 2 - 175;
+    rightMargin = SCREEN_WIDTH / 2 + 175;
+    upperMargin = 650;
+    downMargin = 750;
+    horizontalPosition = leftMargin + 20;
+    verticalPosition = 675;
+    strcpy(text, "Legendary");
+
+    // Draw the "Legendary" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+
+    // Get the necessary parameters for drawing the "Back" button.
+    leftMargin = SCREEN_WIDTH / 2 - 83;
+    rightMargin = SCREEN_WIDTH / 2 + 83;
+    upperMargin = 850;
+    downMargin = 950;
+    horizontalPosition = leftMargin + 22;
+    verticalPosition = 875;
+    strcpy(text, "Back");
+
+    // Draw the "Back" button.
+    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+}
+
+
 void UserInterface::drawButton (USI leftMargin, USI upperMargin, USI rightMargin, USI downMargin, USI depth, bool drawDetails, USI horizontalPosition, USI verticalPosition, char text[])
 {
     // Set the style of the button.
@@ -297,7 +364,7 @@ void UserInterface::drawButton (USI leftMargin, USI upperMargin, USI rightMargin
 }
 
 
-void UserInterface::hoverStartGame ()
+void UserInterface::hoverPlay ()
 {
     // Clear the window.
     cleardevice();
@@ -473,7 +540,6 @@ void UserInterface::hoverRules ()
 }
 
 
-
 void UserInterface::hoverExit ()
 {
     // Clear the window.
@@ -529,54 +595,6 @@ void UserInterface::hoverExit ()
 
     // Draw the "Exit" button.
     drawButton(left, up, right, down, depth, drawDetails, horizontalPosition, verticalPosition, text);
-}
-
-
-void UserInterface::hoverBackRules ()
-{
-    // Clear the window.
-    cleardevice();
-
-    // Get the necessary parameters for writing the title.
-    unsigned short int fontStyle = COMPLEX_FONT;
-    unsigned short int fontDirection = HORIZ_DIR;
-    unsigned short int fontSize = 7;
-    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 170;
-    unsigned short int verticalPosition = 100;
-    char text[] = "GAME RULES";
-
-    // Write the title.
-    settextstyle(fontStyle, fontDirection, fontSize);
-    outtextxy(horizontalPosition, verticalPosition, text);
-
-    // Get the necessary parameters for writing the rules.
-    fontSize = 4;
-    horizontalPosition = SCREEN_WIDTH / 2 - 550;
-    verticalPosition = 300;
-
-    // Write the rules.
-    settextstyle(fontStyle, fontDirection, fontSize);
-    outtextxy(horizontalPosition, verticalPosition, "The game board  has  2 'L' shaped objects  and  2 coins.");
-    outtextxy(horizontalPosition, verticalPosition += 60, "You can  move  your 'L' object and, if you wish, you can");
-    outtextxy(horizontalPosition, verticalPosition += 60, "also  move  one  of  the  coins  on a free position. You");
-    outtextxy(horizontalPosition, verticalPosition += 60, "have  to move  your  objects  in  such  a  way  that you");
-    outtextxy(horizontalPosition, verticalPosition += 60, "block  the  other player.  When  a player can't move his");
-    outtextxy(horizontalPosition, verticalPosition += 60, "or her 'L' object, the other player wins. The red player");
-    outtextxy(horizontalPosition, verticalPosition += 60, "is the first one.");
-
-    // Get the necessary parameters for drawing the "Back" button.
-    unsigned short int leftMargin = SCREEN_WIDTH / 2 - 80;
-    unsigned short int rightMargin = SCREEN_WIDTH / 2 + 120;
-    unsigned short int upperMargin = 830;
-    unsigned short int downMargin = 930;
-    unsigned short int depth = 10;
-    bool drawDetails = 1;
-    horizontalPosition = leftMargin + 38;
-    verticalPosition = 855;
-    strcpy(text, "Back");
-
-    // Draw the "Back" button.
-    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
 }
 
 
@@ -636,7 +654,6 @@ void UserInterface::hoverPlayerVsComputer ()
     //Draw the "Back" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
-
 
 
 void UserInterface::hoverPlayerVsPlayer ()
@@ -753,392 +770,6 @@ void UserInterface::hoverBackPlay ()
 
     //Draw the "Back" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
-}
-
-
-void UserInterface::clickOnStartGame ()
-{
-    cleardevice();
-    this->drawStartGameMenu();
-
-    bool onPlayScreen = true;
-    bool hoveredOverButton = false;
-
-    while (onPlayScreen)
-    {
-        HWND foregroundWindowHandler = GetForegroundWindow();
-        POINT cursorPosition;
-        GetCursorPos(&cursorPosition);
-        ScreenToClient(foregroundWindowHandler, &cursorPosition);
-        double horizontalPosition = cursorPosition.x;
-        double verticalPosition = cursorPosition.y;
-
-        if (GetAsyncKeyState(VK_LBUTTON))
-
-            // The user clicked on the "Player vs Computer" button.
-            if (horizontalPosition >= SCREEN_WIDTH / 2 - 300 && horizontalPosition <= SCREEN_WIDTH / 2 + 300 &&
-                verticalPosition >= 350 && verticalPosition <= 450)
-            {
-                PlayerVersusEnvironment playerVersusEnvironment;
-                playerVersusEnvironment.startGame();
-                onPlayScreen = false;
-            }
-
-            // The user clicked on the "Player vs Player" button.
-            else if (horizontalPosition >= SCREEN_WIDTH / 2 - 268 && horizontalPosition <= SCREEN_WIDTH / 2 + 268 &&
-                verticalPosition >= 550 && verticalPosition <= 650)
-            {
-                PlayerVersusPlayer playerVersusPlayer;
-                playerVersusPlayer.startGame();
-                onPlayScreen = false;
-            }
-
-            // The user clicked on the "Back" button.
-            else if (horizontalPosition >= SCREEN_WIDTH / 2 - 83 && horizontalPosition <= SCREEN_WIDTH / 2 + 83 &&
-                verticalPosition >= 750 && verticalPosition <= 850)
-            {
-                cleardevice();
-                this->drawMainMenu();
-                this->scanMouseLocationMainMenu();
-                onPlayScreen = false;
-            }
-
-        // The user hovered over the "Player vs Computer" button.
-        if (horizontalPosition >= SCREEN_WIDTH / 2 - 300 && horizontalPosition <= SCREEN_WIDTH / 2 + 300 &&
-            verticalPosition >= 350 && verticalPosition <= 450)
-        {
-             if (hoveredOverButton == false)
-             {
-                hoveredOverButton = true;
-                cleardevice();
-                this->hoverPlayerVsComputer();
-             }
-        }
-
-        // The user hovered over the "Player vs Player" button.
-        else if (horizontalPosition >= SCREEN_WIDTH / 2 - 268 && horizontalPosition <= SCREEN_WIDTH / 2 + 268 &&
-            verticalPosition >= 550 && verticalPosition <= 650)
-        {
-            if (hoveredOverButton == false)
-            {
-                hoveredOverButton = true;
-                cleardevice();
-                this->hoverPlayerVsPlayer();
-            }
-        }
-
-        // The user hovered over the "Back" button.
-        else if (horizontalPosition >= SCREEN_WIDTH / 2 - 83 && horizontalPosition <= SCREEN_WIDTH / 2 + 83 &&
-                verticalPosition >= 750 && verticalPosition <= 850)
-        {
-            if (hoveredOverButton == false)
-            {
-                hoveredOverButton = true;
-                cleardevice();
-                this->hoverBackPlay();
-            }
-        }
-
-        // The user does not hover over any button anymore.
-        else if (hoveredOverButton == true)
-        {
-            hoveredOverButton = false;
-            this->drawStartGameMenu();
-        }
-    }
-}
-
-
-void UserInterface::clickOnRules ()
-{
-    cleardevice();
-    this->drawRulesScreen();
-
-    bool onRulesPage = true;
-    bool changer = false;
-
-    // The left margin of the "BACK" button.
-    unsigned short int leftMargin = SCREEN_WIDTH / 2 - 100;
-    unsigned short int rightMargin = SCREEN_WIDTH / 2 + 100;
-
-    while (onRulesPage)
-    {
-        HWND foregroundWindowHandler = GetForegroundWindow();
-        POINT cursorPosition;
-        GetCursorPos(&cursorPosition);
-        ScreenToClient(foregroundWindowHandler, &cursorPosition);
-        double horizontalPosition = cursorPosition.x;
-        double verticalPosition = cursorPosition.y;
-
-        // Check if the click is inside the "BACK" button.
-        if (GetAsyncKeyState(VK_LBUTTON))
-            if (horizontalPosition >= leftMargin && horizontalPosition <= rightMargin)
-                if (verticalPosition >= 800 && verticalPosition <= 900)
-                    onRulesPage = false;
-
-        if (horizontalPosition >= leftMargin && horizontalPosition <= rightMargin)
-            if (verticalPosition >= 800 && verticalPosition <= 900)
-            {
-                 if (changer == false)
-                 {
-                    changer = true;
-                    cleardevice();
-                    hoverBackRules();
-                 }
-            }
-            else
-            {
-                if (changer == true)
-                {
-                    changer = false;
-                    drawRulesScreen();
-                }
-            }
-        else if (changer == true)
-        {
-            changer = false;
-            drawRulesScreen();
-        }
-    }
-
-    cleardevice();
-    this->drawMainMenu();
-    this->scanMouseLocationMainMenu();
-}
-
-
-
-void UserInterface::clickOnOptions ()
-{
-    cleardevice();
-    this->drawOptionsMenu();
-
-    bool onOptionsScreen = true;
-    bool hoveredOverButton = false;
-
-    while (onOptionsScreen)
-    {
-        HWND foregroundWindowHandler = GetForegroundWindow();
-        POINT cursorPosition;
-        GetCursorPos(&cursorPosition);
-        ScreenToClient(foregroundWindowHandler, &cursorPosition);
-        double horizontalPosition = cursorPosition.x;
-        double verticalPosition = cursorPosition.y;
-
-        if (GetAsyncKeyState(VK_LBUTTON))
-
-            // The user clicked on the "Music" button.
-            if (horizontalPosition >= SCREEN_WIDTH / 2 - 100 && horizontalPosition <= SCREEN_WIDTH / 2 + 100 &&
-                verticalPosition >= 250 && verticalPosition <= 350)
-                onOptionsScreen = false;
-
-            // The user clicked on the "Language" button.
-            else if (horizontalPosition >= SCREEN_WIDTH / 2 - 145 && horizontalPosition <= SCREEN_WIDTH / 2 + 145 &&
-                verticalPosition >= 450 && verticalPosition <= 550)
-                onOptionsScreen = false;
-
-            // The user clicked on the "Difficulty" button.
-            else if (horizontalPosition >= SCREEN_WIDTH / 2 - 175 && horizontalPosition <= SCREEN_WIDTH / 2 + 175 &&
-                verticalPosition >= 650 && verticalPosition <= 750)
-                {
-                    cleardevice();
-                    this->drawDifficultyScreen();
-                    onOptionsScreen = false;
-                }
-
-            // The user clicked on the "Back" button.
-            else if (horizontalPosition >= SCREEN_WIDTH / 2 - 83 && horizontalPosition <= SCREEN_WIDTH / 2 + 83 &&
-                verticalPosition >= 850 && verticalPosition <= 950)
-                {
-                    cleardevice();
-                    this->drawMainMenu();
-                    this->scanMouseLocationMainMenu();
-                    onOptionsScreen = false;
-                }
-
-        // The user hovered over the "Music" button.
-        if (horizontalPosition >= SCREEN_WIDTH / 2 - 100 && horizontalPosition <= SCREEN_WIDTH / 2 + 100 &&
-            verticalPosition >= 250 && verticalPosition <= 350)
-        {
-            if (hoveredOverButton == false)
-            {
-                hoveredOverButton = true;
-                cleardevice();
-                this->hoverMusic();
-            }
-        }
-
-        // The user hovered over the "Langauge" button.
-        else if (horizontalPosition >= SCREEN_WIDTH / 2 - 145 && horizontalPosition <= SCREEN_WIDTH / 2 + 145 &&
-            verticalPosition >= 450 && verticalPosition <= 550)
-        {
-            if (hoveredOverButton == false)
-            {
-                hoveredOverButton = true;
-                cleardevice();
-                this->hoverLangauge();
-            }
-        }
-
-        // The user hovered over the "Difficulty" button.
-        else if (horizontalPosition >= SCREEN_WIDTH / 2 - 175 && horizontalPosition <= SCREEN_WIDTH / 2 + 175 &&
-            verticalPosition >= 650 && verticalPosition <= 750)
-        {
-            if (hoveredOverButton == false)
-            {
-                hoveredOverButton = true;
-                cleardevice();
-                this->hoverDifficulty();
-            }
-        }
-
-        // The user hovered over the "Back" button.
-        else if (horizontalPosition >= SCREEN_WIDTH / 2 - 83 && horizontalPosition <= SCREEN_WIDTH / 2 + 83 &&
-            verticalPosition >= 850 && verticalPosition <= 950)
-        {
-            if (hoveredOverButton == false)
-            {
-                hoveredOverButton = true;
-                cleardevice();
-                this->hoverBackOptions();
-            }
-        }
-
-        // The user does not hover over any button anymore.
-        else if (hoveredOverButton == true)
-        {
-            hoveredOverButton = false;
-            this->drawOptionsMenu();
-        }
-    }
-}
-
-
-void UserInterface::scanMouseLocationMainMenu ()
-{
-    bool hoveredOverButton = false;
-    bool buttonPressed = false;
-
-    while (not buttonPressed)
-    {
-        HWND foregroundWindowHandler = GetForegroundWindow();
-        POINT cursorPosition;
-        GetCursorPos(&cursorPosition);
-        ScreenToClient(foregroundWindowHandler, &cursorPosition);
-        double horizontalPosition = cursorPosition.x;
-        double verticalPosition = cursorPosition.y;
-        unsigned short int button = getMouseLocationMainMenu(horizontalPosition, verticalPosition);
-
-        switch (button)
-        {
-            // The user hovered over the "Play" button.
-            case 1:
-                if (hoveredOverButton == false)
-                {
-                    this->hoverStartGame();
-                    hoveredOverButton = true;
-                }
-                break;
-
-            // The user hovered over the "Options" button.
-            case 2:
-                if (hoveredOverButton == false)
-                {
-                    this->hoverOptions();
-                    hoveredOverButton = true;
-                }
-                break;
-
-            // The user hovered over the "Rules" button.
-            case 3:
-                if (hoveredOverButton == false)
-                {
-                    this->hoverRules();
-                    hoveredOverButton = true;
-                }
-                break;
-
-            // The user hovered over the "Exit" button.
-            case 4:
-                if (hoveredOverButton == false)
-                {
-                    this->hoverExit();
-                    hoveredOverButton = true;
-                }
-                break;
-
-            // The click is outside the buttons.
-            default:
-                if (hoveredOverButton == true)
-                {
-                    cleardevice();
-                    this->drawMainMenu();
-                    hoveredOverButton = false;
-                }
-        }
-
-        if (GetAsyncKeyState(VK_LBUTTON))
-            switch (button)
-            {
-                // The user clicked on the "Play" button.
-                case 1:
-                    this->clickOnStartGame();
-                    buttonPressed = true;
-                    break;
-
-                // The user clicked on the "Options" button.
-                case 2:
-                    this->clickOnOptions();
-                    buttonPressed = true;
-                    break;
-
-                // The user clicked on the "Rules" button.
-                case 3:
-                    this->clickOnRules();
-                    buttonPressed = true;
-                    break;
-
-                // The user clicked on the "Exit" button.
-                case 4:
-                    this->clickOnExit();
-                    buttonPressed = true;
-            }
-    }
-}
-
-
-unsigned short int UserInterface::getMouseLocationMainMenu (double horizontalCoordinate, double verticalCoordinate)
-{
-    // The user clicked on the "Play" button.
-    if (horizontalCoordinate >= SCREEN_WIDTH / 2 - 84 && horizontalCoordinate <= SCREEN_WIDTH / 2 + 84 &&
-        verticalCoordinate >= 200 && verticalCoordinate <= 300)
-        return 1;
-
-    // The user clicked on the "Options" button.
-    if (horizontalCoordinate >= SCREEN_WIDTH / 2 - 130 && horizontalCoordinate <= SCREEN_WIDTH / 2 + 130 &&
-        verticalCoordinate >= 400 && verticalCoordinate <= 500)
-        return 2;
-
-    // The user clicked on the "Rules" button.
-    if (horizontalCoordinate >= SCREEN_WIDTH / 2 - 100 && horizontalCoordinate <= SCREEN_WIDTH / 2 + 100 &&
-        verticalCoordinate >= 600 && verticalCoordinate <= 700)
-        return 3;
-
-    // The user clicked on the "Exit" button.
-    if (horizontalCoordinate >= SCREEN_WIDTH / 2 - 84 && horizontalCoordinate <= SCREEN_WIDTH / 2 + 84 &&
-        verticalCoordinate >= 800 && verticalCoordinate <= 900)
-        return 4;
-
-    // The user clicked outside the buttons.
-    return 0;
-}
-
-
-void UserInterface::clickOnExit ()
-{
-    exit(0);
-    closegraph();
-    getch();
 }
 
 
@@ -1424,7 +1055,7 @@ void UserInterface::hoverBackOptions ()
 }
 
 
-void UserInterface::drawDifficultyScreen ()
+void UserInterface::hoverBackRules ()
 {
     // Clear the window.
     cleardevice();
@@ -1433,61 +1064,425 @@ void UserInterface::drawDifficultyScreen ()
     unsigned short int fontStyle = COMPLEX_FONT;
     unsigned short int fontDirection = HORIZ_DIR;
     unsigned short int fontSize = 7;
-    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 125;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 170;
     unsigned short int verticalPosition = 100;
-    char text[20] = "DIFFICULTY";
+    char text[] = "GAME RULES";
 
     // Write the title.
     settextstyle(fontStyle, fontDirection, fontSize);
     outtextxy(horizontalPosition, verticalPosition, text);
 
-    // Get the necessary parameters for drawing the "Easy" button.
-    unsigned short int leftMargin = SCREEN_WIDTH / 2 - 100;
-    unsigned short int rightMargin = SCREEN_WIDTH / 2 + 100;
-    unsigned short int upperMargin = 250;
-    unsigned short int downMargin = 350;
-    unsigned short int depth = 25;
-    bool drawDetails = 1;
-    horizontalPosition = leftMargin + 25;
-    verticalPosition = 275;
-    strcpy(text, "Easy");
+    // Get the necessary parameters for writing the rules.
+    fontSize = 4;
+    horizontalPosition = SCREEN_WIDTH / 2 - 550;
+    verticalPosition = 300;
 
-    // Draw the "Easy" button.
-    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
-
-    // Get the necessary parameters for drawing the "Hard" button.
-    leftMargin = SCREEN_WIDTH / 2 - 145;
-    rightMargin = SCREEN_WIDTH / 2 + 145;
-    upperMargin = 450;
-    downMargin = 550;
-    horizontalPosition = leftMargin + 21;
-    verticalPosition = 475;
-    strcpy(text, "Hard");
-
-    // Draw the "Hard" button.
-    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
-
-    // Get the necessary parameters for drawing the "Legendary" button.
-    leftMargin = SCREEN_WIDTH / 2 - 175;
-    rightMargin = SCREEN_WIDTH / 2 + 175;
-    upperMargin = 650;
-    downMargin = 750;
-    horizontalPosition = leftMargin + 20;
-    verticalPosition = 675;
-    strcpy(text, "Legendary");
-
-    // Draw the "Legendary" button.
-    this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+    // Write the rules.
+    settextstyle(fontStyle, fontDirection, fontSize);
+    outtextxy(horizontalPosition, verticalPosition, "The game board  has  2 'L' shaped objects  and  2 coins.");
+    outtextxy(horizontalPosition, verticalPosition += 60, "You can  move  your 'L' object and, if you wish, you can");
+    outtextxy(horizontalPosition, verticalPosition += 60, "also  move  one  of  the  coins  on a free position. You");
+    outtextxy(horizontalPosition, verticalPosition += 60, "have  to move  your  objects  in  such  a  way  that you");
+    outtextxy(horizontalPosition, verticalPosition += 60, "block  the  other player.  When  a player can't move his");
+    outtextxy(horizontalPosition, verticalPosition += 60, "or her 'L' object, the other player wins. The red player");
+    outtextxy(horizontalPosition, verticalPosition += 60, "is the first one.");
 
     // Get the necessary parameters for drawing the "Back" button.
-    leftMargin = SCREEN_WIDTH / 2 - 83;
-    rightMargin = SCREEN_WIDTH / 2 + 83;
-    upperMargin = 850;
-    downMargin = 950;
-    horizontalPosition = leftMargin + 22;
-    verticalPosition = 875;
+    unsigned short int leftMargin = SCREEN_WIDTH / 2 - 80;
+    unsigned short int rightMargin = SCREEN_WIDTH / 2 + 120;
+    unsigned short int upperMargin = 830;
+    unsigned short int downMargin = 930;
+    unsigned short int depth = 10;
+    bool drawDetails = 1;
+    horizontalPosition = leftMargin + 38;
+    verticalPosition = 855;
     strcpy(text, "Back");
 
     // Draw the "Back" button.
     this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
+}
+
+
+void UserInterface::onMainScreen ()
+{
+    bool hoveredOverButton = false;
+    bool buttonPressed = false;
+
+    while (not buttonPressed)
+    {
+        HWND foregroundWindowHandler = GetForegroundWindow();
+        POINT cursorPosition;
+        GetCursorPos(&cursorPosition);
+        ScreenToClient(foregroundWindowHandler, &cursorPosition);
+        double horizontalPosition = cursorPosition.x;
+        double verticalPosition = cursorPosition.y;
+        unsigned short int button = getMouseLocationOnMainScreen(horizontalPosition, verticalPosition);
+
+        switch (button)
+        {
+            // The user hovered over the "Play" button.
+            case 1:
+                if (hoveredOverButton == false)
+                {
+                    this->hoverPlay();
+                    hoveredOverButton = true;
+                }
+                break;
+
+            // The user hovered over the "Options" button.
+            case 2:
+                if (hoveredOverButton == false)
+                {
+                    this->hoverOptions();
+                    hoveredOverButton = true;
+                }
+                break;
+
+            // The user hovered over the "Rules" button.
+            case 3:
+                if (hoveredOverButton == false)
+                {
+                    this->hoverRules();
+                    hoveredOverButton = true;
+                }
+                break;
+
+            // The user hovered over the "Exit" button.
+            case 4:
+                if (hoveredOverButton == false)
+                {
+                    this->hoverExit();
+                    hoveredOverButton = true;
+                }
+                break;
+
+            // The click is outside the buttons.
+            default:
+                if (hoveredOverButton == true)
+                {
+                    cleardevice();
+                    this->drawMainScreen();
+                    hoveredOverButton = false;
+                }
+        }
+
+        if (GetAsyncKeyState(VK_LBUTTON))
+            switch (button)
+            {
+                // The user clicked on the "Play" button.
+                case 1:
+                    this->onPlayScreen();
+                    buttonPressed = true;
+                    break;
+
+                // The user clicked on the "Options" button.
+                case 2:
+                    this->onOptionsScreen();
+                    buttonPressed = true;
+                    break;
+
+                // The user clicked on the "Rules" button.
+                case 3:
+                    this->onRulesScreen();
+                    buttonPressed = true;
+                    break;
+
+                // The user clicked on the "Exit" button.
+                case 4:
+                    this->exitGame();
+                    buttonPressed = true;
+            }
+    }
+}
+
+
+void UserInterface::onPlayScreen ()
+{
+    cleardevice();
+    this->drawPlayScreen();
+
+    bool onPlayScreen = true;
+    bool hoveredOverButton = false;
+
+    while (onPlayScreen)
+    {
+        HWND foregroundWindowHandler = GetForegroundWindow();
+        POINT cursorPosition;
+        GetCursorPos(&cursorPosition);
+        ScreenToClient(foregroundWindowHandler, &cursorPosition);
+        double horizontalPosition = cursorPosition.x;
+        double verticalPosition = cursorPosition.y;
+
+        if (GetAsyncKeyState(VK_LBUTTON))
+
+            // The user clicked on the "Player vs Computer" button.
+            if (horizontalPosition >= SCREEN_WIDTH / 2 - 300 && horizontalPosition <= SCREEN_WIDTH / 2 + 300 &&
+                verticalPosition >= 350 && verticalPosition <= 450)
+            {
+                PlayerVersusEnvironment playerVersusEnvironment;
+                playerVersusEnvironment.startGame();
+                onPlayScreen = false;
+            }
+
+            // The user clicked on the "Player vs Player" button.
+            else if (horizontalPosition >= SCREEN_WIDTH / 2 - 268 && horizontalPosition <= SCREEN_WIDTH / 2 + 268 &&
+                verticalPosition >= 550 && verticalPosition <= 650)
+            {
+                PlayerVersusPlayer playerVersusPlayer;
+                playerVersusPlayer.startGame();
+                onPlayScreen = false;
+            }
+
+            // The user clicked on the "Back" button.
+            else if (horizontalPosition >= SCREEN_WIDTH / 2 - 83 && horizontalPosition <= SCREEN_WIDTH / 2 + 83 &&
+                verticalPosition >= 750 && verticalPosition <= 850)
+            {
+                cleardevice();
+                this->drawMainScreen();
+                this->onMainScreen();
+                onPlayScreen = false;
+            }
+
+        // The user hovered over the "Player vs Computer" button.
+        if (horizontalPosition >= SCREEN_WIDTH / 2 - 300 && horizontalPosition <= SCREEN_WIDTH / 2 + 300 &&
+            verticalPosition >= 350 && verticalPosition <= 450)
+        {
+             if (hoveredOverButton == false)
+             {
+                hoveredOverButton = true;
+                cleardevice();
+                this->hoverPlayerVsComputer();
+             }
+        }
+
+        // The user hovered over the "Player vs Player" button.
+        else if (horizontalPosition >= SCREEN_WIDTH / 2 - 268 && horizontalPosition <= SCREEN_WIDTH / 2 + 268 &&
+            verticalPosition >= 550 && verticalPosition <= 650)
+        {
+            if (hoveredOverButton == false)
+            {
+                hoveredOverButton = true;
+                cleardevice();
+                this->hoverPlayerVsPlayer();
+            }
+        }
+
+        // The user hovered over the "Back" button.
+        else if (horizontalPosition >= SCREEN_WIDTH / 2 - 83 && horizontalPosition <= SCREEN_WIDTH / 2 + 83 &&
+                verticalPosition >= 750 && verticalPosition <= 850)
+        {
+            if (hoveredOverButton == false)
+            {
+                hoveredOverButton = true;
+                cleardevice();
+                this->hoverBackPlay();
+            }
+        }
+
+        // The user does not hover over any button anymore.
+        else if (hoveredOverButton == true)
+        {
+            hoveredOverButton = false;
+            this->drawPlayScreen();
+        }
+    }
+}
+
+
+void UserInterface::onOptionsScreen ()
+{
+    cleardevice();
+    this->drawOptionsScreen();
+
+    bool onOptionsScreen = true;
+    bool hoveredOverButton = false;
+
+    while (onOptionsScreen)
+    {
+        HWND foregroundWindowHandler = GetForegroundWindow();
+        POINT cursorPosition;
+        GetCursorPos(&cursorPosition);
+        ScreenToClient(foregroundWindowHandler, &cursorPosition);
+        double horizontalPosition = cursorPosition.x;
+        double verticalPosition = cursorPosition.y;
+
+        if (GetAsyncKeyState(VK_LBUTTON))
+
+            // The user clicked on the "Music" button.
+            if (horizontalPosition >= SCREEN_WIDTH / 2 - 100 && horizontalPosition <= SCREEN_WIDTH / 2 + 100 &&
+                verticalPosition >= 250 && verticalPosition <= 350)
+                onOptionsScreen = false;
+
+            // The user clicked on the "Language" button.
+            else if (horizontalPosition >= SCREEN_WIDTH / 2 - 145 && horizontalPosition <= SCREEN_WIDTH / 2 + 145 &&
+                verticalPosition >= 450 && verticalPosition <= 550)
+                onOptionsScreen = false;
+
+            // The user clicked on the "Difficulty" button.
+            else if (horizontalPosition >= SCREEN_WIDTH / 2 - 175 && horizontalPosition <= SCREEN_WIDTH / 2 + 175 &&
+                verticalPosition >= 650 && verticalPosition <= 750)
+                {
+                    cleardevice();
+                    this->drawDifficultyScreen();
+                    onOptionsScreen = false;
+                }
+
+            // The user clicked on the "Back" button.
+            else if (horizontalPosition >= SCREEN_WIDTH / 2 - 83 && horizontalPosition <= SCREEN_WIDTH / 2 + 83 &&
+                verticalPosition >= 850 && verticalPosition <= 950)
+                {
+                    cleardevice();
+                    this->drawMainScreen();
+                    this->onMainScreen();
+                    onOptionsScreen = false;
+                }
+
+        // The user hovered over the "Music" button.
+        if (horizontalPosition >= SCREEN_WIDTH / 2 - 100 && horizontalPosition <= SCREEN_WIDTH / 2 + 100 &&
+            verticalPosition >= 250 && verticalPosition <= 350)
+        {
+            if (hoveredOverButton == false)
+            {
+                hoveredOverButton = true;
+                cleardevice();
+                this->hoverMusic();
+            }
+        }
+
+        // The user hovered over the "Langauge" button.
+        else if (horizontalPosition >= SCREEN_WIDTH / 2 - 145 && horizontalPosition <= SCREEN_WIDTH / 2 + 145 &&
+            verticalPosition >= 450 && verticalPosition <= 550)
+        {
+            if (hoveredOverButton == false)
+            {
+                hoveredOverButton = true;
+                cleardevice();
+                this->hoverLangauge();
+            }
+        }
+
+        // The user hovered over the "Difficulty" button.
+        else if (horizontalPosition >= SCREEN_WIDTH / 2 - 175 && horizontalPosition <= SCREEN_WIDTH / 2 + 175 &&
+            verticalPosition >= 650 && verticalPosition <= 750)
+        {
+            if (hoveredOverButton == false)
+            {
+                hoveredOverButton = true;
+                cleardevice();
+                this->hoverDifficulty();
+            }
+        }
+
+        // The user hovered over the "Back" button.
+        else if (horizontalPosition >= SCREEN_WIDTH / 2 - 83 && horizontalPosition <= SCREEN_WIDTH / 2 + 83 &&
+            verticalPosition >= 850 && verticalPosition <= 950)
+        {
+            if (hoveredOverButton == false)
+            {
+                hoveredOverButton = true;
+                cleardevice();
+                this->hoverBackOptions();
+            }
+        }
+
+        // The user does not hover over any button anymore.
+        else if (hoveredOverButton == true)
+        {
+            hoveredOverButton = false;
+            this->drawOptionsScreen();
+        }
+    }
+}
+
+
+void UserInterface::onRulesScreen ()
+{
+    cleardevice();
+    this->drawRulesScreen();
+
+    bool onRulesPage = true;
+    bool changer = false;
+
+    // The left margin of the "BACK" button.
+    unsigned short int leftMargin = SCREEN_WIDTH / 2 - 100;
+    unsigned short int rightMargin = SCREEN_WIDTH / 2 + 100;
+
+    while (onRulesPage)
+    {
+        HWND foregroundWindowHandler = GetForegroundWindow();
+        POINT cursorPosition;
+        GetCursorPos(&cursorPosition);
+        ScreenToClient(foregroundWindowHandler, &cursorPosition);
+        double horizontalPosition = cursorPosition.x;
+        double verticalPosition = cursorPosition.y;
+
+        // Check if the click is inside the "BACK" button.
+        if (GetAsyncKeyState(VK_LBUTTON))
+            if (horizontalPosition >= leftMargin && horizontalPosition <= rightMargin)
+                if (verticalPosition >= 800 && verticalPosition <= 900)
+                    onRulesPage = false;
+
+        if (horizontalPosition >= leftMargin && horizontalPosition <= rightMargin)
+            if (verticalPosition >= 800 && verticalPosition <= 900)
+            {
+                 if (changer == false)
+                 {
+                    changer = true;
+                    cleardevice();
+                    hoverBackRules();
+                 }
+            }
+            else
+            {
+                if (changer == true)
+                {
+                    changer = false;
+                    drawRulesScreen();
+                }
+            }
+        else if (changer == true)
+        {
+            changer = false;
+            drawRulesScreen();
+        }
+    }
+
+    cleardevice();
+    this->drawMainScreen();
+    this->onMainScreen();
+}
+
+
+unsigned short int UserInterface::getMouseLocationOnMainScreen (double horizontalPosition, double verticalPosition)
+{
+    // The user clicked on the "Play" button.
+    if (horizontalPosition >= SCREEN_WIDTH / 2 - 84 && horizontalPosition <= SCREEN_WIDTH / 2 + 84 &&
+        verticalPosition >= 200 && verticalPosition <= 300)
+        return 1;
+
+    // The user clicked on the "Options" button.
+    if (horizontalPosition >= SCREEN_WIDTH / 2 - 130 && horizontalPosition <= SCREEN_WIDTH / 2 + 130 &&
+        verticalPosition >= 400 && verticalPosition <= 500)
+        return 2;
+
+    // The user clicked on the "Rules" button.
+    if (horizontalPosition >= SCREEN_WIDTH / 2 - 100 && horizontalPosition <= SCREEN_WIDTH / 2 + 100 &&
+        verticalPosition >= 600 && verticalPosition <= 700)
+        return 3;
+
+    // The user clicked on the "Exit" button.
+    if (horizontalPosition >= SCREEN_WIDTH / 2 - 84 && horizontalPosition <= SCREEN_WIDTH / 2 + 84 &&
+        verticalPosition >= 800 && verticalPosition <= 900)
+        return 4;
+
+    // The user clicked outside the buttons.
+    return 0;
+}
+
+
+void UserInterface::exitGame ()
+{
+    exit(0);
+    closegraph();
+    getch();
 }
