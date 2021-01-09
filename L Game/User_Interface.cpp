@@ -279,7 +279,7 @@ void UserInterface::drawMusicScreen ()
     unsigned short int fontStyle = COMPLEX_FONT;
     unsigned short int fontDirection = HORIZ_DIR;
     unsigned short int fontSize = 7;
-    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 125;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 85;
     unsigned short int verticalPosition = 100;
     char text[20] = "MUSIC";
 
@@ -288,26 +288,26 @@ void UserInterface::drawMusicScreen ()
     outtextxy(horizontalPosition, verticalPosition, text);
 
     // Get the necessary parameters for drawing the "Turn Music ON/OFF" button.
-    unsigned short int leftMargin = SCREEN_WIDTH / 2 - 100;
-    unsigned short int rightMargin = SCREEN_WIDTH / 2 + 100;
-    unsigned short int upperMargin = 250;
-    unsigned short int downMargin = 350;
+    unsigned short int leftMargin = SCREEN_WIDTH / 2 - 288;
+    unsigned short int rightMargin = SCREEN_WIDTH / 2 + 288;
+    unsigned short int upperMargin = 350;
+    unsigned short int downMargin = 450;
     unsigned short int depth = 25;
     bool drawDetails = 1;
     horizontalPosition = leftMargin + 25;
-    verticalPosition = 275;
+    verticalPosition = 375;
     strcpy(text, "Turn Music ON/OFF");
 
     // Draw the "Turn Music ON/OFF" button.
     this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
 
     // Get the necessary parameters for drawing the "Back" button.
-    leftMargin = SCREEN_WIDTH / 2 - 83;
-    rightMargin = SCREEN_WIDTH / 2 + 83;
-    upperMargin = 850;
-    downMargin = 950;
-    horizontalPosition = leftMargin + 22;
-    verticalPosition = 875;
+    leftMargin = SCREEN_WIDTH / 2 - 87;
+    rightMargin = SCREEN_WIDTH / 2 + 87;
+    upperMargin = 650;
+    downMargin = 750;
+    horizontalPosition = leftMargin + 25;
+    verticalPosition = 675;
     strcpy(text, "Back");
 
     // Draw the "Back" button.
@@ -336,8 +336,8 @@ void UserInterface::drawLanguageScreen ()
     fontStyle = COMPLEX_FONT;
     fontDirection = HORIZ_DIR;
     fontSize = 4;
-    horizontalPosition = SCREEN_WIDTH / 2 - 300;
-    verticalPosition = 100;
+    horizontalPosition = SCREEN_WIDTH / 2 - 450;
+    verticalPosition = 300;
     strcpy(text, "Sorry, this functionality is under construction.");
 
     // Write the text.
@@ -355,7 +355,7 @@ void UserInterface::drawDifficultyScreen ()
     unsigned short int fontStyle = COMPLEX_FONT;
     unsigned short int fontDirection = HORIZ_DIR;
     unsigned short int fontSize = 7;
-    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 125;
+    unsigned short int horizontalPosition = SCREEN_WIDTH / 2 - 177;
     unsigned short int verticalPosition = 100;
     char text[20] = "DIFFICULTY";
 
@@ -364,8 +364,8 @@ void UserInterface::drawDifficultyScreen ()
     outtextxy(horizontalPosition, verticalPosition, text);
 
     // Get the necessary parameters for drawing the "Easy" button.
-    unsigned short int leftMargin = SCREEN_WIDTH / 2 - 100;
-    unsigned short int rightMargin = SCREEN_WIDTH / 2 + 100;
+    unsigned short int leftMargin = SCREEN_WIDTH / 2 - 87;
+    unsigned short int rightMargin = SCREEN_WIDTH / 2 + 87;
     unsigned short int upperMargin = 250;
     unsigned short int downMargin = 350;
     unsigned short int depth = 25;
@@ -378,11 +378,11 @@ void UserInterface::drawDifficultyScreen ()
     this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
 
     // Get the necessary parameters for drawing the "Hard" button.
-    leftMargin = SCREEN_WIDTH / 2 - 145;
-    rightMargin = SCREEN_WIDTH / 2 + 145;
+    leftMargin = SCREEN_WIDTH / 2 - 87;
+    rightMargin = SCREEN_WIDTH / 2 + 87;
     upperMargin = 450;
     downMargin = 550;
-    horizontalPosition = leftMargin + 21;
+    horizontalPosition = leftMargin + 25;
     verticalPosition = 475;
     strcpy(text, "Hard");
 
@@ -390,11 +390,11 @@ void UserInterface::drawDifficultyScreen ()
     this->drawButton(leftMargin, upperMargin, rightMargin, downMargin, depth, drawDetails, horizontalPosition, verticalPosition, text);
 
     // Get the necessary parameters for drawing the "Legendary" button.
-    leftMargin = SCREEN_WIDTH / 2 - 175;
-    rightMargin = SCREEN_WIDTH / 2 + 175;
+    leftMargin = SCREEN_WIDTH / 2 - 162;
+    rightMargin = SCREEN_WIDTH / 2 + 162;
     upperMargin = 650;
     downMargin = 750;
-    horizontalPosition = leftMargin + 20;
+    horizontalPosition = leftMargin + 25;
     verticalPosition = 675;
     strcpy(text, "Legendary");
 
@@ -705,7 +705,7 @@ void UserInterface::hoverPlayerVsComputer ()
     // Draw the "Player vs Computer" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
-    // Get the necessary parameters for drawing the "Player vs Player" button.
+    // Get the necessary parameters for drawing onLanguageScreenthe "Player vs Player" button.
     left = SCREEN_WIDTH / 2 - 268;
     right = SCREEN_WIDTH / 2 + 268;
     up = 550;
@@ -1381,7 +1381,6 @@ void UserInterface::onOptionsScreen ()
         ScreenToClient(foregroundWindowHandler, &cursorPosition);
         double horizontalPosition = cursorPosition.x;
         double verticalPosition = cursorPosition.y;
-
         if (GetAsyncKeyState(VK_LBUTTON))
 
             // The user clicked on the "Music" button.
@@ -1389,7 +1388,7 @@ void UserInterface::onOptionsScreen ()
                 verticalPosition >= 250 && verticalPosition <= 350)
             {
                 cleardevice();
-                this->drawMusicScreen();
+                this->onMusicScreen();
                 onOptionsScreen = false;
             }
 
@@ -1398,7 +1397,7 @@ void UserInterface::onOptionsScreen ()
                 verticalPosition >= 450 && verticalPosition <= 550)
             {
                 cleardevice();
-                this->drawLanguageScreen();
+                this->onLanguageScreen();
                 onOptionsScreen = false;
             }
 
@@ -1407,7 +1406,7 @@ void UserInterface::onOptionsScreen ()
                 verticalPosition >= 650 && verticalPosition <= 750)
                 {
                     cleardevice();
-                    this->drawDifficultyScreen();
+                    this->onDifficultyScreen();
                     onOptionsScreen = false;
                 }
 
@@ -1534,6 +1533,94 @@ void UserInterface::onRulesScreen ()
     cleardevice();
     this->drawMainScreen();
     this->onMainScreen();
+}
+
+
+void UserInterface::onMusicScreen ()
+{
+    cleardevice();
+    this->drawMusicScreen();
+
+    bool onMusicScreen = true;
+    bool hoveredOverButton = false;
+
+    while (onMusicScreen)
+    {
+        HWND foregroundWindowHandler = GetForegroundWindow();
+        POINT cursorPosition;
+        GetCursorPos(&cursorPosition);
+        ScreenToClient(foregroundWindowHandler, &cursorPosition);
+        double horizontalPosition = cursorPosition.x;
+        double verticalPosition = cursorPosition.y;
+
+        if (GetAsyncKeyState(VK_LBUTTON))
+
+            // The user clicked on the "Turn Music ON/OFF" button.
+            if (horizontalPosition >= SCREEN_WIDTH / 2 - 288 && horizontalPosition <= SCREEN_WIDTH / 2 + 288 &&
+                verticalPosition >= 350 && verticalPosition <= 450)
+                this->turnMusicOnOff();
+
+            // The user clicked on the "Back" button.
+            if (horizontalPosition >= SCREEN_WIDTH / 2 - 87 && horizontalPosition <= SCREEN_WIDTH / 2 + 87 &&
+                verticalPosition >= 650 && verticalPosition <= 750)
+            {
+                onMusicScreen = false;
+                this->drawOptionsScreen();
+                this->onOptionsScreen();
+            }
+    }
+
+    cleardevice();
+    this->drawOptionsScreen();
+    this->onOptionsScreen();
+}
+
+
+void UserInterface::onLanguageScreen ()
+{
+    cleardevice();
+    this->drawLanguageScreen();
+
+    bool onLanguageScreen = true;
+    bool hoveredOverButton = false;
+
+    while (onLanguageScreen)
+    {
+        HWND foregroundWindowHandler = GetForegroundWindow();
+        POINT cursorPosition;
+        GetCursorPos(&cursorPosition);
+        ScreenToClient(foregroundWindowHandler, &cursorPosition);
+        double horizontalPosition = cursorPosition.x;
+        double verticalPosition = cursorPosition.y;
+    }
+
+    cleardevice();
+    this->drawOptionsScreen();
+    this->onOptionsScreen();
+}
+
+
+void UserInterface::onDifficultyScreen ()
+{
+    cleardevice();
+    this->drawDifficultyScreen();
+
+    bool onDifficultyScreen = true;
+    bool hoveredOverButton = false;
+
+    while (onDifficultyScreen)
+    {
+        HWND foregroundWindowHandler = GetForegroundWindow();
+        POINT cursorPosition;
+        GetCursorPos(&cursorPosition);
+        ScreenToClient(foregroundWindowHandler, &cursorPosition);
+        double horizontalPosition = cursorPosition.x;
+        double verticalPosition = cursorPosition.y;
+    }
+
+    cleardevice();
+    this->drawOptionsScreen();
+    this->onOptionsScreen();
 }
 
 

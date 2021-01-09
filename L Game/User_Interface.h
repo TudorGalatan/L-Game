@@ -255,10 +255,36 @@ class UserInterface
         void onRulesScreen ();
 
         /**
+            Handles user's actions on the Music screen.
+            Input:
+                - none
+            Output:
+                - user's actions on the Music screen are being handled
+        **/
+        void onMusicScreen ();
+
+        /**
+            Handles user's actions on the Language screen.
+            Input:
+                - none
+            Output:
+                - user's actions on the Language screen are being handled
+        **/
+        void onLanguageScreen ();
+
+        /**
+            Handles user's actions on the Difficulty screen.
+            Input:
+                - none
+            Output:
+                - user's actions on the Difficulty screen are being handled
+        **/
+        void onDifficultyScreen ();
+
+        /**
             Gets the mouse location on the Main screen.
             Input:
-                - "horizontalPosition": the horizontal                 cleardevice();
-                this->drawMusicScreen();position of the mouse
+                - "horizontalPosition": the horizontal position of the mouse
                 - "verticalPosition": the vertical position of the mouse
             Output:
                 - 0: if the mouse is outside the buttons
