@@ -4,95 +4,93 @@
 **/
 
 #include <graphics.h>
+#include <fstream>
 
 #include "Domain_Cell.h"
 
 
-Cell::Cell ()
+
+void Cell::drawCell (int left, int up, int right, int bottom)
 {
-    this->dimension = 200;
-    this->colour = BLACK;
+    setlinestyle(SOLID_FILL,0,5);
+    rectangle(left, up, right, bottom);
 }
 
 
-unsigned short int Cell::getDimension ()
+
+int Cell::getCellSize ()
 {
-    return this->dimension;
+    return this->dim;
 }
 
 
-void Cell::setDimension (unsigned short int newDimension)
+
+int Cell::getColor ()
 {
-    this->dimension = newDimension;
+    return this->cellColor;
 }
 
 
-unsigned short int Cell::getColour ()
+
+void Cell::setColor (int color)
 {
-    return this->colour;
+    this->cellColor = color;
+    setfillstyle(SOLID_FILL, color);
+    floodfill(this->posX, this->posY, WHITE);
 }
 
 
-void Cell::setColour (unsigned short int newColour)
-{
-    this->colour = newColour;
-    setfillstyle(SOLID_FILL, this->colour);
-    floodfill(this->horizontalPosition, this->verticalPosition, WHITE);
-}
 
-
-unsigned short int Cell::getTopMargin ()
-{
-    return this->topMargin;
-}
-
-
-unsigned short int Cell::getLeftMargin ()
-{
-    return this->leftMargin;
-}
-
-
-void Cell::setTopLeftMargins (unsigned short int newTopMargin, unsigned short int newLeftMargin)
-{
-    this->topMargin = newTopMargin;
-    this->leftMargin = newLeftMargin;
-}
-
-
-short int Cell::getPosition (char* axis)
+int Cell::getPosition (char* axis)
 {
     if (strcmp(axis, "ox") == 0)
-        return this->horizontalPosition;
+        return posX;
 
     else if (strcmp(axis, "oy") == 0)
-        return this->verticalPosition;
+        return posY;
 
     return -1;
 }
 
 
-void Cell::setPosition (unsigned short int newHorizontalPosition, unsigned short int newVerticalPosition)
+
+void Cell::setPosition (int pX, int pY)
 {
-    this->horizontalPosition = newHorizontalPosition;
-    this->verticalPosition = newVerticalPosition;
+    this->posX = pX;
+    this->posY = pY;
 }
 
 
-bool Cell::isInside (double horizontalCoordinate, double verticalCoordinate)
+
+void Cell::changeCellSize (int newSize)
 {
-    // The point is inside the cell.
-    if (horizontalCoordinate >= this->leftMargin && horizontalCoordinate <= this->leftMargin + this->dimension &&
-       verticalCoordinate >= this->topMargin && verticalCoordinate <= this->topMargin + this->dimension)
+    this->dim = newSize;
+}
+
+
+void Cell::setBounds (int l, int t)
+{
+    this->left = l;
+    this->top = t;
+}
+
+int Cell::getTopValue()
+{
+    return this->top;
+}
+
+int Cell::getLeftValue()
+{
+    return this->left;
+}
+
+bool Cell::isInside (double xCoord, double yCoord)
+{
+    std::ofstream g("test.txt");
+    double top = this->getTopValue();
+    double left = this->getLeftValue();
+    int cellSize = 200; /// !!!!!!!!!!! function that returns the cell size has problems!!!---------------------------------------------------------------------------------------
+    if(xCoord >= left && xCoord <= left + cellSize && yCoord >= top && yCoord <= top + cellSize)
         return true;
-
-    // The point is outside the cell.
     return false;
-}
-
-
-void Cell::drawCell (USI left, USI up, USI right, USI bottom)
-{
-    setlinestyle(SOLID_FILL, 0, 5);
-    rectangle(left, up, right, bottom);
 }

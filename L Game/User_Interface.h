@@ -6,311 +6,199 @@
 #pragma once
 
 #define USI unsigned short int
+#define FONT_SIZE 4
+#define MAIN_PAGE 1
 
 
 class UserInterface
 {
-    private:
-
-        bool musicIsOn;
-
     public:
-
-        /**
-            This is the default constructor.
-        **/
-        UserInterface ();
-
+        bool musicOn;
+        UserInterface();
+        int currentPage;
+        void turnMusicOnOff();
+        void soundSettings();
         /**
             Starts the graphical user interface.
             Input:
                 - none
             Output:
-                - the graphical user interface is being started
+                - starts the graphical user interface
         **/
         void startGUI ();
 
         /**
-            Draws the Main screen.
+            Draws the main menu.
             Input:
                 - none
             Output:
-                - the Main screen is drawn
+                - draws the main menu
         **/
-        void drawMainScreen ();
+        void drawMainMenu ();
 
         /**
-            Draws the Play screen.
+            Draws the "START GAME" menu.
             Input:
                 - none
             Output:
-                - the Play screen is drawn
+                - draws the "START GAME" menu
         **/
-        void drawPlayScreen ();
+        void drawStartGameMenu ();
 
         /**
-            Draws the Options screen.
+            Draws the "RULES" screen.
             Input:
                 - none
             Output:
-                - the Options screen is drawn
-        **/
-        void drawOptionsScreen ();
-
-        /**
-            Draws the Rules screen.
-            Input:
-                - none
-            Output:
-                - the Rules screen is drawn
+                - draws the "RULES" screen
         **/
         void drawRulesScreen ();
 
         /**
-            Draws the Music screen.
+            Draws the "OPTIONS" menu.
             Input:
                 - none
             Output:
-                - the Music screen is drawn
+                - draws the "OPTIONS" menu
         **/
-        void drawMusicScreen ();
-
-        /**
-            Draws the Language screen.
-            Input:
-                - none
-            Output:
-                - the Language screen is drawn
-        **/
-        void drawLanguageScreen ();
-
-        /**
-            Draws the Difficulty screen.
-            Input:
-                - none
-            Output:
-                - the Difficulty screen is drawn
-        **/
-        void drawDifficultyScreen ();
+        void drawOptionsMenu ();
 
         /**
             Draws a button.
             Input:
-                - "leftMargin": the left margin of the button
-                - "upperMargin": the upper margin of the button
-                - "rightMargin": the right margin of the button
-                - "downMargin": the down margin of the button
+                - "left": the left margin of the button
+                - "up": the upper margin of the button
+                - "right": the right margin of the button
+                - "down": the down margin of the button
                 - "depth": the depth of the button
-                - "drawDetails": specifies whether or not to draw more details
-                - "horizontalPosition": the horizontal position of the text
-                - "verticalPosition": the vertical position of the text
+                - "drawDetails": specifies if it should draw more details
+                - "textXCoordinate": the starting X position of the text
+                - "textYCoordinate": the starting Y position of the text
                 - "text": the text to be displayed on the button
             Output:
-                - the button is drawn
+                - draws a button on the screen
         **/
-        void drawButton (USI leftMargin, USI upperMargin, USI rightMargin, USI downMargin, USI depth, bool drawDetails, USI horizontalPosition, USI verticalPosition, char text[]);
+        void drawButton (USI left, USI up, USI right, USI down, USI depth, bool drawDetails, USI textXCoordinate, USI textYCoordinate, char text[]);
 
         /**
-            Draws the Main screen with a hover effect on the Play button.
+            Redraws the "START" button with the hover effect on it.
             Input:
                 - none
             Output:
-                - the Main screen with a hover effect on the Play button is drawn
+                - redraws the "START" button with the hover effect on it
         **/
-        void hoverPlay ();
+        void hoverStartGame ();
 
         /**
-            Draws the Main screen with a hover effect on the Options button.
+            Redraws the "RULES" button with the hover effect on it.
             Input:
                 - none
             Output:
-                - the Main screen with a hover effect on the Options button is drawn
-        **/
-        void hoverOptions ();
-
-        /**
-            Draws the Main screen with a hover effect on the Rules button.
-            Input:
-                - none
-            Output:
-                - the Main screen with a hover effect on the Rules button is drawn
+                - redraws the "RULES" button with the hover effect on it
         **/
         void hoverRules ();
 
         /**
-            Draws the Main screen with a hover effect on the Exit button.
+            Redraws the "EXIT" button with the hover effect on it.
             Input:
                 - none
             Output:
-                - the Main screen with a hover effect on the Exit button is drawn
+                - redraws the "EXIT" button with the hover effect on it
         **/
         void hoverExit ();
 
         /**
-            Draws the Play screen with a hover effect on the Player vs Computer button.
+            Redraws the "OPTIONS" button with the hover effect on it.
             Input:
                 - none
             Output:
-                - the Play screen with a hover effect on the Player vs Computer button is drawn
+                - redraws the "OPTIONS" button with the hover effect on it
+        **/
+        void hoverOptions ();
+
+        /**
+            Redraws the "BACK" button with the hover effect on it.
+            Input:
+                - none
+            Output:
+                - redraws the "BACK" button with the hover effect on it
+        **/
+        void hoverBack ();
+
+        /**
+            Redraws the "PLAYER vs COMPUTER" button with the hover effect on it.
+            Input:
+                - none
+            Output:
+                - redraws the "PLAYER vs COMPUTER" button with the hover effect on it
         **/
         void hoverPlayerVsComputer ();
 
         /**
-            Draws the Play screen with a hover effect on the Player vs Player button.
+            Redraws the "PLAYER vs PLAYER" button with the hover effect on it.
             Input:
                 - none
             Output:
-                - the Play screen with a hover effect on the Player vs Player button is drawn
+                - redraws the "PLAYER vs PLAYER" button with the hover effect on it
         **/
         void hoverPlayerVsPlayer ();
 
         /**
-            Draws the Play screen with a hover effect on the Back button.
+            Redirects to the "START GAME" menu.
             Input:
                 - none
             Output:
-                - the Play screen with a hover effect on the Back button is drawn
+                - redirects to the "START GAME" menu
         **/
-        void hoverBackPlay ();
+        void clickOnStartGame ();
 
         /**
-            Draws the Options screen with a hover effect on the Music button.
+            Redirects to the "RULES" screen.
             Input:
                 - none
             Output:
-                - the Options screen with a hover effect on the Music button is drawn
+                - redirects to the "RULES" screen
         **/
-        void hoverMusic ();
+        void clickOnRules ();
 
         /**
-            Draws the Options screen with a hover effect on the Language button.
+            Redirects to the "OPTIONS" menu.
             Input:
                 - none
             Output:
-                - the Options screen with a hover effect on the Language button is drawn
+                - redirects to the "OPTIONS" menu
         **/
-        void hoverLangauge ();
+        void clickOnOptions ();
 
         /**
-            Draws the Options screen with a hover effect on the Difficulty button.
+            Permanently scans the mouse location on the screen.
             Input:
                 - none
             Output:
-                - the Options screen with a hover effect on the Difficulty button is drawn
+                - permanently scans the mouse location on the screen
         **/
-        void hoverDifficulty ();
+        void scanMouseLocation ();
 
         /**
-            Draws the Options screen with a hover effect on the Back button.
+            Determines where the user has clicked on the screen.
             Input:
-                - none
+                - "xCoordinate": the x coordinate for the click
+                - "yCoordinate": the y coordinate for the click
             Output:
-                - the Options screen with a hover effect on the Back button is drawn
-        **/
-        void hoverBackOptions ();
-
-        /**
-            Draws the Rules screen with a hover effect on the Back button.
-            Input:
-                - none
-            Output:
-                - the Rules screen with a hover effect on the Back button is drawn
-        **/
-        void hoverBackRules ();
-
-        /**
-            Handles user's actions on the Main screen.
-            Input:
-                - none
-            Output:
-                - user's actions on the Main screen are being handled
-        **/
-        void onMainScreen ();
-
-        /**
-            Handles user's actions on the Play screen.
-            Input:
-                - none
-            Output:
-                - user's actions on the Play screen are being handled
-        **/
-        void onPlayScreen ();
-
-        /**
-            Handles user's actions on the Options screen.
-            Input:
-                - none
-            Output:
-                - user's actions on the Options screen are being handled
-        **/
-        void onOptionsScreen ();
-
-        /**
-            Handles user's actions on the Rules screen.
-            Input:
-                - none
-            Output:
-                - user's actions on the Rules screen are being handled
-        **/
-        void onRulesScreen ();
-
-        /**
-            Handles user's actions on the Music screen.
-            Input:
-                - none
-            Output:
-                - user's actions on the Music screen are being handled
-        **/
-        void onMusicScreen ();
-
-        /**
-            Handles user's actions on the Language screen.
-            Input:
-                - none
-            Output:
-                - user's actions on the Language screen are being handled
-        **/
-        void onLanguageScreen ();
-
-        /**
-            Handles user's actions on the Difficulty screen.
-            Input:
-                - none
-            Output:
-                - user's actions on the Difficulty screen are being handled
-        **/
-        void onDifficultyScreen ();
-
-        /**
-            Gets the mouse location on the Main screen.
-            Input:
-                - "horizontalPosition": the horizontal position of the mouse
-                - "verticalPosition": the vertical position of the mouse
-            Output:
-                - 0: if the mouse is outside the buttons
-                - 1: if the mouse is on the Play button
-                - 2: if the mouse is on the Options button
-                - 3: if the mouse is on the Rules button
-                - 4: if the mouse is on the Exit button
+                - 0: if the user clicked outside the buttons
+                - 1: if the user clicked on the "START" button
+                - 2: if the user clicked on the "RULES" button
+                - 3: if the user clicked on the "EXIT" button
+                - 4: if the user clicked on the "OPTIONS" button
         */
-        unsigned short int getMouseLocationOnMainScreen (double horizontalPosition, double verticalPosition);
+        unsigned short int getMouseLocation (double xCoordinate, double yCoordinate);
 
         /**
-            Turns the music on or off.
+            Closes the application.
             Input:
                 - none
             Output:
-                - the music is turned on if it was off
-                - the music is turned off if it was on
+                - closes the application
         **/
-        void turnMusicOnOff ();
-
-        /**
-            Exits the game.
-            Input:
-                - none
-            Output:
-                - the game is exited
-        **/
-        void exitGame ();
+        void closeApplication ();
 };

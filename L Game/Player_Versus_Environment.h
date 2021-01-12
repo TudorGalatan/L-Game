@@ -8,20 +8,22 @@
 #include "Domain_Game_Board.h"
 
 
+
 class PlayerVersusEnvironment
 {
     private:
 
+        // The game board
         GameBoard gameBoard;
 
     public:
 
         /**
-            Starts a new game in the player versus environment game mode.
+            Starts a new game in the player versus environment mode.
             Input:
                 - none
             Output:
-                - starts a new game in the player versus environment game mode
+                - starts a new game in the player versus environment mode
         **/
         void startGame ();
 };
