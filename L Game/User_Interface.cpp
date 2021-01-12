@@ -18,6 +18,7 @@ const unsigned short int SCREEN_HEIGHT = GetSystemMetrics(SM_CYSCREEN);
 
 UserInterface::UserInterface ()
 {
+    this->language = 1;
     this->musicOn = false;
     this->turnMusicOnOff();
 }
@@ -92,7 +93,10 @@ void UserInterface::drawMainMenu ()
     up = 400;
     down = 500;
     textYCoordinate = 450;
-    strcpy(text, "RULES");
+    if(language==1)
+        strcpy(text, "RULES");
+    else
+        strcpy(text, "REGULI");
 
     // Draw the "RULES" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -102,13 +106,19 @@ void UserInterface::drawMainMenu ()
     down = 700;
     textXCoordinate += 10;
     textYCoordinate = 650;
-    strcpy(text, "EXIT");
+    if(language == 1)
+        strcpy(text, "EXIT");
+    else
+        strcpy(text, "IESIRE");
 
     // Draw the "EXIT" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 
     // Update the parameters for drawing the "OPTIONS" button.
-    strcpy(text, "OPTIONS");
+    if(language == 1)
+        strcpy(text, "OPTIONS");
+    else
+        strcpy(text, "OPTIUNI");
     up = 800;
     down = 900;
     textXCoordinate -= 25;
@@ -133,7 +143,11 @@ void UserInterface::drawStartGameMenu ()
     bool drawDetails = 1;
     unsigned short int textXCoordinate = horizontalPosition - 120;
     unsigned short int textYCoordinate = SCREEN_WIDTH / 2 - 550;
-    char text[] = "PLAYER vs COMPUTER";
+    char text[30];
+    if(language == 1)
+        strcpy(text, "PLAYER vs COMPUTER");
+    else
+        strcpy(text, "JUCATOR vs CALCULATOR");
 
     // Draw the "PLAYER vs COMPUTER" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -143,7 +157,10 @@ void UserInterface::drawStartGameMenu ()
     down += 300;
     textXCoordinate += 20;
     textYCoordinate += 300;
-    strcpy(text, "PLAYER vs PLAYER");
+    if(language == 1)
+        strcpy(text, "PLAYER vs PLAYER");
+    else
+        strcpy(text, "JUCATOR vs JUCATOR");
 
     //Draw the "PLAYER vs PLAYER" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -155,7 +172,10 @@ void UserInterface::drawStartGameMenu ()
     down -= 150;
     textXCoordinate += 700;
     textYCoordinate -= 150;
-    strcpy(text, "BACK");
+    if(language == 1)
+        strcpy(text, "BACK");
+    else
+        strcpy(text, "INAPOI");
 
     //Draw the "BACK" button.
     outtextxy(1555, SCREEN_HEIGHT / 2, text);
@@ -176,19 +196,36 @@ void UserInterface::drawRulesScreen ()
 
     // Write the title.
     settextstyle(BOLD_FONT, HORIZ_DIR, fontSize);
-    outtextxy(horizontalPosition - 200, verticalPosition, "!!!RULES OF THE GAME!!!");
+    if(language == 1)
+    {
+        outtextxy(horizontalPosition - 200, verticalPosition, "!!!RULES OF THE GAME!!!");
 
-    horizontalPosition -= 50;
+        horizontalPosition -= 50;
 
-    // Write the rules.
-    settextstyle(BOLD_FONT, HORIZ_DIR, fontSize / 2);
-    outtextxy(horizontalPosition - 200, verticalPosition += 150, "The board has 2 'L' shaped objects and 2 coins");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "You can move your 'L' object and, if you wish,");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "you can move at your choice one of the coins on");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "a free position. You have to move your objects");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "in such a way that you block the other player.");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "The player who runs out of moves loses!!!");
+        // Write the rules.
+        settextstyle(BOLD_FONT, HORIZ_DIR, fontSize / 2);
+        outtextxy(horizontalPosition - 200, verticalPosition += 150, "The board has 2 'L' shaped objects and 2 coins");
+        outtextxy(horizontalPosition - 200, verticalPosition += 50, "You can move your 'L' object and, if you wish,");
+        outtextxy(horizontalPosition - 200, verticalPosition += 50, "you can move at your choice one of the coins on");
+        outtextxy(horizontalPosition - 200, verticalPosition += 50, "a free position. You have to move your objects");
+        outtextxy(horizontalPosition - 200, verticalPosition += 50, "in such a way that you block the other player.");
+        outtextxy(horizontalPosition - 200, verticalPosition += 50, "The player who runs out of moves loses!!!");
+    }
+    else
+    {
+        outtextxy(horizontalPosition - 200, verticalPosition, "!!!REGULILE JOCULUI!!!");
 
+        horizontalPosition -= 50;
+
+        // Write the rules.
+        settextstyle(BOLD_FONT, HORIZ_DIR, fontSize / 2);
+        outtextxy(horizontalPosition - 200, verticalPosition += 150, "Tabla are 2 piese in forma de 'L' si 2 banuti");
+        outtextxy(horizontalPosition - 200, verticalPosition += 50, "Iti poti muta piesa ta in forma de 'L' si,");
+        outtextxy(horizontalPosition - 200, verticalPosition += 50, "doar daca vrei, poti muta si unul dintre banuti");
+        outtextxy(horizontalPosition - 200, verticalPosition += 50, "pe o pozitie libera. Trebuie sa-ti calculezi");
+        outtextxy(horizontalPosition - 200, verticalPosition += 50, "mutarile astfel incat sa il blochezi pe celalalt.");
+        outtextxy(horizontalPosition - 200, verticalPosition += 50, "Cel ce ramane fara mutari pierde!!!");
+    }
     unsigned short int left = horizontalPosition - 100;
     unsigned short int right = horizontalPosition + 100;
     unsigned short int up = 800 + SCREEN_HEIGHT - 1080;
@@ -196,8 +233,12 @@ void UserInterface::drawRulesScreen ()
     unsigned short int depth = 25;
     bool drawDetails = 1;
     unsigned short int textXCoordinate = horizontalPosition - 40;
+    char text[30];
     unsigned short int textYCoordinate = 850 + SCREEN_HEIGHT - 1080;
-    char text[] = "BACK";
+    if(language == 1)
+        strcpy(text, "BACK");
+    else
+        strcpy(text, "INAPOI");
 
     // Draw the "BACK" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -221,17 +262,43 @@ void UserInterface::drawOptionsMenu ()
     bool drawDetails = 1;
     unsigned short int textXCoordinate = left + 20;
     unsigned short int textYCoordinate = up + 50;
-    char text[30] = "CHANGE LANGUAGE";
+    char text[30];
+    if(language == 1)
+        strcpy(text, "LANGUAGE: ENGLISH");
+    else
+        strcpy(text, "LIMBA: ROMANA");
     // Draw the "CHANGE LANGUAGE" button.
-    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate + 50, textYCoordinate, text);
 
     // Update the parameters for drawing the "TURN MUSIC ON/OFF" button.
     up = 400;
     down = 500;
     textYCoordinate = up + 50;
-    strcpy(text, "TURN MUSIC OFF");
+    if(musicOn == true)
+        if(language == 1)
+            strcpy(text, "TURN MUSIC OFF");
+        else
+            strcpy(text, "OPRESTE MUZICA");
+    else
+        if(language == 1)
+            strcpy(text, "TURN MUSIC ON");
+        else
+            strcpy(text, "PORNESTE MUZICA");
 
     // Draw the "TURN MUSIC ON/OFF" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate + 50, textYCoordinate, text);
+
+    right-=100;
+    left+=100;
+    textXCoordinate += 130;
+    textYCoordinate = 850;
+    up = 800;
+    down = 900;
+    if(language == 1)
+        strcpy(text,"BACK");
+    else
+        strcpy(text,"INAPOI");
+
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
 
@@ -280,7 +347,10 @@ void UserInterface::hoverStartGame ()
     depth = 25;
     textXCoordinate = SCREEN_WIDTH / 2 - 50;
     textYCoordinate = 450;
-    strcpy(text, "RULES");
+    if(language == 1)
+        strcpy(text, "RULES");
+    else
+        strcpy(text, "REGULI");
 
     // Redraw the "RULES" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -290,7 +360,10 @@ void UserInterface::hoverStartGame ()
     down = 700 + SCREEN_HEIGHT - 1080;
     textXCoordinate += 10;
     textYCoordinate = 650;
-    strcpy(text, "EXIT");
+    if(language == 1)
+        strcpy(text, "EXIT");
+    else
+        strcpy(text, "IESIRE");
 
     // Redraw the "EXIT" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -300,7 +373,10 @@ void UserInterface::hoverStartGame ()
     down = 900;
     textXCoordinate -= 25;
     textYCoordinate += 200;
-    strcpy(text, "OPTIONS");
+    if(language == 1)
+        strcpy(text, "OPTIONS");
+    else
+        strcpy(text, "OPTIUNI");
 
     // Redraw the "OPTIONS" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -337,7 +413,10 @@ void UserInterface::hoverRules ()
     depth = 10;
     textXCoordinate = SCREEN_WIDTH / 2 - 30;
     textYCoordinate = 430 + SCREEN_HEIGHT - 1080;
-    strcpy(text, "RULES");
+    if(language == 1)
+        strcpy(text, "RULES");
+    else
+        strcpy(text, "REGULI");
 
     // Redraw the "RULES" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -351,7 +430,10 @@ void UserInterface::hoverRules ()
     depth = 25;
     textXCoordinate -= 10;
     textYCoordinate = 650 + SCREEN_HEIGHT - 1080;
-    strcpy(text, "EXIT");
+    if(language == 1)
+        strcpy(text, "EXIT");
+    else
+        strcpy(text, "IESIRE");
 
     // Redraw the "EXIT" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -360,8 +442,11 @@ void UserInterface::hoverRules ()
     up = 800;
     down = 900;
     textXCoordinate -= 25;
-    textYCoordinate += 200;     // ??? Doesn't work.
-    strcpy(text, "OPTIONS");
+    textYCoordinate += 200;
+    if(language == 1)
+        strcpy(text, "OPTIONS");
+    else
+        strcpy(text, "OPTIUNI");
 
     // Redraw the "OPTIONS" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -393,7 +478,10 @@ void UserInterface::hoverExit ()
     up = 400 + SCREEN_HEIGHT - 1080;
     down = 500 + SCREEN_HEIGHT - 1080;
     textYCoordinate = 450 + SCREEN_HEIGHT - 1080;
-    strcpy(text, "RULES");
+    if(language == 1)
+        strcpy(text, "RULES");
+    else
+        strcpy(text, "REGULI");
 
     // Redraw the "RULES" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -407,7 +495,10 @@ void UserInterface::hoverExit ()
     depth = 10;
     textXCoordinate = SCREEN_WIDTH / 2 - 20;
     textYCoordinate = 630 + SCREEN_HEIGHT - 1080;
-    strcpy(text, "EXIT");
+    if(language == 1)
+        strcpy(text, "EXIT");
+    else
+        strcpy(text, "IESIRE");
 
     // Redraw the "EXIT" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -421,7 +512,10 @@ void UserInterface::hoverExit ()
     depth = 25;
     textXCoordinate = SCREEN_WIDTH / 2 - 65;
     textYCoordinate = 850;
-    strcpy(text, "OPTIONS");
+    if(language == 1)
+        strcpy(text, "OPTIONS");
+    else
+        strcpy(text, "OPTIUNI");
 
     // Redraw the "OPTIONS" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -453,7 +547,10 @@ void UserInterface::hoverOptions ()
     up = 400;
     down = 500;
     textYCoordinate = 450;
-    strcpy(text, "RULES");
+    if(language == 1)
+        strcpy(text, "RULES");
+    else
+        strcpy(text, "REGULI");
 
     // Redraw the "RULES" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -463,7 +560,10 @@ void UserInterface::hoverOptions ()
     down = 700;
     textXCoordinate += 10;
     textYCoordinate = 650;
-    strcpy(text, "EXIT");
+    if(language == 1)
+        strcpy(text, "EXIT");
+    else
+        strcpy(text, "IESIRE");
 
     // Redraw the "EXIT" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -474,8 +574,11 @@ void UserInterface::hoverOptions ()
     left += 20;
     right += 20;
     depth = 10;
-    textYCoordinate += 180;     // ??? Doesn't work.
-    strcpy(text, "OPTIONS");
+    textYCoordinate += 180;
+    if(language == 1)
+        strcpy(text, "OPTIONS");
+    else
+        strcpy(text, "OPTIUNI");
 
     // Redraw the "OPTIONS" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -492,19 +595,37 @@ void UserInterface::hoverBack ()
     unsigned short int fontSize = 4;
     unsigned short int verticalPosition = 100 + SCREEN_HEIGHT - 1080;
 
-    // Write the title.
-    settextstyle(BOLD_FONT, HORIZ_DIR, fontSize);
-    outtextxy(horizontalPosition - 200, verticalPosition, "!!!RULES OF THE GAME!!!");
 
-    horizontalPosition -= 50;
-    // Write the rules.
-    settextstyle(BOLD_FONT, HORIZ_DIR, fontSize / 2);
-    outtextxy(horizontalPosition - 200, verticalPosition += 150, "The board has 2 'L' shaped objects and 2 coins");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "You can move your 'L' object and, if you wish,");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "you can move at your choice one of the coins on");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "a free position. You have to move your objects");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "in such a way that you block the other player.");
-    outtextxy(horizontalPosition - 200, verticalPosition += 50, "The player who runs out of moves loses!!!");
+    if(language == 1)
+    {
+        outtextxy(horizontalPosition - 200, verticalPosition, "!!!RULES OF THE GAME!!!");
+
+        horizontalPosition -= 50;
+
+        // Write the rules.
+        settextstyle(BOLD_FONT, HORIZ_DIR, fontSize / 2);
+        outtextxy(horizontalPosition - 200, verticalPosition += 150, "The board has 2 'L' shaped objects and 2 coins");
+        outtextxy(horizontalPosition - 200, verticalPosition += 50, "You can move your 'L' object and, if you wish,");
+        outtextxy(horizontalPosition - 200, verticalPosition += 50, "you can move at your choice one of the coins on");
+        outtextxy(horizontalPosition - 200, verticalPosition += 50, "a free position. You have to move your objects");
+        outtextxy(horizontalPosition - 200, verticalPosition += 50, "in such a way that you block the other player.");
+        outtextxy(horizontalPosition - 200, verticalPosition += 50, "The player who runs out of moves loses!!!");
+    }
+    else
+    {
+        outtextxy(horizontalPosition - 200, verticalPosition, "!!!REGULILE JOCULUI!!!");
+
+        horizontalPosition -= 50;
+
+        // Write the rules.
+        settextstyle(BOLD_FONT, HORIZ_DIR, fontSize / 2);
+        outtextxy(horizontalPosition - 200, verticalPosition += 150, "Tabla are 2 piese in forma de 'L' si 2 banuti");
+        outtextxy(horizontalPosition - 200, verticalPosition += 50, "Iti poti muta piesa ta in forma de 'L' si,");
+        outtextxy(horizontalPosition - 200, verticalPosition += 50, "doar daca vrei, poti muta si unul dintre banuti");
+        outtextxy(horizontalPosition - 200, verticalPosition += 50, "pe o pozitie libera. Trebuie sa-ti calculezi");
+        outtextxy(horizontalPosition - 200, verticalPosition += 50, "mutarile astfel incat sa il blochezi pe celalalt.");
+        outtextxy(horizontalPosition - 200, verticalPosition += 50, "Cel ce ramane fara mutari pierde!!!");
+    }
 
     unsigned short int left = horizontalPosition - 80;
     unsigned short int right = horizontalPosition + 120;
@@ -514,7 +635,11 @@ void UserInterface::hoverBack ()
     bool drawDetails = 1;
     unsigned short int textXCoordinate = horizontalPosition - 20;
     unsigned short int textYCoordinate = 830 + SCREEN_HEIGHT - 1080;
-    char text[] = "BACK";
+    char text[30];
+    if(language == 1)
+        strcpy(text,"BACK");
+    else
+        strcpy(text,"INAPOI");
 
     // Draw the "BACK" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -535,7 +660,11 @@ void UserInterface::hoverPlayerVsComputer ()
     bool drawDetails = 1;
     unsigned short int textXCoordinate = horizontalPosition - 120;
     unsigned short int textYCoordinate = SCREEN_WIDTH / 2 - 550 + SCREEN_HEIGHT - 1080;
-    char text[] = "PLAYER vs COMPUTER";
+    char text[30];
+    if(language == 1)
+        strcpy(text,"PLAYER vs COMPUTER");
+    else
+        strcpy(text,"JUCATOR vs CALCULATOR");
 
     // Draw the "PLAYER vs COMPUTER" button.
     drawButton(left + 20, up - 20, right + 20, down - 20, depth - 15, drawDetails, textXCoordinate + 20, textYCoordinate - 20, text);
@@ -545,7 +674,10 @@ void UserInterface::hoverPlayerVsComputer ()
     down += 300;
     textXCoordinate += 20;
     textYCoordinate += 300;
-    strcpy(text, "PLAYER vs PLAYER");
+    if(language == 1)
+        strcpy(text, "PLAYER vs PLAYER");
+    else
+        strcpy(text, "JUCATOR vs JUCATOR");
 
     //Draw the "PLAYER vs PLAYER" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -557,7 +689,10 @@ void UserInterface::hoverPlayerVsComputer ()
     down -= 150;
     textXCoordinate += 700;
     textYCoordinate -= 150;
-    strcpy(text, "BACK");
+    if(language == 1)
+        strcpy(text, "BACK");
+    else
+        strcpy(text, "INAPOI");
 
     //Draw the "BACK" button.
     outtextxy(1555, SCREEN_HEIGHT / 2, text);
@@ -577,7 +712,11 @@ void UserInterface::hoverPlayerVsPlayer ()
     bool drawDetails = 1;
     unsigned short int textXCoordinate = horizontalPosition - 120;
     unsigned short int textYCoordinate = SCREEN_WIDTH / 2 - 550 + SCREEN_HEIGHT - 1080;
-    char text[] = "PLAYER vs COMPUTER";
+    char text[30];
+    if(language == 1)
+        strcpy(text, "PLAYER vs COMPUTER");
+    else
+        strcpy(text, "JUCATOR vs CALCULATOR");
 
     // Draw the "PLAYER vs COMPUTER" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -590,7 +729,10 @@ void UserInterface::hoverPlayerVsPlayer ()
     depth = 10;
     textXCoordinate += 40;
     textYCoordinate += 280;
-    strcpy(text,"PLAYER vs PLAYER");
+    if(language == 1)
+        strcpy(text, "PLAYER vs PLAYER");
+    else
+        strcpy(text, "JUCATOR vs JUCATOR");
 
     //Draw the "PLAYER vs PLAYER" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
@@ -603,7 +745,10 @@ void UserInterface::hoverPlayerVsPlayer ()
     depth += 15;
     textXCoordinate += 700 - 20;
     textYCoordinate -= 150 - 20;
-    strcpy(text, "BACK");
+    if(language == 1)
+        strcpy(text, "BACK");
+    else
+        strcpy(text, "INAPOI");
 
     //Draw the "BACK" button.
     outtextxy(1555, SCREEN_HEIGHT / 2, text);
@@ -788,7 +933,6 @@ void UserInterface::clickOnOptions ()
 {
     // Clear the window.
     cleardevice();
-
     // Draws the "OPTIONS" page.
     drawOptionsMenu();
 
@@ -799,6 +943,7 @@ void UserInterface::clickOnOptions ()
 
     while (onOptionsPage == true)
     {
+        delay(200);
         HWND hwnd = GetForegroundWindow();  // a pointer to the open window
         POINT cursorPosition;
 
@@ -817,22 +962,31 @@ void UserInterface::clickOnOptions ()
             if (xCoordinate >= startPosition - 150 && xCoordinate <= startPosition + 150)
             {
                 // Do if the click is inside the "CHANGE LANGUAGE" button.
-                if (yCoordinate >= 300 + SCREEN_HEIGHT - 1080 && yCoordinate <= 400 + SCREEN_HEIGHT - 1080)
+                if (yCoordinate >= 300 + SCREEN_HEIGHT - 1180 && yCoordinate <= 400 + SCREEN_HEIGHT - 1180)
                 {
-                    //onOptionsPage = false;
+                    if(language = 1)
+                        language = 2;
+                    else
+                        language = 1;
+                    cleardevice();
+                    delay(100);
+                    drawOptionsMenu();
                 }
 
                 // Do if the click is inside the "TURN MUSIC ON/OFF" button.
-                else if(yCoordinate >= SCREEN_HEIGHT / 2 - 200 && yCoordinate <= SCREEN_HEIGHT / 2 + 200)
+                else if(yCoordinate >= SCREEN_HEIGHT / 2 - 200 && yCoordinate <= SCREEN_HEIGHT / 2)
                 {
                     turnMusicOnOff();
-                    delay(100);
+                    cleardevice();
+                    drawOptionsMenu();
+                    delay(200);
                 }
                 else if(yCoordinate >= SCREEN_HEIGHT - 300 && yCoordinate <= SCREEN_HEIGHT - 100)
                 {
                     onOptionsPage = false;
                     drawMainMenu();
                     scanMouseLocation();
+                    delay(200);
                 }
             }
     }
@@ -943,8 +1097,9 @@ void UserInterface::scanMouseLocation ()
                         buttonPressed = true;
                         cleardevice();
                         clickOnOptions();
+                        break;
                     }
-                    break;
+
             }
         }
 

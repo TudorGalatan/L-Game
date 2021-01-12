@@ -13,15 +13,13 @@
 void PlayerVersusEnvironment::startGame ()
 {
     std::ofstream g("test.txt");
-
+    int gameMode = 2;
 
     std::vector < std::pair < USI, USI > >pos;
     /*
         false - the red player
         true - the blue player
     */
-    int gameMode = 2;
-
     bool player = false;
 
     // Clear the window.

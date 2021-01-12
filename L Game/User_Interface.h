@@ -13,6 +13,7 @@
 class UserInterface
 {
     public:
+        int language;
         bool musicOn;
         UserInterface();
         int currentPage;
