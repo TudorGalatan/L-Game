@@ -17,7 +17,7 @@ class PlayerVersusEnvironment
         GameBoard gameBoard;
 
     public:
-        int gameMode = 1;
+        int gameMode;
         /**
             Starts a new game in the player versus environment mode.
             Input:

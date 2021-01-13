@@ -18,6 +18,8 @@ const unsigned short int SCREEN_HEIGHT = GetSystemMetrics(SM_CYSCREEN);
 
 UserInterface::UserInterface ()
 {
+    PlayerVersusEnvironment bot;
+    bot.gameMode = 1;
     this->language = 1;
     this->musicOn = false;
     this->turnMusicOnOff();
@@ -286,6 +288,23 @@ void UserInterface::drawOptionsMenu ()
             strcpy(text, "PORNESTE MUZICA");
 
     // Draw the "TURN MUSIC ON/OFF" button.
+    drawButton(left, up, right, down, depth, drawDetails, textXCoordinate + 50, textYCoordinate, text);
+
+    PlayerVersusEnvironment bot;
+    if(bot.gameMode == 1)
+        if(language == 1)
+            strcpy(text, "GAMEMODE: EASY");
+        else
+            strcpy(text, "MOD DE JOC: USOR");
+    else
+        if(language == 1)
+            strcpy(text, "GAMEMODE: HARD");
+        else
+            strcpy(text, "MOD DE JOC: GREU");
+    up+=200;
+    down+=200;
+    textYCoordinate+=200;
+
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate + 50, textYCoordinate, text);
 
     right-=100;
@@ -794,19 +813,12 @@ void UserInterface::clickOnStartGame ()
                     PlayerVersusEnvironment playerVersusEnvironment;
                     playerVersusEnvironment.startGame();
                 }
-                else if (yCoordinate >=600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
+                else if (yCoordinate >= 600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
                 {
                     onStartPage = false;
                     PlayerVersusPlayer playerVersusPlayer;
                     playerVersusPlayer.startGame();
                 }
-                /*
-                else if (yCoordinate >=600 + SCREEN_HEIGHT - 1080 && yCoordinate <= 700 + SCREEN_HEIGHT - 1080)
-                {
-                    onStartPage = false;
-                    startPlayerVsPlayerGame();
-                }
-                */
             }
             if(xCoordinate>=1500 && xCoordinate<=1700 && yCoordinate <= SCREEN_HEIGHT / 2 + 50 && yCoordinate >= SCREEN_HEIGHT / 2 - 50)
             {
@@ -929,6 +941,15 @@ void UserInterface::clickOnRules ()
     scanMouseLocation();
 }
 
+void UserInterface::changeDifficulty()
+{
+    PlayerVersusEnvironment bot;
+    if(bot.gameMode == 1)
+        bot.gameMode = 2;
+    else
+        bot.gameMode = 1;
+}
+
 void UserInterface::clickOnOptions ()
 {
     // Clear the window.
@@ -979,14 +1000,22 @@ void UserInterface::clickOnOptions ()
                     turnMusicOnOff();
                     cleardevice();
                     drawOptionsMenu();
-                    delay(200);
+                    delay(100);
+                }
+                else if(yCoordinate >= SCREEN_HEIGHT / 2 + 50 && yCoordinate <= SCREEN_HEIGHT / 2 + 150)
+                {
+                    changeDifficulty();
+                    cleardevice();
+                    delay(500);
+                    drawOptionsMenu();
+                    delay(100);
                 }
                 else if(yCoordinate >= SCREEN_HEIGHT - 300 && yCoordinate <= SCREEN_HEIGHT - 100)
                 {
                     onOptionsPage = false;
                     drawMainMenu();
                     scanMouseLocation();
-                    delay(200);
+                    delay(100);
                 }
             }
     }
@@ -1103,7 +1132,6 @@ void UserInterface::scanMouseLocation ()
             }
         }
 
-        // Wait 30 milliseconds for performance reasons. (we don t want to scan the mouse position every millisecond)
         delay(30);
     }
 }

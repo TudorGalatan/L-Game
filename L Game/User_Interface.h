@@ -18,6 +18,7 @@ class UserInterface
         UserInterface();
         int currentPage;
         void turnMusicOnOff();
+        void changeDifficulty();
         void soundSettings();
         /**
             Starts the graphical user interface.
