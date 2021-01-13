@@ -964,7 +964,7 @@ void UserInterface::clickOnOptions ()
                 // Do if the click is inside the "CHANGE LANGUAGE" button.
                 if (yCoordinate >= 300 + SCREEN_HEIGHT - 1180 && yCoordinate <= 400 + SCREEN_HEIGHT - 1180)
                 {
-                    if(language = 1)
+                    if(language == 1)
                         language = 2;
                     else
                         language = 1;

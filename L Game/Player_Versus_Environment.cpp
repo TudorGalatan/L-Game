@@ -13,7 +13,6 @@
 void PlayerVersusEnvironment::startGame ()
 {
     std::ofstream g("test.txt");
-    int gameMode = 2;
 
     std::vector < std::pair < USI, USI > >pos;
     /*
