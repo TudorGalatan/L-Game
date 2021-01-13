@@ -4,85 +4,97 @@
 **/
 
 #include "Player_Versus_Player.h"
+#include "User_Interface.h"
 
+#include <fstream>
 
 void PlayerVersusPlayer::startGame ()
 {
-    /*
-        false - the red player
-        true - the blue player
-    */
+    std::ofstream g("test.in");
+    std::vector<std::pair<USI, USI> > positions;
+    // false - the red player
+    // true - the blue player
     bool player = false;
 
-    std::vector <std::pair <unsigned short int, unsigned short int> > positions;
-
+    // Clear the window.
     cleardevice();
 
-    this->gameBoard.getInitialConfiguration();
-    this->gameBoard.saveCurrentConfiguration();
+    // Draw the game board.board.cell[0][0].getPosition("ox")   ???
     this->gameBoard.drawBoard();
+
+    // Get the initial configuration of the game board.
+    this->gameBoard.getInitialConfiguration();
+
+    // Save the current configuration of the game board.
+    this->gameBoard.saveCurrentConfiguration();
+
     this->gameBoard.loadNewGame();
 
+    // Temporary: just for testing
     delay(300);
 
-    // Run the game.
     while (true)
     {
         switch (player)
         {
-            // It's red player's turn.
-            case false:
-                this->gameBoard.currentPlayer = 1;
-                this->gameBoard.redPlayerMoves();
-                player = true;
-                break;
+        // The red player's turn
+        case false:
+            this->gameBoard.currentPlayer=1;
+            this->gameBoard.redPlayerMoves();
+            player = true;
+            break;
 
-            // It's blue player's turn.
-            default:
-                this->gameBoard.currentPlayer = 2;
-                this->gameBoard.bluePlayerMoves();
-                player = false;
-                break;
+        // The blue player's turn
+        default:
+            this->gameBoard.currentPlayer=2;
+            this->gameBoard.bluePlayerMoves();
+            player = false;
+            break;
         }
-
         this->gameBoard.saveCurrentConfiguration();
-
-        // The blue player won.
-        if (this->gameBoard.findMove(this->gameBoard.data, 1, 1, positions) == false && player == false)
+        if(this->gameBoard.findBestMove(this->gameBoard.boardData,1,1,positions)== false && player == false)
         {
-            for (unsigned short int line = 0; line < 4; line++)
-                for (unsigned short int column = 0; column < 4; column++)
-                    if (this->gameBoard.data[line][column] == 2)
+            for(int i=0; i<4; i++)
+                for(int j=0; j<4; j++)
+                    if(this->gameBoard.boardData[i][j]==2)
                     {
-                        this->gameBoard.cells[line][column].setColour(LIGHTBLUE);
+                        this->gameBoard.cell[i][j].setColor(LIGHTBLUE);
                         delay(500);
                     }
-
-            delay(1000);
+            delay(200);
             cleardevice();
-
-            setfillstyle(SOLID_FILL, BLUE);
-            floodfill(10, 10, 1);
-            outtextxy(getmaxx() / 2 - 100, getmaxy() / 2, "The blue player won.");
+            setfillstyle(SOLID_FILL,BLUE);
+            floodfill(10,10,1);
+            outtextxy(getmaxx()/2-100,getmaxy()/2,"BLUE PLAYER WINS");
+            delay(1000);
+            UserInterface ui;
+            cleardevice();
+            delay(1000);
+            ui.drawMainMenu();
+            ui.scanMouseLocation();
+            return;
         }
-
-        // The red player won.
-        else if (this->gameBoard.findMove(this->gameBoard.data, 2, 2, positions) == false && player == true)
+        else if(this->gameBoard.findBestMove(this->gameBoard.boardData,2,2,positions)==false && player == true)
         {
-            for (unsigned short int line = 0; line < 4; line++)
-                for (unsigned short int column = 0; column < 4; column++)
-                    if (this->gameBoard.data[line][column] == 1)
+            for(int i=0; i<4; i++)
+                for(int j=0; j<4; j++)
+                    if(this->gameBoard.boardData[i][j]==1)
                     {
-                        this->gameBoard.cells[line][column].setColour(LIGHTRED);
+                        this->gameBoard.cell[i][j].setColor(LIGHTRED);
                         delay(500);
                     }
-
-            delay(1000);
+            delay(200);
             cleardevice();
-
-            setfillstyle(SOLID_FILL, RED);
-            floodfill(10, 10, 1);
-            outtextxy(getmaxx() / 2 - 100, getmaxy() / 2, "The red player won.");
+            setfillstyle(SOLID_FILL,RED);
+            floodfill(10,10,1);
+            outtextxy(getmaxx()/2-100,getmaxy()/2,"RED PLAYER WINS");
+            delay(1000);
+            UserInterface ui;
+            cleardevice();
+            delay(1000);
+            ui.drawMainMenu();
+            ui.scanMouseLocation();
+            return;
         }
     }
 }

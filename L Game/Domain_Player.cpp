@@ -5,38 +5,16 @@
 
 #include "Domain_Player.h"
 
+#include <vector>
+#include <fstream>
 
 
-std::vector < std::pair <USI, USI> > Player::getCoordinates ()
+
+void Player::updatePositions (unsigned short int cellNumber, unsigned short int line, unsigned short int column)
 {
-    return this->coordinates;
-}
-
-
-
-USI Player::getLineCoordinateOfCell (USI cellNumber)
-{
-    return this->coordinates[cellNumber].first;
-}
-
-
-
-USI Player::getColumnCoordinateOfCell (USI cellNumber)
-{
-    return this->coordinates[cellNumber].second;
-}
-
-
-
-std::vector < std::pair <USI, USI> > Player::setCoordinates (std::vector < std::pair <USI, USI> > newCoordinates)
-{
-    this->coordinates = newCoordinates;
-}
-
-
-
-void Player::setCoordinatesOfCell (USI cellNumber, USI newLine, USI newColumn)
-{
-    this->coordinates[cellNumber].first = newLine;
-    this->coordinates[cellNumber].second = newColumn;
+    if (cellNumber < 4)
+    {
+        this->positions[cellNumber].first = line;
+        this->positions[cellNumber].second = column;
+    }
 }

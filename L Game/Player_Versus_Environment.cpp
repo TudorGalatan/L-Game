@@ -6,154 +6,154 @@
 #include "Player_Versus_Environment.h"
 
 #include <iostream>
+#include <fstream>
 #include <time.h>
 
 
 void PlayerVersusEnvironment::startGame ()
 {
+    std::ofstream g("test.txt");
+
+    std::vector < std::pair < USI, USI > >pos;
     /*
         false - the red player
         true - the blue player
     */
     bool player = false;
 
-    int gameMode = 2;
-    std::vector < std::pair < USI, USI > > pos;
-
+    // Clear the window.
     cleardevice();
 
-    this->gameBoard.getInitialConfiguration();
-    this->gameBoard.saveCurrentConfiguration();
-    this->gameBoard.drawBoard();
-    this->gameBoard.loadNewGame();
+    // Draw the game board.
+    gameBoard.drawBoard();
 
+    // Get the initial configuration of the game board.
+    this->gameBoard.getInitialConfiguration();
+
+    // Save the current configuration of the game board.
+    this->gameBoard.saveCurrentConfiguration();
+
+    // Load a new game.
+    gameBoard.loadNewGame();
+
+    // Temporary - just for testing
     delay(300);
 
     // Run the game.
     while (true)
         switch (player)
         {
-            // It's red player's turn.
-            case false:
+            // The red player's turn
+            case false://RED
                 gameBoard.currentPlayer = 1;
                 gameBoard.redPlayerMoves();
                 player = true;
-
-                // The blue player won.
-                if (this->gameBoard.findMove(this->gameBoard.data, 1, 1, pos) == false && player == false)
+                if(this->gameBoard.findMove(this->gameBoard.boardData,1,1,pos)== false && player == false)
                 {
-                    for (unsigned short int line = 0; line < 4; line++)
-                        for (unsigned short int column = 0; column < 4; column++)
-                            if (this->gameBoard.data[line][column] == 1)
+                    for(int i=0;i<4;i++)
+                        for(int j=0;j<4;j++)
+                            if(this->gameBoard.boardData[i][j]==1)
                             {
-                                this->gameBoard.cells[line][column].setColour(LIGHTBLUE);
+                                this->gameBoard.cell[i][j].setColor(LIGHTBLUE);
                                 delay(500);
                             }
-
                     delay(1000);
                     cleardevice();
-
                     setfillstyle(SOLID_FILL,BLUE);
-                    floodfill(10, 10, 1);
-                    settextjustify(CENTER_TEXT, CENTER_TEXT);
-                    outtextxy(getmaxx() / 2, getmaxy() / 2, "Blue player won.");
+                    floodfill(10,10,1);
+                    settextjustify(CENTER_TEXT,CENTER_TEXT);
+                    outtextxy(getmaxx()/2,getmaxy()/2,"BLUE PLAYER WINS");
                 }
                 break;
-
-            // It's blue player's turn.
-            default:
-
-                // Easy mode
-                if (gameMode == 1)
+            case true://BLUE
+                if(gameMode == 1)///easy
                 {
                     gameBoard.currentPlayer = 2;
                     player = false;
                     pos.clear();
-
-                    if (gameBoard.findMove(this->gameBoard.data, 2, 2, pos) == 1)
+                    if(gameBoard.findMove(this->gameBoard.boardData,2,2,pos) == 1)
                     {
-                        for (unsigned short int line = 0; line < 4; line++)
+                        for(int z=0;z<4;z++)
                         {
-                            for (unsigned short int column = 0; column < 4; column++)
-                                if (this->gameBoard.data[line][column] == 2)
+                            for(int z2=0;z2<4;z2++)
+                                if(this->gameBoard.boardData[z][z2] == 2)
                                 {
-                                    this->gameBoard.cells[line][column].setColour(BLACK);
-                                    this->gameBoard.data[line][column] = 0;
+                                    this->gameBoard.cell[z][z2].setColor(BLACK);
+                                    this->gameBoard.boardData[z][z2] = 0;
                                 }
-                            this->gameBoard.bluePlayer.setCoordinatesOfCell(line, 10, 10);
+                            this->gameBoard.blueL.positions[z].first = 10;
+                            this->gameBoard.blueL.positions[z].second = 10;
                         }
-                        for (int i = 0; i < pos.size(); i++)
+                        for(int i=0;i<pos.size();i++)
                         {
-                            this->gameBoard.data[pos[i].first][pos[i].second] = 2;
-                            this->gameBoard.cells[pos[i].first][pos[i].second].setColour(BLUE);
-                            this->gameBoard.bluePlayer.setCoordinatesOfCell(i, pos[i].first, pos[i].second);
+                            this->gameBoard.boardData[pos[i].first][pos[i].second] = 2;
+                            this->gameBoard.cell[pos[i].first][pos[i].second].setColor(BLUE);
+                            this->gameBoard.blueL.positions[i].first = pos[i].first;
+                            this->gameBoard.blueL.positions[i].second = pos[i].second;
                         }
-                    }
 
+                    }
                     else
                     {
-                        for (unsigned short int line = 0; line < 4; line++)
-                            for (unsigned short int column = 0; column < 4; column++)
-                                if (this->gameBoard.data[line][column]==1)
+                        for(int i=0;i<4;i++)
+                            for(int j=0;j<4;j++)
+                                if(this->gameBoard.boardData[i][j]==1)
                                 {
-                                    this->gameBoard.cells[line][column].setColour(LIGHTRED);
+                                    this->gameBoard.cell[i][j].setColor(LIGHTRED);
                                     delay(500);
                                 }
-
                         delay(1000);
                         cleardevice();
-
-                        setfillstyle(SOLID_FILL, RED);
-                        floodfill(10, 10, 1);
-                        settextjustify(CENTER_TEXT, CENTER_TEXT);
-                        outtextxy(getmaxx() / 2, getmaxy() / 2, "Red player won.");
+                        setfillstyle(SOLID_FILL,RED);
+                        floodfill(10,10,1);
+                        settextjustify(CENTER_TEXT,CENTER_TEXT);
+                        outtextxy(getmaxx()/2,getmaxy()/2,"RED PLAYER WINS");
                     }
                 }
-
-                // Hard mode
-                else if (gameMode == 2)
+                else if(gameMode == 2)///hard
                 {
                     gameBoard.currentPlayer = 2;
                     player = false;
                     pos.clear();
-
-                    if (gameBoard.findBestMove(this->gameBoard.data, 2, 2, pos) == 1)
+                    if(gameBoard.findBestMove(this->gameBoard.boardData,2,2,pos) == 1)
                     {
-                        for (unsigned short int line = 0; line < 4; line++)
+                        for(int z=0;z<4;z++)
                         {
-                            for (unsigned short int column = 0; column < 4; column++)
-                                if (this->gameBoard.data[line][column] == 2)
+                            for(int z2=0;z2<4;z2++)
+                                if(this->gameBoard.boardData[z][z2] == 2)
                                 {
-                                    this->gameBoard.cells[line][column].setColour(BLACK);
-                                    this->gameBoard.data[line][column] = 0;
+                                    this->gameBoard.cell[z][z2].setColor(BLACK);
+                                    this->gameBoard.boardData[z][z2] = 0;
                                 }
-                            this->gameBoard.bluePlayer.setCoordinatesOfCell(line, 10, 10);
+                            this->gameBoard.blueL.positions[z].first = 10;
+                            this->gameBoard.blueL.positions[z].second = 10;
                         }
-                        for (int i = 0; i < pos.size(); i++)
+                        for(int i=0;i<pos.size();i++)
                         {
-                            this->gameBoard.data[pos[i].first][pos[i].second] = 2;
-                            this->gameBoard.cells[pos[i].first][pos[i].second].setColour(BLUE);
-                            this->gameBoard.bluePlayer.setCoordinatesOfCell(i, pos[i].first, pos[i].second);
+                            this->gameBoard.boardData[pos[i].first][pos[i].second] = 2;
+                            this->gameBoard.cell[pos[i].first][pos[i].second].setColor(BLUE);
+                            this->gameBoard.blueL.positions[i].first = pos[i].first;
+                            this->gameBoard.blueL.positions[i].second = pos[i].second;
                         }
+
                     }
                     else
                     {
-                        for (unsigned short int line = 0; line < 4; line++)
-                            for (unsigned short int column = 0; column < 4; column++)
-                                if (this->gameBoard.data[line][column] == 1)
+                        for(int i=0;i<4;i++)
+                            for(int j=0;j<4;j++)
+                                if(this->gameBoard.boardData[i][j]==1)
                                 {
-                                    this->gameBoard.cells[line][column].setColour(LIGHTRED);
+                                    this->gameBoard.cell[i][j].setColor(LIGHTRED);
                                     delay(500);
                                 }
-
                         delay(50000);
                         cleardevice();
-
-                        setfillstyle(SOLID_FILL, RED);
-                        floodfill(10, 10, 1);
-                        settextjustify(CENTER_TEXT, CENTER_TEXT);
-                        outtextxy(getmaxx() / 2, getmaxy() / 2, "Red player won.");
+                        setfillstyle(SOLID_FILL,RED);
+                        floodfill(10,10,1);
+                        settextjustify(CENTER_TEXT,CENTER_TEXT);
+                        outtextxy(getmaxx()/2,getmaxy()/2,"RED PLAYER WINS");
                     }
                 }
+
         }
 }
