@@ -38,7 +38,7 @@ void PlayerVersusEnvironment::startGame ()
 
     // Temporary - just for testing
     delay(300);
-
+    int gameMode = 1;
     // Run the game.
     while (true)
         switch (player)

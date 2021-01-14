@@ -20,7 +20,6 @@ const unsigned short int SCREEN_HEIGHT = GetSystemMetrics(SM_CYSCREEN);
 UserInterface::UserInterface ()
 {
     PlayerVersusEnvironment bot;
-    bot.gameMode = 1;
     this->language = 1;
     this->musicOn = false;
     this->turnMusicOnOff();
@@ -292,12 +291,12 @@ void UserInterface::drawOptionsMenu ()
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate + 50, textYCoordinate, text);
 
     PlayerVersusEnvironment bot;
-    if(bot.gameMode == 1)
+    //if(bot.gameMode == 1)
         if(language == 1)
             strcpy(text, "GAMEMODE: EASY");
         else
             strcpy(text, "MOD DE JOC: USOR");
-    else
+   // else
         if(language == 1)
             strcpy(text, "GAMEMODE: HARD");
         else
@@ -944,11 +943,11 @@ void UserInterface::clickOnRules ()
 
 void UserInterface::changeDifficulty()
 {
-    PlayerVersusEnvironment bot;
+   /** PlayerVersusEnvironment bot;
     if(bot.gameMode == 1)
         bot.gameMode = 2;
     else
-        bot.gameMode = 1;
+        bot.gameMode = 1;*/
 }
 
 void UserInterface::clickOnOptions ()
