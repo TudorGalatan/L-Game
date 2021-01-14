@@ -5,25 +5,30 @@
 
 #include "Domain_Coin.h"
 
+
 int Coin::getXIndex()
 {
     return this->xIndex;
 }
+
 
 int Coin::getYIndex()
 {
     return this->yIndex;
 }
 
+
 void Coin::setXIndex(int value)
 {
     this->xIndex = value;
 }
 
+
 void Coin::setYIndex(int value)
 {
     this->yIndex = value;
 }
+
 
 void Coin::deleteCoin(int xCoord,int yCoord)
 {
@@ -34,6 +39,7 @@ void Coin::deleteCoin(int xCoord,int yCoord)
     // Colour the cell.
     floodfill(xCoord, yCoord, BLACK);
 }
+
 
 void Coin::drawCoin (int xCoord, int yCoord)
 {
@@ -46,7 +52,6 @@ void Coin::drawCoin (int xCoord, int yCoord)
     // Colour the cell.
     floodfill(xCoord, yCoord, WHITE);
 }
-
 
 
 int Coin::getCoinSize ()

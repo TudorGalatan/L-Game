@@ -8,10 +8,11 @@
 #include <vector>
 
 
-
 class Player
 {
     public:
+
         std::vector < std::pair <unsigned short int, unsigned short int> > positions;
+
         void updatePositions (unsigned short int cellNumber, unsigned short int line, unsigned short int column);
 };

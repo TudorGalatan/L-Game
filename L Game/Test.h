@@ -9,12 +9,10 @@
 #include "Domain_Game_Board.h"
 
 
-
 class Test
 {
     public:
 
-        // A game board
         GameBoard gameBoard;
 
         /**

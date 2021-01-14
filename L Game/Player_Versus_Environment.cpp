@@ -154,6 +154,5 @@ void PlayerVersusEnvironment::startGame ()
                         outtextxy(getmaxx()/2,getmaxy()/2,"RED PLAYER WINS");
                     }
                 }
-
         }
 }

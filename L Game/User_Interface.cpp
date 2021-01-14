@@ -7,7 +7,6 @@
 #include "Player_Versus_Environment.h"
 #include "Player_Versus_Player.h"
 
-
 #include <graphics.h>
 #include <Windows.h>
 #include <cstring>
@@ -17,6 +16,7 @@
 const unsigned short int SCREEN_WIDTH = GetSystemMetrics(SM_CXSCREEN);
 const unsigned short int SCREEN_HEIGHT = GetSystemMetrics(SM_CYSCREEN);
 
+
 UserInterface::UserInterface ()
 {
     PlayerVersusEnvironment bot;
@@ -25,10 +25,12 @@ UserInterface::UserInterface ()
     this->turnMusicOnOff();
 }
 
+
 void UserInterface::startGUI ()
 {
     // Exclude the C functions for higher speed.
     std::ios::sync_with_stdio(false);
+
     // Draw the application window.
     initwindow(SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -41,6 +43,7 @@ void UserInterface::startGUI ()
     // Close the application.
     closeApplication();
 }
+
 
 void UserInterface::soundSettings ()
 {
@@ -59,20 +62,18 @@ void UserInterface::soundSettings ()
 
         if (GetAsyncKeyState(VK_LBUTTON))
         {
-
             // The user clicked on the "Turn Music ON/OFF" button.
             if (x >= SCREEN_WIDTH / 2 - 288 && x <= SCREEN_WIDTH / 2 + 288 && y >= SCREEN_HEIGHT / 2 - 500 && y <= SCREEN_HEIGHT / 2 + 300)
-            {
                 continue;
-            }
-
         }
     }
 }
 
+
 void UserInterface::drawMainMenu ()
 {
     this->currentPage = 1;
+
     // Clear the window.
     cleardevice();
 
@@ -130,7 +131,6 @@ void UserInterface::drawMainMenu ()
 }
 
 
-
 void UserInterface::drawStartGameMenu ()
 {
     // Clear the window.
@@ -182,7 +182,6 @@ void UserInterface::drawStartGameMenu ()
     //Draw the "BACK" button.
     outtextxy(1555, SCREEN_HEIGHT / 2, text);
 }
-
 
 
 void UserInterface::drawRulesScreen ()
@@ -245,7 +244,6 @@ void UserInterface::drawRulesScreen ()
     // Draw the "BACK" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
-
 
 
 void UserInterface::drawOptionsMenu ()
@@ -322,7 +320,6 @@ void UserInterface::drawOptionsMenu ()
 }
 
 
-
 void UserInterface::drawButton (USI left, USI up, USI right, USI down, USI depth, bool drawDetails, USI textXCoordinate, USI textYCoordinate, char text[])
 {
     setfillstyle(SOLID_FILL,YELLOW);
@@ -334,7 +331,6 @@ void UserInterface::drawButton (USI left, USI up, USI right, USI down, USI depth
     // Write the text.
     outtextxy(textXCoordinate, textYCoordinate, text);
 }
-
 
 
 void UserInterface::hoverStartGame ()
@@ -400,7 +396,6 @@ void UserInterface::hoverStartGame ()
     // Redraw the "OPTIONS" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
-
 
 
 void UserInterface::hoverRules ()
@@ -472,7 +467,6 @@ void UserInterface::hoverRules ()
 }
 
 
-
 void UserInterface::hoverExit ()
 {
     // Clear the window.
@@ -541,7 +535,6 @@ void UserInterface::hoverExit ()
 }
 
 
-
 void UserInterface::hoverOptions ()
 {
     // Clear the window.
@@ -604,7 +597,6 @@ void UserInterface::hoverOptions ()
 }
 
 
-
 void UserInterface::hoverBack ()
 {
     // Clears the window.
@@ -613,7 +605,6 @@ void UserInterface::hoverBack ()
     unsigned short horizontalPosition = SCREEN_WIDTH / 2;
     unsigned short int fontSize = 4;
     unsigned short int verticalPosition = 100 + SCREEN_HEIGHT - 1080;
-
 
     if(language == 1)
     {
@@ -663,7 +654,6 @@ void UserInterface::hoverBack ()
     // Draw the "BACK" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate, textYCoordinate, text);
 }
-
 
 
 void UserInterface::hoverPlayerVsComputer ()
@@ -941,6 +931,7 @@ void UserInterface::clickOnRules ()
     scanMouseLocation();
 }
 
+
 void UserInterface::changeDifficulty()
 {
    /** PlayerVersusEnvironment bot;
@@ -949,6 +940,7 @@ void UserInterface::changeDifficulty()
     else
         bot.gameMode = 1;*/
 }
+
 
 void UserInterface::clickOnOptions ()
 {
@@ -1020,6 +1012,8 @@ void UserInterface::clickOnOptions ()
             }
     }
 }
+
+
 void UserInterface::turnMusicOnOff()
 {
     if (this->musicOn)
@@ -1033,6 +1027,7 @@ void UserInterface::turnMusicOnOff()
         this->musicOn = true;
     }
 }
+
 
 void UserInterface::scanMouseLocation ()
 {

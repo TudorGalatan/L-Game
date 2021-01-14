@@ -9,13 +9,11 @@
 #include "Domain_Cell.h"
 
 
-
 void Cell::drawCell (int left, int up, int right, int bottom)
 {
     setlinestyle(SOLID_FILL,0,5);
     rectangle(left, up, right, bottom);
 }
-
 
 
 int Cell::getCellSize ()
@@ -24,12 +22,10 @@ int Cell::getCellSize ()
 }
 
 
-
 int Cell::getColor ()
 {
     return this->cellColor;
 }
-
 
 
 void Cell::setColor (int color)
@@ -38,7 +34,6 @@ void Cell::setColor (int color)
     setfillstyle(SOLID_FILL, color);
     floodfill(this->posX, this->posY, WHITE);
 }
-
 
 
 int Cell::getPosition (char* axis)
@@ -53,13 +48,11 @@ int Cell::getPosition (char* axis)
 }
 
 
-
 void Cell::setPosition (int pX, int pY)
 {
     this->posX = pX;
     this->posY = pY;
 }
-
 
 
 void Cell::changeCellSize (int newSize)
@@ -74,23 +67,26 @@ void Cell::setBounds (int l, int t)
     this->top = t;
 }
 
+
 int Cell::getTopValue()
 {
     return this->top;
 }
+
 
 int Cell::getLeftValue()
 {
     return this->left;
 }
 
+
 bool Cell::isInside (double xCoord, double yCoord)
 {
     std::ofstream g("test.txt");
     double top = this->getTopValue();
     double left = this->getLeftValue();
-    int cellSize = 200; /// !!!!!!!!!!! function that returns the cell size has problems!!!---------------------------------------------------------------------------------------
-    if(xCoord >= left && xCoord <= left + cellSize && yCoord >= top && yCoord <= top + cellSize)
+    int cellSize = 200;
+    if (xCoord >= left && xCoord <= left + cellSize && yCoord >= top && yCoord <= top + cellSize)
         return true;
     return false;
 }

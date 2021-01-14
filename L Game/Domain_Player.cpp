@@ -9,7 +9,6 @@
 #include <fstream>
 
 
-
 void Player::updatePositions (unsigned short int cellNumber, unsigned short int line, unsigned short int column)
 {
     if (cellNumber < 4)

@@ -8,6 +8,7 @@
 
 #include <fstream>
 
+
 void PlayerVersusPlayer::startGame ()
 {
     std::ofstream g("test.in");

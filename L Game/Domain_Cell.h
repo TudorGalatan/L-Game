@@ -6,7 +6,6 @@
 #pragma once
 
 
-
 class Cell
 {
     private:
@@ -24,10 +23,10 @@ class Cell
         int posX, posY;
 
     public:
+
         bool isInside(double xCoord, double yCoord);
 
         void setBounds(int l,int t);
-
 
         int getTopValue();
 

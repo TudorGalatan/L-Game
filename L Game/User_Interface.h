@@ -13,13 +13,47 @@
 class UserInterface
 {
     public:
+
         int language;
         bool musicOn;
-        UserInterface();
         int currentPage;
-        void turnMusicOnOff();
-        void changeDifficulty();
+
+        /**
+            This is the default constructor.
+            Input:
+                - none
+            Output:
+                - the instance of the class is initialized
+        **/
+        UserInterface ();
+
+        /**
+            Turns the music on or off.
+            Input:
+                - none
+            Output:
+                - the music is turned on or off
+        **/
+        void turnMusicOnOff ();
+
+        /**
+            Changes the difficulty of the game.
+            Input:
+                - none
+            Output:
+                - the difficulty is changed
+        **/
+        void changeDifficulty ();
+
+        /**
+            Settings of the sound.
+            Input:
+                - none
+            Output:
+                - the settings of the sound are changed
+        **/
         void soundSettings();
+
         /**
             Starts the graphical user interface.
             Input:

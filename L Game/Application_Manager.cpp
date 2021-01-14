@@ -7,15 +7,13 @@
 #include "User_Interface.h"
 
 
-
 int main ()
 {
-    // Create the necessary objects.
     Test test;
     UserInterface userInterface;
 
     // Test the application.
-    // test.runAll();
+    test.runAll();
 
     // Start the application.
     userInterface.startGUI();

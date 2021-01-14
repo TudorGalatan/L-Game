@@ -9,7 +9,6 @@
 #include <windows.h>
 
 
-
 class Coin
 {
     private:
@@ -37,15 +36,17 @@ class Coin
             Output:
                 - the size of the coin
         **/
-
         void deleteCoin(int xCoord,int yCoord);
 
         int getCoinSize ();
+
         void onClickAction();
 
         int getXIndex();
+
         int getYIndex();
 
         void setXIndex(int value);
+
         void setYIndex(int value);
 };

@@ -6,7 +6,6 @@
 #include "Test.h"
 
 
-
 void Test::runAll ()
 {
     // Initialize the data.
@@ -20,7 +19,6 @@ void Test::runAll ()
     this->getStartEndPositions();
     this->onValidPosition();
 }
-
 
 
 void Test::checkMove ()
@@ -45,7 +43,6 @@ void Test::checkMove ()
     correctResult = true;
     assert(ourResult == correctResult);*/
 }
-
 
 
 bool Test::goodCells ()
@@ -90,7 +87,6 @@ bool Test::goodCells ()
 }
 
 
-
 std::pair <USI, USI> Test::getOrientation ()
 {
     std::vector < std::pair <USI, USI> > coordinates;
@@ -122,7 +118,6 @@ std::pair <USI, USI> Test::getOrientation ()
     correctResult = std::make_pair(0, 0);
     assert(ourResult == correctResult);
 }
-
 
 
 bool Test::hasGap ()
@@ -167,7 +162,6 @@ bool Test::hasGap ()
 }
 
 
-
 std::pair <USI, USI> Test::getStartEndPositions ()
 {
     std::vector < std::pair <USI, USI> > coordinates;
@@ -190,7 +184,6 @@ std::pair <USI, USI> Test::getStartEndPositions ()
     correctResult = std::make_pair(1, 3);
     assert(ourResult == correctResult);
 }
-
 
 
 bool Test::onValidPosition ()

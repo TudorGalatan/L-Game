@@ -34,6 +34,8 @@ bool areEqualVectors(std::vector < std::pair <USI, USI> > prevCoordinates, std::
     }
     return true;
 }
+
+
 bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,std::vector<std::pair<USI, USI> > &positions)
 {
     Player* playerRef;
@@ -820,6 +822,7 @@ bool GameBoard::findMove(unsigned short int aa[4][4], int color, int player,std:
     return false;
 }
 
+
 void GameBoard::getInitialConfiguration ()
 {
     std::ifstream inputFile("Input.in");
@@ -836,7 +839,6 @@ void GameBoard::getInitialConfiguration ()
 }
 
 
-
 void GameBoard::saveCurrentConfiguration ()
 {
     std::ofstream saveFile("Playground.txt");
@@ -848,7 +850,6 @@ void GameBoard::saveCurrentConfiguration ()
         saveFile << '\n';
     }
 }
-
 
 
 void GameBoard::drawBoard ()
@@ -878,7 +879,6 @@ void GameBoard::drawBoard ()
         yCoord++;
     }
 }
-
 
 
 /**
@@ -922,6 +922,7 @@ void GameBoard::loadNewGame ()
             }
 }
 
+
 void GameBoard::drawButton(int color)
 {
     settextstyle(BOLD_FONT,HORIZ_DIR,3);
@@ -930,6 +931,7 @@ void GameBoard::drawButton(int color)
     int maxy = getmaxy()/2;
     outtextxy(maxx, maxy,"SKIP MOVING");
 }
+
 
 void GameBoard::moveCoin ()
 {
@@ -991,8 +993,9 @@ void GameBoard::moveCoin ()
             }
         }
     }
-
 }
+
+
 void GameBoard::redPlayerMoves ()
 {
     drawButton(DARKGRAY);
@@ -1084,6 +1087,7 @@ void GameBoard::redPlayerMoves ()
     }
 }
 
+
 void GameBoard::bluePlayerMoves()
 {
     drawButton(DARKGRAY);
@@ -1173,6 +1177,7 @@ void GameBoard::bluePlayerMoves()
     }
 }
 
+
 bool GameBoard::checkMove (std::vector < std::pair <USI, USI> > coordinates, std::vector < std::pair <USI, USI> >prevCoordinates)
 {
     // All the cells must be free (black or the current player).
@@ -1201,7 +1206,6 @@ bool GameBoard::checkMove (std::vector < std::pair <USI, USI> > coordinates, std
 }
 
 
-
 void GameBoard::makeMove (std::vector < std::pair <USI, USI> > newCoordinates)
 {
     // Delete the current squares of the current player.
@@ -1218,7 +1222,6 @@ void GameBoard::makeMove (std::vector < std::pair <USI, USI> > newCoordinates)
         this->boardData[line][column] = this->currentPlayer;
     }
 }
-
 
 
 bool GameBoard::goodCells (std::vector < std::pair <USI, USI> > coordinates)
@@ -1249,7 +1252,6 @@ bool GameBoard::goodCells (std::vector < std::pair <USI, USI> > coordinates)
 
     return true;
 }
-
 
 
 std::pair <USI, USI> GameBoard::getOrientation (std::vector < std::pair <USI, USI> > coordinates)
@@ -1293,7 +1295,6 @@ std::pair <USI, USI> GameBoard::getOrientation (std::vector < std::pair <USI, US
 
     return orientation;
 }
-
 
 
 bool GameBoard::hasGap (std::vector < std::pair <USI, USI> > coordinates)
@@ -1340,7 +1341,6 @@ bool GameBoard::hasGap (std::vector < std::pair <USI, USI> > coordinates)
     // We don't have a gap.
     return false;
 }
-
 
 
 std::pair <USI, USI> GameBoard::getStartEndPositions (std::vector < std::pair <USI, USI> > coordinates)
@@ -1390,7 +1390,6 @@ std::pair <USI, USI> GameBoard::getStartEndPositions (std::vector < std::pair <U
 
     return startEndPositions;
 }
-
 
 
 bool GameBoard::onValidPosition (std::vector < std::pair <USI, USI> > coordinates)
