@@ -61,22 +61,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(2,1));
         if(areEqualVectors(playerRef->positions,positions)==false)
         {
-            srand(time(NULL));
-            int val = rand()%2+1;
-            Coin* obj;
-            if(val==1)
-                obj=&this->firstCoin;
-            else
-                obj=&this->secondCoin;
-            if(this->boardData[2][0]==0)
-            {
-                obj->deleteCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
-                this->boardData[obj->getXIndex()][obj->getYIndex()]=0;
-                obj->setXIndex(2);
-                obj->setYIndex(0);
-                this->boardData[2][0]=3;
-                obj->drawCoin(this->cell[2][0].getPosition("ox"),this->cell[2][0].getPosition("oy"));
-            }
+
             return true;
         }
     }
@@ -89,22 +74,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(2,1));
         if(areEqualVectors(playerRef->positions,positions)==false)
         {
-            srand(time(NULL));
-            int val = rand()%2+1;
-            Coin* obj;
-            if(val==1)
-                obj=&this->firstCoin;
-            else
-                obj=&this->secondCoin;
-            if(this->boardData[0][2]==0)
-            {
-                obj->deleteCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
-                this->boardData[obj->getXIndex()][obj->getYIndex()]=0;
-                obj->setXIndex(0);
-                obj->setYIndex(2);
-                this->boardData[0][2]=3;
-                obj->drawCoin(this->cell[0][2].getPosition("ox"),this->cell[0][2].getPosition("oy"));
-            }
+
             return true;
         }
     }
@@ -117,22 +87,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(2,2));
         if(areEqualVectors(playerRef->positions,positions)==false)
         {
-            srand(time(NULL));
-            int val = rand()%2+1;
-            Coin* obj;
-            if(val==1)
-                obj=&this->firstCoin;
-            else
-                obj=&this->secondCoin;
-            if(this->boardData[2][3]==0)
-            {
-                obj->deleteCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
-                this->boardData[obj->getXIndex()][obj->getYIndex()]=0;
-                obj->setXIndex(2);
-                obj->setYIndex(3);
-                this->boardData[2][3]=3;
-                obj->drawCoin(this->cell[2][3].getPosition("ox"),this->cell[2][3].getPosition("oy"));
-            }
+
             return true;
         }
     }
@@ -145,22 +100,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(2,2));
         if(areEqualVectors(playerRef->positions,positions)==false)
         {
-            srand(time(NULL));
-            int val = rand()%2+1;
-            Coin* obj;
-            if(val==1)
-                obj=&this->firstCoin;
-            else
-                obj=&this->secondCoin;
-            if(this->boardData[1][0]==0)
-            {
-                obj->deleteCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
-                this->boardData[obj->getXIndex()][obj->getYIndex()]=0;
-                obj->setXIndex(0);
-                obj->setYIndex(1);
-                this->boardData[0][1]=3;
-                obj->drawCoin(this->cell[1][0].getPosition("ox"),this->cell[1][0].getPosition("oy"));
-            }
+
             return true;
         }
     }
@@ -173,22 +113,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(1,2));
         if(areEqualVectors(playerRef->positions,positions)==false)
         {
-            srand(time(NULL));
-            int val = rand()%2+1;
-            Coin* obj;
-            if(val==1)
-                obj=&this->firstCoin;
-            else
-                obj=&this->secondCoin;
-            if(this->boardData[1][3]==0)
-            {
-                obj->deleteCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
-                this->boardData[obj->getXIndex()][obj->getYIndex()]=0;
-                obj->setXIndex(1);
-                obj->setYIndex(3);
-                this->boardData[1][3]=3;
-                obj->drawCoin(this->cell[1][3].getPosition("ox"),this->cell[1][3].getPosition("oy"));
-            }
+
             return true;
         }
     }
@@ -201,22 +126,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(1,2));
         if(areEqualVectors(playerRef->positions,positions)==false)
         {
-            srand(time(NULL));
-            int val = rand()%2+1;
-            Coin* obj;
-            if(val==1)
-                obj=&this->firstCoin;
-            else
-                obj=&this->secondCoin;
-            if(this->boardData[3][1]==0)
-            {
-                obj->deleteCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
-                this->boardData[obj->getXIndex()][obj->getYIndex()]=0;
-                obj->setXIndex(3);
-                obj->setYIndex(1);
-                this->boardData[3][1]=3;
-                obj->drawCoin(this->cell[3][1].getPosition("ox"),this->cell[3][1].getPosition("oy"));
-            }
+
             return true;
         }
     }
@@ -229,22 +139,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(1,1));
         if(areEqualVectors(playerRef->positions,positions)==false)
         {
-            srand(time(NULL));
-            int val = rand()%2+1;
-            Coin* obj;
-            if(val==1)
-                obj=&this->firstCoin;
-            else
-                obj=&this->secondCoin;
-            if(this->boardData[1][0]==0)
-            {
-                obj->deleteCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
-                this->boardData[obj->getXIndex()][obj->getYIndex()]=0;
-                obj->setXIndex(1);
-                obj->setYIndex(0);
-                this->boardData[1][0]=3;
-                obj->drawCoin(this->cell[1][0].getPosition("ox"),this->cell[1][0].getPosition("oy"));
-            }
+
             return true;
         }
     }
@@ -257,22 +152,7 @@ bool GameBoard::findBestMove(unsigned short int aa[4][4], int color, int player,
         positions.push_back(std::make_pair(1,1));
         if(areEqualVectors(playerRef->positions,positions)==false)
         {
-            srand(time(NULL));
-            int val = rand()%2+1;
-            Coin* obj;
-            if(val==1)
-                obj=&this->firstCoin;
-            else
-                obj=&this->secondCoin;
-            if(this->boardData[3][2]==0)
-            {
-                obj->deleteCoin(this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("ox"),this->cell[obj->getXIndex()][obj->getYIndex()].getPosition("oy"));
-                this->boardData[obj->getXIndex()][obj->getYIndex()]=0;
-                obj->setXIndex(3);
-                obj->setYIndex(2);
-                this->boardData[3][2]=3;
-                obj->drawCoin(this->cell[3][2].getPosition("ox"),this->cell[3][2].getPosition("oy"));
-            }
+
             return true;
         }
     }
@@ -959,24 +839,30 @@ void GameBoard::moveCoin ()
 
             for (line = 0; line < 4 && coinRef == NULL; line++)
             {
-                for (column = 0; column < 4; column++)
+                for (column = 0; column < 4 && coinRef == NULL; column++)
                     if (this->cell[line][column].isInside(xCoordinate, yCoordinate) && this->boardData[line][column] == 3)
                         if(line == x && column == y)
                         {
-                            this->boardData[line][column]=0;
                             coinRef = &this->firstCoin;
-                            this->firstCoin.deleteCoin(this->cell[line][column].getPosition("ox"),this->cell[line][column].getPosition("oy"));
+                            if(this->boardData[line][column]==3)
+                                this->firstCoin.deleteCoin(this->cell[line][column].getPosition("ox"),this->cell[line][column].getPosition("oy"));
+                            else
+                                coinRef = NULL;
+                            this->boardData[line][column]=0;
                         }
                         else
                         {
-                            this->boardData[line][column]=0;
                             coinRef = &this->secondCoin;
-                            this->secondCoin.deleteCoin(this->cell[line][column].getPosition("ox"),this->cell[line][column].getPosition("oy"));
+                            if(this->boardData[line][column]==3)
+                                this->secondCoin.deleteCoin(this->cell[line][column].getPosition("ox"),this->cell[line][column].getPosition("oy"));
+                            else
+                                coinRef = NULL;
+                            this->boardData[line][column]=0;
                         }
             }
             delay(100);
         }
-        else if(GetAsyncKeyState(VK_LBUTTON) && coinRef != NULL)
+        if(GetAsyncKeyState(VK_LBUTTON) && coinRef != NULL)
         {
 
             coinRef->setXIndex(line);
