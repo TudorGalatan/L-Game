@@ -5,6 +5,8 @@
 
 #pragma once
 
+#include "Player_Versus_Environment.h"
+
 #define USI unsigned short int
 #define FONT_SIZE 4
 #define MAIN_PAGE 1
@@ -17,6 +19,7 @@ class UserInterface
         int language;
         bool musicOn;
         int currentPage;
+        PlayerVersusEnvironment bot;
 
         /**
             This is the default constructor.

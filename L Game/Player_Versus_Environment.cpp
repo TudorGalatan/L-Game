@@ -38,7 +38,7 @@ void PlayerVersusEnvironment::startGame ()
 
     // Temporary - just for testing
     delay(300);
-    int gameMode = 1;
+
     // Run the game.
     while (true)
         switch (player)
@@ -66,7 +66,7 @@ void PlayerVersusEnvironment::startGame ()
                 }
                 break;
             case true://BLUE
-                if(gameMode == 1)///easy
+                if(this->gameMode == 1)///easy
                 {
                     gameBoard.currentPlayer = 2;
                     player = false;
@@ -110,7 +110,7 @@ void PlayerVersusEnvironment::startGame ()
                         outtextxy(getmaxx()/2,getmaxy()/2,"RED PLAYER WINS");
                     }
                 }
-                else if(gameMode == 2)///hard
+                else if (this->gameMode == 2)///hard
                 {
                     gameBoard.currentPlayer = 2;
                     player = false;
