@@ -10,7 +10,6 @@
 #include <graphics.h>
 #include <Windows.h>
 #include <cstring>
-#include <iostream>
 #include <mmsystem.h>
 
 const unsigned short int SCREEN_WIDTH = GetSystemMetrics(SM_CXSCREEN);
@@ -28,11 +27,8 @@ UserInterface::UserInterface ()
 
 void UserInterface::startGUI ()
 {
-    // Exclude the C functions for higher speed.
-    std::ios::sync_with_stdio(false);
-
     // Draw the application window.
-    initwindow(SCREEN_WIDTH, SCREEN_HEIGHT);
+    initwindow(SCREEN_WIDTH,SCREEN_HEIGHT, "THE 'L' GAME");
 
     // Draw the main menu.
     drawMainMenu();
@@ -76,7 +72,7 @@ void UserInterface::drawMainMenu ()
 
     // Clear the window.
     cleardevice();
-
+    setlinestyle(0,0,0);
     // Get the parameters for drawing the "START" button.
     unsigned short int distanceFromCenter = 100;
     unsigned short int left = SCREEN_WIDTH / 2 - distanceFromCenter;
@@ -269,7 +265,6 @@ void UserInterface::drawOptionsMenu ()
         strcpy(text, "LIMBA: ROMANA");
     // Draw the "CHANGE LANGUAGE" button.
     drawButton(left, up, right, down, depth, drawDetails, textXCoordinate + 50, textYCoordinate, text);
-
     // Update the parameters for drawing the "TURN MUSIC ON/OFF" button.
     up = 400;
     down = 500;

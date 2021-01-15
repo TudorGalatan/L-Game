@@ -16,7 +16,7 @@ class PlayerVersusEnvironment
 
     public:
 
-        int gameMode = 1;
+        int gameMode = 2;
 
         /**
             Starts a new game in the player versus environment mode.

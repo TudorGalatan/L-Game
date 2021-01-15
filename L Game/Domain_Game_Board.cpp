@@ -6,6 +6,7 @@
 #include "Domain_Game_Board.h"
 #include "Domain_Cell.h"
 #include "Domain_Player.h"
+#include "User_Interface.h"
 
 #include <iostream>
 #include <fstream>
@@ -758,6 +759,8 @@ void GameBoard::drawBoard ()
         xCoord = 0;
         yCoord++;
     }
+    setcolor(LIGHTRED);
+    outtextxy(200,900,"EXIT");
 }
 
 
@@ -770,7 +773,7 @@ void GameBoard::loadNewGame ()
     for (unsigned short int line = 0; line < 4; line++)
         for (unsigned short int column = 0; column < 4; column++)
 
-            // Colour the red player.
+    // Colour the red player.
             if (this->boardData[line][column] == 1)
             {
                 this->cell[line][column].setColor(RED);
@@ -826,7 +829,7 @@ void GameBoard::moveCoin ()
         // Get the mouse position.
         GetCursorPos(&cursorPosition);
 
-        // Get the mouse position on the window.
+        // Get the mouse position on the window. '
         ScreenToClient(hwnd, &cursorPosition);
 
         double xCoordinate = cursorPosition.x;
@@ -834,6 +837,15 @@ void GameBoard::moveCoin ()
 
         if(GetAsyncKeyState(VK_LBUTTON) && xCoordinate >= getmaxx()/10 && xCoordinate <= getmaxx()/10 + 300 && yCoordinate>=getmaxy()/2-100 && yCoordinate<=getmaxy()/2+100)
             return;
+        if(GetAsyncKeyState(VK_LBUTTON) && xCoordinate >= 200 && xCoordinate <= 300 && yCoordinate>=880 && yCoordinate<=930)
+        {
+            UserInterface ui;
+            cleardevice();
+            drawButton(WHITE);
+            ui.drawMainMenu();
+            ui.scanMouseLocation();
+            return;
+        }
         if(GetAsyncKeyState(VK_LBUTTON) && coinRef == NULL)
         {
 
@@ -908,6 +920,16 @@ void GameBoard::redPlayerMoves ()
                 this->redL.positions[line].first = 10;
                 this->redL.positions[line].second = 10;
             }
+        }
+
+        if(GetAsyncKeyState(VK_LBUTTON) && mousex() >= 200 && mousex() <= 300 && mousey()>=880 && mousey()<=930)
+        {
+            UserInterface ui;
+            cleardevice();
+            drawButton(WHITE);
+            ui.drawMainMenu();
+            ui.scanMouseLocation();
+            return;
         }
 
         // Left click
@@ -1000,6 +1022,16 @@ void GameBoard::bluePlayerMoves()
                 this->blueL.positions[line].first = 10;
                 this->blueL.positions[line].second = 10;
             }
+        }
+
+        if(GetAsyncKeyState(VK_LBUTTON) && mousex() >= 200 && mousex() <= 300 && mousey()>=880 && mousey()<=930)
+        {
+            UserInterface ui;
+            cleardevice();
+            drawButton(WHITE);
+            ui.drawMainMenu();
+            ui.scanMouseLocation();
+            return;
         }
 
         // Left click

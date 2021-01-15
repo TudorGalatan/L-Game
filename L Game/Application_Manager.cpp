@@ -14,7 +14,6 @@ int main ()
 
     // Test the application.
     test.runAll();
-
     // Start the application.
     userInterface.startGUI();
 

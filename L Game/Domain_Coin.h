@@ -14,16 +14,13 @@ class Coin
     private:
 
         // The radius of the coin
-        int coinSize = 100;
+        const int coinSize = 100;
         int xIndex = -1,yIndex;
 
     public:
 
         /**
             Draws the coin.
-            Input:
-                - "xCoord": ???
-                - "yCoord": ???
             Output:
                 - draws the coin
         **/
